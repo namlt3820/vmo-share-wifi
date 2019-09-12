@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import styled from 'styled-components';
 import { Checkbox } from 'antd';
 import {
   WrapperComponent,
@@ -14,7 +13,7 @@ import {
 } from '../components/Authentication';
 import LayoutMain from '../layout/LayoutMain';
 
-export default class SignUp extends Component {
+export default class Login extends Component {
   render() {
     return (
       <LayoutMain>
@@ -22,22 +21,20 @@ export default class SignUp extends Component {
           <WrapperForm>
             <Logo>
               <img src="../../public/assets/logo.png" alt="Italian Trulli" />
-              <div>Create your account.</div>
+              <div>Welcome Back</div>
             </Logo>
             <WrapperInput>
-              <Label>Username</Label>
-              <InputStyle placeholder="Enter Username" />
               <Label>Email</Label>
               <InputStyle placeholder="Enter Email" />
               <Label>Password</Label>
               <InputStyle placeholder="Enter Password" />
             </WrapperInput>
-            <WrapperAction type="signup">
-              <CheckBoxAccess type="signup">
+            <WrapperAction type="login">
+              <ButtonStyle>Login</ButtonStyle>
+              <CheckBoxAccess type="login">
                 <Checkbox defaultChecked={false} />
-                <div>I have read, understand, and agree </div>
+                <div>Remember me</div>
               </CheckBoxAccess>
-              <ButtonStyle>SignUp</ButtonStyle>
             </WrapperAction>
           </WrapperForm>
         </WrapperComponent>

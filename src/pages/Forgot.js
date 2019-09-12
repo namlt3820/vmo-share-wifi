@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import styled from 'styled-components';
-import { Checkbox } from 'antd';
 import {
   WrapperComponent,
   WrapperForm,
@@ -9,12 +7,11 @@ import {
   Label,
   InputStyle,
   WrapperAction,
-  CheckBoxAccess,
   ButtonStyle
 } from '../components/Authentication';
 import LayoutMain from '../layout/LayoutMain';
 
-export default class SignUp extends Component {
+export default class Forgot extends Component {
   render() {
     return (
       <LayoutMain>
@@ -22,22 +19,14 @@ export default class SignUp extends Component {
           <WrapperForm>
             <Logo>
               <img src="../../public/assets/logo.png" alt="Italian Trulli" />
-              <div>Create your account.</div>
+              <div>Forgot Password</div>
             </Logo>
             <WrapperInput>
-              <Label>Username</Label>
-              <InputStyle placeholder="Enter Username" />
               <Label>Email</Label>
               <InputStyle placeholder="Enter Email" />
-              <Label>Password</Label>
-              <InputStyle placeholder="Enter Password" />
             </WrapperInput>
-            <WrapperAction type="signup">
-              <CheckBoxAccess type="signup">
-                <Checkbox defaultChecked={false} />
-                <div>I have read, understand, and agree </div>
-              </CheckBoxAccess>
-              <ButtonStyle>SignUp</ButtonStyle>
+            <WrapperAction type="forgot">
+              <ButtonStyle> Send recovery email</ButtonStyle>
             </WrapperAction>
           </WrapperForm>
         </WrapperComponent>
