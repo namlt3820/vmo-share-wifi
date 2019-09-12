@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Input, Button } from 'antd';
+import { Button } from 'antd';
 
 export const WrapperComponent = styled.div`
   display: flex;
@@ -34,9 +34,17 @@ export const Label = styled.div`
   border-radius: 5px;
 `;
 
-export const InputStyle = styled(Input)`
+export const InputStyle = styled.input`
   margin: 5px 0;
   border-color: #ccd3d9;
+  height: 32px;
+  width: 300px;
+  padding: 4px 11px;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  line-height: 1.5;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
 `;
 
 export const WrapperAction = styled.div`
