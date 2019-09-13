@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "prettier", "prettier/react"],
+  "extends": ["airbnb", "prettier", "prettier/react", "eslint:recommended"],
   "plugins": ["prettier"],
   "parser": "babel-eslint",
   "rules": {
@@ -14,7 +14,10 @@
     "import/imports-first": ["error", "absolute-first"],
     "import/newline-after-import": "error",
     "react/prefer-stateless-function": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "no-useless-escape": "off",
+    "no-misleading-character-class": "off",
+    "no-restricted-globals": "off"
   },
   "globals": {
     "window": true,

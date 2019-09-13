@@ -9,21 +9,30 @@ import {
   ButtonStyle
 } from '../components/Authentication';
 import LayoutMain from '../layout/LayoutMain';
+import Validator from '../utils/validator';
 
 export default class Forgot extends Component {
   constructor() {
     super();
-    this.state = { value: '' };
+    this.state = { email: '', error: '' };
   }
 
-  handleBlur = () => {};
+  handleValidateForm = () => {
+    const { email } = this.state;
+    const validateEmail = Validator.isValidEmailAddress(email);
+    if (!validateEmail) {
+      this.setState({ error: 'Invalid Email' });
+    } else {
+      this.setState({ error: '' });
+    }
+  };
 
   handleChange = event => {
-    this.setState({ value: event.target.value });
+    this.setState({ email: event.target.value });
   };
 
   render() {
-    const { value } = this.state;
+    const { email, error } = this.state;
     return (
       <LayoutMain>
         <WrapperComponent>
@@ -34,12 +43,13 @@ export default class Forgot extends Component {
             </Logo>
             <WrapperInput>
               <FormInput
-                placeholder="Enter Username"
-                label="Username"
-                name="name"
-                value={value}
+                placeholder="Enter Email"
+                label="Email"
+                error={error}
+                name="email"
+                value={email}
                 handleChange={this.handleChange}
-                handleBlur={this.handleBlur}
+                handleBlur={this.handleValidateForm}
               />
             </WrapperInput>
             <WrapperAction type="forgot">

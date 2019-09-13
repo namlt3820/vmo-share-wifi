@@ -9,6 +9,7 @@ export default class FormInput extends Component {
       handleBlur,
       name,
       value,
+      error,
       handleChange
     } = this.props;
     return (
@@ -21,6 +22,7 @@ export default class FormInput extends Component {
           name={name}
           value={value}
         />
+        <Label type="error">{error}</Label>
       </div>
     );
   }

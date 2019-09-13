@@ -30,7 +30,7 @@ export const WrapperInput = styled.div`
 export const Label = styled.div`
   display: flex;
   justify-content: flex-start;
-  color: #747474;
+  color: ${props => (props.type === 'error' ? '#D95A44' : '#747474')};
   border-radius: 5px;
 `;
 
