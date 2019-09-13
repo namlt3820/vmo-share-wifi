@@ -21,7 +21,7 @@ export default class SignUp extends Component {
         <WrapperComponent>
           <WrapperForm>
             <Logo>
-              <img src="../../public/assets/logo.png" alt="Italian Trulli" />
+              <img src="assets/logo.png" alt="Italian Trulli" />
               <div>Create your account.</div>
             </Logo>
             <WrapperInput>

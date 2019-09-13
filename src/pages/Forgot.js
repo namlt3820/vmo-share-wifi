@@ -16,12 +16,7 @@ export default class Forgot extends Component {
     this.state = { value: '' };
   }
 
-  handleBlur = () => {
-    const { value } = this.state;
-    if (value.length < 6) {
-      console.log('error');
-    }
-  };
+  handleBlur = () => {};
 
   handleChange = event => {
     this.setState({ value: event.target.value });
@@ -48,7 +43,7 @@ export default class Forgot extends Component {
               />
             </WrapperInput>
             <WrapperAction type="forgot">
-              <ButtonStyle> Send recovery email</ButtonStyle>
+              <ButtonStyle>Send recovery email</ButtonStyle>
             </WrapperAction>
           </WrapperForm>
         </WrapperComponent>
