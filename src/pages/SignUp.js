@@ -64,6 +64,7 @@ export default class SignUp extends Component {
                 placeholder="Enter Username"
                 label="Username"
                 name="name"
+                type="text"
                 error={errors.name}
                 value={name}
                 handleChange={this.handleChange}
@@ -73,6 +74,7 @@ export default class SignUp extends Component {
                 placeholder="Enter Email"
                 label="Email"
                 name="email"
+                type="email"
                 error={!errors.name ? errors.email : ''}
                 value={email}
                 handleChange={this.handleChange}
@@ -82,6 +84,7 @@ export default class SignUp extends Component {
                 placeholder="Enter Password"
                 label="Password"
                 name="password"
+                type="password"
                 error={!errors.name && !errors.email ? errors.password : ''}
                 value={password}
                 handleChange={this.handleChange}

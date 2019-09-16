@@ -6,6 +6,7 @@ export default class FormInput extends Component {
     const {
       placeholder,
       label,
+      type,
       handleBlur,
       name,
       value,
@@ -21,6 +22,7 @@ export default class FormInput extends Component {
           onBlur={handleBlur}
           name={name}
           value={value}
+          type={type}
         />
         <Label type="error">{error}</Label>
       </div>

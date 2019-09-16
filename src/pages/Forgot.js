@@ -45,8 +45,9 @@ export default class Forgot extends Component {
               <FormInput
                 placeholder="Enter Email"
                 label="Email"
-                error={error}
                 name="email"
+                type="email"
+                error={error}
                 value={email}
                 handleChange={this.handleChange}
                 handleBlur={this.handleValidateForm}

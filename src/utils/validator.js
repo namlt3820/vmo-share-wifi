@@ -8,7 +8,7 @@ const USER_NAME_MAX_LENGTH = 16;
 const NAME_MIN_LENGTH = 2;
 const NAME_MAX_LENGTH = 128;
 // eslint-disable-next-line
-const EMAIL_REGEX = /^(([^<>()\[\]\.,:\s@\"]+(\.[^<>()\[\]\.,:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,:\s@\"]+\.)+[^<>()[\]\.,:\s@\"]{2,})$/i;
+export const EMAIL_REGEX = /^(([^<>()\[\]\.,:\s@\"]+(\.[^<>()\[\]\.,:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,:\s@\"]+\.)+[^<>()[\]\.,:\s@\"]{2,})$/i;
 // eslint-disable-next-line
 const PASSWORD_REGEX = /^[-\w\.\$@\*\!]+$/;
 // eslint-disable-next-line
