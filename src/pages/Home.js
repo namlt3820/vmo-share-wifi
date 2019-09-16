@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import LayoutMain from '../layout/LayoutMain';
+import LayoutDashboard from '../layout/LayoutDashboard';
 
 export default class Home extends Component {
   render() {
     return (
-      <LayoutMain>
-        <div>Home</div>
-      </LayoutMain>
+      <LayoutDashboard>
+        <div>Layout Dashboard</div>
+      </LayoutDashboard>
     );
   }
 }

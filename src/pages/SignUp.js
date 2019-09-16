@@ -70,12 +70,12 @@ export default class SignUp extends Component {
 
   handleValidateUsername = () => {
     const { name, errors } = this.state;
-    const validatePassword = Validator.isValidPassword(name);
+    const validateUsername = Validator.isValidUsername(name);
     const valied = { ...errors };
-    if (!validatePassword && name.length === 0) {
+    if (!validateUsername && name.length === 0) {
       valied.name = 'Require Name';
       this.setState({ errors: valied });
-    } else if (!validatePassword && name.length > 0) {
+    } else if (!validateUsername && name.length > 0) {
       valied.name = 'Invalid Name';
       this.setState({ errors: valied });
     } else {
@@ -91,7 +91,7 @@ export default class SignUp extends Component {
         <WrapperComponent>
           <WrapperForm>
             <Logo>
-              <img src="assets/logo.png" alt="Italian Trulli" />
+              <img src="assets/logo.png" alt="Share Wifi" />
               <div>Create your account.</div>
             </Logo>
             <WrapperInput>

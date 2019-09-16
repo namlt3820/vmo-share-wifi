@@ -76,9 +76,10 @@ export const CheckBoxAccess = styled.div`
 `;
 
 export const ButtonStyle = styled(Button)`
-  width: 8em;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 30px;
   font-size: 14px;
-  padding: 0.25em 1em;
   background: linear-gradient(to bottom, #e44688 0%, #ba3cbd 100%);
   :hover {
     background: linear-gradient(to bottom, #e44688 0%, #ba3cbd 100%);

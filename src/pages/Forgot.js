@@ -38,7 +38,7 @@ export default class Forgot extends Component {
         <WrapperComponent>
           <WrapperForm>
             <Logo>
-              <img src="assets/logo.png" alt="Italian Trulli" />
+              <img src="assets/logo.png" alt="Share Wifi" />
               <div>Forgot Password</div>
             </Logo>
             <WrapperInput>

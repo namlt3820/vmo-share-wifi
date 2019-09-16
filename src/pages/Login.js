@@ -74,7 +74,7 @@ export default class Login extends Component {
         <WrapperComponent>
           <WrapperForm>
             <Logo>
-              <img src="assets/logo.png" alt="Italian Trulli" />
+              <img src="assets/logo.png" alt="Share Wifi" />
               <div>Welcome Back</div>
             </Logo>
             <WrapperInput>
