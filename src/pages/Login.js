@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Checkbox } from 'antd';
+import { Checkbox, Icon } from 'antd';
 import FormInput from '../components/core/FormInput';
 import {
   WrapperComponent,
@@ -8,7 +8,9 @@ import {
   WrapperInput,
   WrapperAction,
   CheckBoxAccess,
-  ButtonStyle
+  ButtonStyle,
+  Bottom,
+  OutSide
 } from '../components/Authentication';
 import LayoutMain from '../layout/LayoutMain';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
@@ -104,7 +106,14 @@ export default class Login extends Component {
                 <div>Remember me</div>
               </CheckBoxAccess>
             </WrapperAction>
+            <Bottom>
+              <Icon type="lock" />
+              &nbsp;&nbsp;Forgot your password
+            </Bottom>
           </WrapperForm>
+          <OutSide>
+            Don&apos;t have an account? <a href="#1">Signup Now</a>
+          </OutSide>
         </WrapperComponent>
       </LayoutMain>
     );

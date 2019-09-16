@@ -13,15 +13,27 @@ export const WrapperComponent = styled.div`
 
 export const WrapperForm = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   width: 400px;
-  height: 450px;
   background: #ffffff;
+  padding: 2.5em;
+  margin-bottom: 3em;
+  line-height: 2em;
 `;
 
-export const Logo = styled.div``;
+export const Logo = styled.div`
+  margin-bottom: 0.75em;
+  text-align: center;
+  img {
+    width: 130px;
+    margin-bottom: 2.3em;
+  }
+  h3 {
+    margin-bottom: 0;
+  }
+`;
 
 export const WrapperInput = styled.div`
   width: 300px;
@@ -60,15 +72,13 @@ export const CheckBoxAccess = styled.div`
   width: ${props => (props.type === 'login' ? '115px' : '250px')};
   justify-content: ${props =>
     props.type === 'login' ? ' space-around;' : 'space-between'};
-  margin: 10px 0;
+  margin: 0.5em 0;
 `;
 
 export const ButtonStyle = styled(Button)`
-  display: flex;
-  justify-content: flex-start;
+  width: 8em;
   font-size: 14px;
   padding: 0.25em 1em;
-  // padding: 0 30px;
   background: linear-gradient(to bottom, #e44688 0%, #ba3cbd 100%);
   :hover {
     background: linear-gradient(to bottom, #e44688 0%, #ba3cbd 100%);
@@ -76,6 +86,18 @@ export const ButtonStyle = styled(Button)`
   color: #ffffff;
   :hover {
     color: #ffffff;
+  }
+`;
+
+export const Bottom = styled.p`
+  position: absolute;
+  right: 3.75em;
+  bottom: 1em;
+`;
+
+export const OutSide = styled.div`
+  a {
+    color: #e80069;
   }
 `;
 
