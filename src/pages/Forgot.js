@@ -9,30 +9,59 @@ import {
   ButtonStyle
 } from '../components/Authentication';
 import LayoutMain from '../layout/LayoutMain';
-import Validator from '../utils/validator';
+import Validator, { EMAIL_REGEX } from '../utils/validator';
+import ForgotPwd from '../services/forgotPwd.service';
+import httpStatus from '../config/httpStatus';
 
+const forgot = new ForgotPwd();
 export default class Forgot extends Component {
   constructor() {
     super();
-    this.state = { email: '', error: '' };
+    this.state = {
+      email: '',
+      errors: {}
+    };
   }
 
-  handleValidateForm = () => {
+  handleChange = event => {
     const { email } = this.state;
-    const validateEmail = Validator.isValidEmailAddress(email);
-    if (!validateEmail) {
-      this.setState({ error: 'Invalid Email' });
-    } else {
-      this.setState({ error: '' });
+    this.setState({ email: event.target.value });
+    if (EMAIL_REGEX.test(email)) {
+      this.handleValidateEmail();
     }
   };
 
-  handleChange = event => {
-    this.setState({ email: event.target.value });
+  handleValidateEmail = () => {
+    const { email, errors } = this.state;
+    const validateEmail = Validator.isValidEmailAddress(email);
+    const valied = { ...errors };
+    if (!validateEmail && email.length === 0) {
+      valied.email = 'Require Email';
+      this.setState({ errors: valied });
+    } else if (!validateEmail && email.length > 0) {
+      valied.email = 'Invalid Email';
+      this.setState({ errors: valied });
+    } else {
+      valied.email = '';
+      this.setState({ errors: valied });
+    }
+  };
+
+  forgotPwd = () => {
+    const { email, errors } = this.state;
+    const valied = { ...errors };
+    forgot.forgotPwd({ email }).then(res => {
+      if (res.status === httpStatus.StatusNotFound) {
+        valied.email = res.data.errors[0].message;
+      } else {
+        valied.email = res.data.errors[0].message;
+      }
+      this.setState({ errors: valied });
+    });
   };
 
   render() {
-    const { email, error } = this.state;
+    const { email, errors } = this.state;
     return (
       <LayoutMain>
         <WrapperComponent>
@@ -47,14 +76,16 @@ export default class Forgot extends Component {
                 label="Email"
                 name="email"
                 type="email"
-                error={error}
+                error={errors.email}
                 value={email}
                 handleChange={this.handleChange}
-                handleBlur={this.handleValidateForm}
+                handleBlur={this.handleValidateEmail}
               />
             </WrapperInput>
             <WrapperAction type="forgot">
-              <ButtonStyle>Send recovery email</ButtonStyle>
+              <ButtonStyle onClick={this.forgotPwd}>
+                Send recovery email
+              </ButtonStyle>
             </WrapperAction>
           </WrapperForm>
         </WrapperComponent>

@@ -35,10 +35,6 @@ export default class SignUp extends Component {
     this.setState({ [name]: value });
     if (name === 'email' && EMAIL_REGEX.test(value)) {
       this.handleValidateEmail();
-    } else if (name === 'password' && value.length > 6) {
-      this.handleValidatePassword();
-    } else if (name === 'name' && value.length > 4) {
-      this.handleValidateUsername();
     }
   };
 
