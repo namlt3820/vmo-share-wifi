@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import './App.css';
+// import './App.css';
 import routers from './routers/index';
 
 const AppRoute = ({ component: Component, ...rest }) => (

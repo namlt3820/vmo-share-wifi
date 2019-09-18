@@ -44,6 +44,9 @@ export const Label = styled.div`
   justify-content: flex-start;
   color: ${props => (props.type === 'error' ? '#D95A44' : '#747474')};
   border-radius: 5px;
+  .icon {
+    color: red;
+  }
 `;
 
 export const InputStyle = styled.input`
@@ -78,22 +81,25 @@ export const CheckBoxAccess = styled.div`
 export const ButtonStyle = styled(Button)`
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   padding: 0 30px;
   font-size: 14px;
-  background: linear-gradient(to bottom, #e44688 0%, #ba3cbd 100%);
+  background: ${props =>
+    props.background !== 'none'
+      ? 'linear-gradient(to bottom, #e44688 0%, #ba3cbd 100%);'
+      : ''};
   :hover {
     background: linear-gradient(to bottom, #e44688 0%, #ba3cbd 100%);
   }
-  color: #ffffff;
+  color: ${props => (props.background !== 'none' ? '#fff' : '#333')};
   :hover {
     color: #ffffff;
   }
+  font-weight: 700;
 `;
 
 export const Bottom = styled.p`
-  position: absolute;
-  right: 3.75em;
-  bottom: 1em;
+  margin: 1.5em 0 0 10em;
 `;
 
 export const OutSide = styled.div`
