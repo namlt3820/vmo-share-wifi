@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Checkbox, Icon } from 'antd';
-import { connect } from 'react-redux';
 import FormInput from '../components/core/FormInput';
 import {
   WrapperComponent,
@@ -8,23 +6,23 @@ import {
   Logo,
   WrapperInput,
   WrapperAction,
-  CheckBoxAccess,
   ButtonStyle,
-  Bottom,
   OutSide
 } from '../components/Authentication';
 import LayoutMain from '../layout/LayoutMain';
+import UpdatePwd from '../services/updatePwdBycode.service';
+import httpStatus from '../config/httpStatus';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
-import { login } from '../store/actions/authenticate';
 
-class Login extends Component {
+const updatePwd = new UpdatePwd();
+class UpdatePwdBycode extends Component {
   constructor() {
     super();
     this.state = {
       email: '',
       password: '',
+      code: '',
       errors: {},
-      checked: false,
       loading: false
     };
   }
@@ -69,39 +67,47 @@ class Login extends Component {
     }
   };
 
-  login = () => {
-    const { email, password, errors } = this.state;
-    this.setState({ loading: false });
+  updatePwd = () => {
+    const { email, password, code, errors } = this.state;
     const valied = { ...errors };
-    const { login, history } = this.props;
     const params = {
       email,
-      password
+      password,
+      code
     };
-    login(params, history).then(res => {
-      if (res.code === 'password_incorrect') {
-        valied.password = res.message;
-      } else {
-        valied.email = res.message;
+    updatePwd.updatePwdBycode(params).then(res => {
+      if (
+        res.status === httpStatus.StatusBadRequest ||
+        res.status === httpStatus.StatusNotFound
+      ) {
+        res.data.errors.map(error => {
+          if (error.location === 'email') {
+            valied.email = error.message;
+          } else if (error.location === 'password') {
+            valied.password = error.message;
+          } else {
+            valied.code = error.message;
+          }
+          return valied;
+        });
+        this.setState({ errors: valied });
       }
-      this.setState({ errors: valied });
+      // else if (res.status === httpStatus.StatusBadRequest) {
+
+      // }
+      console.log('resss', res);
     });
   };
 
-  handleCheckbox = () => {
-    const { checked } = this.state;
-    this.setState({ checked: !checked });
-  };
-
   render() {
-    const { email, password, errors, checked, loading } = this.state;
+    const { email, password, errors, loading, code } = this.state;
     return (
       <LayoutMain>
         <WrapperComponent>
           <WrapperForm>
             <Logo>
               <img src="assets/logo.png" alt="Share Wifi" />
-              <div>Welcome Back</div>
+              <div>Change Password</div>
             </Logo>
             <WrapperInput>
               <FormInput
@@ -124,24 +130,21 @@ class Login extends Component {
                 handleChange={this.handleChange}
                 handleBlur={this.handleValidatePassword}
               />
+              <FormInput
+                placeholder="Enter Active Code"
+                label="Active Code"
+                name="code"
+                type="text"
+                error={errors.code}
+                value={code}
+                handleChange={this.handleChange}
+              />
             </WrapperInput>
             <WrapperAction type="login">
-              <ButtonStyle
-                loading={loading}
-                disabled={!checked || !email || !password}
-                onClick={this.login}
-              >
-                Login
+              <ButtonStyle loading={loading} onClick={this.updatePwd}>
+                Change Password
               </ButtonStyle>
-              <CheckBoxAccess type="login">
-                <Checkbox checked={checked} onChange={this.handleCheckbox} />
-                <div>Remember me</div>
-              </CheckBoxAccess>
             </WrapperAction>
-            <Bottom>
-              <Icon type="lock" />
-              &nbsp;&nbsp;Forgot your password
-            </Bottom>
           </WrapperForm>
           <OutSide>
             Don&apos;t have an account? <a href="#1">Signup Now</a>
@@ -151,7 +154,4 @@ class Login extends Component {
     );
   }
 }
-export default connect(
-  null,
-  { login }
-)(Login);
+export default UpdatePwdBycode;
