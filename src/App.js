@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import './App.css';
+// import './App.css';
 import routers from './routers/index';
 import { getCurrentUser } from './store/actions/user';
 
