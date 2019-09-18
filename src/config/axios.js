@@ -19,7 +19,6 @@ _axios.interceptors.request.use(
   // eslint-disable-next-line no-shadow
   function(config) {
     if (window.localStorage.access_token)
-      // eslint-disable-next-line no-param-reassign
       config.headers['x-access-token'] = window.localStorage.access_token;
     return config;
   },

@@ -9,6 +9,7 @@
         "extensions": [".js", ".jsx"]
       }
     ],
+    "react/destructuring-assignment": [0],
     "react/prop-types": 0,
     "no-underscore-dangle": 0,
     "import/imports-first": ["error", "absolute-first"],
@@ -17,7 +18,9 @@
     "react/jsx-props-no-spreading": "off",
     "no-useless-escape": "off",
     "no-misleading-character-class": "off",
-    "no-restricted-globals": "off"
+    "no-restricted-globals": "off",
+    "no-param-reassign": "off",
+    "no-shadow": "off"
   },
   "globals": {
     "window": true,

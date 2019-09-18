@@ -2,7 +2,7 @@ import Base from './base.service';
 
 export default class User extends Base {
   constructor() {
-    super('authentication');
+    super('authenticate');
   }
 
   login(params) {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Checkbox, Icon } from 'antd';
+import { connect } from 'react-redux';
 import FormInput from '../components/core/FormInput';
 import {
   WrapperComponent,
@@ -14,14 +15,17 @@ import {
 } from '../components/Authentication';
 import LayoutMain from '../layout/LayoutMain';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
+import { login } from '../store/actions/authenticate';
 
-export default class Login extends Component {
+class Login extends Component {
   constructor() {
     super();
     this.state = {
       email: '',
       password: '',
-      errors: {}
+      errors: {},
+      checked: false,
+      loading: false
     };
   }
 
@@ -36,9 +40,9 @@ export default class Login extends Component {
   };
 
   handleValidateEmail = () => {
-    const { email, errors } = this.state;
+    const { email } = this.state;
     const validateEmail = Validator.isValidEmailAddress(email);
-    const valied = { ...errors };
+    const valied = {};
     if (!validateEmail && email.length === 0) {
       valied.email = 'Require Email';
       this.setState({ errors: valied });
@@ -67,8 +71,32 @@ export default class Login extends Component {
     }
   };
 
-  render() {
+  login = () => {
     const { email, password, errors } = this.state;
+    this.setState({ loading: false });
+    const valied = { ...errors };
+    const { login, history } = this.props;
+    const params = {
+      email,
+      password
+    };
+    login(params, history).then(res => {
+      if (res.code === 'password_incorrect') {
+        valied.password = res.message;
+      } else {
+        valied.email = res.message;
+      }
+      this.setState({ errors: valied });
+    });
+  };
+
+  handleCheckbox = () => {
+    const { checked } = this.state;
+    this.setState({ checked: !checked });
+  };
+
+  render() {
+    const { email, password, errors, checked, loading } = this.state;
     return (
       <LayoutMain>
         <WrapperComponent>
@@ -100,9 +128,15 @@ export default class Login extends Component {
               />
             </WrapperInput>
             <WrapperAction type="login">
-              <ButtonStyle>Login</ButtonStyle>
+              <ButtonStyle
+                loading={loading}
+                disabled={!checked || !email || !password}
+                onClick={this.login}
+              >
+                Login
+              </ButtonStyle>
               <CheckBoxAccess type="login">
-                <Checkbox defaultChecked={false} />
+                <Checkbox checked={checked} onChange={this.handleCheckbox} />
                 <div>Remember me</div>
               </CheckBoxAccess>
             </WrapperAction>
@@ -119,3 +153,7 @@ export default class Login extends Component {
     );
   }
 }
+export default connect(
+  null,
+  { login }
+)(Login);
