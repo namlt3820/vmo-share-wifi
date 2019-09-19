@@ -11,7 +11,6 @@ import {
   ButtonStyle
 } from '../components/Authentication';
 import FormInput from '../components/core/FormInput';
-import LayoutMain from '../layout/LayoutMain';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
 import httpStatus from '../config/httpStatus';
 import User from '../services/user.service';
@@ -120,57 +119,55 @@ export default class SignUp extends Component {
         }}
       />
     ) : (
-      <LayoutMain>
-        <WrapperComponent>
-          <WrapperForm>
-            <Logo>
-              <img src="assets/logo.png" alt="Share Wifi" />
-              <div>Create your account.</div>
-            </Logo>
-            <WrapperInput>
-              <FormInput
-                placeholder="Enter Username"
-                label="Username"
-                name="name"
-                type="text"
-                error={errors.name}
-                value={name}
-                handleChange={this.handleChange}
-                handleBlur={this.handleValidateUsername}
-              />
-              <FormInput
-                placeholder="Enter Email"
-                label="Email"
-                name="email"
-                type="email"
-                error={!errors.name ? errors.email : ''}
-                value={email}
-                handleChange={this.handleChange}
-                handleBlur={this.handleValidateEmail}
-              />
-              <FormInput
-                placeholder="Enter Password"
-                label="Password"
-                name="password"
-                type="password"
-                error={!errors.name && !errors.email ? errors.password : ''}
-                value={password}
-                handleChange={this.handleChange}
-                handleBlur={this.handleValidatePassword}
-              />
-            </WrapperInput>
-            <WrapperAction type="signup">
-              <CheckBoxAccess type="signup">
-                <Checkbox checked={checked} onChange={this.handleCheckbox} />
-                <div>I have read, understand, and agree </div>
-              </CheckBoxAccess>
-              <ButtonStyle onClick={this.signUp} disabled={!checked}>
-                SignUp
-              </ButtonStyle>
-            </WrapperAction>
-          </WrapperForm>
-        </WrapperComponent>
-      </LayoutMain>
+      <WrapperComponent>
+        <WrapperForm>
+          <Logo>
+            <img src="assets/logo.png" alt="Share Wifi" />
+            <div>Create your account.</div>
+          </Logo>
+          <WrapperInput>
+            <FormInput
+              placeholder="Enter Username"
+              label="Username"
+              name="name"
+              type="text"
+              error={errors.name}
+              value={name}
+              handleChange={this.handleChange}
+              handleBlur={this.handleValidateUsername}
+            />
+            <FormInput
+              placeholder="Enter Email"
+              label="Email"
+              name="email"
+              type="email"
+              error={!errors.name ? errors.email : ''}
+              value={email}
+              handleChange={this.handleChange}
+              handleBlur={this.handleValidateEmail}
+            />
+            <FormInput
+              placeholder="Enter Password"
+              label="Password"
+              name="password"
+              type="password"
+              error={!errors.name && !errors.email ? errors.password : ''}
+              value={password}
+              handleChange={this.handleChange}
+              handleBlur={this.handleValidatePassword}
+            />
+          </WrapperInput>
+          <WrapperAction type="signup">
+            <CheckBoxAccess type="signup">
+              <Checkbox checked={checked} onChange={this.handleCheckbox} />
+              <div>I have read, understand, and agree </div>
+            </CheckBoxAccess>
+            <ButtonStyle onClick={this.signUp} disabled={!checked}>
+              SignUp
+            </ButtonStyle>
+          </WrapperAction>
+        </WrapperForm>
+      </WrapperComponent>
     );
     return result;
   }

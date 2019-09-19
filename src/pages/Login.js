@@ -13,7 +13,6 @@ import {
   Bottom,
   OutSide
 } from '../components/Authentication';
-import LayoutMain from '../layout/LayoutMain';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
 import { login } from '../store/actions/authenticate';
 
@@ -96,58 +95,56 @@ class Login extends Component {
   render() {
     const { email, password, errors, checked, loading } = this.state;
     return (
-      <LayoutMain>
-        <WrapperComponent>
-          <WrapperForm>
-            <Logo>
-              <img src="assets/logo.png" alt="Share Wifi" />
-              <div>Welcome Back</div>
-            </Logo>
-            <WrapperInput>
-              <FormInput
-                placeholder="Enter Email"
-                label="Email"
-                name="email"
-                type="email"
-                error={errors.email}
-                value={email}
-                handleChange={this.handleChange}
-                handleBlur={this.handleValidateEmail}
-              />
-              <FormInput
-                placeholder="Enter Password"
-                label="Password"
-                name="password"
-                type="password"
-                error={errors.password}
-                value={password}
-                handleChange={this.handleChange}
-                handleBlur={this.handleValidatePassword}
-              />
-            </WrapperInput>
-            <WrapperAction type="login">
-              <ButtonStyle
-                loading={loading}
-                disabled={!checked || !email || !password}
-                onClick={this.login}
-              >
-                Login
-              </ButtonStyle>
-              <CheckBoxAccess type="login">
-                <Checkbox checked={checked} onChange={this.handleCheckbox} />
-                <div>Remember me</div>
-              </CheckBoxAccess>
-            </WrapperAction>
-            <Bottom>
-              <Icon type="lock" />
-              &nbsp;&nbsp;Forgot your password
-            </Bottom>
-          </WrapperForm>
-          <OutSide>
-            Don&apos;t have an account? <a href="#1">Signup Now</a>
-          </OutSide>
-        </WrapperComponent>
-      </LayoutMain>
+      <WrapperComponent>
+        <WrapperForm>
+          <Logo>
+            <img src="assets/logo.png" alt="Share Wifi" />
+            <div>Welcome Back</div>
+          </Logo>
+          <WrapperInput>
+            <FormInput
+              placeholder="Enter Email"
+              label="Email"
+              name="email"
+              type="email"
+              error={errors.email}
+              value={email}
+              handleChange={this.handleChange}
+              handleBlur={this.handleValidateEmail}
+            />
+            <FormInput
+              placeholder="Enter Password"
+              label="Password"
+              name="password"
+              type="password"
+              error={errors.password}
+              value={password}
+              handleChange={this.handleChange}
+              handleBlur={this.handleValidatePassword}
+            />
+          </WrapperInput>
+          <WrapperAction type="login">
+            <ButtonStyle
+              loading={loading}
+              disabled={!checked || !email || !password}
+              onClick={this.login}
+            >
+              Login
+            </ButtonStyle>
+            <CheckBoxAccess type="login">
+              <Checkbox checked={checked} onChange={this.handleCheckbox} />
+              <div>Remember me</div>
+            </CheckBoxAccess>
+          </WrapperAction>
+          <Bottom>
+            <Icon type="lock" />
+            &nbsp;&nbsp;Forgot your password
+          </Bottom>
+        </WrapperForm>
+        <OutSide>
+          Don&apos;t have an account? <a href="#1">Signup Now</a>
+        </OutSide>
+      </WrapperComponent>
     );
   }
 }

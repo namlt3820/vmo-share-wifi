@@ -9,7 +9,6 @@ import {
   ButtonStyle,
   OutSide
 } from '../components/Authentication';
-import LayoutMain from '../layout/LayoutMain';
 import UpdatePwd from '../services/updatePwdBycode.service';
 import httpStatus from '../config/httpStatus';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
@@ -102,55 +101,53 @@ class UpdatePwdBycode extends Component {
   render() {
     const { email, password, errors, loading, code } = this.state;
     return (
-      <LayoutMain>
-        <WrapperComponent>
-          <WrapperForm>
-            <Logo>
-              <img src="assets/logo.png" alt="Share Wifi" />
-              <div>Change Password</div>
-            </Logo>
-            <WrapperInput>
-              <FormInput
-                placeholder="Enter Email"
-                label="Email"
-                name="email"
-                type="email"
-                error={errors.email}
-                value={email}
-                handleChange={this.handleChange}
-                handleBlur={this.handleValidateEmail}
-              />
-              <FormInput
-                placeholder="Enter Password"
-                label="Password"
-                name="password"
-                type="password"
-                error={errors.password}
-                value={password}
-                handleChange={this.handleChange}
-                handleBlur={this.handleValidatePassword}
-              />
-              <FormInput
-                placeholder="Enter Active Code"
-                label="Active Code"
-                name="code"
-                type="text"
-                error={errors.code}
-                value={code}
-                handleChange={this.handleChange}
-              />
-            </WrapperInput>
-            <WrapperAction type="login">
-              <ButtonStyle loading={loading} onClick={this.updatePwd}>
-                Change Password
-              </ButtonStyle>
-            </WrapperAction>
-          </WrapperForm>
-          <OutSide>
-            Don&apos;t have an account? <a href="#1">Signup Now</a>
-          </OutSide>
-        </WrapperComponent>
-      </LayoutMain>
+      <WrapperComponent>
+        <WrapperForm>
+          <Logo>
+            <img src="assets/logo.png" alt="Share Wifi" />
+            <div>Change Password</div>
+          </Logo>
+          <WrapperInput>
+            <FormInput
+              placeholder="Enter Email"
+              label="Email"
+              name="email"
+              type="email"
+              error={errors.email}
+              value={email}
+              handleChange={this.handleChange}
+              handleBlur={this.handleValidateEmail}
+            />
+            <FormInput
+              placeholder="Enter Password"
+              label="Password"
+              name="password"
+              type="password"
+              error={errors.password}
+              value={password}
+              handleChange={this.handleChange}
+              handleBlur={this.handleValidatePassword}
+            />
+            <FormInput
+              placeholder="Enter Active Code"
+              label="Active Code"
+              name="code"
+              type="text"
+              error={errors.code}
+              value={code}
+              handleChange={this.handleChange}
+            />
+          </WrapperInput>
+          <WrapperAction type="login">
+            <ButtonStyle loading={loading} onClick={this.updatePwd}>
+              Change Password
+            </ButtonStyle>
+          </WrapperAction>
+        </WrapperForm>
+        <OutSide>
+          Don&apos;t have an account? <a href="#1">Signup Now</a>
+        </OutSide>
+      </WrapperComponent>
     );
   }
 }

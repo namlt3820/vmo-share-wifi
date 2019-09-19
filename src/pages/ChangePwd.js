@@ -9,7 +9,6 @@ import {
   ButtonStyle,
   OutSide
 } from '../components/Authentication';
-import LayoutMain from '../layout/LayoutMain';
 import Validator from '../utils/validator';
 import ChangePassword from '../services/changePwd.service';
 import httpStatus from '../config/httpStatus';
@@ -91,46 +90,44 @@ class ChangePwd extends Component {
   render() {
     const { currentPassword, newPassword, errors, loading } = this.state;
     return (
-      <LayoutMain>
-        <WrapperComponent>
-          <WrapperForm>
-            <Logo>
-              <img src="assets/logo.png" alt="Share Wifi" />
-              <div>Change Password</div>
-            </Logo>
-            <WrapperInput>
-              <FormInput
-                placeholder="Enter Current Password"
-                label="Current Password"
-                name="currentPassword"
-                type="password"
-                error={errors.currentPassword}
-                value={currentPassword}
-                handleChange={this.handleChange}
-                handleBlur={this.handleValidateCurrentPassword}
-              />
-              <FormInput
-                placeholder="Enter New Password"
-                label="New Password"
-                name="newPassword"
-                type="password"
-                error={errors.newPassword}
-                value={newPassword}
-                handleChange={this.handleChange}
-                handleBlur={this.handleValidateNewPassword}
-              />
-            </WrapperInput>
-            <WrapperAction type="login">
-              <ButtonStyle loading={loading} onClick={this.changePwd}>
-                Change Password
-              </ButtonStyle>
-            </WrapperAction>
-          </WrapperForm>
-          <OutSide>
-            Don&apos;t have an account? <a href="#1">Signup Now</a>
-          </OutSide>
-        </WrapperComponent>
-      </LayoutMain>
+      <WrapperComponent>
+        <WrapperForm>
+          <Logo>
+            <img src="assets/logo.png" alt="Share Wifi" />
+            <div>Change Password</div>
+          </Logo>
+          <WrapperInput>
+            <FormInput
+              placeholder="Enter Current Password"
+              label="Current Password"
+              name="currentPassword"
+              type="password"
+              error={errors.currentPassword}
+              value={currentPassword}
+              handleChange={this.handleChange}
+              handleBlur={this.handleValidateCurrentPassword}
+            />
+            <FormInput
+              placeholder="Enter New Password"
+              label="New Password"
+              name="newPassword"
+              type="password"
+              error={errors.newPassword}
+              value={newPassword}
+              handleChange={this.handleChange}
+              handleBlur={this.handleValidateNewPassword}
+            />
+          </WrapperInput>
+          <WrapperAction type="login">
+            <ButtonStyle loading={loading} onClick={this.changePwd}>
+              Change Password
+            </ButtonStyle>
+          </WrapperAction>
+        </WrapperForm>
+        <OutSide>
+          Don&apos;t have an account? <a href="#1">Signup Now</a>
+        </OutSide>
+      </WrapperComponent>
     );
   }
 }

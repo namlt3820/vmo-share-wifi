@@ -8,7 +8,6 @@ import {
   WrapperAction,
   ButtonStyle
 } from '../components/Authentication';
-import LayoutMain from '../layout/LayoutMain';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
 import ForgotPwd from '../services/forgotPwd.service';
 import httpStatus from '../config/httpStatus';
@@ -63,33 +62,31 @@ export default class Forgot extends Component {
   render() {
     const { email, errors } = this.state;
     return (
-      <LayoutMain>
-        <WrapperComponent>
-          <WrapperForm>
-            <Logo>
-              <img src="assets/logo.png" alt="Share Wifi" />
-              <div>Forgot Password</div>
-            </Logo>
-            <WrapperInput>
-              <FormInput
-                placeholder="Enter Email"
-                label="Email"
-                name="email"
-                type="email"
-                error={errors.email}
-                value={email}
-                handleChange={this.handleChange}
-                handleBlur={this.handleValidateEmail}
-              />
-            </WrapperInput>
-            <WrapperAction type="forgot">
-              <ButtonStyle onClick={this.forgotPwd}>
-                Send recovery email
-              </ButtonStyle>
-            </WrapperAction>
-          </WrapperForm>
-        </WrapperComponent>
-      </LayoutMain>
+      <WrapperComponent>
+        <WrapperForm>
+          <Logo>
+            <img src="assets/logo.png" alt="Share Wifi" />
+            <div>Forgot Password</div>
+          </Logo>
+          <WrapperInput>
+            <FormInput
+              placeholder="Enter Email"
+              label="Email"
+              name="email"
+              type="email"
+              error={errors.email}
+              value={email}
+              handleChange={this.handleChange}
+              handleBlur={this.handleValidateEmail}
+            />
+          </WrapperInput>
+          <WrapperAction type="forgot">
+            <ButtonStyle onClick={this.forgotPwd}>
+              Send recovery email
+            </ButtonStyle>
+          </WrapperAction>
+        </WrapperForm>
+      </WrapperComponent>
     );
   }
 }

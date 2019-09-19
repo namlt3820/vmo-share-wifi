@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+import LayoutMain from './layout/LayoutMain';
+import LayoutDashboard from './layout/LayoutDashboard';
+
 // import './App.css';
-import routers from './routers/index';
+import { routersAuth, routesDashboard } from './routers/index';
 import { getCurrentUser } from './store/actions/user';
 
-const AppRoute = ({ component: Components, ...rest }) => (
-  <Route {...rest} render={props => <Components {...props} />} />
+const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (
+      <Layout>
+        <Component {...props} />
+      </Layout>
+    )}
+  />
 );
 
 class App extends Component {
@@ -23,10 +33,22 @@ class App extends Component {
       <div className="App">
         <BrowserRouter>
           <Switch>
-            {routers.map(router => (
+            {routesDashboard.map(router => (
               <AppRoute
                 exact
                 path={router.path}
+                layout={LayoutDashboard}
+                component={router.component}
+                key={router.id}
+              />
+            ))}
+          </Switch>
+          <Switch>
+            {routersAuth.map(router => (
+              <AppRoute
+                exact
+                path={router.path}
+                layout={LayoutMain}
                 component={router.component}
                 key={router.id}
               />

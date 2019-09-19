@@ -5,37 +5,37 @@ import Forgot from '../pages/Forgot';
 import ChangePwd from '../pages/ChangePwd';
 import UpdatePwdBycode from '../pages/UpdatePwdBycode';
 
-const routers = [
+export const routesDashboard = [
   {
     id: 1,
     path: '/',
     component: Home
-  },
+  }
+];
+export const routersAuth = [
   {
-    id: 2,
+    id: 1,
     path: '/signup',
     component: SignUp
   },
   {
-    id: 3,
+    id: 2,
     path: '/login',
     component: Login
   },
   {
-    id: 4,
+    id: 3,
     path: '/forgotPwd',
     component: Forgot
   },
   {
-    id: 5,
+    id: 4,
     path: '/changePwd',
     component: ChangePwd
   },
   {
-    id: 6,
+    id: 5,
     path: '/updatePwdBycode',
     component: UpdatePwdBycode
   }
 ];
-
-export default routers;
