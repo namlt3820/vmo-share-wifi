@@ -12,7 +12,8 @@ const AppRoute = ({ component: Components, ...rest }) => (
 class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    if (window.localStorage.access_token) {
+    const token = localStorage.getItem('access_token');
+    if (token) {
       dispatch(getCurrentUser());
     }
   }
