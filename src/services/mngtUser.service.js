@@ -1,11 +1,11 @@
 import Base from './base.service';
 
-export default class User extends Base {
+export default class UserManager extends Base {
   constructor() {
-    super('users');
+    super('mngt/user');
   }
 
-  signUp(params) {
+  addUser(params) {
     return this.post(params);
   }
 }
