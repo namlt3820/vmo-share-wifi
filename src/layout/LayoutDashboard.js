@@ -68,8 +68,8 @@ export default class LayoutDashboard extends Component {
           <Sider
             trigger={null}
             theme="light"
-            collapsed={collapsed}
             style={{ minWidth: '220px' }}
+            collapsed={collapsed}
           >
             <LogoDashBoard>
               <Button
@@ -87,12 +87,7 @@ export default class LayoutDashboard extends Component {
                 }}
               />
             </LogoDashBoard>
-            <Menu
-              defaultSelectedKeys={['1']}
-              mode="inline"
-              theme="light"
-              inlineCollapsed={collapsed}
-            >
+            <Menu defaultSelectedKeys={['1']} mode="inline" theme="light">
               <Menu.Divider />
 
               <Menu.Item key="1">
