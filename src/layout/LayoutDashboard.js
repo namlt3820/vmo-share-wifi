@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Layout, Menu, Icon, Button, Badge, Dropdown } from 'antd';
 import styled from 'styled-components';
 import {
-  DividerStyle,
   LogoDashBoard,
   HeaderIcon,
   HeaderProfile,
@@ -72,36 +71,35 @@ export default class LayoutDashboard extends Component {
             collapsed={collapsed}
             style={{ minWidth: '220px' }}
           >
+            <LogoDashBoard>
+              <Button
+                onClick={this.toggle}
+                style={{ margin: 17, border: 'none' }}
+              >
+                <Icon type={collapsed ? 'menu' : 'close'} />
+              </Button>
+              <img
+                src="assets/logo.png"
+                alt="Share Wifi"
+                style={{
+                  display: `${!collapsed ? 'block' : 'none'}`,
+                  transition: 'display 2s 2s 2s'
+                }}
+              />
+            </LogoDashBoard>
             <Menu
-              defaultSelectedK
-              eys={['1']}
+              defaultSelectedKeys={['1']}
               mode="inline"
               theme="light"
               inlineCollapsed={collapsed}
             >
-              <LogoDashBoard>
-                <Button
-                  onClick={this.toggle}
-                  style={{ margin: 17, border: 'none' }}
-                >
-                  <Icon type={collapsed ? 'menu' : 'close'} />
-                </Button>
-                <img
-                  src="assets/logo.png"
-                  alt="Share Wifi"
-                  style={{
-                    display: `${!collapsed ? 'block' : 'none'}`,
-                    transition: 'display 2s 2s 2s'
-                  }}
-                />
-              </LogoDashBoard>
-              <DividerStyle name="full" />
+              <Menu.Divider />
 
               <Menu.Item key="1">
                 <Icon type="dashboard" />
                 <span>Dashboard</span>
               </Menu.Item>
-              <DividerStyle />
+              <Menu.Divider />
               <SubMenu
                 key="sub1"
                 title={
@@ -125,7 +123,7 @@ export default class LayoutDashboard extends Component {
                   <span>Add User</span>
                 </Menu.Item>
               </SubMenu>
-              <DividerStyle />
+              <Menu.Divider />
               <SubMenu
                 key="sub2"
                 title={
@@ -144,12 +142,12 @@ export default class LayoutDashboard extends Component {
                   <span>Add User</span>
                 </Menu.Item>
               </SubMenu>
-              <DividerStyle />
+              <Menu.Divider />
               <Menu.Item key="7">
                 <Icon type="database" />
                 <span>Data Management</span>
               </Menu.Item>
-              <DividerStyle />
+              <Menu.Divider />
               <Menu.Item key="8">
                 <Icon type="dollar" />
                 <span>Payment Management </span>
