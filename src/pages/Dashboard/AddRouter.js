@@ -11,12 +11,62 @@ import {
   ButtonStyle
 } from '../../components/Authentication';
 import FormInput from '../../components/core/FormInput';
-import LayoutDashboard from '../../layout/LayoutDashboard';
+import Router from '../../services/router.service';
+import httpStatus from '../../config/httpStatus';
 
+const router = new Router();
 export default class AddRouter extends Component {
+  constructor() {
+    super();
+    this.state = {
+      name: '',
+      macAddress: '',
+      description: '',
+      location: '',
+      errors: {}
+    };
+  }
+
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value, errors: {} });
+  };
+
+  addRouter = () => {
+    const { name, macAddress, description, location } = this.state;
+    const { history } = this.props;
+    const valied = {};
+    const params = {
+      name,
+      macAddress,
+      description,
+      location
+    };
+    router.addRouter(params).then(res => {
+      if (res.status === httpStatus.StatusBadRequest) {
+        res.data.errors.forEach(error => {
+          if (error.location === 'macAddress') {
+            valied.macAddress = error.message;
+          } else {
+            valied.location = error.message;
+          }
+        });
+        this.setState({ errors: valied });
+      } else if (res.status === httpStatus.StatusConflict) {
+        valied.macAddress = res.data.errors[0].message;
+        this.setState({ errors: valied });
+      } else {
+        history.push('/routers');
+      }
+    });
+  };
+
+  cancel = () => {};
+
   render() {
+    const { macAddress, errors, location, description, name } = this.state;
     return (
-      <LayoutDashboard>
+      <>
         <DashBoardTittle>
           <h3>Router</h3>
           <Breadcrumb separator=">">
@@ -29,16 +79,11 @@ export default class AddRouter extends Component {
           <WrapperForm>
             <WrapperInput>
               <FormInput
-                placeholder="Enter router"
-                label="Router"
-                name="routerName"
-                type="text"
-                icon="*"
-              />
-              <FormInput
                 placeholder="Enter Router Name"
                 label="Name"
                 name="name"
+                value={name}
+                handleChange={this.handleChange}
                 type="text"
               />
               <FormInput
@@ -46,16 +91,40 @@ export default class AddRouter extends Component {
                 label="Mac-Address"
                 name="macAddress"
                 type="text"
+                error={errors.macAddress}
+                handleChange={this.handleChange}
+                value={macAddress}
                 icon="*"
+              />
+
+              <FormInput
+                placeholder="Location"
+                label="Location"
+                name="location"
+                type="text"
+                error={errors.location}
+                handleChange={this.handleChange}
+                value={location}
+                icon="*"
+              />
+              <FormInput
+                placeholder="Description"
+                label="Description"
+                name="description"
+                value={description}
+                handleChange={this.handleChange}
+                type="text"
               />
             </WrapperInput>
             <WrapperAction type="login">
-              <ButtonStyle>Save</ButtonStyle>
-              <ButtonStyle background="none">Cancel</ButtonStyle>
+              <ButtonStyle onClick={this.addRouter}>Save</ButtonStyle>
+              <ButtonStyle background="none" onClick={this.cancel}>
+                Cancel
+              </ButtonStyle>
             </WrapperAction>
           </WrapperForm>
         </DashBoardContent>
-      </LayoutDashboard>
+      </>
     );
   }
 }

@@ -160,7 +160,7 @@ export default class SignUp extends Component {
           <WrapperAction type="signup">
             <CheckBoxAccess type="signup">
               <Checkbox checked={checked} onChange={this.handleCheckbox} />
-              <div>I have read, understand, and agree </div>
+              <div>I accept the Terms and Conditions</div>
             </CheckBoxAccess>
             <ButtonStyle onClick={this.signUp} disabled={!checked}>
               SignUp

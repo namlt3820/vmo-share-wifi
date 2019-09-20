@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Icon, Button, Badge, Dropdown } from 'antd';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   LogoDashBoard,
@@ -101,7 +102,7 @@ export default class LayoutDashboard extends Component {
                   <span>
                     <Icon type="user" />
 
-                    <span>Account Management</span>
+                    <span>Account</span>
                   </span>
                 }
               >
@@ -124,17 +125,19 @@ export default class LayoutDashboard extends Component {
                 title={
                   <span>
                     <Icon type="wifi" />
-                    <span>Wifi Management</span>
+                    <span>Wifi</span>
                   </span>
                 }
               >
                 <Menu.Item key="5">
                   <Icon type="wifi" />
-                  <span>Add User</span>
+                  <span>All Router</span>
+                  <Link to="/routers" />
                 </Menu.Item>
                 <Menu.Item key="6">
                   <Icon type="wifi" />
-                  <span>Add User</span>
+                  <span>Add Router</span>
+                  <Link to="/addRouter" />
                 </Menu.Item>
               </SubMenu>
               <Menu.Divider />
