@@ -8,6 +8,8 @@ import AllUser from '../pages/Dashboard/User/AllUser';
 import AddUser from '../pages/Dashboard/User/AddUser';
 import UserInfomation from '../pages/Dashboard/User/UserInfomation';
 import UpdateUserInfo from '../pages/Dashboard/User/UpdateUserInfo';
+import AddRouter from '../pages/Dashboard/AddRouter';
+import ListRouter from '../pages/Dashboard/ListRouter';
 
 export const routesDashboard = [
   {
@@ -31,9 +33,19 @@ export const routesDashboard = [
     component: UserInfomation
   },
   {
-    id: 4,
+    id: 5,
     path: '/updateUserInfo',
     component: UpdateUserInfo
+  },
+  {
+    id: 6,
+    path: '/addRouter',
+    component: AddRouter
+  },
+  {
+    id: 7,
+    path: '/routers',
+    component: ListRouter
   }
 ];
 

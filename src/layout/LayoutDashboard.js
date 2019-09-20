@@ -151,11 +151,13 @@ export default class LayoutDashboard extends Component {
               >
                 <Menu.Item key="5">
                   <Icon type="wifi" />
-                  <span>Add User</span>
+                  <span>All Router</span>
+                  <Link to="/routers" />
                 </Menu.Item>
                 <Menu.Item key="6">
                   <Icon type="wifi" />
-                  <span>Add User</span>
+                  <span>Add Router</span>
+                  <Link to="/addRouter" />
                 </Menu.Item>
               </SubMenu>
               <Menu.Divider />

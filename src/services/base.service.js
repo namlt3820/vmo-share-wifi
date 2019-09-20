@@ -18,7 +18,7 @@ export default class Base {
   }
 
   put(id) {
-    return axios.put(this.path + id);
+    return axios.put(`${this.path}/${id}`);
   }
 
   patch(id, param) {

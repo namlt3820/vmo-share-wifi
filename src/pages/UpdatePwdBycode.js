@@ -91,10 +91,6 @@ class UpdatePwdBycode extends Component {
         });
         this.setState({ errors: valied });
       }
-      // else if (res.status === httpStatus.StatusBadRequest) {
-
-      // }
-      // console.log('resss', res);
     });
   };
 
