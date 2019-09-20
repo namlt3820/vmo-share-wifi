@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Table, Menu } from 'antd';
+import { Button, Table, Menu, Modal } from 'antd';
 
 export const DashBoardTittle = styled.div`
   h3 {
@@ -29,7 +29,7 @@ export const DashBoardTabItems = styled.div`
   box-shadow: ${props => (props.active === 'active' ? 'none' : '2px 0px 3px;')};
 `;
 
-export const DashBoardTable = styled.div`
+export const DashBoardContentLayout = styled.div`
   padding: 2.7em;
   background: #ffffff;
 `;
@@ -40,6 +40,10 @@ export const DashBoardTableButton = styled.div`
     props.name === 'user' ? 'space-between;' : 'flex-start'};
   margin-bottom: 1.5em;
   align-items: center;
+`;
+
+export const DashBoardTable = styled.div`
+  // display: flex;
 `;
 
 export const DashBoardButton = styled.div`
@@ -114,4 +118,56 @@ export const HeaderProfileName = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 10px;
+`;
+
+export const DashboardTop = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 3em;
+  margin-right: 15em;
+  img {
+    width: 200px;
+    height: 200px;
+  }
+`;
+
+export const DashboardTopText = styled.div`
+  h3 {
+    margin-bottom: 3em;
+  }
+  h5 {
+    margin-bottom: 3em;
+  }
+`;
+
+export const DashboardBottomText = styled.div`
+  display: flex;
+  margin: 2em 0;
+  h4 {
+    margin-right: 1em;
+    margin-bottom: 0;
+    position: relative;
+  }
+`;
+
+export const UnderLine = styled.h4`
+  ::after {
+    content: '';
+    height: 1px;
+    background: #333;
+    position: absolute;
+    width: 100%;
+    top: 1.75em;
+    left: 0;
+  }
+`;
+
+export const ModalStyle = styled(Modal)`
+  .ant-modal-footer {
+    padding: 0;
+  }
+  .ant-modal-footer button {
+    display: none;
+  }
 `;

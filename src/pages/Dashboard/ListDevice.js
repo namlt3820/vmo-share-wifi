@@ -3,7 +3,7 @@ import { Breadcrumb, Input, Icon, Menu, Select, Dropdown } from 'antd';
 import {
   DashBoardTittle,
   DashBoardContent,
-  DashBoardTable,
+  // DashBoardTable,
   DashBoardTableButton,
   Label,
   TableStyle,
@@ -117,23 +117,21 @@ const data = [
   }
 ];
 
-// rowSelection object indicates the need for row selection
-const rowSelection = {
-  // onChange: (selectedRowKeys, selectedRows) => {
-  //   // console.log(
-  //   //   `selectedRowKeys: ${selectedRowKeys}`,
-  //   //   'selectedRows: ',
-  //   //   selectedRows
-  //   // );
-  // },
-  getCheckboxProps: record => ({
-    disabled: record.name === 'Disabled User', // Column configuration not to be checked
-    name: record.name
-  })
-};
-
 export default class ListDevice extends Component {
   render() {
+    const rowSelection = {
+      // onChange: (selectedRowKeys, selectedRows) => {
+      // console.log(
+      //   `selectedRowKeys: ${selectedRowKeys}`,
+      //   'selectedRows: ',
+      //   selectedRows
+      // );
+      // }
+      // getCheckboxProps: record => ({
+      //   disabled: record.name === 'Disabled User', // Column configuration not to be checked
+      //   name: record.name
+      // })
+    };
     return (
       <>
         <DashBoardTittle>
@@ -145,24 +143,24 @@ export default class ListDevice extends Component {
           </Breadcrumb>
         </DashBoardTittle>
         <DashBoardContent>
-          <DashBoardTable>
-            <DashBoardTableButton>
-              <Label>Address</Label>
-              <InputGroup compact>
-                <Select defaultValue="Duy Tan Street" style={{ width: '20%' }}>
-                  <Option value="Duy Tan Street">Duy Tan Street</Option>
-                  <Option value="Pham Hung Street">Pham Hung Street</Option>
-                </Select>
-              </InputGroup>
-            </DashBoardTableButton>
-            <div>
-              <TableStyle
-                rowSelection={rowSelection}
-                columns={columns}
-                dataSource={data}
-              />
-            </div>
-          </DashBoardTable>
+          {/* <DashBoardTable> */}
+          <DashBoardTableButton>
+            <Label>Address</Label>
+            <InputGroup compact>
+              <Select defaultValue="Duy Tan Street" style={{ width: '20%' }}>
+                <Option value="Duy Tan Street">Duy Tan Street</Option>
+                <Option value="Pham Hung Street">Pham Hung Street</Option>
+              </Select>
+            </InputGroup>
+          </DashBoardTableButton>
+          <div>
+            <TableStyle
+              rowSelection={rowSelection}
+              columns={columns}
+              dataSource={data}
+            />
+          </div>
+          {/* </DashBoardTable> */}
         </DashBoardContent>
       </>
     );

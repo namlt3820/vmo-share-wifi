@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
-import { Breadcrumb } from 'antd';
-import {
-  DashBoardTittle,
-  DashBoardContent
-} from '../../components/DashboardStyle';
+import { Select } from 'antd';
+import { DashBoardContent } from '../../../components/DashboardStyle';
 import {
   WrapperForm,
   WrapperInput,
   WrapperAction,
   ButtonStyle
-} from '../../components/Authentication';
-import FormInput from '../../components/core/FormInput';
-import Validator, { EMAIL_REGEX } from '../../utils/validator';
-import UserManager from '../../services/mngtUser.service';
-import httpStatus from '../../config/httpStatus';
+} from '../../../components/Authentication';
+import FormInput from '../../../components/core/FormInput';
+import Validator, { EMAIL_REGEX } from '../../../utils/validator';
 
-const userManager = new UserManager();
+const { Option } = Select;
 
 export default class AddDevice extends Component {
   constructor() {
@@ -23,14 +18,14 @@ export default class AddDevice extends Component {
     this.state = {
       name: '',
       email: '',
-      password: '',
+      role: '',
       file: '',
       // loading: false,
       errors: {}
     };
   }
 
-  handleChange = evt => {
+  handleChangeForm = evt => {
     const { name, value } = evt.target;
     this.setState({ [name]: value });
     if (name === 'email' && EMAIL_REGEX.test(value)) {
@@ -40,15 +35,22 @@ export default class AddDevice extends Component {
     }
   };
 
+  handleChange = value => {
+    // const { role } = this.state;
+    this.setState({
+      role: value
+    });
+  };
+
   handleValidateName = () => {
-    const { name } = this.state;
+    const { name, errors } = this.state;
     const validateName = Validator.isValidName(name);
-    const valied = {};
+    const valied = { ...errors };
     if (!validateName && name.length === 0) {
-      valied.name = 'Require Email';
+      valied.name = 'Require Name';
       this.setState({ errors: valied });
     } else if (!validateName && name.length > 0) {
-      valied.name = 'Invalid Email';
+      valied.name = 'Invalid Name';
       this.setState({ errors: valied });
     } else {
       valied.name = '';
@@ -57,9 +59,9 @@ export default class AddDevice extends Component {
   };
 
   handleValidateEmail = () => {
-    const { email } = this.state;
+    const { email, errors } = this.state;
     const validateEmail = Validator.isValidEmailAddress(email);
-    const valied = {};
+    const valied = { ...errors };
     if (!validateEmail && email.length === 0) {
       valied.email = 'Require Email';
       this.setState({ errors: valied });
@@ -89,42 +91,25 @@ export default class AddDevice extends Component {
   };
 
   addUser = () => {
-    const { name, email, password, file } = this.state;
-    // const { history } = this.props;
+    const { name, email, password, role, file } = this.state;
     const params = {
       name,
       email,
       password,
+      role,
       file
     };
-    userManager
-      .addUser(params)
-      .then(res => {
-        if (res.status === httpStatus.StatusOK) {
-          // history.push('/');
-          // console.log(res.data);
-        } else if (res.status === httpStatus.StatusUnauthorized) {
-          // sdlalskd
-        }
-      })
-      .catch(error => {
-        throw error;
-      });
+    this.props.addUser(params);
+  };
+
+  handleCancel = () => {
+    this.props.handleCancel();
   };
 
   render() {
-    // const { name, password, errors, email, files, loading } = this.state;
-
+    const { name, errors, email } = this.state;
     return (
       <>
-        <DashBoardTittle>
-          <h3>Add User</h3>
-          <Breadcrumb separator=">">
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="">Account</Breadcrumb.Item>
-            <Breadcrumb.Item href="">Add User</Breadcrumb.Item>
-          </Breadcrumb>
-        </DashBoardTittle>
         <DashBoardContent>
           <WrapperForm>
             <WrapperInput>
@@ -133,8 +118,10 @@ export default class AddDevice extends Component {
                 label="Name"
                 name="name"
                 type="text"
-                handleChange={this.handleChange}
-                handleBlur={this.handleValidateEmail}
+                error={errors.name}
+                value={name}
+                handleChange={this.handleChangeForm}
+                handleBlur={this.handleValidateName}
               />
               <FormInput
                 placeholder="Enter Email"
@@ -142,7 +129,9 @@ export default class AddDevice extends Component {
                 name="email"
                 type="text"
                 icon="*"
-                handleChange={this.handleChange}
+                error={errors.email}
+                value={email}
+                handleChange={this.handleChangeForm}
                 handleBlur={this.handleValidateEmail}
               />
               <FormInput
@@ -151,14 +140,28 @@ export default class AddDevice extends Component {
                 name="password"
                 type="password"
                 icon="*"
-                handleChange={this.handleChange}
+                error={errors.password}
+                handleChange={this.handleChangeForm}
                 handleBlur={this.handleValidatePassword}
               />
+              <div>
+                <p>Role</p>
+                <Select
+                  defaultValue="Admin"
+                  style={{ width: 120 }}
+                  onChange={this.handleChange}
+                >
+                  <Option value={0}>Admin</Option>
+                  <Option value={1}>User</Option>
+                </Select>
+              </div>
               <FormInput label="Image" name="file" type="file" icon="*" />
             </WrapperInput>
             <WrapperAction type="login">
               <ButtonStyle onClick={this.addUser}>Save</ButtonStyle>
-              <ButtonStyle background="none">Cancel</ButtonStyle>
+              <ButtonStyle onClick={this.handleCancel} background="none">
+                Cancel
+              </ButtonStyle>
             </WrapperAction>
           </WrapperForm>
         </DashBoardContent>

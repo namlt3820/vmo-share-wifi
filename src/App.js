@@ -20,6 +20,13 @@ const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
 );
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      // user: null
+    };
+  }
+
   componentDidMount() {
     const { dispatch } = this.props;
     const token = localStorage.getItem('access_token');
@@ -60,4 +67,11 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+const mapStateToProp = state => ({
+  user: state.data
+});
+
+export default connect(
+  mapStateToProp,
+  null
+)(App);

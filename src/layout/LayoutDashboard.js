@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon, Button, Badge, Dropdown } from 'antd';
 import styled from 'styled-components';
 import {
@@ -30,7 +31,17 @@ const menu = (
   <Menu>
     <Menu.Item key="0">
       <a href="http://www.alipay.com/">
-        <Icon type="profile" /> My Profile
+        <Link
+          to={{
+            pathname: '/userInfomation',
+            state: {
+              type: 'myprofile'
+            }
+          }}
+        >
+          My Profile
+        </Link>
+        <Icon type="profile" />
       </a>
     </Menu.Item>
     <Menu.Divider />
@@ -101,21 +112,31 @@ export default class LayoutDashboard extends Component {
                   <span>
                     <Icon type="user" />
 
-                    <span>Account Management</span>
+                    <span>Account</span>
                   </span>
                 }
               >
                 <Menu.Item key="2">
                   <Icon type="user" />
                   <span>All User</span>
+                  <Link to="allUser" />
                 </Menu.Item>
                 <Menu.Item key="3">
                   <Icon type="info-circle" />
                   <span>User Infomation</span>
+                  <Link
+                    to={{
+                      pathname: '/userInfomation',
+                      state: {
+                        type: 'userInfo'
+                      }
+                    }}
+                  />
                 </Menu.Item>
                 <Menu.Item key="4">
                   <Icon type="user-add" />
                   <span>Add User</span>
+                  <Link to="addUser" />
                 </Menu.Item>
               </SubMenu>
               <Menu.Divider />
@@ -124,7 +145,7 @@ export default class LayoutDashboard extends Component {
                 title={
                   <span>
                     <Icon type="wifi" />
-                    <span>Wifi Management</span>
+                    <span>Wifi</span>
                   </span>
                 }
               >
@@ -140,12 +161,12 @@ export default class LayoutDashboard extends Component {
               <Menu.Divider />
               <Menu.Item key="7">
                 <Icon type="database" />
-                <span>Data Management</span>
+                <span>Data</span>
               </Menu.Item>
               <Menu.Divider />
               <Menu.Item key="8">
                 <Icon type="dollar" />
-                <span>Payment Management </span>
+                <span>Payment </span>
               </Menu.Item>
             </Menu>
           </Sider>

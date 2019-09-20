@@ -94,7 +94,7 @@ class UpdatePwdBycode extends Component {
       // else if (res.status === httpStatus.StatusBadRequest) {
 
       // }
-      console.log('resss', res);
+      // console.log('resss', res);
     });
   };
 
