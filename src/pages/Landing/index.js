@@ -34,7 +34,7 @@ const Landing = ({ className }) => (
 );
 
 const StyledLanding = styled(Landing)`
-  font-family: 'roboto-bold';
+  font-family: 'utm_avo';
 `;
 
 const withTheme = Component => () => (
