@@ -8,7 +8,7 @@ import store from '../store/index';
 const config = {
   baseURL: process.env.REACT_APP_API_URL || '',
   validateStatus(status) {
-    return status >= 200 && status < 500; // default
+    return (status >= 200 && status < 300) || status === 400; // default
   }
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
@@ -35,7 +35,6 @@ _axios.interceptors.response.use(
   },
   function(error) {
     // Do something with response error
-    // Do something with request error
     if (error.response && error.response.status === 401) {
       store.dispatch('logout');
     } else {

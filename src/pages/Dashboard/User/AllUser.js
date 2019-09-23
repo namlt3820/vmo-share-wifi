@@ -16,6 +16,7 @@ import {
 import UserManager from '../../../services/mngtUser.service';
 import AddUser from './AddUser';
 import EditUser from './EditUser';
+import httpStatus from '../../../config/httpStatus';
 
 const { Search } = Input;
 const PER_PAGE = 20;
@@ -50,10 +51,12 @@ export default class AllUser extends Component {
     userManager
       .getListUser(params)
       .then(res => {
-        this.setState({
-          loading: false,
-          users: res.data.data.items
-        });
+        if (res.status === httpStatus.StatusOK) {
+          this.setState({
+            loading: false,
+            users: res.data.data.items
+          });
+        }
       })
       .catch(error => {
         throw error;
