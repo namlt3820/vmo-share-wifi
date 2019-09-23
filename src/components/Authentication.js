@@ -112,6 +112,12 @@ export const OutSide = styled.div`
   }
 `;
 
+export const Forgot = styled.div`
+  a {
+    color: #333;
+  }
+`;
+
 export default class Authentication extends Component {
   render() {
     return <div />;

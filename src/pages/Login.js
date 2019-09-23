@@ -12,7 +12,8 @@ import {
   CheckBoxAccess,
   ButtonStyle,
   Bottom,
-  OutSide
+  OutSide,
+  Forgot
 } from '../components/Authentication';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
 import { login } from '../store/actions/authenticate';
@@ -114,7 +115,7 @@ class Login extends Component {
           <WrapperAction type="login">
             <ButtonStyle
               loading={loading}
-              disabled={!checked || !email || !password}
+              disabled={!email || !password}
               onClick={this.login}
             >
               Login
@@ -125,8 +126,10 @@ class Login extends Component {
             </CheckBoxAccess>
           </WrapperAction>
           <Bottom>
-            <Icon type="lock" />
-            &nbsp;&nbsp;Forgot your password
+            <Forgot>
+              <Icon type="lock" />
+              &nbsp;&nbsp; <Link to="/forgotPwd">Forgot your password</Link>
+            </Forgot>
           </Bottom>
         </WrapperForm>
         <OutSide>
