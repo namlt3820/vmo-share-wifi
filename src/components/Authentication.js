@@ -112,7 +112,7 @@ export const OutSide = styled.div`
   }
 `;
 
-export const Forgot = styled.div`
+export const Forgot = styled.span`
   a {
     color: #333;
   }
