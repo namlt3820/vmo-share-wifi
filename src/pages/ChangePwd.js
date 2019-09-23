@@ -12,6 +12,7 @@ import {
 import Validator from '../utils/validator';
 import ChangePassword from '../services/changePwd.service';
 import httpStatus from '../config/httpStatus';
+import Errors from '../commons/error_validate';
 
 const changePw = new ChangePassword();
 class ChangePwd extends Component {
@@ -33,33 +34,23 @@ class ChangePwd extends Component {
   handleValidateCurrentPassword = () => {
     const { currentPassword, errors } = this.state;
     const validatePassword = Validator.isValidPassword(currentPassword);
-    const valied = { ...errors };
-    if (!validatePassword && currentPassword.length === 0) {
-      valied.currentPassword = 'Require Password';
-      this.setState({ errors: valied });
-    } else if (!validatePassword && currentPassword.length > 0) {
-      valied.currentPassword = 'Invalid Password';
-      this.setState({ errors: valied });
-    } else {
-      valied.currentPassword = '';
-      this.setState({ errors: valied });
-    }
+    errors.currentPassword = Errors.handleValidate(
+      validatePassword,
+      currentPassword,
+      'password'
+    );
+    this.setState({ errors });
   };
 
   handleValidateNewPassword = () => {
     const { newPassword, errors } = this.state;
     const validatePassword = Validator.isValidPassword(newPassword);
-    const valied = { ...errors };
-    if (!validatePassword && newPassword.length === 0) {
-      valied.newPassword = 'Require Password';
-      this.setState({ errors: valied });
-    } else if (!validatePassword && newPassword.length > 0) {
-      valied.newPassword = 'Invalid Password';
-      this.setState({ errors: valied });
-    } else {
-      valied.newPassword = '';
-      this.setState({ errors: valied });
-    }
+    errors.newPassword = Errors.handleValidate(
+      validatePassword,
+      newPassword,
+      'password'
+    );
+    this.setState({ errors });
   };
 
   changePwd = () => {

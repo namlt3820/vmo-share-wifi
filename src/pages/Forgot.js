@@ -11,6 +11,7 @@ import {
 import Validator, { EMAIL_REGEX } from '../utils/validator';
 import ForgotPwd from '../services/forgotPwd.service';
 import httpStatus from '../config/httpStatus';
+import Errors from '../commons/error_validate';
 
 const forgot = new ForgotPwd();
 export default class Forgot extends Component {
@@ -33,17 +34,8 @@ export default class Forgot extends Component {
   handleValidateEmail = () => {
     const { email, errors } = this.state;
     const validateEmail = Validator.isValidEmailAddress(email);
-    const valied = { ...errors };
-    if (!validateEmail && email.length === 0) {
-      valied.email = 'Require Email';
-      this.setState({ errors: valied });
-    } else if (!validateEmail && email.length > 0) {
-      valied.email = 'Invalid Email';
-      this.setState({ errors: valied });
-    } else {
-      valied.email = '';
-      this.setState({ errors: valied });
-    }
+    errors.email = Errors.handleValidate(validateEmail, email, 'email');
+    this.setState({ errors });
   };
 
   forgotPwd = () => {

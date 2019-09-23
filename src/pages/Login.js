@@ -15,6 +15,7 @@ import {
 } from '../components/Authentication';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
 import { login } from '../store/actions/authenticate';
+import Errors from '../commons/error_validate';
 
 class Login extends Component {
   constructor() {
@@ -37,35 +38,21 @@ class Login extends Component {
   };
 
   handleValidateEmail = () => {
-    const { email } = this.state;
+    const { email, errors } = this.state;
     const validateEmail = Validator.isValidEmailAddress(email);
-    const valied = {};
-    if (!validateEmail && email.length === 0) {
-      valied.email = 'Require Email';
-      this.setState({ errors: valied });
-    } else if (!validateEmail && email.length > 0) {
-      valied.email = 'Invalid Email';
-      this.setState({ errors: valied });
-    } else {
-      valied.email = '';
-      this.setState({ errors: valied });
-    }
+    errors.email = Errors.handleValidate(validateEmail, email, 'email');
+    this.setState({ errors });
   };
 
   handleValidatePassword = () => {
     const { password, errors } = this.state;
     const validatePassword = Validator.isValidPassword(password);
-    const valied = { ...errors };
-    if (!validatePassword && password.length === 0) {
-      valied.password = 'Require Password';
-      this.setState({ errors: valied });
-    } else if (!validatePassword) {
-      valied.password = 'Invalid Password';
-      this.setState({ errors: valied });
-    } else {
-      valied.password = '';
-      this.setState({ errors: valied });
-    }
+    errors.password = Errors.handleValidate(
+      validatePassword,
+      password,
+      'password'
+    );
+    this.setState({ errors });
   };
 
   login = () => {
