@@ -24,7 +24,7 @@ const Introduction = ({ className }) => (
 );
 
 const StyledIntroduction = styled(Introduction)`
-  padding-top: 8rem;
+  padding-top: 4rem;
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
     padding-top: 10rem;
@@ -93,19 +93,25 @@ const Cards = ({ className }) => {
   const cardData = [
     {
       icon: icon1,
-      title: 'Data Manager',
+      title: 'Easy to connect',
       content:
         'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris commodo'
     },
     {
       icon: icon2,
-      title: 'Convenient Payment',
+      title: 'High speed',
       content:
         'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolores'
     },
     {
       icon: icon3,
-      title: 'Dashboard',
+      title: 'Wide coverage',
+      content:
+        'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit'
+    },
+    {
+      icon: icon3,
+      title: 'Get money from your wifi',
       content:
         'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit'
     }
@@ -114,9 +120,9 @@ const Cards = ({ className }) => {
   return (
     <div className={className} id="features">
       <FixWidth>
-        <Row type="flex" justify="space-between">
+        <Row type="flex" justify="space-between" gutter={40}>
           {cardData.map(item => (
-            <Col xs={24} sm={7} key={item.title}>
+            <Col xs={24} sm={12} key={item.title}>
               <StyledCard {...item} />
             </Col>
           ))}

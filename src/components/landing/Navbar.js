@@ -14,34 +14,36 @@ class Navbar extends Component {
   }
 
   handleScroll = () => {
-    if (window.scrollY > 20) {
-      document.getElementById('navbar-landing').style.backgroundColor = 'white';
-      document.getElementById('navbar-landing').style.webkitBoxShadow =
-        '1px 1px 12px 0px rgba(50, 50, 50, 0.35)';
-      document.getElementById('navbar-landing').style.mozBoxShadow =
-        '1px 1px 12px 0px rgba(50, 50, 50, 0.35)';
-      document.getElementById('navbar-landing').style.boxShadow =
-        '1px 1px 12px 0px rgba(50, 50, 50, 0.35)';
-      document.querySelectorAll('#navbar-landing a').forEach(element => {
-        element.style.color = 'black';
-      });
-    } else {
-      document.getElementById('navbar-landing').style.backgroundColor =
-        'transparent';
-      document.getElementById('navbar-landing').style.webkitBoxShadow = 'none';
-      document.getElementById('navbar-landing').style.mozBoxShadow = 'none';
-      document.getElementById('navbar-landing').style.boxShadow = 'none';
-
-      document.querySelectorAll('#navbar-landing a').forEach(element => {
-        element.style.color = 'white';
-      });
+    if (window.outerWidth > 375) {
+      if (window.scrollY > 20) {
+        const navbarStyle = document.getElementById('navbar-landing').style;
+        navbarStyle.backgroundColor = 'white';
+        navbarStyle.webkitBoxShadow = '1px 1px 12px 0px rgba(50, 50, 50, 0.35)';
+        navbarStyle.mozBoxShadow = '1px 1px 12px 0px rgba(50, 50, 50, 0.35)';
+        navbarStyle.boxShadow = '1px 1px 12px 0px rgba(50, 50, 50, 0.35)';
+        document.querySelectorAll('#navbar-landing a').forEach(element => {
+          element.style.color = 'black';
+        });
+      } else {
+        const navbarStyle = document.getElementById('navbar-landing').style;
+        navbarStyle.backgroundColor = 'transparent';
+        navbarStyle.webkitBoxShadow = 'none';
+        navbarStyle.mozBoxShadow = 'none';
+        navbarStyle.boxShadow = 'none';
+        document.querySelectorAll('#navbar-landing a').forEach(element => {
+          element.style.color = 'white';
+        });
+      }
     }
   };
 
   render() {
     return (
       <div className={this.props.className} ref={this.navbarRef}>
-        <nav className="navbar navbar-expand-lg fixed-top" id="navbar-landing">
+        <nav
+          className="navbar navbar-expand-lg fixed-top navbar-light"
+          id="navbar-landing"
+        >
           <div className="container">
             <a className="navbar-brand" href="/landing">
               <img src={logo} alt="logo" />
@@ -61,22 +63,22 @@ class Navbar extends Component {
             >
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <a className="nav-link" href="#features">
+                  <a className="nav-link scrollspy" href="#features">
                     Features
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#aboutus">
+                  <a className="nav-link scrollspy" href="#aboutus">
                     About Us
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#pricing">
+                  <a className="nav-link scrollspy" href="#pricing">
                     Pricing
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#contact">
+                  <a className="nav-link scrollspy" href="#contact">
                     Contact
                   </a>
                 </li>
@@ -99,15 +101,23 @@ const StyledNavbar = styled(Navbar)`
   }
 
   nav {
-    background-color: transparent;
+    background-color: white;
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+      background: transparent;
+    }
   }
 
-  a {
-    color: white;
+  a.scrollspy.nav-link {
+    color: black;
     font-size: 1.2rem;
 
     &.active {
       color: #49a1fc !important;
+    }
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+      color: white;
     }
   }
 `;
