@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Breadcrumb, Button, Tabs, Divider } from 'antd';
+import { Breadcrumb, Button, Tabs, Divider, Skeleton } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
@@ -13,6 +13,32 @@ import {
 
 const { TabPane } = Tabs;
 
+const Devices = [
+  {
+    id: '1',
+    name: 'SW-101',
+    mac_address: '09238982983'
+  },
+  {
+    id: '2',
+    name: 'SW-102',
+    mac_address: '09238982983'
+  }
+];
+
+const Routers = [
+  {
+    id: '1',
+    name: 'SW-101',
+    mac_address: '09238982983'
+  },
+  {
+    id: '2',
+    name: 'SW-102',
+    mac_address: '09238982983'
+  }
+];
+
 class UserInfomation extends Component {
   constructor() {
     super();
@@ -20,7 +46,8 @@ class UserInfomation extends Component {
       id: '',
       name: '',
       email: '',
-      role: ''
+      role: '',
+      loading: true
     };
   }
 
@@ -29,31 +56,31 @@ class UserInfomation extends Component {
   }
 
   takeUserInfo = () => {
+    const { type, userInfo } = this.props.location.state;
     setTimeout(() => {
-      if (
-        this.props.location.state.type === 'myprofile' ||
-        this.props.location.state.type === 'userInfo'
-      ) {
+      if (type === 'myprofile' || type === 'userInfo') {
         const { _id, name, email, role } = this.props.userInfo.user;
         this.setState({
           id: _id,
           name,
           email,
-          role
+          role,
+          loading: false
         });
-      } else if (this.props.location.state.type === 'userDetail') {
-        const { _id, name, email } = this.props.location.state.userInfo;
+      } else if (type === 'userDetail') {
+        const { _id, name, email } = userInfo;
         this.setState({
           id: _id,
           name,
-          email
+          email,
+          loading: false
         });
       }
     }, 3000);
   };
 
   render() {
-    const { id, name, email, role } = this.state;
+    const { id, name, email, role, loading } = this.state;
     const userInfoEdit = {
       id,
       name,
@@ -71,100 +98,95 @@ class UserInfomation extends Component {
         </DashBoardTittle>
         <DashBoardContentLayout>
           <DashboardTop>
-            <img alt="" src="assets/logo.png" />
-            <DashboardTopText>
-              <h3>{name}</h3>
-              <h5>{role === 0 ? 'Admin' : 'User'}</h5>
-              <Button>
-                <Link
-                  to={{
-                    pathname: '/updateUserInfo',
-                    state: {
-                      userInfoEdit
-                    }
-                  }}
-                >
-                  Update infomation
-                </Link>
-              </Button>
-            </DashboardTopText>
+            <Skeleton loading={loading} active>
+              <img alt="" src="assets/logo.png" />
+              <DashboardTopText>
+                <h3>{name}</h3>
+                <h5>{role === 0 ? 'Admin' : 'User'}</h5>
+                <Button>
+                  <Link
+                    to={{
+                      pathname: '/updateUserInfo',
+                      state: {
+                        userInfoEdit
+                      }
+                    }}
+                  >
+                    Update infomation
+                  </Link>
+                </Button>
+              </DashboardTopText>
+            </Skeleton>
           </DashboardTop>
           <div>
-            <Tabs defaultActiveKey="1">
-              <TabPane tab="About" key="1" style={{ padding: '0 4em' }}>
-                <DashboardBottomText>
-                  <h4>Email:</h4>
-                  <p>{email}</p>
-                </DashboardBottomText>
-                <Divider />
-                <div>
-                  <h4>Payment</h4>
-                  <div>
-                    <DashboardBottomText>
-                      <h4>Type:</h4>
-                      <p>Credit Card</p>
-                    </DashboardBottomText>
-                    <DashboardBottomText>
-                      <h4>Number:</h4>
-                      <p>09238982983</p>
-                    </DashboardBottomText>
+            <Skeleton loading={loading} active>
+              <Tabs defaultActiveKey="1">
+                <TabPane tab="About" key="1" style={{ padding: '0 4em' }}>
+                  <DashboardBottomText>
+                    <h4>Email:</h4>
+                    <p>{email}</p>
+                  </DashboardBottomText>
+                  <Divider />
 
-                    <DashboardBottomText>
-                      <h4>Expiry Date:</h4>
-                      <p>2019/08/10</p>
-                    </DashboardBottomText>
+                  <div>
+                    <h4>Payment</h4>
+                    <div>
+                      <DashboardBottomText>
+                        <h4>Type:</h4>
+                        <p>Credit Card</p>
+                      </DashboardBottomText>
+                      <DashboardBottomText>
+                        <h4>Number:</h4>
+                        <p>09238982983</p>
+                      </DashboardBottomText>
+                      <DashboardBottomText>
+                        <h4>Expiry Date:</h4>
+                        <p>2019/08/10</p>
+                      </DashboardBottomText>
+                    </div>
                   </div>
-                </div>
-              </TabPane>
-              <TabPane tab="Devices" key="2" style={{ padding: '0 4em' }}>
-                <div>
-                  <DashboardBottomText>
-                    <UnderLine>SW Devices</UnderLine>
-                  </DashboardBottomText>
+                </TabPane>
+                <TabPane tab="Devices" key="2" style={{ padding: '0 4em' }}>
                   <div>
                     <DashboardBottomText>
-                      <h4>Name</h4>
-                      <p>SW-101</p>
+                      <UnderLine>SW Devices</UnderLine>
                     </DashboardBottomText>
-                    <DashboardBottomText>
-                      <h4>Mac-Address:</h4>
-                      <p>09238982983</p>
-                    </DashboardBottomText>
+                    {Devices.map(dv => {
+                      return (
+                        <div>
+                          <DashboardBottomText>
+                            <h4>Name</h4>
+                            <p>{dv.name}</p>
+                          </DashboardBottomText>
+                          <DashboardBottomText>
+                            <h4>Mac-Address:</h4>
+                            <p>{dv.mac_address}</p>
+                          </DashboardBottomText>
+                        </div>
+                      );
+                    })}
                     <Divider />
                     <DashboardBottomText>
-                      <h4>Name</h4>
-                      <p>SW-101</p>
+                      <UnderLine>SW Routers</UnderLine>
                     </DashboardBottomText>
-                    <DashboardBottomText>
-                      <h4>Mac-Address:</h4>
-                      <p>09238982983</p>
-                    </DashboardBottomText>
+                    {Routers.map(rt => {
+                      return (
+                        <div>
+                          <DashboardBottomText>
+                            <h4>Name</h4>
+                            <p>{rt.name}</p>
+                          </DashboardBottomText>
+                          <DashboardBottomText>
+                            <h4>Mac-Address:</h4>
+                            <p>{rt.mac_address}</p>
+                          </DashboardBottomText>
+                        </div>
+                      );
+                    })}
                   </div>
-                  <DashboardBottomText>
-                    <UnderLine>SW Routers</UnderLine>
-                  </DashboardBottomText>
-                  <div>
-                    <DashboardBottomText>
-                      <h4>Name</h4>
-                      <p>SW-104</p>
-                    </DashboardBottomText>
-                    <DashboardBottomText>
-                      <h4>Mac-Address:</h4>
-                      <p>09238982983</p>
-                    </DashboardBottomText>
-                    <Divider />
-                    <DashboardBottomText>
-                      <h4>Name</h4>
-                      <p>SW-105</p>
-                    </DashboardBottomText>
-                    <DashboardBottomText>
-                      <h4>Mac-Address:</h4>
-                      <p>09238982983</p>
-                    </DashboardBottomText>
-                  </div>
-                </div>
-              </TabPane>
-            </Tabs>
+                </TabPane>
+              </Tabs>
+            </Skeleton>
           </div>
         </DashBoardContentLayout>
       </>

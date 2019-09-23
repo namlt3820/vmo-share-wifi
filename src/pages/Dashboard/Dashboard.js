@@ -11,21 +11,20 @@ import {
   DataCardBottom,
   DataChart
 } from '../../components/DashboardStyle';
-// import DashboardManagerment from '../../services/dashboard.service';
+import DashboardManagerment from '../../services/dashboard.service';
 
-// const dashboardManagerment = new DashboardManagerment();
+const dashboardManagerment = new DashboardManagerment();
 
 // const { RangePicker } = DatePicker;
 
 export default class AddDevice extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      // routers: '',
-      // devices: '',
-      // users: '',
-      // dataUsed: '',
+      routers: '',
+      devices: '',
+      users: '',
+      usedData: '',
       options: {
         chart: {
           id: 'basic-bar'
@@ -43,14 +42,21 @@ export default class AddDevice extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   dashboardManagerment.getAllData().then(res => {
-  //     console.log(res);
-  //   });
-  // }
+  componentDidMount() {
+    dashboardManagerment.getAllData().then(res => {
+      console.log(res);
+      const { users, routers, devices, usedData } = res.data.data;
+      this.setState({
+        users,
+        routers,
+        devices,
+        usedData
+      });
+    });
+  }
 
   render() {
-    // const { routers, users, devices, dataUsed } = this.state;
+    const { routers, users, devices, usedData } = this.state;
     return (
       <>
         <DashBoardTittle>
@@ -66,28 +72,28 @@ export default class AddDevice extends Component {
               <DataCard>
                 <DataCardTop>
                   <Icon type="wifi" />
-                  <h1>Du lieu</h1>
+                  <h1>{routers}</h1>
                 </DataCardTop>
                 <DataCardBottom>Wifi Routers</DataCardBottom>
               </DataCard>
               <DataCard>
                 <DataCardTop>
                   <Icon type="user" />
-                  <h1>Du lieu</h1>
+                  <h1>{users}</h1>
                 </DataCardTop>
                 <DataCardBottom>Users</DataCardBottom>
               </DataCard>
               <DataCard>
                 <DataCardTop>
                   <Icon type="database" />
-                  <h1>Du lieu</h1>
+                  <h1>{devices}</h1>
                 </DataCardTop>
                 <DataCardBottom>Devices</DataCardBottom>
               </DataCard>
               <DataCard>
                 <DataCardTop>
                   <Icon type="database" />
-                  <h1>Du lieu</h1>
+                  <h1>{usedData}</h1>
                 </DataCardTop>
                 <DataCardBottom>Used Data</DataCardBottom>
               </DataCard>

@@ -22,6 +22,7 @@ const PER_PAGE = 20;
 const OFF_SET = 0;
 const PAGE_SIZE = 5;
 const userManager = new UserManager();
+let dataUser = [];
 
 export default class AllUser extends Component {
   constructor() {
@@ -31,7 +32,8 @@ export default class AllUser extends Component {
       loading: false,
       visible: false,
       visibleEdit: false,
-      userInfo: {}
+      userInfo: {},
+      searchText: ''
     };
   }
 
@@ -50,6 +52,7 @@ export default class AllUser extends Component {
     userManager
       .getListUser(params)
       .then(res => {
+        dataUser = res.data.data.items;
         this.setState({
           loading: false,
           users: res.data.data.items
@@ -89,6 +92,27 @@ export default class AllUser extends Component {
     });
   };
 
+  searchOnChange = e => {
+    this.setState({ searchText: e.target.value });
+  };
+
+  onSearch = () => {
+    const { searchText } = this.state;
+    const reg = new RegExp(searchText, 'gi');
+    this.setState({
+      searchText: '',
+      users: dataUser
+        .map(record => {
+          const match = record.name.match(reg);
+          if (!match) {
+            return null;
+          }
+          return record;
+        })
+        .filter(record => !!record)
+    });
+  };
+
   showModal = () => {
     this.setState({
       visible: true
@@ -125,7 +149,7 @@ export default class AllUser extends Component {
   };
 
   render() {
-    const { users, loading, userInfo } = this.state;
+    const { users, loading, userInfo, searchText } = this.state;
     const menu = (
       <Menu>
         <Menu.Item key="0">
@@ -158,15 +182,33 @@ export default class AllUser extends Component {
       {
         title: 'Name',
         dataIndex: 'name',
-        render: text => <a href="#1">{text}</a>
+        key: 'name',
+        filters: [
+          {
+            text: 'phuong',
+            value: 'phuong'
+          },
+          {
+            text: 'avew',
+            value: 'avew'
+          }
+        ],
+        onFilter: (value, record) => record.name.indexOf(value) === 0,
+        render: (text, record) => (
+          <a key={record._id} href="#1">
+            {text}
+          </a>
+        )
       },
       {
         title: 'Email',
-        dataIndex: 'email'
+        dataIndex: 'email',
+        key: 'email'
       },
       {
         title: 'Role',
-        dataIndex: 'role'
+        dataIndex: 'role',
+        key: 'role'
       },
       {
         title: 'Status',
@@ -230,8 +272,11 @@ export default class AllUser extends Component {
           <DashBoardContentLayout>
             <DashBoardTableButton name="user">
               <Search
-                // onSearch={value => console.log(value)}
+                value={searchText}
+                onSearch={value => this.searchUserInfo(value)}
                 style={{ width: 200 }}
+                onChange={this.searchOnChange}
+                onPressEnter={this.onSearch}
               />
               <DashBoardButton>
                 <DashBoardButtonStyle
@@ -251,7 +296,7 @@ export default class AllUser extends Component {
             />
           </DashBoardContentLayout>
         </DashBoardContent>
-        {/* ADD */}
+        ADD
         <ModalStyle
           title="Add User"
           visible={this.state.visible}
@@ -259,7 +304,7 @@ export default class AllUser extends Component {
         >
           <AddUser addUser={this.addUser} handleCancel={this.handleCancel} />
         </ModalStyle>
-        {/* EDIT */}
+        EDIT
         <ModalStyle
           title="Edit User"
           visible={this.state.visibleEdit}

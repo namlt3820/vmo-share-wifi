@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import {
   DashBoardTittle,
   DashBoardContent,
-  DashBoardTable,
+  DashBoardContentLayout,
   DashBoardTableButton,
   Label,
   TableStyle,
@@ -194,7 +194,7 @@ export default class ListRouter extends Component {
           </Breadcrumb>
         </DashBoardTittle>
         <DashBoardContent>
-          <DashBoardTable>
+          <DashBoardContentLayout>
             <DashBoardTableButton>
               <Label>Address</Label>
               <InputGroup compact>
@@ -218,7 +218,7 @@ export default class ListRouter extends Component {
                 loading={loading}
               />
             </div>
-          </DashBoardTable>
+          </DashBoardContentLayout>
           {isVisibleEditRouter ? (
             <Modal
               title="Edit Routers"

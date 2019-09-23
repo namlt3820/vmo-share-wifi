@@ -77,7 +77,7 @@ class LayoutDashboard extends Component {
   };
 
   render() {
-    const { collapsed } = this.state;
+    const { collapsed, user } = this.state;
     const { children } = this.props;
     return (
       <Wrapper>
@@ -220,19 +220,14 @@ class LayoutDashboard extends Component {
                   </a>
                 </Dropdown>
                 <HeaderProfile>
-                  <HeaderProfileName>
-                    {/* <h3>{user.name}</h3> */}
-                    {/* <h3>
-                      {this.props.userInfo
-                        ? this.props.userInfo.user.name
-                        : '...'}
-                    </h3>
-                    <h5>
-                      {this.props.userInfo
-                        ? this.props.userInfo.user.role
-                        : '...'}
-                    </h5> */}
-                  </HeaderProfileName>
+                  {user ? (
+                    <HeaderProfileName>
+                      <h3>{user.name}</h3>
+                      <h5>{user.role === 0 ? 'Admin' : 'User'}</h5>
+                    </HeaderProfileName>
+                  ) : (
+                    ''
+                  )}
                 </HeaderProfile>
               </HeaderIcon>
             </Header>
