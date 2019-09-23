@@ -2,34 +2,21 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Row, Col } from 'antd';
 import FixWidth from './core/FixWidth';
-import logo from './assets/images/logo.png';
 import bg1 from './assets/images/header-bg-1.png';
 import bg2 from './assets/images/header-bg-2.png';
 import icon1 from './assets/images/icon-1.png';
 import icon2 from './assets/images/icon-2.png';
 import icon3 from './assets/images/icon-3.png';
 
-const Logo = ({ className }) => (
-  <div className={className}>
-    <FixWidth>
-      <img src={logo} alt="logo" />
-    </FixWidth>
-  </div>
-);
-
-const StyledLogo = styled(Logo)`
-  img {
-    max-height: 60px;
-    padding-top: 15px;
-  }
-`;
-
 const Introduction = ({ className }) => (
   <div className={className}>
     <FixWidth>
-      <Row>
-        <Col xs={24} sm={10}>
+      <Row type="flex">
+        <Col xs={24} sm={8}>
           <p>Duis aute irure dolor in voluptate velit esse cillum</p>
+        </Col>
+        <Col xs={24} sm={16}>
+          <img src={bg2} alt="header-bg-2" />
         </Col>
       </Row>
     </FixWidth>
@@ -37,37 +24,33 @@ const Introduction = ({ className }) => (
 );
 
 const StyledIntroduction = styled(Introduction)`
+  padding-top: 8rem;
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+    padding-top: 10rem;
+  }
+
   p {
     font-family: 'utm_avo_bold';
     font-size: 1.75rem;
     line-height: 2.5rem;
-    margin-right: -15px;
-    margin-left: -15px;
+    color: #4d5761;
     text-transform: uppercase;
+    margin-top: 3rem;
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
-      font-size: 2.5rem;
-      margin-right: 0;
-      margin-left: 0;
-      line-height: 3.5rem;
+      font-size: 2rem;
+      line-height: 3rem;
     }
   }
 
-  margin-top: 2rem;
-  margin-right: 1rem;
-  margin-left: 1rem;
-  background-image: url(${bg2});
-  background-repeat: no-repeat;
-  min-height: 460px;
-  background-size: contain;
-  background-position: 90% 100%;
+  img {
+    max-height: 600px;
+    width: 100%;
 
-  @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
-    margin-top: 10rem;
-    padding-top: 5rem;
-    min-height: 500px;
-    margin-right: 0;
-    margin-left: 0;
+    @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+      margin-left: 4rem;
+    }
   }
 `;
 
@@ -129,11 +112,11 @@ const Cards = ({ className }) => {
   ];
 
   return (
-    <div className={className}>
+    <div className={className} id="features">
       <FixWidth>
         <Row type="flex" justify="space-between">
           {cardData.map(item => (
-            <Col xs={24} sm={7}>
+            <Col xs={24} sm={7} key={item.title}>
               <StyledCard {...item} />
             </Col>
           ))}
@@ -144,22 +127,25 @@ const Cards = ({ className }) => {
 };
 
 const StyledCards = styled(Cards)`
-  margin: 8rem 0 4rem 0;
+  margin: 3rem 0 4rem 0;
 
-  .ant-row-flex {
-    margin-top: -5rem;
+  @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+    margin-top: 6rem;
+  }
+
+  .ant-row {
+    margin-top: -6rem;
   }
 
   .ant-col {
-    margin-top: 5rem;
+    margin-top: 6rem;
   }
 `;
 
-class Header extends Component {
+class Features extends Component {
   render() {
     return (
       <div className={this.props.className}>
-        <StyledLogo />
         <StyledIntroduction />
         <StyledCards />
       </div>
@@ -167,16 +153,15 @@ class Header extends Component {
   }
 }
 
-const StyledHeader = styled(Header)`
+const StyledFeatures = styled(Features)`
   background-image: url(${bg1});
   background-repeat: no-repeat;
-  min-height: 00px;
   background-size: cover;
-  background-position-x: 400px;
+  background-position-x: 500px;
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.ul}) {
     background-position-x: 800px;
   }
 `;
 
-export { StyledHeader as Header };
+export { StyledFeatures as Features };

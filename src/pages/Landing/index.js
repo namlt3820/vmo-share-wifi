@@ -4,7 +4,8 @@ import styled, { ThemeProvider } from 'styled-components';
 import {
   AboutUs,
   Contact,
-  Header,
+  Navbar,
+  Features,
   Footer,
   Pricing
 } from '../../components/landing';
@@ -25,11 +26,14 @@ const theme = {
 
 const Landing = ({ className }) => (
   <div className={className}>
-    <Header />
-    <AboutUs />
-    <Pricing />
-    <Contact />
-    <Footer />
+    <Navbar />
+    <div>
+      <Features />
+      <AboutUs />
+      <Pricing />
+      <Contact />
+      <Footer />
+    </div>
   </div>
 );
 

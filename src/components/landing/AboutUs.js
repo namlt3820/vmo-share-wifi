@@ -49,7 +49,7 @@ const StyledContent = styled(Content)`
 class AboutUs extends Component {
   render() {
     return (
-      <div className={this.props.className}>
+      <div className={this.props.className} id="aboutus">
         <StyledContent />
       </div>
     );
