@@ -27,7 +27,7 @@ const StyledContent = styled(Content)`
   margin-top: 3rem;
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
-    margin-top: 6rem;
+    margin-top: 8rem;
   }
 
   p:first-child {

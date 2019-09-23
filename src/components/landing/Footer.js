@@ -100,6 +100,7 @@ class Footer extends Component {
 const StyledFooter = styled(Footer)`
   background-color: #f3f3f3;
   position: relative;
+  margin-top: 6rem;
 
   .logo {
     position: absolute;

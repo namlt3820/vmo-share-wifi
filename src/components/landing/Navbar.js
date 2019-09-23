@@ -1,38 +1,44 @@
+/* eslint-disable func-names */
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import logo from './assets/images/logo.png';
 
 class Navbar extends Component {
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
+    $('.nav-link.scrollspy').click(function() {
+      const divId = $(this).attr('href');
+      $('html, body').animate(
+        {
+          scrollTop: $(divId).offset().top - 78
+        },
+        500
+      );
+    });
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+    $('.nav-link.scrollspy').off('click');
   }
 
   handleScroll = () => {
     if (window.outerWidth > 375) {
       if (window.scrollY > 20) {
-        const navbarStyle = document.getElementById('navbar-landing').style;
-        navbarStyle.backgroundColor = 'white';
-        navbarStyle.webkitBoxShadow = '1px 1px 12px 0px rgba(50, 50, 50, 0.35)';
-        navbarStyle.mozBoxShadow = '1px 1px 12px 0px rgba(50, 50, 50, 0.35)';
-        navbarStyle.boxShadow = '1px 1px 12px 0px rgba(50, 50, 50, 0.35)';
-        document.querySelectorAll('#navbar-landing a').forEach(element => {
-          element.style.color = 'black';
+        $('#navbar-landing').css({
+          boxShadow: '1px 1px 12px 0px rgba(50, 50, 50, 0.35)',
+          backgroundColor: 'white'
         });
+        $('#navbar-landing a').css('color', 'black');
       } else {
-        const navbarStyle = document.getElementById('navbar-landing').style;
-        navbarStyle.backgroundColor = 'transparent';
-        navbarStyle.webkitBoxShadow = 'none';
-        navbarStyle.mozBoxShadow = 'none';
-        navbarStyle.boxShadow = 'none';
-        document.querySelectorAll('#navbar-landing a').forEach(element => {
-          element.style.color = 'white';
+        $('#navbar-landing').css({
+          boxShadow: 'none',
+          backgroundColor: 'transparent'
         });
+        $('#navbar-landing a').css('color', 'white');
       }
     }
   };
@@ -82,6 +88,11 @@ class Navbar extends Component {
                     Contact
                   </a>
                 </li>
+                <li className="nav-item">
+                  <a className="nav-link scrollspy" href="/">
+                    Login/Sign Up
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -108,12 +119,21 @@ const StyledNavbar = styled(Navbar)`
     }
   }
 
+  li {
+    margin-right: 1rem;
+  }
+
+  li > a.active {
+    border-radius: 0.25rem;
+    background-color: #49a1fc;
+  }
+
   a.scrollspy.nav-link {
     color: black;
     font-size: 1.2rem;
 
     &.active {
-      color: #49a1fc !important;
+      color: white !important;
     }
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {

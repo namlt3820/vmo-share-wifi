@@ -1,6 +1,7 @@
+import { Row, Col } from 'antd';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Row, Col } from 'antd';
+
 import FixWidth from './core/FixWidth';
 import bg1 from './assets/images/header-bg-1.png';
 import bg2 from './assets/images/header-bg-2.png';
@@ -75,7 +76,7 @@ const StyledCard = styled(Card)`
   img {
     position: absolute;
     left: 50%;
-    top: -30%;
+    top: -35%;
     transform: translateX(-50%);
   }
 
