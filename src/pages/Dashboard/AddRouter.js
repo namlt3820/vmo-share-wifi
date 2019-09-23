@@ -71,8 +71,8 @@ export default class AddRouter extends Component {
           <h3>Router</h3>
           <Breadcrumb separator=">">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="">Wifi Management</Breadcrumb.Item>
-            <Breadcrumb.Item href="">Add</Breadcrumb.Item>
+            <Breadcrumb.Item href="">Wifi</Breadcrumb.Item>
+            <Breadcrumb.Item href="">Add Router</Breadcrumb.Item>
           </Breadcrumb>
         </DashBoardTittle>
         <DashBoardContent>

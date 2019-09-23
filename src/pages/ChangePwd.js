@@ -91,7 +91,7 @@ class ChangePwd extends Component {
     const { currentPassword, newPassword, errors, loading } = this.state;
     return (
       <WrapperComponent>
-        <WrapperForm>
+        <WrapperForm form="login">
           <Logo>
             <img src="assets/logo.png" alt="Share Wifi" />
             <div>Change Password</div>

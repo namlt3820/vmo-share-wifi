@@ -120,7 +120,7 @@ export default class SignUp extends Component {
       />
     ) : (
       <WrapperComponent>
-        <WrapperForm>
+        <WrapperForm form="login">
           <Logo>
             <img src="assets/logo.png" alt="Share Wifi" />
             <div>Create your account.</div>

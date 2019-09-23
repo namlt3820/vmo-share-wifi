@@ -20,29 +20,42 @@ export default class AddDevice extends Component {
     };
   }
 
-  // static getDerivedStateFromProps(props) {
-  //   const { _id, name } = props.dataUser;
-  //   return {
+  static getDerivedStateFromProps(props, state) {
+    const { _id, name } = props.userInfo;
+    if (name !== state.name && _id !== state.id) {
+      return {
+        id: _id,
+        name
+      };
+    }
+
+    return null;
+  }
+
+  // componentDidUpdate(prevProps, prevState) {}
+  // componentWillReceiveProps(props) {
+  //   const { _id, name } = props.userInfo;
+  //   console.log(name);
+  //   this.setState({
   //     id: _id,
   //     name
-  //   };
+  //   });
   // }
 
-  componentDidMount() {
-    const { _id, name } = this.props.userInfo;
-    this.setState({
-      id: _id,
-      name
-    });
-  }
+  // componentDidMount() {
+  //   const { _id, name } = this.props.userInfo;
+  //   console.log(name);
+  //   this.setState({
+  //     id: _id,
+  //     name
+  //   });
+  // }
 
   handleChangeForm = evt => {
     const { name, value } = evt.target;
     this.setState({ [name]: value });
-    if (name === 'email' && EMAIL_REGEX.test(value)) {
-      this.handleValidateEmail();
-    } else if (name === 'password' && value.length > 6) {
-      this.handleValidatePassword();
+    if (name === 'name' && EMAIL_REGEX.test(value)) {
+      this.handleValidateName();
     }
   };
 
@@ -58,22 +71,6 @@ export default class AddDevice extends Component {
       this.setState({ errors: valied });
     } else {
       valied.name = '';
-      this.setState({ errors: valied });
-    }
-  };
-
-  handleValidateEmail = () => {
-    const { email, errors } = this.state;
-    const validateEmail = Validator.isValidEmailAddress(email);
-    const valied = { ...errors };
-    if (!validateEmail && email.length === 0) {
-      valied.email = 'Require Email';
-      this.setState({ errors: valied });
-    } else if (!validateEmail && email.length > 0) {
-      valied.email = 'Invalid Email';
-      this.setState({ errors: valied });
-    } else {
-      valied.email = '';
       this.setState({ errors: valied });
     }
   };

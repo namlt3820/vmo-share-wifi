@@ -16,7 +16,7 @@ export const WrapperForm = styled.div`
   position: relative;
   flex-direction: column;
   align-items: center;
-  width: 400px;
+  width: ${props => (props.form === 'login' ? '400px' : '')};
   background: #ffffff;
   padding: 2.5em;
   margin-bottom: 3em;

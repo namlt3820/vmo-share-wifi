@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { Breadcrumb, Input, Table, Icon, Dropdown, Menu } from 'antd';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import {
   DashBoardTittle,
   DashBoardContent,
-  DashBoardTab,
-  DashBoardTabItems,
+  // DashBoardTab,
+  // DashBoardTabItems,
   DashBoardContentLayout,
   DashBoardTableButton,
   DashBoardButton,
   DashBoardButtonStyle,
-  ModalStyle
+  ModalStyle,
+  LinkStyle
 } from '../../../components/DashboardStyle';
 import UserManager from '../../../services/mngtUser.service';
 import AddUser from './AddUser';
@@ -27,7 +28,6 @@ export default class AllUser extends Component {
     super();
     this.state = {
       users: [],
-      key: [],
       loading: false,
       visible: false,
       visibleEdit: false,
@@ -82,8 +82,9 @@ export default class AllUser extends Component {
   };
 
   deleteUser = () => {
-    const { key } = this.state;
-    userManager.deleteUser(key).then(() => {
+    const { _id } = this.state.userInfo;
+    const id = _id;
+    userManager.deleteUser(id).then(() => {
       this.getListUser();
     });
   };
@@ -125,19 +126,6 @@ export default class AllUser extends Component {
 
   render() {
     const { users, loading, userInfo } = this.state;
-    const rowSelection = {
-      onChange: (selectedRowKeys, selectedRows) => {
-        const key = selectedRows.map(slrow => {
-          return slrow._id;
-        });
-        this.setState({ key });
-      }
-      // getCheckboxProps: record => ({
-      //   disabled: record.name === 'Disabled User', // Column configuration not to be checked
-      //   name: record.name
-      // })
-    };
-
     const menu = (
       <Menu>
         <Menu.Item key="0">
@@ -147,19 +135,21 @@ export default class AllUser extends Component {
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="1">
-          <a href="#3">
-            <Link
-              to={{
-                pathname: '/userInfomation',
-                state: {
-                  type: 'userDetail',
-                  userInfo
-                }
-              }}
-            >
-              Profile
-            </Link>
-          </a>
+          <LinkStyle
+            to={{
+              pathname: '/userInfomation',
+              state: {
+                type: 'userDetail',
+                userInfo
+              }
+            }}
+          >
+            View Profile
+          </LinkStyle>
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="2" onClick={this.deleteUser}>
+          <a href="#3">Delete</a>
         </Menu.Item>
       </Menu>
     );
@@ -215,12 +205,12 @@ export default class AllUser extends Component {
           <h3>ALL USER</h3>
           <Breadcrumb separator=">">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="">Account Management</Breadcrumb.Item>
+            <Breadcrumb.Item href="">Account</Breadcrumb.Item>
             <Breadcrumb.Item href="">All User</Breadcrumb.Item>
           </Breadcrumb>
         </DashBoardTittle>
         <DashBoardContent>
-          <DashBoardTab>
+          {/* <DashBoardTab>
             <DashBoardTabItems active="active">
               <a href="#1" type="button">
                 All (06)
@@ -236,7 +226,7 @@ export default class AllUser extends Component {
                 User (06)
               </a>
             </DashBoardTabItems>
-          </DashBoardTab>
+          </DashBoardTab> */}
           <DashBoardContentLayout>
             <DashBoardTableButton name="user">
               <Search
@@ -250,13 +240,9 @@ export default class AllUser extends Component {
                 >
                   Add
                 </DashBoardButtonStyle>
-                <DashBoardButtonStyle onClick={this.deleteUser}>
-                  Delete
-                </DashBoardButtonStyle>
               </DashBoardButton>
             </DashBoardTableButton>
             <Table
-              rowSelection={rowSelection}
               columns={columns}
               dataSource={users}
               loading={loading}

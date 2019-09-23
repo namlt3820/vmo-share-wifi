@@ -96,7 +96,7 @@ class Login extends Component {
     const { email, password, errors, checked, loading } = this.state;
     return (
       <WrapperComponent>
-        <WrapperForm>
+        <WrapperForm form="login">
           <Logo>
             <img src="assets/logo.png" alt="Share Wifi" />
             <div>Welcome Back</div>

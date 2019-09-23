@@ -10,6 +10,9 @@ import UserInfomation from '../pages/Dashboard/User/UserInfomation';
 import UpdateUserInfo from '../pages/Dashboard/User/UpdateUserInfo';
 import AddRouter from '../pages/Dashboard/AddRouter';
 import ListRouter from '../pages/Dashboard/ListRouter';
+import UserData from '../pages/Dashboard/Data/UserData';
+import WifiData from '../pages/Dashboard/Data/WifiData';
+import Dashboard from '../pages/Dashboard/Dashboard';
 
 export const routesDashboard = [
   {
@@ -46,6 +49,21 @@ export const routesDashboard = [
     id: 7,
     path: '/routers',
     component: ListRouter
+  },
+  {
+    id: 8,
+    path: '/userData',
+    component: UserData
+  },
+  {
+    id: 9,
+    path: '/wifiData',
+    component: WifiData
+  },
+  {
+    id: 10,
+    path: '/dashboard',
+    component: Dashboard
   }
 ];
 

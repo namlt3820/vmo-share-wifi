@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Layout, Menu, Icon, Button, Badge, Dropdown } from 'antd';
 import styled from 'styled-components';
 import {
   LogoDashBoard,
   HeaderIcon,
   HeaderProfile,
-  HeaderProfileName
+  HeaderProfileName,
+  LinkStyle
 } from '../components/DashboardStyle';
 
 const { Header, Sider, Content } = Layout;
@@ -21,17 +23,12 @@ const Wrapper = styled.div`
   // align-items: center;
 `;
 
-const HeaderStyle = styled(Header)`
-  .ant-layout-header {
-    line-height: 21px;
-  }
-`;
-
 const menu = (
   <Menu>
     <Menu.Item key="0">
-      <a href="http://www.alipay.com/">
-        <Link
+      <Icon type="profile" />
+      <span>
+        <LinkStyle
           to={{
             pathname: '/userInfomation',
             state: {
@@ -40,27 +37,36 @@ const menu = (
           }}
         >
           My Profile
-        </Link>
-        <Icon type="profile" />
-      </a>
+        </LinkStyle>
+      </span>
     </Menu.Item>
     <Menu.Divider />
     <Menu.Item key="1">
-      <a href="http://www.taobao.com/">
-        <Icon type="setting" /> Setting
-      </a>
+      <Icon type="setting" />
+      <span>Setting </span>
     </Menu.Item>
     <Menu.Divider />
     <Menu.Item key="3">Change Password</Menu.Item>
   </Menu>
 );
 
-export default class LayoutDashboard extends Component {
+class LayoutDashboard extends Component {
   constructor() {
     super();
     this.state = {
-      collapsed: false
+      collapsed: false,
+      user: {}
     };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    const { user } = props.userInfo;
+    if (user !== state.user) {
+      return {
+        user
+      };
+    }
+    return null;
   }
 
   toggle = () => {
@@ -104,6 +110,7 @@ export default class LayoutDashboard extends Component {
               <Menu.Item key="1">
                 <Icon type="dashboard" />
                 <span>Dashboard</span>
+                <Link to="/dashboard" />
               </Menu.Item>
               <Menu.Divider />
               <SubMenu
@@ -133,11 +140,6 @@ export default class LayoutDashboard extends Component {
                     }}
                   />
                 </Menu.Item>
-                <Menu.Item key="4">
-                  <Icon type="user-add" />
-                  <span>Add User</span>
-                  <Link to="addUser" />
-                </Menu.Item>
               </SubMenu>
               <Menu.Divider />
               <SubMenu
@@ -161,10 +163,26 @@ export default class LayoutDashboard extends Component {
                 </Menu.Item>
               </SubMenu>
               <Menu.Divider />
-              <Menu.Item key="7">
-                <Icon type="database" />
-                <span>Data</span>
-              </Menu.Item>
+              <SubMenu
+                key="sub3"
+                title={
+                  <span>
+                    <Icon type="database" />
+                    <span>Data</span>
+                  </span>
+                }
+              >
+                <Menu.Item key="5">
+                  <Icon type="user" />
+                  <span>User Data</span>
+                  <Link to="/userData" />
+                </Menu.Item>
+                <Menu.Item key="6">
+                  <Icon type="wifi" />
+                  <span>Wifi Data</span>
+                  <Link to="/wifiData" />
+                </Menu.Item>
+              </SubMenu>
               <Menu.Divider />
               <Menu.Item key="8">
                 <Icon type="dollar" />
@@ -173,7 +191,14 @@ export default class LayoutDashboard extends Component {
             </Menu>
           </Sider>
           <Layout>
-            <HeaderStyle style={{ background: '#fff' }}>
+            <Header
+              style={{
+                background: '#fff',
+                lineHeight: '21px',
+                height: '66px',
+                padding: '0'
+              }}
+            >
               <HeaderIcon>
                 <Badge count={5}>
                   <Icon type="bell" style={{ fontSize: 25 }} />
@@ -188,24 +213,33 @@ export default class LayoutDashboard extends Component {
                         height: 40,
                         background: '#333',
                         marginLeft: '2em',
-                        marginRight: '3em'
+                        marginRight: '1em',
+                        backgroundSize: 'cover'
                       }}
                     />
                   </a>
                 </Dropdown>
                 <HeaderProfile>
                   <HeaderProfileName>
-                    <h3>John Thomasasas</h3>
-                    <h3>Admin</h3>
+                    {/* <h3>{user.name}</h3> */}
+                    {/* <h3>
+                      {this.props.userInfo
+                        ? this.props.userInfo.user.name
+                        : '...'}
+                    </h3>
+                    <h5>
+                      {this.props.userInfo
+                        ? this.props.userInfo.user.role
+                        : '...'}
+                    </h5> */}
                   </HeaderProfileName>
                 </HeaderProfile>
               </HeaderIcon>
-            </HeaderStyle>
+            </Header>
             <Content
               style={{
                 padding: 24,
-                minHeight: 280,
-                height: '100vh'
+                minHeight: 280
               }}
             >
               {children}
@@ -216,3 +250,12 @@ export default class LayoutDashboard extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  userInfo: state.users
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(LayoutDashboard);

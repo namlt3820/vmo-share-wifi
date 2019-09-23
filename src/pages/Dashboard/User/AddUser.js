@@ -155,7 +155,7 @@ export default class AddDevice extends Component {
                   <Option value={1}>User</Option>
                 </Select>
               </div>
-              <FormInput label="Image" name="file" type="file" icon="*" />
+              {/* <FormInput label="Image" name="file" type="file" icon="*" /> */}
             </WrapperInput>
             <WrapperAction type="login">
               <ButtonStyle onClick={this.addUser}>Save</ButtonStyle>

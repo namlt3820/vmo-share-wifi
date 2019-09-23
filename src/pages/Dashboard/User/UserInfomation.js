@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Breadcrumb, Button, Tabs, Divider } from 'antd';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
   DashBoardTittle,
@@ -16,6 +17,7 @@ class UserInfomation extends Component {
   constructor() {
     super();
     this.state = {
+      id: '',
       name: '',
       email: '',
       role: ''
@@ -32,15 +34,17 @@ class UserInfomation extends Component {
         this.props.location.state.type === 'myprofile' ||
         this.props.location.state.type === 'userInfo'
       ) {
-        const { name, email, role } = this.props.userInfo.user;
+        const { _id, name, email, role } = this.props.userInfo.user;
         this.setState({
+          id: _id,
           name,
           email,
           role
         });
       } else if (this.props.location.state.type === 'userDetail') {
-        const { name, email } = this.props.location.state.userInfo;
+        const { _id, name, email } = this.props.location.state.userInfo;
         this.setState({
+          id: _id,
           name,
           email
         });
@@ -49,14 +53,19 @@ class UserInfomation extends Component {
   };
 
   render() {
-    const { name, email, role } = this.state;
+    const { id, name, email, role } = this.state;
+    const userInfoEdit = {
+      id,
+      name,
+      email
+    };
     return (
       <>
         <DashBoardTittle>
           <h4>USER INFOMATION</h4>
           <Breadcrumb separator=">">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="">Account Management</Breadcrumb.Item>
+            <Breadcrumb.Item href="">Account</Breadcrumb.Item>
             <Breadcrumb.Item href="">User Infomation</Breadcrumb.Item>
           </Breadcrumb>
         </DashBoardTittle>
@@ -66,7 +75,18 @@ class UserInfomation extends Component {
             <DashboardTopText>
               <h3>{name}</h3>
               <h5>{role === 0 ? 'Admin' : 'User'}</h5>
-              <Button>Update infomation</Button>
+              <Button>
+                <Link
+                  to={{
+                    pathname: '/updateUserInfo',
+                    state: {
+                      userInfoEdit
+                    }
+                  }}
+                >
+                  Update infomation
+                </Link>
+              </Button>
             </DashboardTopText>
           </DashboardTop>
           <div>
