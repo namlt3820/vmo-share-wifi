@@ -12,6 +12,7 @@ import {
 } from '../../../components/DashboardStyle';
 
 const { TabPane } = Tabs;
+let timeOut;
 
 class UserInfomation extends Component {
   constructor() {
@@ -25,31 +26,33 @@ class UserInfomation extends Component {
   }
 
   componentDidMount() {
-    this.takeUserInfo();
+    timeOut = setTimeout(() => {
+      this.takeUserInfo();
+    }, 1000);
   }
 
-  takeUserInfo = () => {
-    setTimeout(() => {
-      if (
-        this.props.location.state.type === 'myprofile' ||
-        this.props.location.state.type === 'userInfo'
-      ) {
-        const { _id, name, email, role } = this.props.userInfo.user;
-        this.setState({
-          id: _id,
-          name,
-          email,
-          role
-        });
-      } else if (this.props.location.state.type === 'userDetail') {
-        const { _id, name, email } = this.props.location.state.userInfo;
-        this.setState({
-          id: _id,
-          name,
-          email
-        });
-      }
-    }, 3000);
+  componentWillUnmount() {
+    clearTimeout(timeOut);
+  }
+
+  takeUserInfo = async () => {
+    const { type } = this.props.location.state;
+    if (type === 'myprofile' || type === 'userInfo') {
+      const { _id, name, email, role } = this.props.userInfo.user;
+      this.setState({
+        id: _id,
+        name,
+        email,
+        role
+      });
+    } else if (type === 'userDetail') {
+      const { _id, name, email } = this.props.location.state.userInfo;
+      this.setState({
+        id: _id,
+        name,
+        email
+      });
+    }
   };
 
   render() {

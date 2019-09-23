@@ -25,6 +25,7 @@ export default class SignUp extends Component {
       email: '',
       password: '',
       redirect: false,
+      loading: false,
       checked: false,
       errors: {}
     };
@@ -65,6 +66,7 @@ export default class SignUp extends Component {
 
   signUp = () => {
     const { name, email, password, errors } = this.state;
+    this.setState({ loading: true });
     const params = {
       name,
       email,
@@ -75,10 +77,10 @@ export default class SignUp extends Component {
         this.setState({ redirect: false });
       } else if (res.status === httpStatus.StatusConflict) {
         const valied = { ...errors };
-        valied.email = 'This email is already existed.';
+        valied.email = 'This email or password invalid.';
         this.setState({ redirect: false, errors: valied });
       } else {
-        this.setState({ redirect: true });
+        this.setState({ redirect: true, loading: false });
       }
     });
   };
@@ -89,7 +91,15 @@ export default class SignUp extends Component {
   };
 
   render() {
-    const { name, email, password, errors, redirect, checked } = this.state;
+    const {
+      name,
+      email,
+      password,
+      errors,
+      redirect,
+      checked,
+      loading
+    } = this.state;
     const result = redirect ? (
       <Redirect
         to={{
@@ -140,7 +150,11 @@ export default class SignUp extends Component {
               <Checkbox checked={checked} onChange={this.handleCheckbox} />
               <div>I accept the Terms and Conditions</div>
             </CheckBoxAccess>
-            <ButtonStyle onClick={this.signUp} disabled={!checked}>
+            <ButtonStyle
+              onClick={this.signUp}
+              disabled={!checked}
+              loading={loading}
+            >
               SignUp
             </ButtonStyle>
           </WrapperAction>

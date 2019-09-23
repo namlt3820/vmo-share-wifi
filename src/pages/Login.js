@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Checkbox, Icon } from 'antd';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import FormInput from '../components/core/FormInput';
 import {
   WrapperComponent,
@@ -57,7 +58,7 @@ class Login extends Component {
 
   login = () => {
     const { email, password, errors } = this.state;
-    this.setState({ loading: false });
+    this.setState({ loading: true });
     const valied = { ...errors };
     const { login, history } = this.props;
     const params = {
@@ -70,7 +71,7 @@ class Login extends Component {
       } else {
         valied.email = res.message;
       }
-      this.setState({ errors: valied });
+      this.setState({ errors: valied, loading: false });
     });
   };
 
@@ -129,7 +130,7 @@ class Login extends Component {
           </Bottom>
         </WrapperForm>
         <OutSide>
-          Don&apos;t have an account? <a href="#1">Signup Now</a>
+          Don&apos;t have an account? <Link to="/signup">Signup Now</Link>
         </OutSide>
       </WrapperComponent>
     );

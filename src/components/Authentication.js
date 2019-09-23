@@ -95,6 +95,10 @@ export const ButtonStyle = styled(Button)`
   :hover {
     color: #ffffff;
   }
+  :focus {
+    background: linear-gradient(to bottom, #e44688 0%, #ba3cbd 100%);
+    color: #ffffff;
+  }
   font-weight: 700;
 `;
 

@@ -55,6 +55,7 @@ class UpdatePwdBycode extends Component {
 
   updatePwd = () => {
     const { email, password, code, errors } = this.state;
+    this.setState({ loading: true });
     const valied = { ...errors };
     const params = {
       email,
@@ -76,7 +77,7 @@ class UpdatePwdBycode extends Component {
           }
           return valied;
         });
-        this.setState({ errors: valied });
+        this.setState({ errors: valied, loading: false });
       }
     });
   };

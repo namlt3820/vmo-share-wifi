@@ -55,6 +55,7 @@ class ChangePwd extends Component {
 
   changePwd = () => {
     const { currentPassword, newPassword, errors } = this.state;
+    this.setState({ loading: true });
     const valied = { ...errors };
     const params = {
       currentPassword,
@@ -73,7 +74,7 @@ class ChangePwd extends Component {
           }
           return valied;
         });
-        this.setState({ errors: valied });
+        this.setState({ errors: valied, loading: false });
       }
     });
   };
