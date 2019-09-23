@@ -1,6 +1,7 @@
+import { Row, Col } from 'antd';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Row, Col } from 'antd';
+
 import FixWidth from './core/FixWidth';
 import logo from './assets/images/logo.png';
 import bg1 from './assets/images/header-bg-1.png';
