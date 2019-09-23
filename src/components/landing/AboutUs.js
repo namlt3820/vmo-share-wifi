@@ -66,6 +66,11 @@ const StyledAboutUs = styled(AboutUs)`
     background-image: url(${bg1}), url(${bg2});
     min-height: 800px;
   }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.xl}) {
+    background-image: url(${bg1}), url(${bg2});
+    min-height: 600px;
+  }
 `;
 
 export { StyledAboutUs as AboutUs };
