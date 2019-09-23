@@ -28,7 +28,7 @@ export const Logo = styled.div`
   text-align: center;
   img {
     width: 130px;
-    margin-bottom: 2.3em;
+    margin-bottom: 0.5em;
   }
   h3 {
     margin-bottom: 0;
@@ -65,9 +65,8 @@ export const InputStyle = styled.input`
 export const WrapperAction = styled.div`
   width: 300px;
   display: ${props => (props.type === 'login' ? 'flex' : '')};
-  justify-content: ${props => (props.type === 'login' ? 'space-between' : '')};
-  margin: ${props => (props.type === 'signup' ? '' : '10px 0')};
-  align-items: center;
+  justify-content: ${props => (props.type === 'login' ? 'flex-end' : '')};
+  flex-direction: column;
 `;
 
 export const CheckBoxAccess = styled.div`
@@ -75,27 +74,23 @@ export const CheckBoxAccess = styled.div`
   width: ${props => (props.type === 'login' ? '115px' : '250px')};
   justify-content: ${props =>
     props.type === 'login' ? ' space-around;' : 'space-between'};
-  margin: 0.5em 0;
+  margin: 0 0 0.5em 0;
 `;
 
 export const ButtonStyle = styled(Button)`
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   padding: 0 30px;
   font-size: 14px;
-  background: ${props =>
-    props.background !== 'none'
-      ? 'linear-gradient(to bottom, #e44688 0%, #ba3cbd 100%);'
-      : ''};
-  :hover {
-    background: linear-gradient(to bottom, #e44688 0%, #ba3cbd 100%);
-  }
+  width: 100%;
+  background: #096dd9;
   color: ${props => (props.background !== 'none' ? '#fff' : '#333')};
-  :hover {
-    color: #ffffff;
-  }
   font-weight: 700;
+  :hover {
+    background: #096dd9;
+    color: #fff;
+  }
 `;
 
 export const Bottom = styled.p`
@@ -105,6 +100,12 @@ export const Bottom = styled.p`
 export const OutSide = styled.div`
   a {
     color: #e80069;
+  }
+`;
+
+export const Forgot = styled.span`
+  a {
+    color: #333;
   }
 `;
 

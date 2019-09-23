@@ -7,11 +7,11 @@ import {
   DashBoardContentLayout,
   DashboardTop,
   DashboardTopText,
-  DashboardBottomText,
-  UnderLine
+  DashboardBottomText
 } from '../../../components/DashboardStyle';
 
 const { TabPane } = Tabs;
+let timeOut;
 
 const Devices = [
   {
@@ -52,31 +52,35 @@ class UserInfomation extends Component {
   }
 
   componentDidMount() {
-    this.takeUserInfo();
+    timeOut = setTimeout(() => {
+      this.takeUserInfo();
+    }, 1000);
   }
 
-  takeUserInfo = () => {
-    const { type, userInfo } = this.props.location.state;
-    setTimeout(() => {
-      if (type === 'myprofile' || type === 'userInfo') {
-        const { _id, name, email, role } = this.props.userInfo.user;
-        this.setState({
-          id: _id,
-          name,
-          email,
-          role,
-          loading: false
-        });
-      } else if (type === 'userDetail') {
-        const { _id, name, email } = userInfo;
-        this.setState({
-          id: _id,
-          name,
-          email,
-          loading: false
-        });
-      }
-    }, 3000);
+  componentWillUnmount() {
+    clearTimeout(timeOut);
+  }
+
+  takeUserInfo = async () => {
+    const { type } = this.props.location.state;
+    if (type === 'myprofile' || type === 'userInfo') {
+      const { _id, name, email, role } = this.props.userInfo.user;
+      this.setState({
+        id: _id,
+        name,
+        email,
+        role,
+        loading: false
+      });
+    } else if (type === 'userDetail') {
+      const { _id, name, email } = this.props.location.state.userInfo;
+      this.setState({
+        id: _id,
+        name,
+        email,
+        loading: false
+      });
+    }
   };
 
   render() {
@@ -149,11 +153,11 @@ class UserInfomation extends Component {
                 <TabPane tab="Devices" key="2" style={{ padding: '0 4em' }}>
                   <div>
                     <DashboardBottomText>
-                      <UnderLine>SW Devices</UnderLine>
+                      <h4>SW Devices</h4>
                     </DashboardBottomText>
                     {Devices.map(dv => {
                       return (
-                        <div>
+                        <div key={dv.id}>
                           <DashboardBottomText>
                             <h4>Name</h4>
                             <p>{dv.name}</p>
@@ -167,11 +171,11 @@ class UserInfomation extends Component {
                     })}
                     <Divider />
                     <DashboardBottomText>
-                      <UnderLine>SW Routers</UnderLine>
+                      <h4>SW Routers</h4>
                     </DashboardBottomText>
                     {Routers.map(rt => {
                       return (
-                        <div>
+                        <div key={rt.id}>
                           <DashboardBottomText>
                             <h4>Name</h4>
                             <p>{rt.name}</p>

@@ -25,5 +25,5 @@ export const login = (data, history) => dispatch =>
 
 export const logout = () => {
   localStorage.removeItem('access_token');
-  window.location.reload();
+  window.location.reload('/');
 };

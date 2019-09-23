@@ -10,11 +10,11 @@ const NAME_MAX_LENGTH = 128;
 // eslint-disable-next-line
 export const EMAIL_REGEX = /^(([^<>()\[\]\.,:\s@\"]+(\.[^<>()\[\]\.,:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,:\s@\"]+\.)+[^<>()[\]\.,:\s@\"]{2,})$/i;
 // eslint-disable-next-line
-const PASSWORD_REGEX = /^[-\w\.\$@\*\!]+$/;
+export const PASSWORD_REGEX = /^[-\w\.\$@\*\!]+$/;
 // eslint-disable-next-line
-const USERNAME_REGEX = /^[a-zA-Z0-9\_\.]+$/;
+export const USERNAME_REGEX = /^[a-zA-Z0-9\_\.]+$/;
 // eslint-disable-next-line
-const NAME_REGEX = new RegExp(
+export const NAME_REGEX = new RegExp(
   /^[a-zA-Z0-9ẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴẮẰẲẴẶĂẤẦẨẪẬÂÁÀẢÃẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒỎÕỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ ]+$/,
   'i'
 );

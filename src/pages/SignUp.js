@@ -14,6 +14,7 @@ import FormInput from '../components/core/FormInput';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
 import httpStatus from '../config/httpStatus';
 import User from '../services/user.service';
+import Errors from '../commons/error_validate';
 
 const user = new User();
 export default class SignUp extends Component {
@@ -24,6 +25,7 @@ export default class SignUp extends Component {
       email: '',
       password: '',
       redirect: false,
+      loading: false,
       checked: false,
       errors: {}
     };
@@ -40,53 +42,31 @@ export default class SignUp extends Component {
   handleValidateEmail = () => {
     const { email, errors } = this.state;
     const validateEmail = Validator.isValidEmailAddress(email);
-    const valied = { ...errors };
-    if (!validateEmail && email.length === 0) {
-      valied.email = 'Require Email';
-      this.setState({ errors: valied });
-    } else if (!validateEmail && email.length > 0) {
-      valied.email = 'Invalid Email';
-      this.setState({ errors: valied });
-    } else {
-      valied.email = '';
-      this.setState({ errors: valied });
-    }
+    errors.email = Errors.handleValidate(validateEmail, email, 'email');
+    this.setState({ errors });
   };
 
   handleValidatePassword = () => {
     const { password, errors } = this.state;
     const validatePassword = Validator.isValidPassword(password);
-    const valied = { ...errors };
-    if (!validatePassword && password.length === 0) {
-      valied.password = 'Require Password';
-      this.setState({ errors: valied });
-    } else if (!validatePassword && password.length > 0) {
-      valied.password = 'Invalid Password';
-      this.setState({ errors: valied });
-    } else {
-      valied.password = '';
-      this.setState({ errors: valied });
-    }
+    errors.password = Errors.handleValidate(
+      validatePassword,
+      password,
+      'password'
+    );
+    this.setState({ errors });
   };
 
   handleValidateUsername = () => {
     const { name, errors } = this.state;
     const validateUsername = Validator.isValidUsername(name);
-    const valied = { ...errors };
-    if (!validateUsername && name.length === 0) {
-      valied.name = 'Require Name';
-      this.setState({ errors: valied });
-    } else if (!validateUsername && name.length > 0) {
-      valied.name = 'Invalid Name';
-      this.setState({ errors: valied });
-    } else {
-      valied.name = '';
-      this.setState({ errors: valied });
-    }
+    errors.name = Errors.handleValidate(validateUsername, name, 'name');
+    this.setState({ errors });
   };
 
   signUp = () => {
     const { name, email, password, errors } = this.state;
+    this.setState({ loading: true });
     const params = {
       name,
       email,
@@ -97,10 +77,10 @@ export default class SignUp extends Component {
         this.setState({ redirect: false });
       } else if (res.status === httpStatus.StatusConflict) {
         const valied = { ...errors };
-        valied.email = 'This email is already existed.';
+        valied.email = 'This email or password invalid.';
         this.setState({ redirect: false, errors: valied });
       } else {
-        this.setState({ redirect: true });
+        this.setState({ redirect: true, loading: false });
       }
     });
   };
@@ -111,7 +91,15 @@ export default class SignUp extends Component {
   };
 
   render() {
-    const { name, email, password, errors, redirect, checked } = this.state;
+    const {
+      name,
+      email,
+      password,
+      errors,
+      redirect,
+      checked,
+      loading
+    } = this.state;
     const result = redirect ? (
       <Redirect
         to={{
@@ -162,7 +150,11 @@ export default class SignUp extends Component {
               <Checkbox checked={checked} onChange={this.handleCheckbox} />
               <div>I accept the Terms and Conditions</div>
             </CheckBoxAccess>
-            <ButtonStyle onClick={this.signUp} disabled={!checked}>
+            <ButtonStyle
+              onClick={this.signUp}
+              disabled={!checked}
+              loading={loading}
+            >
               SignUp
             </ButtonStyle>
           </WrapperAction>

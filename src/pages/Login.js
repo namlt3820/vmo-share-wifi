@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Checkbox, Icon } from 'antd';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import FormInput from '../components/core/FormInput';
 import {
   WrapperComponent,
@@ -11,10 +12,12 @@ import {
   CheckBoxAccess,
   ButtonStyle,
   Bottom,
-  OutSide
+  OutSide,
+  Forgot
 } from '../components/Authentication';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
 import { login } from '../store/actions/authenticate';
+import Errors from '../commons/error_validate';
 
 class Login extends Component {
   constructor() {
@@ -37,40 +40,26 @@ class Login extends Component {
   };
 
   handleValidateEmail = () => {
-    const { email } = this.state;
+    const { email, errors } = this.state;
     const validateEmail = Validator.isValidEmailAddress(email);
-    const valied = {};
-    if (!validateEmail && email.length === 0) {
-      valied.email = 'Require Email';
-      this.setState({ errors: valied });
-    } else if (!validateEmail && email.length > 0) {
-      valied.email = 'Invalid Email';
-      this.setState({ errors: valied });
-    } else {
-      valied.email = '';
-      this.setState({ errors: valied });
-    }
+    errors.email = Errors.handleValidate(validateEmail, email, 'email');
+    this.setState({ errors });
   };
 
   handleValidatePassword = () => {
     const { password, errors } = this.state;
     const validatePassword = Validator.isValidPassword(password);
-    const valied = { ...errors };
-    if (!validatePassword && password.length === 0) {
-      valied.password = 'Require Password';
-      this.setState({ errors: valied });
-    } else if (!validatePassword) {
-      valied.password = 'Invalid Password';
-      this.setState({ errors: valied });
-    } else {
-      valied.password = '';
-      this.setState({ errors: valied });
-    }
+    errors.password = Errors.handleValidate(
+      validatePassword,
+      password,
+      'password'
+    );
+    this.setState({ errors });
   };
 
   login = () => {
     const { email, password, errors } = this.state;
-    this.setState({ loading: false });
+    this.setState({ loading: true });
     const valied = { ...errors };
     const { login, history } = this.props;
     const params = {
@@ -83,7 +72,7 @@ class Login extends Component {
       } else {
         valied.email = res.message;
       }
-      this.setState({ errors: valied });
+      this.setState({ errors: valied, loading: false });
     });
   };
 
@@ -124,25 +113,27 @@ class Login extends Component {
             />
           </WrapperInput>
           <WrapperAction type="login">
-            <ButtonStyle
-              loading={loading}
-              disabled={!checked || !email || !password}
-              onClick={this.login}
-            >
-              Login
-            </ButtonStyle>
             <CheckBoxAccess type="login">
               <Checkbox checked={checked} onChange={this.handleCheckbox} />
               <div>Remember me</div>
             </CheckBoxAccess>
+            <ButtonStyle
+              loading={loading}
+              disabled={!email || !password}
+              onClick={this.login}
+            >
+              Login
+            </ButtonStyle>
           </WrapperAction>
           <Bottom>
-            <Icon type="lock" />
-            &nbsp;&nbsp;Forgot your password
+            <Forgot>
+              <Icon type="lock" />
+              &nbsp;&nbsp; <Link to="/forgotPwd">Forgot your password</Link>
+            </Forgot>
           </Bottom>
         </WrapperForm>
         <OutSide>
-          Don&apos;t have an account? <a href="#1">Signup Now</a>
+          Don&apos;t have an account? <Link to="/signup">Signup Now</Link>
         </OutSide>
       </WrapperComponent>
     );

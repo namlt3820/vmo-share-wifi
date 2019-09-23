@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { Breadcrumb, Icon, Upload, Select } from 'antd';
-// import { Link } from 'react-router-dom';
 import {
   DashBoardTittle,
-  DashBoardContent,
-  DashBoardContentLayout,
-  UnderLine
+  DashBoardContent
 } from '../../../components/DashboardStyle';
-import { ButtonStyle, WrapperAction } from '../../../components/Authentication';
+import {
+  ButtonStyle,
+  WrapperForm,
+  WrapperAction
+} from '../../../components/Authentication';
 import FormInput from '../../../components/core/FormInput';
 import Validator, { EMAIL_REGEX } from '../../../utils/validator';
 import UserManager from '../../../services/mngtUser.service';
+import Errors from '../../../commons/error_validate';
 
 const { Option } = Select;
 
@@ -86,17 +88,8 @@ export default class UpdateUserInfo extends Component {
   handleValidateName = () => {
     const { name, errors } = this.state;
     const validateName = Validator.isValidName(name);
-    const valied = { ...errors };
-    if (!validateName && name.length === 0) {
-      valied.name = 'Require Name';
-      this.setState({ errors: valied });
-    } else if (!validateName && name.length > 0) {
-      valied.name = 'Invalid Name';
-      this.setState({ errors: valied });
-    } else {
-      valied.name = '';
-      this.setState({ errors: valied });
-    }
+    errors.name = Errors.handleValidate(validateName, name, 'name');
+    this.setState({ errors });
   };
 
   editUser = () => {
@@ -128,7 +121,7 @@ export default class UpdateUserInfo extends Component {
           </Breadcrumb>
         </DashBoardTittle>
         <DashBoardContent>
-          <DashBoardContentLayout>
+          <WrapperForm>
             <div>
               <div>
                 <Upload
@@ -167,7 +160,7 @@ export default class UpdateUserInfo extends Component {
               </div>
             </div>
             <div>
-              <UnderLine>Payment</UnderLine>
+              <h4>Payment</h4>
               <div>
                 <p>Type</p>
                 <Select
@@ -202,7 +195,7 @@ export default class UpdateUserInfo extends Component {
               <ButtonStyle onClick={this.editUser}>Save</ButtonStyle>
               <ButtonStyle background="none">Cancel</ButtonStyle>
             </WrapperAction>
-          </DashBoardContentLayout>
+          </WrapperForm>
         </DashBoardContent>
       </>
     );

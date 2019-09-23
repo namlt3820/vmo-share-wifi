@@ -47,7 +47,9 @@ export default class ListRouter extends Component {
     };
     this.setState({ loading: true });
     router.getRouter(params).then(res => {
-      this.setState({ routers: res.data.data.items, loading: false });
+      if (res.status === httpStatus.StatusOK) {
+        this.setState({ routers: res.data.data.items, loading: false });
+      }
     });
   };
 

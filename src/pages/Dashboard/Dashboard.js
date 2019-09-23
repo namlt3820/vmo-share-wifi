@@ -15,8 +15,6 @@ import DashboardManagerment from '../../services/dashboard.service';
 
 const dashboardManagerment = new DashboardManagerment();
 
-// const { RangePicker } = DatePicker;
-
 export default class AddDevice extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +42,6 @@ export default class AddDevice extends Component {
 
   componentDidMount() {
     dashboardManagerment.getAllData().then(res => {
-      console.log(res);
       const { users, routers, devices, usedData } = res.data.data;
       this.setState({
         users,

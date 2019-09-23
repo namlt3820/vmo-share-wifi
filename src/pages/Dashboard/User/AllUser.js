@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Breadcrumb, Input, Table, Icon, Dropdown, Menu } from 'antd';
-// import { Link } from 'react-router-dom';
 import {
   DashBoardTittle,
   DashBoardContent,
@@ -16,6 +15,7 @@ import {
 import UserManager from '../../../services/mngtUser.service';
 import AddUser from './AddUser';
 import EditUser from './EditUser';
+import httpStatus from '../../../config/httpStatus';
 
 const { Search } = Input;
 const PER_PAGE = 20;
@@ -31,7 +31,6 @@ export default class AllUser extends Component {
       users: [],
       loading: false,
       visible: false,
-      visibleEdit: false,
       userInfo: {},
       searchText: ''
     };
@@ -52,11 +51,13 @@ export default class AllUser extends Component {
     userManager
       .getListUser(params)
       .then(res => {
-        dataUser = res.data.data.items;
-        this.setState({
-          loading: false,
-          users: res.data.data.items
-        });
+        if (res.status === httpStatus.StatusOK) {
+          dataUser = res.data.data.items;
+          this.setState({
+            loading: false,
+            users: res.data.data.items
+          });
+        }
       })
       .catch(error => {
         throw error;
@@ -119,21 +120,9 @@ export default class AllUser extends Component {
     });
   };
 
-  showModalEdit = () => {
-    this.setState({
-      visibleEdit: true
-    });
-  };
-
   handleCancel = () => {
     this.setState({
       visible: false
-    });
-  };
-
-  handleCancelEdit = () => {
-    this.setState({
-      visibleEdit: false
     });
   };
 
@@ -152,12 +141,6 @@ export default class AllUser extends Component {
     const { users, loading, userInfo, searchText } = this.state;
     const menu = (
       <Menu>
-        <Menu.Item key="0">
-          <a href="#3" onClick={this.showModalEdit}>
-            Edit
-          </a>
-        </Menu.Item>
-        <Menu.Divider />
         <Menu.Item key="1">
           <LinkStyle
             to={{
@@ -168,7 +151,7 @@ export default class AllUser extends Component {
               }
             }}
           >
-            View Profile
+            Edit
           </LinkStyle>
         </Menu.Item>
         <Menu.Divider />
@@ -273,7 +256,7 @@ export default class AllUser extends Component {
             <DashBoardTableButton name="user">
               <Search
                 value={searchText}
-                onSearch={value => this.searchUserInfo(value)}
+                onSearch={this.onSearch}
                 style={{ width: 200 }}
                 onChange={this.searchOnChange}
                 onPressEnter={this.onSearch}
@@ -296,7 +279,7 @@ export default class AllUser extends Component {
             />
           </DashBoardContentLayout>
         </DashBoardContent>
-        ADD
+        {/* ADD */}
         <ModalStyle
           title="Add User"
           visible={this.state.visible}
@@ -304,7 +287,7 @@ export default class AllUser extends Component {
         >
           <AddUser addUser={this.addUser} handleCancel={this.handleCancel} />
         </ModalStyle>
-        EDIT
+        {/* EDIT */}
         <ModalStyle
           title="Edit User"
           visible={this.state.visibleEdit}
