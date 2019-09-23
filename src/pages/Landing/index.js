@@ -34,11 +34,7 @@ const Landing = ({ className }) => (
 );
 
 const StyledLanding = styled(Landing)`
-<<<<<<< HEAD
   font-family: 'utm_avo_bold';
-=======
-  font-family: 'utm_avo';
->>>>>>> 7a9b738bc02631b11c47e1486aa1f6d4ec2f41b0
 `;
 
 const withTheme = Component => () => (
