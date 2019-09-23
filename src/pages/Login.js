@@ -113,6 +113,10 @@ class Login extends Component {
             />
           </WrapperInput>
           <WrapperAction type="login">
+            <CheckBoxAccess type="login">
+              <Checkbox checked={checked} onChange={this.handleCheckbox} />
+              <div>Remember me</div>
+            </CheckBoxAccess>
             <ButtonStyle
               loading={loading}
               disabled={!email || !password}
@@ -120,10 +124,6 @@ class Login extends Component {
             >
               Login
             </ButtonStyle>
-            <CheckBoxAccess type="login">
-              <Checkbox checked={checked} onChange={this.handleCheckbox} />
-              <div>Remember me</div>
-            </CheckBoxAccess>
           </WrapperAction>
           <Bottom>
             <Forgot>

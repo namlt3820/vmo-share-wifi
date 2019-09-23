@@ -141,9 +141,6 @@ export const DashboardTop = styled.div`
 `;
 
 export const DashboardTopText = styled.div`
-  h3 {
-    margin-bottom: 3em;
-  }
   h5 {
     margin-bottom: 3em;
   }
@@ -151,7 +148,7 @@ export const DashboardTopText = styled.div`
 
 export const DashboardBottomText = styled.div`
   display: flex;
-  margin: 2em 0;
+  margin: 2em 0 0 0;
   h4 {
     margin-right: 1em;
     margin-bottom: 0;
@@ -159,17 +156,18 @@ export const DashboardBottomText = styled.div`
   }
 `;
 
-export const UnderLine = styled.h4`
-  ::after {
-    content: '';
-    height: 1px;
-    background: #333;
-    position: absolute;
-    width: 100%;
-    top: 1.75em;
-    left: 0;
-  }
-`;
+// export const UnderLine = styled.h4`
+//   position: relative;
+//   ::after {
+//     content: '';
+//     height: 1px;
+//     background: #333;
+//     position: absolute;
+//     width: 18%;
+//     top: 1.75em;
+//     left: 0;
+//   }
+// `;
 
 export const ModalStyle = styled(Modal)`
   .ant-modal-footer {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Breadcrumb, Input, Table, Icon, Dropdown, Menu } from 'antd';
-// import { Link } from 'react-router-dom';
 import {
   DashBoardTittle,
   DashBoardContent,
@@ -23,6 +22,7 @@ const PER_PAGE = 20;
 const OFF_SET = 0;
 const PAGE_SIZE = 5;
 const userManager = new UserManager();
+let dataUser = [];
 
 export default class AllUser extends Component {
   constructor() {
@@ -31,8 +31,8 @@ export default class AllUser extends Component {
       users: [],
       loading: false,
       visible: false,
-      visibleEdit: false,
-      userInfo: {}
+      userInfo: {},
+      searchText: ''
     };
   }
 
@@ -52,6 +52,7 @@ export default class AllUser extends Component {
       .getListUser(params)
       .then(res => {
         if (res.status === httpStatus.StatusOK) {
+          dataUser = res.data.data.items;
           this.setState({
             loading: false,
             users: res.data.data.items
@@ -92,27 +93,36 @@ export default class AllUser extends Component {
     });
   };
 
+  searchOnChange = e => {
+    this.setState({ searchText: e.target.value });
+  };
+
+  onSearch = () => {
+    const { searchText } = this.state;
+    const reg = new RegExp(searchText, 'gi');
+    this.setState({
+      searchText: '',
+      users: dataUser
+        .map(record => {
+          const match = record.name.match(reg);
+          if (!match) {
+            return null;
+          }
+          return record;
+        })
+        .filter(record => !!record)
+    });
+  };
+
   showModal = () => {
     this.setState({
       visible: true
     });
   };
 
-  showModalEdit = () => {
-    this.setState({
-      visibleEdit: true
-    });
-  };
-
   handleCancel = () => {
     this.setState({
       visible: false
-    });
-  };
-
-  handleCancelEdit = () => {
-    this.setState({
-      visibleEdit: false
     });
   };
 
@@ -128,15 +138,9 @@ export default class AllUser extends Component {
   };
 
   render() {
-    const { users, loading, userInfo } = this.state;
+    const { users, loading, userInfo, searchText } = this.state;
     const menu = (
       <Menu>
-        <Menu.Item key="0">
-          <a href="#3" onClick={this.showModalEdit}>
-            Edit
-          </a>
-        </Menu.Item>
-        <Menu.Divider />
         <Menu.Item key="1">
           <LinkStyle
             to={{
@@ -147,7 +151,7 @@ export default class AllUser extends Component {
               }
             }}
           >
-            View Profile
+            Edit
           </LinkStyle>
         </Menu.Item>
         <Menu.Divider />
@@ -161,15 +165,33 @@ export default class AllUser extends Component {
       {
         title: 'Name',
         dataIndex: 'name',
-        render: text => <a href="#1">{text}</a>
+        key: 'name',
+        filters: [
+          {
+            text: 'phuong',
+            value: 'phuong'
+          },
+          {
+            text: 'avew',
+            value: 'avew'
+          }
+        ],
+        onFilter: (value, record) => record.name.indexOf(value) === 0,
+        render: (text, record) => (
+          <a key={record._id} href="#1">
+            {text}
+          </a>
+        )
       },
       {
         title: 'Email',
-        dataIndex: 'email'
+        dataIndex: 'email',
+        key: 'email'
       },
       {
         title: 'Role',
-        dataIndex: 'role'
+        dataIndex: 'role',
+        key: 'role'
       },
       {
         title: 'Status',
@@ -233,8 +255,11 @@ export default class AllUser extends Component {
           <DashBoardContentLayout>
             <DashBoardTableButton name="user">
               <Search
-                // onSearch={value => console.log(value)}
+                value={searchText}
+                onSearch={this.onSearch}
                 style={{ width: 200 }}
+                onChange={this.searchOnChange}
+                onPressEnter={this.onSearch}
               />
               <DashBoardButton>
                 <DashBoardButtonStyle

@@ -41,12 +41,7 @@ const menu = (
       </span>
     </Menu.Item>
     <Menu.Divider />
-    <Menu.Item key="1">
-      <Icon type="setting" />
-      <span>Setting </span>
-    </Menu.Item>
-    <Menu.Divider />
-    <Menu.Item key="3">Change Password</Menu.Item>
+    <Menu.Item key="1">Change Password</Menu.Item>
   </Menu>
 );
 
@@ -77,7 +72,7 @@ class LayoutDashboard extends Component {
   };
 
   render() {
-    const { collapsed } = this.state;
+    const { collapsed, user } = this.state;
     const { children } = this.props;
     return (
       <Wrapper>
@@ -106,41 +101,17 @@ class LayoutDashboard extends Component {
             </LogoDashBoard>
             <Menu defaultSelectedKeys={['1']} mode="inline" theme="light">
               <Menu.Divider />
-
               <Menu.Item key="1">
                 <Icon type="dashboard" />
                 <span>Dashboard</span>
                 <Link to="/dashboard" />
               </Menu.Item>
               <Menu.Divider />
-              <SubMenu
-                key="sub1"
-                title={
-                  <span>
-                    <Icon type="user" />
-
-                    <span>Account</span>
-                  </span>
-                }
-              >
-                <Menu.Item key="2">
-                  <Icon type="user" />
-                  <span>All User</span>
-                  <Link to="allUser" />
-                </Menu.Item>
-                <Menu.Item key="3">
-                  <Icon type="info-circle" />
-                  <span>User Infomation</span>
-                  <Link
-                    to={{
-                      pathname: '/userInfomation',
-                      state: {
-                        type: 'userInfo'
-                      }
-                    }}
-                  />
-                </Menu.Item>
-              </SubMenu>
+              <Menu.Item key="2">
+                <Icon type="user" />
+                <span>Accounts</span>
+                <Link to="/allUser" />
+              </Menu.Item>
               <Menu.Divider />
               <SubMenu
                 key="sub2"
@@ -220,19 +191,14 @@ class LayoutDashboard extends Component {
                   </a>
                 </Dropdown>
                 <HeaderProfile>
-                  <HeaderProfileName>
-                    {/* <h3>{user.name}</h3> */}
-                    {/* <h3>
-                      {this.props.userInfo
-                        ? this.props.userInfo.user.name
-                        : '...'}
-                    </h3>
-                    <h5>
-                      {this.props.userInfo
-                        ? this.props.userInfo.user.role
-                        : '...'}
-                    </h5> */}
-                  </HeaderProfileName>
+                  {user ? (
+                    <HeaderProfileName>
+                      <h3>{user.name}</h3>
+                      <h5>{user.role === 0 ? 'Admin' : 'User'}</h5>
+                    </HeaderProfileName>
+                  ) : (
+                    ''
+                  )}
                 </HeaderProfile>
               </HeaderIcon>
             </Header>

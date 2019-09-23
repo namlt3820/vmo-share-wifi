@@ -9,6 +9,7 @@ import {
 } from '../../../components/Authentication';
 import FormInput from '../../../components/core/FormInput';
 import Validator, { EMAIL_REGEX } from '../../../utils/validator';
+import Errors from '../../../commons/error_validate';
 
 const { Option } = Select;
 
@@ -25,6 +26,12 @@ export default class AddDevice extends Component {
     };
   }
 
+  handleChange = value => {
+    this.setState({
+      role: value
+    });
+  };
+
   handleChangeForm = evt => {
     const { name, value } = evt.target;
     this.setState({ [name]: value });
@@ -35,59 +42,29 @@ export default class AddDevice extends Component {
     }
   };
 
-  handleChange = value => {
-    // const { role } = this.state;
-    this.setState({
-      role: value
-    });
-  };
-
   handleValidateName = () => {
     const { name, errors } = this.state;
     const validateName = Validator.isValidName(name);
-    const valied = { ...errors };
-    if (!validateName && name.length === 0) {
-      valied.name = 'Require Name';
-      this.setState({ errors: valied });
-    } else if (!validateName && name.length > 0) {
-      valied.name = 'Invalid Name';
-      this.setState({ errors: valied });
-    } else {
-      valied.name = '';
-      this.setState({ errors: valied });
-    }
+    errors.name = Errors.handleValidate(validateName, name, 'name');
+    this.setState({ errors });
   };
 
   handleValidateEmail = () => {
     const { email, errors } = this.state;
     const validateEmail = Validator.isValidEmailAddress(email);
-    const valied = { ...errors };
-    if (!validateEmail && email.length === 0) {
-      valied.email = 'Require Email';
-      this.setState({ errors: valied });
-    } else if (!validateEmail && email.length > 0) {
-      valied.email = 'Invalid Email';
-      this.setState({ errors: valied });
-    } else {
-      valied.email = '';
-      this.setState({ errors: valied });
-    }
+    errors.email = Errors.handleValidate(validateEmail, email, 'email');
+    this.setState({ errors });
   };
 
   handleValidatePassword = () => {
     const { password, errors } = this.state;
     const validatePassword = Validator.isValidPassword(password);
-    const valied = { ...errors };
-    if (!validatePassword && password.length === 0) {
-      valied.password = 'Require Password';
-      this.setState({ errors: valied });
-    } else if (!validatePassword && password.length > 0) {
-      valied.password = 'Invalid Password';
-      this.setState({ errors: valied });
-    } else {
-      valied.password = '';
-      this.setState({ errors: valied });
-    }
+    errors.password = Errors.handleValidate(
+      validatePassword,
+      password,
+      'password'
+    );
+    this.setState({ errors });
   };
 
   addUser = () => {

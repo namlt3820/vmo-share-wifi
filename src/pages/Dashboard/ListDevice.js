@@ -3,7 +3,7 @@ import { Breadcrumb, Input, Icon, Menu, Select, Dropdown } from 'antd';
 import {
   DashBoardTittle,
   DashBoardContent,
-  // DashBoardTable,
+  DashBoardContentLayout,
   DashBoardTableButton,
   Label,
   TableStyle,
@@ -143,24 +143,24 @@ export default class ListDevice extends Component {
           </Breadcrumb>
         </DashBoardTittle>
         <DashBoardContent>
-          {/* <DashBoardTable> */}
-          <DashBoardTableButton>
-            <Label>Address</Label>
-            <InputGroup compact>
-              <Select defaultValue="Duy Tan Street" style={{ width: '20%' }}>
-                <Option value="Duy Tan Street">Duy Tan Street</Option>
-                <Option value="Pham Hung Street">Pham Hung Street</Option>
-              </Select>
-            </InputGroup>
-          </DashBoardTableButton>
-          <div>
-            <TableStyle
-              rowSelection={rowSelection}
-              columns={columns}
-              dataSource={data}
-            />
-          </div>
-          {/* </DashBoardTable> */}
+          <DashBoardContentLayout>
+            <DashBoardTableButton>
+              <Label>Address</Label>
+              <InputGroup compact>
+                <Select defaultValue="Duy Tan Street" style={{ width: '20%' }}>
+                  <Option value="Duy Tan Street">Duy Tan Street</Option>
+                  <Option value="Pham Hung Street">Pham Hung Street</Option>
+                </Select>
+              </InputGroup>
+            </DashBoardTableButton>
+            <div>
+              <TableStyle
+                rowSelection={rowSelection}
+                columns={columns}
+                dataSource={data}
+              />
+            </div>
+          </DashBoardContentLayout>
         </DashBoardContent>
       </>
     );

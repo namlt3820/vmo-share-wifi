@@ -8,6 +8,7 @@ import {
 } from '../../../components/Authentication';
 import FormInput from '../../../components/core/FormInput';
 import Validator, { EMAIL_REGEX } from '../../../utils/validator';
+import Errors from '../../../commons/error_validate';
 
 export default class AddDevice extends Component {
   constructor() {
@@ -15,7 +16,6 @@ export default class AddDevice extends Component {
     this.state = {
       id: '',
       name: '',
-      // loading: false,
       errors: {}
     };
   }
@@ -62,17 +62,8 @@ export default class AddDevice extends Component {
   handleValidateName = () => {
     const { name, errors } = this.state;
     const validateName = Validator.isValidName(name);
-    const valied = { ...errors };
-    if (!validateName && name.length === 0) {
-      valied.name = 'Require Name';
-      this.setState({ errors: valied });
-    } else if (!validateName && name.length > 0) {
-      valied.name = 'Invalid Name';
-      this.setState({ errors: valied });
-    } else {
-      valied.name = '';
-      this.setState({ errors: valied });
-    }
+    errors.name = Errors.handleValidate(validateName, name, 'name');
+    this.setState({ errors });
   };
 
   editUser = () => {
