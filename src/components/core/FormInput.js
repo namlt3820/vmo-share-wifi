@@ -5,20 +5,15 @@ export default class FormInput extends Component {
   render() {
     const {
       placeholder,
-      label,
       type,
       handleBlur,
       name,
       value,
       error,
-      handleChange,
-      icon
+      handleChange
     } = this.props;
     return (
       <div>
-        <Label>
-          {label}&nbsp;<span className="icon">{icon}</span>
-        </Label>
         <InputStyle
           placeholder={placeholder}
           onChange={handleChange}

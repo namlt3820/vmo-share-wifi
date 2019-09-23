@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from '../contants';
+import { SET_CURRENT_USER, LOGOUT } from '../contants';
 
 const initState = {
   isAuthenticated: false,
@@ -11,6 +11,12 @@ export default function(state = initState, action) {
         ...state,
         isAuthenticated: Object.keys(action.payload).length !== 0,
         user: action.payload
+      };
+    case LOGOUT:
+      return {
+        ...state,
+        isAuthenticated: 2,
+        user: null
       };
 
     default:

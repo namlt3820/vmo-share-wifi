@@ -4,6 +4,7 @@ import httpStatus from '../../config/httpStatus';
 
 const authen = new Authenticate();
 
+// eslint-disable-next-line import/prefer-default-export
 export const login = (data, history) => dispatch =>
   new Promise(resolve => {
     authen
@@ -23,7 +24,10 @@ export const login = (data, history) => dispatch =>
       });
   });
 
-export const logout = () => {
-  localStorage.removeItem('access_token');
-  window.location.reload('/');
-};
+// export const logout = dispatch => {
+//   // history.push('/login');
+//   localStorage.removeItem('access_token');
+//   dispatch({
+//     type: LOGOUT
+//   });
+// };

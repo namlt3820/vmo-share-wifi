@@ -50,7 +50,7 @@ export const Label = styled.div`
 `;
 
 export const InputStyle = styled.input`
-  margin: 5px 0;
+  margin: 10px 0;
   border-color: #ccd3d9;
   height: 32px;
   width: 300px;
