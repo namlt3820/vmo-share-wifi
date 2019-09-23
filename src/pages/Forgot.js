@@ -55,7 +55,7 @@ export default class Forgot extends Component {
     const { email, errors } = this.state;
     return (
       <WrapperComponent>
-        <WrapperForm>
+        <WrapperForm form="login">
           <Logo>
             <img src="assets/logo.png" alt="Share Wifi" />
             <div>Forgot Password</div>

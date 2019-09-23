@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Button, Table, Menu, Modal } from 'antd';
+import { Link } from 'react-router-dom';
 
 export const DashBoardTittle = styled.div`
   h3 {
@@ -56,10 +57,13 @@ export const DashBoardButtonStyle = styled(Button)`
   width: 9em;
   color: ${props => (props.background === '#747474' ? '#ffffff' : '')};
   font-weight: 700;
-  background: ${props =>
-    props.background === '#747474'
-      ? 'linear-gradient(to bottom, #e44688 0%, #ba3cbd 100%)'
-      : ''};
+  background: linear-gradient(150deg, #e44688 0%, #ba3cbd 100%);
+  &:hover {
+    box-shadow: 1px 0px 6px #40a9ff;
+    background: linear-gradient(150deg, #e44688 0%, #ba3cbd 100%);
+    color: #fff;
+    border: none;
+  }
 `;
 
 export const Label = styled.div`
@@ -106,19 +110,21 @@ export const HeaderIcon = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  padding: 0.5em;
 `;
 
 export const HeaderProfile = styled.div`
-  width: 50px;
+  width: 10em;
   height: 50px;
   border-radius: 4px;
-`;
-
-export const HeaderProfileName = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
+  h3:first-child {
+    margin: 2px 0;
+  }
 `;
+
+export const HeaderProfileName = styled.div``;
 
 export const DashboardTop = styled.div`
   display: flex;
@@ -127,8 +133,10 @@ export const DashboardTop = styled.div`
   margin-bottom: 3em;
   margin-right: 15em;
   img {
-    width: 200px;
-    height: 200px;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    border: 1px solid;
   }
 `;
 
@@ -170,4 +178,60 @@ export const ModalStyle = styled(Modal)`
   .ant-modal-footer button {
     display: none;
   }
+`;
+
+// DATA
+
+export const DataTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const DataCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-basis: 20%;
+  border: 1px solid #333;
+  padding: 1em;
+  border-radius: 5px;
+  background: linear-gradient(45deg, #c54e4e, transparent);
+`;
+
+export const DataCardTop = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 25px;
+  h1 {
+    margin: 0;
+  }
+`;
+
+export const DataCardBottom = styled.p`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2em;
+  margin-bottom: 0;
+  font-weight: 700;
+`;
+
+export const DateRangePicker = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 2em 0;
+  p {
+    margin: 0 1em;
+    font-size: 18px;
+    font-weight: 700;
+  }
+`;
+
+export const LinkStyle = styled(Link)`
+  color: #333;
+`;
+
+export const DataChart = styled.div`
+  margin-top: 5em;
 `;

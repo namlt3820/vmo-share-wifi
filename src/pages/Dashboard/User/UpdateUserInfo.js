@@ -7,13 +7,14 @@ import {
   DashBoardContentLayout,
   UnderLine
 } from '../../../components/DashboardStyle';
-import { ButtonStyle } from '../../../components/Authentication';
+import { ButtonStyle, WrapperAction } from '../../../components/Authentication';
 import FormInput from '../../../components/core/FormInput';
+import Validator, { EMAIL_REGEX } from '../../../utils/validator';
+import UserManager from '../../../services/mngtUser.service';
 
 const { Option } = Select;
-// import UserManager from '../../../services/mngtUser.service';
 
-// const userManager = new UserManager();
+const userManager = new UserManager();
 
 function getBase64(img, callback) {
   const reader = new FileReader();
@@ -38,15 +39,27 @@ export default class UpdateUserInfo extends Component {
   constructor() {
     super();
     this.state = {
-      // name: '',
+      id: '',
+      name: '',
+      email: '',
       // type: '',
       // number: '',
       // expridate: '',
-      loading: false
+      errors: {}
+      // loading: false
     };
   }
 
-  handleChange = info => {
+  componentDidMount() {
+    const { id, name, email } = this.props.location.state.userInfoEdit;
+    this.setState({
+      id,
+      name,
+      email
+    });
+  }
+
+  handleChangeImage = info => {
     if (info.file.status === 'uploading') {
       this.setState({ loading: true });
       return;
@@ -62,6 +75,40 @@ export default class UpdateUserInfo extends Component {
     }
   };
 
+  handleChange = evt => {
+    const { name, value } = evt.target;
+    this.setState({ [name]: value });
+    if (name === 'name' && EMAIL_REGEX.test(value)) {
+      this.handleValidateName();
+    }
+  };
+
+  handleValidateName = () => {
+    const { name, errors } = this.state;
+    const validateName = Validator.isValidName(name);
+    const valied = { ...errors };
+    if (!validateName && name.length === 0) {
+      valied.name = 'Require Name';
+      this.setState({ errors: valied });
+    } else if (!validateName && name.length > 0) {
+      valied.name = 'Invalid Name';
+      this.setState({ errors: valied });
+    } else {
+      valied.name = '';
+      this.setState({ errors: valied });
+    }
+  };
+
+  editUser = () => {
+    const { id, name } = this.state;
+    const params = {
+      name
+    };
+    userManager.editUser(id, params).then(() => {
+      this.props.history.push('/allUser');
+    });
+  };
+
   render() {
     const uploadButton = (
       <div>
@@ -69,15 +116,15 @@ export default class UpdateUserInfo extends Component {
         <div className="ant-upload-text">Upload</div>
       </div>
     );
-    const { imageUrl } = this.state;
+    const { imageUrl, name, email, errors } = this.state;
     return (
       <>
         <DashBoardTittle>
-          <h3>ALL USER</h3>
+          <h3>Update User Infomation</h3>
           <Breadcrumb separator=">">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="">Account Management</Breadcrumb.Item>
-            <Breadcrumb.Item href="">User Detail</Breadcrumb.Item>
+            <Breadcrumb.Item href="">Account</Breadcrumb.Item>
+            <Breadcrumb.Item href="">Update Infomation</Breadcrumb.Item>
           </Breadcrumb>
         </DashBoardTittle>
         <DashBoardContent>
@@ -91,7 +138,7 @@ export default class UpdateUserInfo extends Component {
                   showUploadList={false}
                   action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
                   beforeUpload={beforeUpload}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeImage}
                 >
                   {imageUrl ? (
                     <img
@@ -110,13 +157,13 @@ export default class UpdateUserInfo extends Component {
                   label="Name"
                   name="name"
                   type="text"
-                  // error={errors.name}
-                  // value={name}
+                  error={errors.name}
+                  value={name}
                   handleChange={this.handleChange}
                   handleBlur={this.handleValidateName}
                 />
                 <p>Email: </p>
-                <p>david.james@gmail.com</p>
+                <p>{email}</p>
               </div>
             </div>
             <div>
@@ -151,10 +198,10 @@ export default class UpdateUserInfo extends Component {
                 />
               </div>
             </div>
-            <div>
-              <ButtonStyle>Save</ButtonStyle>
+            <WrapperAction type="login">
+              <ButtonStyle onClick={this.editUser}>Save</ButtonStyle>
               <ButtonStyle background="none">Cancel</ButtonStyle>
-            </div>
+            </WrapperAction>
           </DashBoardContentLayout>
         </DashBoardContent>
       </>

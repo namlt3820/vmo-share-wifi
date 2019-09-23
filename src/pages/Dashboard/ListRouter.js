@@ -186,11 +186,11 @@ export default class ListRouter extends Component {
     return (
       <>
         <DashBoardTittle>
-          <h3>LIST Router</h3>
+          <h3>LIST ROUTER</h3>
           <Breadcrumb separator=">">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item href="">Wifi Management</Breadcrumb.Item>
-            <Breadcrumb.Item href="">List</Breadcrumb.Item>
+            <Breadcrumb.Item href="">Wifi</Breadcrumb.Item>
+            <Breadcrumb.Item href="">List Routers</Breadcrumb.Item>
           </Breadcrumb>
         </DashBoardTittle>
         <DashBoardContent>

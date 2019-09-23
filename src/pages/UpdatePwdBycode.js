@@ -85,7 +85,7 @@ class UpdatePwdBycode extends Component {
     const { email, password, errors, loading, code } = this.state;
     return (
       <WrapperComponent>
-        <WrapperForm>
+        <WrapperForm form="login">
           <Logo>
             <img src="assets/logo.png" alt="Share Wifi" />
             <div>Change Password</div>
