@@ -1,13 +1,13 @@
-export const ERROR_REQUIRE = 'Require fill';
-export const ERROR_INVALID = 'Invalid';
+export const ERROR_REQUIRE = 'is required';
+export const ERROR_INVALID = 'is invalid';
 
 class Errors {
   static handleValidate(validate, isLength, type) {
     if (!validate) {
       if (isLength.length === 0) {
-        return `${ERROR_REQUIRE}\n${type}`;
+        return `${type}\n${ERROR_REQUIRE}`;
       }
-      return `${ERROR_INVALID}\n${type}`;
+      return `${type}\n${ERROR_INVALID}`;
     }
     return '';
   }

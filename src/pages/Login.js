@@ -43,7 +43,7 @@ class Login extends Component {
   handleValidateEmail = () => {
     const { email, errors } = this.state;
     const validateEmail = Validator.isValidEmailAddress(email);
-    errors.email = Errors.handleValidate(validateEmail, email, 'email');
+    errors.email = Errors.handleValidate(validateEmail, email, 'Email');
     this.setState({ errors });
   };
 
@@ -53,7 +53,7 @@ class Login extends Component {
     errors.password = Errors.handleValidate(
       validatePassword,
       password,
-      'password'
+      'Password'
     );
     this.setState({ errors });
   };
@@ -116,7 +116,11 @@ class Login extends Component {
               <CheckboxStyle checked={checked} onChange={this.handleCheckbox} />
               <div>Remember me</div>
             </CheckBoxAccess>
-            <ButtonStyle loading={loading} onClick={this.login}>
+            <ButtonStyle
+              loading={loading}
+              onClick={this.login}
+              disabled={!email && !password}
+            >
               Login
             </ButtonStyle>
           </WrapperAction>

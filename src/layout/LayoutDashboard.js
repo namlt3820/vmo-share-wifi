@@ -41,7 +41,15 @@ const menu = (
       </span>
     </Menu.Item>
     <Menu.Divider />
-    <Menu.Item key="1">Change Password</Menu.Item>
+    <Menu.Item key="1">
+      <LinkStyle
+        to={{
+          pathname: '/changePwd'
+        }}
+      >
+        Change Password
+      </LinkStyle>
+    </Menu.Item>
   </Menu>
 );
 

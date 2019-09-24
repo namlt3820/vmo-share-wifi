@@ -102,6 +102,14 @@ export const ButtonStyle = styled(Button)`
     background: #007ed9;
     color: #fff;
   }
+  :disabled {
+    background: #007ed9;
+    color: #fff;
+    :hover {
+      background: #007ed9;
+      color: #fff;
+    }
+  }
 `;
 
 export const Bottom = styled.div`
