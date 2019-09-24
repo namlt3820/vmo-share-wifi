@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Checkbox } from 'antd';
 import { Redirect } from 'react-router-dom';
 import {
   WrapperComponent,
@@ -8,7 +7,8 @@ import {
   WrapperInput,
   WrapperAction,
   CheckBoxAccess,
-  ButtonStyle
+  ButtonStyle,
+  CheckboxStyle
 } from '../components/Authentication';
 import FormInput from '../components/core/FormInput';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
@@ -144,7 +144,7 @@ export default class SignUp extends Component {
           </WrapperInput>
           <WrapperAction type="signup">
             <CheckBoxAccess type="signup">
-              <Checkbox checked={checked} onChange={this.handleCheckbox} />
+              <CheckboxStyle checked={checked} onChange={this.handleCheckbox} />
               <div>I accept the Terms and Conditions</div>
             </CheckBoxAccess>
             <ButtonStyle onClick={this.signUp} loading={loading}>

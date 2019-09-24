@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Checkbox, Icon } from 'antd';
+import { Icon } from 'antd';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import FormInput from '../components/core/FormInput';
@@ -13,7 +13,8 @@ import {
   ButtonStyle,
   Bottom,
   OutSide,
-  Forgot
+  Forgot,
+  CheckboxStyle
 } from '../components/Authentication';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
 import { login } from '../store/actions/authenticate';
@@ -112,7 +113,7 @@ class Login extends Component {
           </WrapperInput>
           <WrapperAction type="login">
             <CheckBoxAccess type="login">
-              <Checkbox checked={checked} onChange={this.handleCheckbox} />
+              <CheckboxStyle checked={checked} onChange={this.handleCheckbox} />
               <div>Remember me</div>
             </CheckBoxAccess>
             <ButtonStyle loading={loading} onClick={this.login}>

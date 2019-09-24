@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Button } from 'antd';
+import { Button, Checkbox } from 'antd';
 
 export const WrapperComponent = styled.div`
   display: flex;
@@ -73,10 +73,12 @@ export const WrapperAction = styled.div`
 
 export const CheckBoxAccess = styled.div`
   display: flex;
-  width: ${props => (props.type === 'login' ? '115px' : '235px')};
-  justify-content: ${props =>
-    props.type === 'login' ? ' space-around;' : 'space-between'};
+  justify-contentn: flex-start
   margin: 0 0 0.5em 0;
+`;
+
+export const CheckboxStyle = styled(Checkbox)`
+  padding: 0 5px;
 `;
 
 export const ButtonStyle = styled(Button)`
@@ -103,8 +105,9 @@ export const ButtonStyle = styled(Button)`
   }
 `;
 
-export const Bottom = styled.p`
-  margin: 1.5em 0 0 10em;
+export const Bottom = styled.div`
+  text-align: right;
+  width: 300px;
 `;
 
 export const OutSide = styled.div`
