@@ -1,7 +1,7 @@
 import { Row, Col } from 'antd';
 import React, { Component } from 'react';
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
 import FixWidth from './core/FixWidth';
 import bg1 from './assets/images/header-bg-1.png';
 import bg2 from './assets/images/header-bg-2.png';
@@ -14,7 +14,13 @@ const Introduction = ({ className }) => (
     <FixWidth>
       <Row type="flex">
         <Col xs={24} sm={8}>
-          <p>Duis aute irure dolor in voluptate velit esse cillum</p>
+          <p>
+            Connect high speed internet. Earn money from your wifi device. All
+            on Shared Wifi network
+          </p>
+          <Link to="/signup" className="explore">
+            Explore
+          </Link>
         </Col>
         <Col xs={24} sm={16}>
           <img src={bg2} alt="header-bg-2" />
@@ -31,14 +37,28 @@ const StyledIntroduction = styled(Introduction)`
     padding-top: 10rem;
   }
 
+  .explore {
+    border-radius: 0.25rem;
+    background-image: linear-gradient(150deg, #e44688 0%, #ba3cbd 100%);
+    color: white !important;
+    font-size: 1.25rem;
+    padding: 0.5rem 0.8rem;
+    margin-top: 2rem;
+    text-decoration: none;
+  }
+
   p {
     font-family: 'utm_avo_bold';
-    font-size: 1.75rem;
-    line-height: 2.5rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
     color: #4d5761;
     text-transform: uppercase;
-    margin-top: 3rem;
+    margin: 3rem 0;
 
+    @media only screen and (min-width: ${props => props.theme.breakpoints.xs}) {
+      font-size: 1.75rem;
+      line-height: 2.5rem;
+    }
     @media only screen and (min-width: ${props => props.theme.breakpoints.ul}) {
       margin-top: 15rem;
     }
@@ -112,26 +132,24 @@ const Cards = ({ className }) => {
     {
       icon: icon1,
       title: 'Easy to connect',
-      content:
-        'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris commodo'
+      content: 'Just register and then you can connect internet easily.'
     },
     {
       icon: icon2,
       title: 'High speed',
       content:
-        'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolores'
+        'Connect a high speed internet verified by our monitoring system.'
     },
     {
       icon: icon3,
       title: 'Wide coverage',
-      content:
-        'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit'
+      content: 'We are providing our service to many countries in the world.'
     },
     {
       icon: icon3,
-      title: 'Get money from your wifi',
+      title: 'Get money from wifi device',
       content:
-        'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit'
+        'You can earn money by connection your wifi devices to shared wifi network.'
     }
   ];
 
@@ -169,7 +187,7 @@ const StyledCards = styled(Cards)`
 class Features extends Component {
   render() {
     return (
-      <div className={this.props.className}>
+      <div className={this.props.className} id="home">
         <StyledIntroduction />
         <StyledCards />
       </div>

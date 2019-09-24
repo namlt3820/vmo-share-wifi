@@ -13,9 +13,10 @@ const Content = ({ className }) => (
         <Col xs={24} sm={11} xxl={9}>
           <p>About us</p>
           <p>
-            At vero eos et accusamus et iusto odio dignissimos ducimus qui
-            blanditiis praesentium voluptatum deleniti atque corrupti quos
-            dolores et quas molestias excepturi sint occaecati cupiditate.
+            Shared Wifi network is online sharing platform which helps people
+            can find and connect a wireless access point easily. It also allows
+            Wifi owner can earn money by sharing their Wifi device to a Shared
+            Wifi Network.
           </p>
         </Col>
       </Row>

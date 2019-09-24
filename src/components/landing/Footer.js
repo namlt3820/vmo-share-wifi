@@ -5,55 +5,84 @@ import FixWidth from './core/FixWidth';
 import bg from './assets/images/footer-bg.png';
 import logo from './assets/images/logo-white.png';
 
-const Bg = ({ className }) => <Col xs={24} sm={12} className={className} />;
+const Bg = ({ className }) => <Col xs={24} sm={10} className={className} />;
 
 const StyledBg = styled(Bg)`
-  min-height: 200px;
+  height: 150px;
   background-image: url(${bg});
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
 
-  @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
-    min-height: 300px;
+  @media only screen and (min-width: ${props => props.theme.breakpoints.xs}) {
+    height: 220px;
   }
 `;
 
 const Content = ({ className }) => (
-  <Col xs={24} sm={12} className={className}>
-    <p>Useful Links</p>
-    <ul>
-      <li>
-        <a href="/landing">Demo</a>
-      </li>
-      <li>
-        <a href="/landing">Pricing</a>
-      </li>
-      <li>
-        <a href="/landing">About Us</a>
-      </li>
-      <li>
-        <a href="/landing">Contact</a>
-      </li>
-    </ul>
+  <Col xs={24} sm={14} className={className}>
+    <Row>
+      <Col xs={24} sm={12} xxl={6}>
+        <p>Useful Links</p>
+        <ul className="section">
+          <li>
+            <a href="#home">Home</a>
+          </li>
+          <li>
+            <a href="#features">Features</a>
+          </li>
+          <li>
+            <a href="#aboutus">About Us</a>
+          </li>
+          <li>
+            <a href="#pricing">Pricing</a>
+          </li>
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+        </ul>
+      </Col>
+      <Col xs={24} sm={12} xxl={18}>
+        <ul className="social">
+          <li>
+            <a href="/">
+              <i className="fa fa-facebook" />
+            </a>
+          </li>
+          <li>
+            <a href="/">
+              <i className="fa fa-twitter" />
+            </a>
+          </li>
+          <li>
+            <a href="/">
+              <i className="fa fa-google-plus" />
+            </a>
+          </li>
+        </ul>
+      </Col>
+    </Row>
   </Col>
 );
 
 const StyledContent = styled(Content)`
-  padding-left: 1rem;
+  padding-left: 4rem;
   padding-bottom: 5rem;
+  padding-top: 1rem;
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
-    margin-top: 3rem;
     padding-left: 0;
     padding-bottom: 0;
+    margin-top: 1rem;
+    padding-top: 0;
   }
 
   p {
     font-family: 'utm_avo_bold';
     font-size: 1.5rem;
+    margin-bottom: 0;
   }
 
-  ul {
+  ul.section {
     padding-left: 0rem;
 
     li {
@@ -67,6 +96,38 @@ const StyledContent = styled(Content)`
 
     a:hover {
       color: #72b4fd;
+    }
+  }
+
+  ul.social {
+    display: flex;
+    margin-top: 0.5rem;
+    padding-left: 0;
+
+    li {
+      list-style-type: none;
+      width: 3rem;
+      height: 3rem;
+      display: inline-block;
+      border: 0.5px solid #4677ed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-right: 1rem;
+
+      &:hover {
+        border-color: #d5429b;
+        cursor: pointer;
+        i {
+          color: #d5429b;
+        }
+      }
+    }
+
+    i {
+      font-size: 1.5rem;
+      color: #4677ed;
     }
   }
 `;
@@ -120,7 +181,12 @@ const StyledFooter = styled(Footer)`
           props.theme.breakpoints.sm}) {
         max-height: 4rem;
         margin-top: 4rem;
-        margin-left: 13rem;
+        margin-left: 9rem;
+      }
+
+      @media only screen and (min-width: ${props =>
+          props.theme.breakpoints.ul}) {
+        margin-left: 35rem;
       }
     }
   }
@@ -130,14 +196,14 @@ const StyledFooter = styled(Footer)`
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
     background-color: white;
     opacity: 0.6;
 
     > div {
       @media only screen and (min-width: ${props =>
           props.theme.breakpoints.ul}) {
-        max-width: 2300px;
+        max-width: 1450px;
       }
     }
 
@@ -145,9 +211,8 @@ const StyledFooter = styled(Footer)`
       margin-bottom: 0;
       margin-left: 0;
 
-      @media only screen and (min-width: ${props =>
-          props.theme.breakpoints.sm}) {
-        margin-left: 4rem;
+      i {
+        vertical-align: text-bottom;
       }
     }
   }
