@@ -1,4 +1,5 @@
 import Home from '../pages/Home';
+import Landing from '../pages/Landing';
 import SignUp from '../pages/SignUp';
 import Login from '../pages/Login';
 import Forgot from '../pages/Forgot';
@@ -92,5 +93,12 @@ export const routersAuth = [
     id: 5,
     path: '/updatePwdBycode',
     component: UpdatePwdBycode
+  }
+];
+export const routesLanding = [
+  {
+    id: 1,
+    path: '/landing',
+    component: Landing
   }
 ];

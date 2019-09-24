@@ -1,0 +1,39 @@
+@font-face {
+  font-family: 'utm_avo';
+  src: url('../../components//landing/assets/fonts/utm-avo/UTM_Avo.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'utm_avo_bold';
+  src: url('../../components//landing/assets/fonts/utm-avo/UTM_AvoBold.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'utm_avo_italic';
+  src: url('../../components//landing/assets/fonts/utm-avo/UTM_AvoItalic.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'roboto-regular';
+  src: url('../../components//landing/assets/fonts/roboto/Roboto-Regular.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'roboto-bold';
+  src: url('../../components//landing/assets/fonts/roboto/Roboto-Bold.ttf')
+    format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
