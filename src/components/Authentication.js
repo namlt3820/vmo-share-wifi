@@ -26,11 +26,14 @@ export const WrapperForm = styled.div`
 export const Logo = styled.div`
   margin-bottom: 0.75em;
   img {
-    width: 130px;
+    width: 170px;
     margin-bottom: 0.5em;
   }
   h3 {
     margin-bottom: 0;
+  }
+  div {
+    font-size: 18px;
   }
 `;
 
@@ -54,7 +57,7 @@ export const InputStyle = styled.input`
   height: 32px;
   width: 300px;
   padding: 4px 11px;
-  color: #d8dadc;
+  color: #f3f3f3;
   font-size: 16px;
   line-height: 1.5;
   border: 1px solid #d9d9d9;
@@ -70,7 +73,7 @@ export const WrapperAction = styled.div`
 
 export const CheckBoxAccess = styled.div`
   display: flex;
-  width: ${props => (props.type === 'login' ? '115px' : '250px')};
+  width: ${props => (props.type === 'login' ? '115px' : '235px')};
   justify-content: ${props =>
     props.type === 'login' ? ' space-around;' : 'space-between'};
   margin: 0 0 0.5em 0;
