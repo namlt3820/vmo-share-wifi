@@ -123,9 +123,6 @@ export default class UserDataDashboard extends Component {
       options,
       series
     } = this.state;
-    console.log(options);
-    console.log(series);
-
     return (
       <>
         <DashBoardTittle>

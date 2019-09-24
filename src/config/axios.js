@@ -1,6 +1,7 @@
 /* eslint-disable func-names */
 import axios from 'axios';
-import store from '../store/index';
+import store from '../store';
+import { logout } from '../store/actions/logout';
 // Full config:  https://github.com/axios/axios#request-config
 // axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
@@ -36,7 +37,10 @@ _axios.interceptors.response.use(
   function(error) {
     // Do something with response error
     if (error.response && error.response.status === 401) {
-      store.dispatch('logout');
+      // store.dispatch({
+      //   type: 'LOGOUT'
+      // });
+      store.dispatch(logout);
     } else {
       // store.dispatch("common/setStateErrorRequest");
     }

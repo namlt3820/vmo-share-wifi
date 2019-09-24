@@ -4,6 +4,7 @@ import httpStatus from '../../config/httpStatus';
 
 const authen = new Authenticate();
 
+// eslint-disable-next-line import/prefer-default-export
 export const login = (data, history) => dispatch =>
   new Promise(resolve => {
     authen
@@ -13,7 +14,7 @@ export const login = (data, history) => dispatch =>
           const token = res.data.data.access_token;
           localStorage.setItem('access_token', token);
           dispatch(getCurrentUser());
-          history.push('/');
+          history.push('/dashboard');
         } else if (res.status === httpStatus.StatusUnauthorized) {
           resolve(res.data);
         }
@@ -22,8 +23,3 @@ export const login = (data, history) => dispatch =>
         throw error;
       });
   });
-
-export const logout = () => {
-  localStorage.removeItem('access_token');
-  window.location.reload('/');
-};

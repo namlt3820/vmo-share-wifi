@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from './Header';
 
 const Wrapper = styled.div`
   // height: 100vh;
@@ -10,11 +9,6 @@ const Wrapper = styled.div`
   // align-items: center;
 `;
 
-const LayoutMain = ({ children }) => (
-  <Wrapper>
-    <Header />
-    {children}
-  </Wrapper>
-);
+const LayoutMain = ({ children }) => <Wrapper>{children}</Wrapper>;
 
 export default LayoutMain;

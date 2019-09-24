@@ -3,9 +3,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LayoutMain from './layout/LayoutMain';
 import LayoutDashboard from './layout/LayoutDashboard';
+import LayoutLanding from './layout/LayoutLanding';
 
 // import './App.css';
-import { routersAuth, routesDashboard } from './routers/index';
+import { routersAuth, routesDashboard, routesLanding } from './routers/index';
 import { getCurrentUser } from './store/actions/user';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
@@ -61,6 +62,17 @@ class App extends Component {
               />
             ))}
           </Switch>
+          <Switch>
+            {routesLanding.map(router => (
+              <AppRoute
+                exact
+                path={router.path}
+                layout={LayoutLanding}
+                component={router.component}
+                key={router.id}
+              />
+            ))}
+          </Switch>
         </BrowserRouter>
       </div>
     );
@@ -71,7 +83,4 @@ const mapStateToProp = state => ({
   user: state.data
 });
 
-export default connect(
-  mapStateToProp,
-  null
-)(App);
+export default connect(mapStateToProp)(App);

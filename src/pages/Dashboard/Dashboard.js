@@ -42,7 +42,6 @@ export default class AddDevice extends Component {
 
   componentDidMount() {
     dashboardManagerment.getAllData().then(res => {
-      console.log(res);
       const { users, routers, devices, dataUsed } = res.data.data;
       this.setState({
         users,

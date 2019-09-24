@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Checkbox } from 'antd';
 import { Redirect } from 'react-router-dom';
 import {
   WrapperComponent,
@@ -8,7 +7,8 @@ import {
   WrapperInput,
   WrapperAction,
   CheckBoxAccess,
-  ButtonStyle
+  ButtonStyle,
+  CheckboxStyle
 } from '../components/Authentication';
 import FormInput from '../components/core/FormInput';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
@@ -111,12 +111,11 @@ export default class SignUp extends Component {
         <WrapperForm form="login">
           <Logo>
             <img src="assets/logo.png" alt="Share Wifi" />
-            <div>Create your account.</div>
+            <div>Create your account</div>
           </Logo>
           <WrapperInput>
             <FormInput
-              placeholder="Enter Username"
-              label="Username"
+              placeholder="Name"
               name="name"
               type="text"
               error={errors.name}
@@ -125,21 +124,19 @@ export default class SignUp extends Component {
               handleBlur={this.handleValidateUsername}
             />
             <FormInput
-              placeholder="Enter Email"
-              label="Email"
+              placeholder="Email"
               name="email"
               type="email"
-              error={!errors.name ? errors.email : ''}
+              error={errors.email}
               value={email}
               handleChange={this.handleChange}
               handleBlur={this.handleValidateEmail}
             />
             <FormInput
-              placeholder="Enter Password"
-              label="Password"
+              placeholder="Password"
               name="password"
               type="password"
-              error={!errors.name && !errors.email ? errors.password : ''}
+              error={errors.password}
               value={password}
               handleChange={this.handleChange}
               handleBlur={this.handleValidatePassword}
@@ -147,14 +144,10 @@ export default class SignUp extends Component {
           </WrapperInput>
           <WrapperAction type="signup">
             <CheckBoxAccess type="signup">
-              <Checkbox checked={checked} onChange={this.handleCheckbox} />
+              <CheckboxStyle checked={checked} onChange={this.handleCheckbox} />
               <div>I accept the Terms and Conditions</div>
             </CheckBoxAccess>
-            <ButtonStyle
-              onClick={this.signUp}
-              disabled={!checked}
-              loading={loading}
-            >
+            <ButtonStyle onClick={this.signUp} loading={loading}>
               SignUp
             </ButtonStyle>
           </WrapperAction>
