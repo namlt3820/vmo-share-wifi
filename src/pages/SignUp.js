@@ -42,7 +42,7 @@ export default class SignUp extends Component {
   handleValidateEmail = () => {
     const { email, errors } = this.state;
     const validateEmail = Validator.isValidEmailAddress(email);
-    errors.email = Errors.handleValidate(validateEmail, email, 'email');
+    errors.email = Errors.handleValidate(validateEmail, email, 'Email');
     this.setState({ errors });
   };
 
@@ -52,7 +52,7 @@ export default class SignUp extends Component {
     errors.password = Errors.handleValidate(
       validatePassword,
       password,
-      'password'
+      'Password'
     );
     this.setState({ errors });
   };
@@ -60,7 +60,7 @@ export default class SignUp extends Component {
   handleValidateUsername = () => {
     const { name, errors } = this.state;
     const validateUsername = Validator.isValidUsername(name);
-    errors.name = Errors.handleValidate(validateUsername, name, 'name');
+    errors.name = Errors.handleValidate(validateUsername, name, 'Name');
     this.setState({ errors });
   };
 
@@ -73,12 +73,22 @@ export default class SignUp extends Component {
       password
     };
     user.signUp(params).then(res => {
+      const { message } = res.data;
+      const valied = { ...errors };
       if (res.status === httpStatus.StatusBadRequest) {
-        this.setState({ redirect: false });
+        message.forEach(m => {
+          if (m.location === 'email') {
+            valied.email = m.message;
+          } else if (m.location === 'password') {
+            valied.password = m.message;
+          } else {
+            valied.name = m.message;
+          }
+        });
+        this.setState({ redirect: false, loading: false, errors: valied });
       } else if (res.status === httpStatus.StatusConflict) {
-        const valied = { ...errors };
         valied.email = 'This email or password invalid.';
-        this.setState({ redirect: false, errors: valied });
+        this.setState({ redirect: false, errors: valied, loading: false });
       } else {
         this.setState({ redirect: true, loading: false });
       }
@@ -147,7 +157,11 @@ export default class SignUp extends Component {
               <CheckboxStyle checked={checked} onChange={this.handleCheckbox} />
               <div>I accept the Terms and Conditions</div>
             </CheckBoxAccess>
-            <ButtonStyle onClick={this.signUp} loading={loading}>
+            <ButtonStyle
+              onClick={this.signUp}
+              loading={loading}
+              disabled={!checked && !name && !email && !password}
+            >
               SignUp
             </ButtonStyle>
           </WrapperAction>

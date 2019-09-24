@@ -103,9 +103,17 @@ export const ButtonStyle = styled(Button)`
     color: #fff;
   }
   :disabled {
+<<<<<<< HEAD
     background-color: #1890ff;
     :hover {
       background-color: #1890ff;
+=======
+    background: #007ed9;
+    color: #fff;
+    :hover {
+      background: #007ed9;
+      color: #fff;
+>>>>>>> 663be1c16b638ea7df7da7cb6407690a0c48a691
     }
   }
 `;
