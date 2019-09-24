@@ -57,7 +57,6 @@ export const InputStyle = styled.input`
   height: 32px;
   width: 300px;
   padding: 4px 11px;
-  color: #f3f3f3;
   font-size: 16px;
   line-height: 1.5;
   border: 1px solid #d9d9d9;
@@ -108,6 +107,11 @@ export const ButtonStyle = styled(Button)`
 export const Bottom = styled.div`
   text-align: right;
   width: 300px;
+  span {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+  }
 `;
 
 export const OutSide = styled.div`

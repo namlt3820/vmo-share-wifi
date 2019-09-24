@@ -89,7 +89,7 @@ class Navbar extends Component {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link scrollspy" href="/">
+                  <a className="nav-link scrollspy" href="/login">
                     Login/Sign Up
                   </a>
                 </li>
