@@ -14,7 +14,7 @@ export const login = (data, history) => dispatch =>
           const token = res.data.data.access_token;
           localStorage.setItem('access_token', token);
           dispatch(getCurrentUser());
-          history.push('/');
+          history.push('/dashboard');
         } else if (res.status === httpStatus.StatusUnauthorized) {
           resolve(res.data);
         }
@@ -23,11 +23,3 @@ export const login = (data, history) => dispatch =>
         throw error;
       });
   });
-
-// export const logout = dispatch => {
-//   // history.push('/login');
-//   localStorage.removeItem('access_token');
-//   dispatch({
-//     type: LOGOUT
-//   });
-// };
