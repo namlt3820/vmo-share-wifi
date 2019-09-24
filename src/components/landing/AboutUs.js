@@ -10,7 +10,7 @@ const Content = ({ className }) => (
   <div className={className}>
     <FixWidth>
       <Row type="flex" justify="end">
-        <Col xs={24} sm={11}>
+        <Col xs={24} sm={11} xxl={9}>
           <p>About us</p>
           <p>
             At vero eos et accusamus et iusto odio dignissimos ducimus qui
@@ -30,13 +30,25 @@ const StyledContent = styled(Content)`
     margin-top: 8rem;
   }
 
+  .ant-col {
+    @media only screen and (min-width: ${props => props.theme.breakpoints.ul}) {
+      margin-top: 20rem;
+    }
+  }
+
   p:first-child {
     font-family: 'utm_avo_bold';
     font-size: 2rem;
     text-transform: uppercase;
     margin-top: 18rem;
+    color: #6c747c;
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+      margin-top: 10rem;
+    }
+
+    @media only screen and (min-width: ${props =>
+        props.theme.breakpoints.xxl}) {
       margin-top: 10rem;
     }
   }
@@ -70,6 +82,12 @@ const StyledAboutUs = styled(AboutUs)`
   @media only screen and (min-width: ${props => props.theme.breakpoints.xl}) {
     background-image: url(${bg1}), url(${bg2});
     min-height: 600px;
+  }
+
+  @media only screen and (min-width: ${props => props.theme.breakpoints.ul}) {
+    background-size: cover, cover;
+    min-height: 1000px;
+    margin-bottom: 5rem;
   }
 `;
 

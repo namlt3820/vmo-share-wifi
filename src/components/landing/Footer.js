@@ -134,6 +134,13 @@ const StyledFooter = styled(Footer)`
     background-color: white;
     opacity: 0.6;
 
+    > div {
+      @media only screen and (min-width: ${props =>
+          props.theme.breakpoints.ul}) {
+        max-width: 2300px;
+      }
+    }
+
     p {
       margin-bottom: 0;
       margin-left: 0;

@@ -43,50 +43,24 @@ const GetInTouch = styled.p`
   font-size: 20pt;
   text-align: center;
   color: #626e78;
+  font-family: 'utm_avo_bold';
+
   span {
     color: #73b9fe;
   }
   @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
-    font-size: 35pt;
-    text-align: center;
-  }
-  @media only screen and (min-width: ${props => props.theme.breakpoints.md}) {
-    font-size: 37pt;
-    text-align: center;
-  }
-  @media only screen and (min-width: ${props => props.theme.breakpoints.xl}) {
-    font-size: 50pt;
-    text-align: center;
-  }
-  @media only screen and (min-width: ${props => props.theme.breakpoints.xxl}) {
-    font-size: 50pt;
-    text-align: center;
+    font-size: 2.5rem;
   }
 `;
 const WeSaid = styled.p`
   font-family: 'utm_avo';
-  font-weight: 600;
   color: #6e6f70;
   font-size: 9pt;
   text-align: center;
+
   @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
     color: #6e6f70;
     font-size: 15pt;
-    text-align: center;
-  }
-  @media only screen and (min-width: ${props => props.theme.breakpoints.md}) {
-    color: #6e6f70;
-    font-size: 19pt;
-    text-align: center;
-  }
-  @media only screen and (min-width: ${props => props.theme.breakpoints.xl}) {
-    color: #6e6f70;
-    font-size: 20pt;
-    text-align: center;
-  }
-  @media only screen and (min-width: ${props => props.theme.breakpoints.xxl}) {
-    color: #6e6f70;
-    font-size: 20pt;
     text-align: center;
   }
 `;

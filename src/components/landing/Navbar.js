@@ -117,6 +117,13 @@ const StyledNavbar = styled(Navbar)`
     @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
       background: transparent;
     }
+
+    > div {
+      @media only screen and (min-width: ${props =>
+          props.theme.breakpoints.xxl}) {
+        max-width: 1400px;
+      }
+    }
   }
 
   li {

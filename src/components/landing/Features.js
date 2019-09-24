@@ -39,7 +39,12 @@ const StyledIntroduction = styled(Introduction)`
     text-transform: uppercase;
     margin-top: 3rem;
 
-    @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+    @media only screen and (min-width: ${props => props.theme.breakpoints.ul}) {
+      margin-top: 15rem;
+    }
+
+    @media only screen and (min-width: ${props =>
+        props.theme.breakpoints.xxl}) {
       font-size: 2rem;
       line-height: 3rem;
     }
@@ -51,6 +56,10 @@ const StyledIntroduction = styled(Introduction)`
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
       margin-left: 4rem;
+    }
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.ul}) {
+      max-height: 800px;
     }
   }
 `;
@@ -76,8 +85,16 @@ const StyledCard = styled(Card)`
   img {
     position: absolute;
     left: 50%;
-    top: -35%;
+    top: -25%;
     transform: translateX(-50%);
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.ul}) {
+      top: -25%;
+    }
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+      top: -35%;
+    }
   }
 
   .title {
@@ -123,7 +140,7 @@ const Cards = ({ className }) => {
       <FixWidth>
         <Row type="flex" justify="space-between" gutter={40}>
           {cardData.map(item => (
-            <Col xs={24} sm={12} key={item.title}>
+            <Col xs={24} sm={12} xll={6} key={item.title}>
               <StyledCard {...item} />
             </Col>
           ))}
