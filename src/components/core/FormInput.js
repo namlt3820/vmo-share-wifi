@@ -10,10 +10,12 @@ export default class FormInput extends Component {
       name,
       value,
       error,
+      label,
       handleChange
     } = this.props;
     return (
       <div>
+        <Label>{label}</Label>
         <InputStyle
           placeholder={placeholder}
           onChange={handleChange}

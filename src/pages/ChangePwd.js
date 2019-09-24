@@ -37,7 +37,7 @@ class ChangePwd extends Component {
     errors.currentPassword = Errors.handleValidate(
       validatePassword,
       currentPassword,
-      'password'
+      'Password'
     );
     this.setState({ errors });
   };
@@ -48,7 +48,7 @@ class ChangePwd extends Component {
     errors.newPassword = Errors.handleValidate(
       validatePassword,
       newPassword,
-      'password'
+      'Password'
     );
     this.setState({ errors });
   };
@@ -108,7 +108,7 @@ class ChangePwd extends Component {
               handleBlur={this.handleValidateNewPassword}
             />
           </WrapperInput>
-          <WrapperAction type="login">
+          <WrapperAction type="change">
             <ButtonStyle loading={loading} onClick={this.changePwd}>
               Change Password
             </ButtonStyle>

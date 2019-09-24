@@ -9,7 +9,13 @@ import { logout } from '../store/actions/logout';
 const config = {
   baseURL: process.env.REACT_APP_API_URL || '',
   validateStatus(status) {
-    return (status >= 200 && status < 300) || status === 400; // default
+    return (
+      (status >= 200 && status < 300) ||
+      status === 400 ||
+      status === 404 ||
+      status === 405 ||
+      status === 409
+    ); // default
   }
   // timeout: 60 * 1000, // Timeout
   // withCredentials: true, // Check cross-site Access-Control
@@ -37,9 +43,6 @@ _axios.interceptors.response.use(
   function(error) {
     // Do something with response error
     if (error.response && error.response.status === 401) {
-      // store.dispatch({
-      //   type: 'LOGOUT'
-      // });
       store.dispatch(logout);
     } else {
       // store.dispatch("common/setStateErrorRequest");

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Breadcrumb, Icon, DatePicker } from 'antd';
 import Chart from 'react-apexcharts';
+import moment from 'moment';
 import {
   DashBoardTittle,
   DashBoardContent,
@@ -12,16 +13,18 @@ import {
   DateRangePicker,
   DataChart
 } from '../../../components/DashboardStyle';
-import WifiData from '../../../services/userdata.service';
+import WifiData from '../../../services/wifidata.service';
+import httpStatus from '../../../config/httpStatus';
 
 const wifiDataManager = new WifiData();
-const { RangePicker } = DatePicker;
+const dateFormat = 'YYYY-MM-DD';
 
 export default class AddDevice extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      dateFrom: '',
       totalDataToday: '',
       totalDataThisWeek: '',
       totalDataThisMonth: '',
@@ -43,31 +46,78 @@ export default class AddDevice extends Component {
   }
 
   onChange = (date, dateString) => {
-    const startDate = dateString[0];
-    const endDate = dateString[1];
+    const startDate = dateString;
+    const dateFrom = moment(dateString, dateFormat).add(7, 'd');
+    this.setState({
+      dateFrom
+    });
+    const endDate = dateFrom.format(dateFormat);
     const params = {
       startDate,
       endDate
     };
-    wifiDataManager.getDataByDate(params).then(res => {
-      const {
-        totalDataToday,
-        totalDataThisWeek,
-        totalDataThisMonth
-      } = res.data.data;
-      this.setState({
-        totalDataToday,
-        totalDataThisWeek,
-        totalDataThisMonth
-      });
+    wifiDataManager.getDataWifiByDate(params).then(res => {
+      if (res.status === httpStatus.StatusOK) {
+        const {
+          totalDataToday,
+          totalDataThisWeek,
+          totalDataThisMonth,
+          dataPerDay
+        } = res.data.data;
+        this.setState(
+          {
+            dataPerDay,
+            totalDataToday,
+            totalDataThisWeek,
+            totalDataThisMonth
+          },
+          () => {
+            this.dataChart();
+          }
+        );
+      }
     });
+  };
+
+  tranferDate = date => {
+    const day = new Date(date).getDate();
+    const month = new Date(date).getMonth();
+    const year = new Date(date).getFullYear();
+    const params = [year, month, day];
+    return params.join('-');
+  };
+
+  dataChart = () => {
+    const { dataPerDay } = this.state;
+    const dataUsed = dataPerDay.map(dt => {
+      return dt.dataUsed;
+    });
+    const date = dataPerDay.map(dt => {
+      return this.tranferDate(dt.createdAt);
+    });
+    this.setState(prevState => ({
+      options: {
+        ...prevState.options,
+        xaxis: {
+          ...prevState.options.xaxis,
+          categories: date
+        }
+      },
+      series: [
+        {
+          ...prevState.series,
+          data: dataUsed
+        }
+      ]
+    }));
   };
 
   render() {
     const {
       totalDataToday,
       totalDataThisWeek,
-      totalDataThisMonth
+      totalDataThisMonth,
+      dateFrom
     } = this.state;
     return (
       <>
@@ -106,7 +156,15 @@ export default class AddDevice extends Component {
             </DataTop>
             <DateRangePicker>
               <p>Date</p>
-              <RangePicker onChange={this.onChange} />
+              <DatePicker onChange={this.onChange} />
+              <p>-</p>
+              <DatePicker
+                onChange={this.onChange}
+                value={
+                  dateFrom ? moment(dateFrom, dateFormat) : moment(new Date())
+                }
+                format={dateFormat}
+              />
             </DateRangePicker>
             <DataChart>
               <Chart

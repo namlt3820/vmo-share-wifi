@@ -2,10 +2,10 @@ import Base from './base.service';
 
 export default class WifiData extends Base {
   constructor() {
-    super('data/usedData');
+    super('router/usedData');
   }
 
-  getDataByDate(params) {
+  getDataWifiByDate(params) {
     return this.get(params);
   }
 }

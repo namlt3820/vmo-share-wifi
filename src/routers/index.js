@@ -1,4 +1,3 @@
-import Home from '../pages/Home';
 import Landing from '../pages/Landing';
 import SignUp from '../pages/SignUp';
 import Login from '../pages/Login';
@@ -18,51 +17,46 @@ import Dashboard from '../pages/Dashboard/Dashboard';
 export const routesDashboard = [
   {
     id: 1,
-    path: '/',
-    component: Home
-  },
-  {
-    id: 2,
     path: '/allUser',
     component: AllUser
   },
   {
-    id: 3,
+    id: 2,
     path: '/addUser',
     component: AddUser
   },
   {
-    id: 4,
+    id: 3,
     path: '/userInfomation',
     component: UserInfomation
   },
   {
-    id: 5,
+    id: 4,
     path: '/updateUserInfo',
     component: UpdateUserInfo
   },
   {
-    id: 6,
+    id: 5,
     path: '/addRouter',
     component: AddRouter
   },
   {
-    id: 7,
+    id: 6,
     path: '/routers',
     component: ListRouter
   },
   {
-    id: 8,
+    id: 7,
     path: '/userData',
     component: UserData
   },
   {
-    id: 9,
+    id: 8,
     path: '/wifiData',
     component: WifiData
   },
   {
-    id: 10,
+    id: 9,
     path: '/dashboard',
     component: Dashboard
   }
@@ -98,7 +92,7 @@ export const routersAuth = [
 export const routesLanding = [
   {
     id: 1,
-    path: '/landing',
+    path: '/',
     component: Landing
   }
 ];

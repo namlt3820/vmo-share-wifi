@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Button } from 'antd';
+import { Button, Checkbox } from 'antd';
 
 export const WrapperComponent = styled.div`
   display: flex;
@@ -26,11 +26,14 @@ export const WrapperForm = styled.div`
 export const Logo = styled.div`
   margin-bottom: 0.75em;
   img {
-    width: 130px;
+    width: 170px;
     margin-bottom: 0.5em;
   }
   h3 {
     margin-bottom: 0;
+  }
+  div {
+    font-size: 18px;
   }
 `;
 
@@ -54,7 +57,6 @@ export const InputStyle = styled.input`
   height: 32px;
   width: 300px;
   padding: 4px 11px;
-  color: #d8dadc;
   font-size: 16px;
   line-height: 1.5;
   border: 1px solid #d9d9d9;
@@ -70,10 +72,12 @@ export const WrapperAction = styled.div`
 
 export const CheckBoxAccess = styled.div`
   display: flex;
-  width: ${props => (props.type === 'login' ? '115px' : '250px')};
-  justify-content: ${props =>
-    props.type === 'login' ? ' space-around;' : 'space-between'};
+  justify-contentn: flex-start
   margin: 0 0 0.5em 0;
+`;
+
+export const CheckboxStyle = styled(Checkbox)`
+  padding: 0 5px;
 `;
 
 export const ButtonStyle = styled(Button)`
@@ -98,10 +102,24 @@ export const ButtonStyle = styled(Button)`
     background: #007ed9;
     color: #fff;
   }
+  :disabled {
+    background: #007ed9;
+    color: #fff;
+    :hover {
+      background: #007ed9;
+      color: #fff;
+    }
+  }
 `;
 
-export const Bottom = styled.p`
-  margin: 1.5em 0 0 10em;
+export const Bottom = styled.div`
+  text-align: right;
+  width: 300px;
+  span {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+  }
 `;
 
 export const OutSide = styled.div`

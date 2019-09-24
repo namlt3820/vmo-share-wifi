@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Checkbox, Icon } from 'antd';
+import { Icon } from 'antd';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import FormInput from '../components/core/FormInput';
@@ -9,7 +9,6 @@ import {
   Logo,
   WrapperInput,
   WrapperAction,
-  CheckBoxAccess,
   ButtonStyle,
   Bottom,
   OutSide,
@@ -42,7 +41,7 @@ class Login extends Component {
   handleValidateEmail = () => {
     const { email, errors } = this.state;
     const validateEmail = Validator.isValidEmailAddress(email);
-    errors.email = Errors.handleValidate(validateEmail, email, 'email');
+    errors.email = Errors.handleValidate(validateEmail, email, 'Email');
     this.setState({ errors });
   };
 
@@ -52,7 +51,7 @@ class Login extends Component {
     errors.password = Errors.handleValidate(
       validatePassword,
       password,
-      'password'
+      'Password'
     );
     this.setState({ errors });
   };
@@ -82,7 +81,7 @@ class Login extends Component {
   };
 
   render() {
-    const { email, password, errors, checked, loading } = this.state;
+    const { email, password, errors, loading } = this.state;
     return (
       <WrapperComponent>
         <WrapperForm form="login">
@@ -111,11 +110,11 @@ class Login extends Component {
             />
           </WrapperInput>
           <WrapperAction type="login">
-            <CheckBoxAccess type="login">
-              <Checkbox checked={checked} onChange={this.handleCheckbox} />
-              <div>Remember me</div>
-            </CheckBoxAccess>
-            <ButtonStyle loading={loading} onClick={this.login}>
+            <ButtonStyle
+              loading={loading}
+              onClick={this.login}
+              disabled={!email && !password}
+            >
               Login
             </ButtonStyle>
           </WrapperAction>

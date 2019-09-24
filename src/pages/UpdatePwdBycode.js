@@ -38,7 +38,7 @@ class UpdatePwdBycode extends Component {
   handleValidateEmail = () => {
     const { email, errors } = this.state;
     const validateEmail = Validator.isValidEmailAddress(email);
-    errors.email = Errors.handleValidate(validateEmail, email, 'email');
+    errors.email = Errors.handleValidate(validateEmail, email, 'Email');
     this.setState({ errors });
   };
 
@@ -48,7 +48,7 @@ class UpdatePwdBycode extends Component {
     errors.password = Errors.handleValidate(
       validatePassword,
       password,
-      'password'
+      'Password'
     );
     this.setState({ errors });
   };
@@ -119,7 +119,7 @@ class UpdatePwdBycode extends Component {
               handleChange={this.handleChange}
             />
           </WrapperInput>
-          <WrapperAction type="login">
+          <WrapperAction type="change">
             <ButtonStyle loading={loading} onClick={this.updatePwd}>
               Change Password
             </ButtonStyle>
