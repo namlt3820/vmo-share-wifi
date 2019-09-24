@@ -93,8 +93,7 @@ class UpdatePwdBycode extends Component {
           </Logo>
           <WrapperInput>
             <FormInput
-              placeholder="Enter Email"
-              label="Email"
+              placeholder="Email"
               name="email"
               type="email"
               error={errors.email}
@@ -103,8 +102,7 @@ class UpdatePwdBycode extends Component {
               handleBlur={this.handleValidateEmail}
             />
             <FormInput
-              placeholder="Enter Password"
-              label="Password"
+              placeholder="Password"
               name="password"
               type="password"
               error={errors.password}
@@ -113,8 +111,7 @@ class UpdatePwdBycode extends Component {
               handleBlur={this.handleValidatePassword}
             />
             <FormInput
-              placeholder="Enter Active Code"
-              label="Active Code"
+              placeholder="Active Code"
               name="code"
               type="text"
               error={errors.code}

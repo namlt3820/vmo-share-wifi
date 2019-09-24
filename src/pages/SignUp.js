@@ -115,8 +115,7 @@ export default class SignUp extends Component {
           </Logo>
           <WrapperInput>
             <FormInput
-              placeholder="Enter Username"
-              label="Username"
+              placeholder="Name"
               name="name"
               type="text"
               error={errors.name}
@@ -125,21 +124,19 @@ export default class SignUp extends Component {
               handleBlur={this.handleValidateUsername}
             />
             <FormInput
-              placeholder="Enter Email"
-              label="Email"
+              placeholder="Email"
               name="email"
               type="email"
-              error={!errors.name ? errors.email : ''}
+              error={errors.email}
               value={email}
               handleChange={this.handleChange}
               handleBlur={this.handleValidateEmail}
             />
             <FormInput
-              placeholder="Enter Password"
-              label="Password"
+              placeholder="Password"
               name="password"
               type="password"
-              error={!errors.name && !errors.email ? errors.password : ''}
+              error={errors.password}
               value={password}
               handleChange={this.handleChange}
               handleBlur={this.handleValidatePassword}
@@ -150,11 +147,7 @@ export default class SignUp extends Component {
               <Checkbox checked={checked} onChange={this.handleCheckbox} />
               <div>I accept the Terms and Conditions</div>
             </CheckBoxAccess>
-            <ButtonStyle
-              onClick={this.signUp}
-              disabled={!checked}
-              loading={loading}
-            >
+            <ButtonStyle onClick={this.signUp} loading={loading}>
               SignUp
             </ButtonStyle>
           </WrapperAction>

@@ -25,7 +25,6 @@ export const WrapperForm = styled.div`
 
 export const Logo = styled.div`
   margin-bottom: 0.75em;
-  text-align: center;
   img {
     width: 130px;
     margin-bottom: 0.5em;
@@ -55,8 +54,8 @@ export const InputStyle = styled.input`
   height: 32px;
   width: 300px;
   padding: 4px 11px;
-  color: rgba(0, 0, 0, 0.65);
-  font-size: 14px;
+  color: #d8dadc;
+  font-size: 16px;
   line-height: 1.5;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
@@ -84,11 +83,19 @@ export const ButtonStyle = styled(Button)`
   padding: 0 30px;
   font-size: 14px;
   width: 100%;
-  background: #096dd9;
+  background: #007ed9;
   color: ${props => (props.background !== 'none' ? '#fff' : '#333')};
   font-weight: 700;
   :hover {
-    background: #096dd9;
+    background: #007ed9;
+    color: #fff;
+  }
+  :focus {
+    background: #007ed9;
+    color: #fff;
+  }
+  :active {
+    background: #007ed9;
     color: #fff;
   }
 `;

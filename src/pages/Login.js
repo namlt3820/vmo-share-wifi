@@ -92,8 +92,7 @@ class Login extends Component {
           </Logo>
           <WrapperInput>
             <FormInput
-              placeholder="Enter Email"
-              label="Email"
+              placeholder="Email"
               name="email"
               type="email"
               error={errors.email}
@@ -102,8 +101,7 @@ class Login extends Component {
               handleBlur={this.handleValidateEmail}
             />
             <FormInput
-              placeholder="Enter Password"
-              label="Password"
+              placeholder="Password"
               name="password"
               type="password"
               error={errors.password}
@@ -117,11 +115,7 @@ class Login extends Component {
               <Checkbox checked={checked} onChange={this.handleCheckbox} />
               <div>Remember me</div>
             </CheckBoxAccess>
-            <ButtonStyle
-              loading={loading}
-              disabled={!email || !password}
-              onClick={this.login}
-            >
+            <ButtonStyle loading={loading} onClick={this.login}>
               Login
             </ButtonStyle>
           </WrapperAction>

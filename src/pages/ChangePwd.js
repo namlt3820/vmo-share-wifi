@@ -90,8 +90,7 @@ class ChangePwd extends Component {
           </Logo>
           <WrapperInput>
             <FormInput
-              placeholder="Enter Current Password"
-              label="Current Password"
+              placeholder="Current Password"
               name="currentPassword"
               type="password"
               error={errors.currentPassword}
@@ -100,8 +99,7 @@ class ChangePwd extends Component {
               handleBlur={this.handleValidateCurrentPassword}
             />
             <FormInput
-              placeholder="Enter New Password"
-              label="New Password"
+              placeholder="New Password"
               name="newPassword"
               type="password"
               error={errors.newPassword}
