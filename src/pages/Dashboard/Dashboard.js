@@ -42,12 +42,13 @@ export default class AddDevice extends Component {
 
   componentDidMount() {
     dashboardManagerment.getAllData().then(res => {
-      const { users, routers, devices, usedData } = res.data.data;
+      console.log(res);
+      const { users, routers, devices, dataUsed } = res.data.data;
       this.setState({
         users,
         routers,
         devices,
-        usedData
+        usedData: dataUsed
       });
     });
   }
@@ -90,7 +91,7 @@ export default class AddDevice extends Component {
               <DataCard>
                 <DataCardTop>
                   <Icon type="database" />
-                  <h1>{usedData}</h1>
+                  <h1>{usedData ? `${usedData}` : ''}</h1>
                 </DataCardTop>
                 <DataCardBottom>Used Data</DataCardBottom>
               </DataCard>

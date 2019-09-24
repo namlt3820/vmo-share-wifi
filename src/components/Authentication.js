@@ -84,12 +84,18 @@ export const ButtonStyle = styled(Button)`
   padding: 0 30px;
   font-size: 14px;
   width: 100%;
-  background: #096dd9;
+  background: #1890ff;
   color: ${props => (props.background !== 'none' ? '#fff' : '#333')};
   font-weight: 700;
   :hover {
-    background: #096dd9;
+    background: #1890ff;
     color: #fff;
+  }
+  :disabled {
+    background-color: #1890ff;
+    :hover {
+      background-color: #1890ff;
+    }
   }
 `;
 

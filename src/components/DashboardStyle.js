@@ -193,7 +193,7 @@ export const DataCard = styled.div`
   border: 1px solid #333;
   padding: 1em;
   border-radius: 5px;
-  background: linear-gradient(45deg, #c54e4e, transparent);
+  background: linear-gradient(45deg, #c1c8ea, transparent);
 `;
 
 export const DataCardTop = styled.div`
