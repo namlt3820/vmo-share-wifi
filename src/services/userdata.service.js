@@ -5,7 +5,7 @@ export default class UserData extends Base {
     super('trafficData');
   }
 
-  getDataByDate(params) {
+  getDataUserByDate(params) {
     return this.get(params);
   }
 }

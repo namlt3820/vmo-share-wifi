@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Breadcrumb, Icon, DatePicker } from 'antd';
 import Chart from 'react-apexcharts';
+import moment from 'moment';
 import {
   DashBoardTittle,
   DashBoardContent,
@@ -13,16 +14,18 @@ import {
   DataChart
 } from '../../../components/DashboardStyle';
 import UserData from '../../../services/userdata.service';
+import httpStatus from '../../../config/httpStatus';
 
 const dataManagerment = new UserData();
-
-const { RangePicker } = DatePicker;
+const dateFormat = 'YYYY-MM-DD';
 
 export default class UserDataDashboard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      dateFrom: '',
+      dataPerDay: '',
       totalDataToday: '',
       totalDataThisWeek: '',
       totalDataThisMonth: '',
@@ -31,44 +34,94 @@ export default class UserDataDashboard extends Component {
           id: 'basic-bar'
         },
         xaxis: {
-          categories: ['10/11/2019', 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+          categories: []
         }
       },
       series: [
         {
           name: 'series-1',
-          data: [30, 40, 45, 50, 49, 60, 70, 200]
+          data: []
         }
       ]
     };
   }
 
   onChange = (date, dateString) => {
-    const startDate = dateString[0];
-    const endDate = dateString[1];
+    const startDate = dateString;
+    const dateFrom = moment(dateString, dateFormat).add(7, 'd');
+    this.setState({
+      dateFrom
+    });
+    const endDate = dateFrom.format(dateFormat);
     const params = {
       startDate,
       endDate
     };
-    dataManagerment.getDataByDate(params).then(res => {
-      const {
-        totalDataToday,
-        totalDataThisWeek,
-        totalDataThisMonth
-      } = res.data.data;
-      this.setState({
-        totalDataToday,
-        totalDataThisWeek,
-        totalDataThisMonth
-      });
+
+    dataManagerment.getDataUserByDate(params).then(res => {
+      if (res.status === httpStatus.StatusOK) {
+        const {
+          totalDataToday,
+          totalDataThisWeek,
+          totalDataThisMonth,
+          dataPerDay
+        } = res.data.data;
+        this.setState(
+          {
+            dataPerDay,
+            totalDataToday,
+            totalDataThisWeek,
+            totalDataThisMonth
+          },
+          () => {
+            this.dataChart();
+          }
+        );
+      }
     });
+  };
+
+  tranferDate = date => {
+    const day = new Date(date).getDate();
+    const month = new Date(date).getMonth();
+    const year = new Date(date).getFullYear();
+    const params = [year, month, day];
+    return params.join('-');
+  };
+
+  dataChart = () => {
+    const { dataPerDay } = this.state;
+    const dataUsed = dataPerDay.map(dt => {
+      return dt.dataUsed;
+    });
+    const date = dataPerDay.map(dt => {
+      return this.tranferDate(dt.createdAt);
+    });
+    this.setState(prevState => ({
+      options: {
+        ...prevState.options,
+        xaxis: {
+          ...prevState.options.xaxis,
+          categories: date
+        }
+      },
+      series: [
+        {
+          ...prevState.series,
+          data: dataUsed
+        }
+      ]
+    }));
   };
 
   render() {
     const {
       totalDataToday,
       totalDataThisWeek,
-      totalDataThisMonth
+      totalDataThisMonth,
+      dateFrom,
+      options,
+      series
     } = this.state;
     return (
       <>
@@ -107,15 +160,18 @@ export default class UserDataDashboard extends Component {
             </DataTop>
             <DateRangePicker>
               <p>Date</p>
-              <RangePicker onChange={this.onChange} />
+              <DatePicker onChange={this.onChange} />
+              <p>-</p>
+              <DatePicker
+                onChange={this.onChange}
+                value={
+                  dateFrom ? moment(dateFrom, dateFormat) : moment(new Date())
+                }
+                format={dateFormat}
+              />
             </DateRangePicker>
             <DataChart>
-              <Chart
-                options={this.state.options}
-                series={this.state.series}
-                type="bar"
-                width="500"
-              />
+              <Chart options={options} series={series} type="bar" width="500" />
             </DataChart>
           </DashBoardContentLayout>
         </DashBoardContent>

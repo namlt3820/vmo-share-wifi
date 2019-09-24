@@ -263,7 +263,7 @@ export default class AllUser extends Component {
               />
               <DashBoardButton>
                 <DashBoardButtonStyle
-                  background="#747474"
+                  background="#1890ff"
                   onClick={this.showModal}
                 >
                   Add
