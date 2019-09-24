@@ -9,12 +9,10 @@ import {
   Logo,
   WrapperInput,
   WrapperAction,
-  CheckBoxAccess,
   ButtonStyle,
   Bottom,
   OutSide,
-  Forgot,
-  CheckboxStyle
+  Forgot
 } from '../components/Authentication';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
 import { login } from '../store/actions/authenticate';
@@ -83,7 +81,7 @@ class Login extends Component {
   };
 
   render() {
-    const { email, password, errors, checked, loading } = this.state;
+    const { email, password, errors, loading } = this.state;
     return (
       <WrapperComponent>
         <WrapperForm form="login">
@@ -112,10 +110,6 @@ class Login extends Component {
             />
           </WrapperInput>
           <WrapperAction type="login">
-            <CheckBoxAccess type="login">
-              <CheckboxStyle checked={checked} onChange={this.handleCheckbox} />
-              <div>Remember me</div>
-            </CheckBoxAccess>
             <ButtonStyle
               loading={loading}
               onClick={this.login}

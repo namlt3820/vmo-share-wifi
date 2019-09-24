@@ -73,7 +73,6 @@ export default class SignUp extends Component {
       password
     };
     user.signUp(params).then(res => {
-      console.log('res', res);
       const { message } = res.data;
       const valied = { ...errors };
       if (res.status === httpStatus.StatusBadRequest) {
