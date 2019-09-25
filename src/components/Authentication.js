@@ -82,6 +82,10 @@ export const Logo = styled.div`
     width: 150px;
     margin-bottom: 0.5em;
   }
+  p {
+    color: gray;
+    font-size: 18px;
+  }
 
   @media only screen and ${sizeDevices.tablet} {
     img {

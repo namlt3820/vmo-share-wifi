@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import FormInput from '../components/core/FormInput';
+
 import {
   WrapperComponent,
   WrapperForm,
@@ -19,7 +21,9 @@ export default class Forgot extends Component {
     super();
     this.state = {
       email: '',
-      errors: {}
+      errors: {},
+      loading: false,
+      redirect: false
     };
   }
 
@@ -41,19 +45,36 @@ export default class Forgot extends Component {
   forgotPwd = () => {
     const { email, errors } = this.state;
     const valied = { ...errors };
+    this.setState({ loading: true });
     forgot.forgotPwd({ email }).then(res => {
+      this.setState({ loading: false });
       if (res.status === httpStatus.StatusNotFound) {
-        valied.email = res.data.errors[0].message;
+        valied.email = Errors.handleValidate(null, email, 'Email');
+        this.setState({ redirect: false, errors: valied });
+      } else if (res.status === httpStatus.StatusBadRequest) {
+        valied.email = Errors.handleValidate(null, email, 'Email');
+        this.setState({ redirect: false, errors: valied });
       } else {
-        valied.email = res.data.errors[0].message;
+        this.setState({ redirect: true });
       }
-      this.setState({ errors: valied });
     });
   };
 
+  keyPressed = event => {
+    if (event.key === 'Enter') {
+      this.forgotPwd();
+    }
+  };
+
   render() {
-    const { email, errors } = this.state;
-    return (
+    const { email, errors, loading, redirect } = this.state;
+    const result = redirect ? (
+      <Redirect
+        to={{
+          pathname: '/updatePwdBycode'
+        }}
+      />
+    ) : (
       <WrapperComponent>
         <WrapperForm form="login">
           <Logo>
@@ -62,23 +83,24 @@ export default class Forgot extends Component {
           </Logo>
           <WrapperInput>
             <FormInput
-              placeholder="Enter Email"
-              label="Email"
+              placeholder="Email"
               name="email"
               type="email"
               error={errors.email}
               value={email}
+              keyPressed={this.keyPressed}
               handleChange={this.handleChange}
               handleBlur={this.handleValidateEmail}
             />
           </WrapperInput>
           <WrapperAction type="forgot">
-            <ButtonStyle onClick={this.forgotPwd}>
+            <ButtonStyle onClick={this.forgotPwd} loading={loading}>
               Send recovery email
             </ButtonStyle>
           </WrapperAction>
         </WrapperForm>
       </WrapperComponent>
     );
+    return result;
   }
 }
