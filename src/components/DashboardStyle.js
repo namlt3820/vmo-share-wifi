@@ -55,14 +55,29 @@ export const DashBoardButtonStyle = styled(Button)`
   align-items: center;
   margin-left: 1em;
   width: 9em;
-  color: ${props => (props.background === '#747474' ? '#ffffff' : '')};
+  color: #fff;
   font-weight: 700;
-  background: linear-gradient(150deg, #e44688 0%, #ba3cbd 100%);
-  &:hover {
-    box-shadow: 1px 0px 6px #40a9ff;
-    background: linear-gradient(150deg, #e44688 0%, #ba3cbd 100%);
+  background: #007ed9;
+  :hover {
+    background: #007ed9;
     color: #fff;
-    border: none;
+    box-shadow: 1px 0px 6px #40a9ff;
+  }
+  :focus {
+    background: #007ed9;
+    color: #fff;
+  }
+  :active {
+    background: #007ed9;
+    color: #fff;
+  }
+  :disabled {
+    background: #007ed9;
+    color: #fff;
+    :hover {
+      background: #007ed9;
+      color: #fff;
+    }
   }
 `;
 
@@ -78,6 +93,11 @@ export const Label = styled.div`
 export const TableStyle = styled(Table)`
   .ant-table-column-title {
     font-weight: 700;
+  }
+  .ant-pagination-item-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -124,7 +144,15 @@ export const HeaderProfile = styled.div`
   }
 `;
 
-export const HeaderProfileName = styled.div``;
+export const HeaderProfileName = styled.div`
+  p {
+    margin: 3px 0;
+    font-size: 18px;
+    :last-child {
+      font-size: 13px;
+    }
+  }
+`;
 
 export const DashboardTop = styled.div`
   display: flex;

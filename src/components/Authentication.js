@@ -6,7 +6,8 @@ import { sizeDevices } from '../layout/sizeDevices';
 export const WrapperComponent = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: ${props =>
+    props.type === 'forgot' ? 'calc(100vh - 250px);' : '100vh'};
   padding: 2em 1.5em 4em;
   margin: 0 auto;
   @media only screen and ${sizeDevices.mobileL} {
@@ -24,12 +25,7 @@ export const WrapperComponent = styled.div`
 
   @media only screen and ${sizeDevices.laptopL} {
     max-width: 1440px;
-    width: 700px;
   }
-
-  // @media only screen and ${sizeDevices.xl} {
-  //   padding: 4em 0 6em;
-  // }
 `;
 
 export const WrapperForm = styled.div`
@@ -42,9 +38,9 @@ export const WrapperForm = styled.div`
     border-radius: 10px;
   }
 
-  @media only screen and ${sizeDevices.laptopL} {
-    padding: 4em 4em;
-  }
+  // @media only screen and ${sizeDevices.laptopL} {
+  //   padding: 4em 4em;
+  // }
 
   // @media only screen and ${sizeDevices.lg} {
   //   width: 600px;
@@ -82,24 +78,29 @@ export const Logo = styled.div`
     width: 150px;
     margin-bottom: 0.5em;
   }
+  p {
+    color: gray;
+    font-size: 18px;
+    font-weight: 400;
+  }
 
   @media only screen and ${sizeDevices.tablet} {
     img {
-      width: 200px
+      width: 185px
     }
     div {
       font-size: 20px;
     }
   }
 
-  @media only screen and ${sizeDevices.laptopL} {
-    img {
-      width: 300px
-    }
-    div {
-      font-size: 26px;
-    }
-  }
+  // @media only screen and ${sizeDevices.laptopL} {
+  //   img {
+  //     width: 300px
+  //   }
+  //   div {
+  //     font-size: 26px;
+  //   }
+  // }
 
   // @media only screen and ${sizeDevices.xl} {
   //   margin-bottom: 3em;
@@ -122,17 +123,16 @@ export const Label = styled.div`
   // .icon {
   //   color: red;
   // }
-  @media only screen and ${sizeDevices.laptopL} {
-    font-size: 27px;
-  }
+  // @media only screen and ${sizeDevices.laptopL} {
+  //   font-size: 27px;
+  // }
 `;
 
 export const InputStyle = styled.input`
   margin: 0.5em 0;
   border-color: #ccd3d9;
-  height: 32px;
+  // height: 32px;
   width: 100%;
-  height: 2.5em;
   padding: 4px 11px;
   font-size: 16px;
   line-height: 1.5;
@@ -143,9 +143,9 @@ export const InputStyle = styled.input`
     font-size: 20px;
   }
 
-  @media only screen and ${sizeDevices.laptopL} {
-    font-size: 27px;
-  }
+  // @media only screen and ${sizeDevices.laptopL} {
+  //   font-size: 27px;
+  // }
 
 //   @media only screen and ${sizeDevices.xl} {
 //     font-size: 20px;
@@ -163,6 +163,7 @@ export const CheckBoxAccess = styled.div`
   display: flex;
   align-items: center;
   justify-contentn: flex-start;
+  margin: 0.75em 0;
 `;
 
 export const CheckboxStyle = styled(Checkbox)`
@@ -170,15 +171,11 @@ export const CheckboxStyle = styled(Checkbox)`
 `;
 
 export const ButtonStyle = styled(Button)`
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // margin: 2em 0 4em;
-  // padding: 0 30px;
-  font-size: 14px;
+  padding: 5px 100px;
+  font-size: 20px;
   margin: 0.5em 0 1.5em;
   width: 100%;
-  height: 2.75em;
+  height: 2.5em;
   background: #007ed9;
   color: ${props => (props.background !== 'none' ? '#fff' : '#333')};
   font-weight: 700;
@@ -206,12 +203,12 @@ export const ButtonStyle = styled(Button)`
   @media only screen and ${sizeDevices.tablet} {
     // height: 3.75em;
     // margin: 2em 0;
-    font-size: 20px;
+    font-size: 17px;
   }
 
-  @media only screen and ${sizeDevices.laptopL} {
-    font-size: 27px;
-  }
+  // @media only screen and ${sizeDevices.laptopL} {
+  //   font-size: 27px;
+  // }
 
   // @media only screen and ${sizeDevices.xl} {
   //   font-size: 20px;
@@ -229,7 +226,7 @@ export const Bottom = styled.div`
   @media only screen and ${sizeDevices.tablet} {
     // height: 3.75em;
     // margin: 2em 0;
-    font-size: 20px;
+    font-size: 17px;
   }
 `;
 
@@ -247,9 +244,9 @@ export const OutSide = styled.div`
     font-size: 20px;
   }
 
-  @media only screen and ${sizeDevices.laptopL} {
-    font-size: 27px;
-  }
+  // @media only screen and ${sizeDevices.laptopL} {
+  //   font-size: 27px;
+  // }
 
   // @media only screen and ${sizeDevices.xl} {
   //   font-size: 22px;
