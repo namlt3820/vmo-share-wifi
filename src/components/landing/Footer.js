@@ -1,6 +1,8 @@
+/* eslint-disable func-names */
 import React, { Component } from 'react';
 import { Row, Col, Icon } from 'antd';
 import styled from 'styled-components';
+import $ from 'jquery';
 import FixWidth from './core/FixWidth';
 import bg from './assets/images/footer-bg.png';
 import logo from './assets/images/logo-white.png';
@@ -18,51 +20,67 @@ const StyledBg = styled(Bg)`
   }
 `;
 
-const Content = ({ className }) => (
-  <Col xs={24} sm={14} className={className}>
-    <Row>
-      <Col xs={24} sm={12} xxl={6}>
-        <p>Useful Links</p>
-        <ul className="section">
-          <li>
-            <a href="#home">Home</a>
-          </li>
-          <li>
-            <a href="#features">Features</a>
-          </li>
-          <li>
-            <a href="#aboutus">About Us</a>
-          </li>
-          <li>
-            <a href="#pricing">Pricing</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
-        </ul>
+class Content extends Component {
+  componentDidMount() {
+    $('.section a').click(function() {
+      const divId = $(this).attr('href');
+      $('html, body').animate(
+        {
+          scrollTop: $(divId).offset().top - 78
+        },
+        500
+      );
+    });
+  }
+
+  render() {
+    return (
+      <Col xs={24} sm={14} className={this.props.className}>
+        <Row>
+          <Col xs={24} sm={12} xxl={6}>
+            <p>Useful Links</p>
+            <ul className="section">
+              <li>
+                <a href="#home">Home</a>
+              </li>
+              <li>
+                <a href="#features">Features</a>
+              </li>
+              <li>
+                <a href="#aboutus">About Us</a>
+              </li>
+              <li>
+                <a href="#pricing">Pricing</a>
+              </li>
+              <li>
+                <a href="#contact">Contact</a>
+              </li>
+            </ul>
+          </Col>
+          <Col xs={24} sm={12} xxl={18}>
+            <ul className="social">
+              <li>
+                <a href="/">
+                  <i className="fa fa-facebook" />
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <i className="fa fa-twitter" />
+                </a>
+              </li>
+              <li>
+                <a href="/">
+                  <i className="fa fa-google-plus" />
+                </a>
+              </li>
+            </ul>
+          </Col>
+        </Row>
       </Col>
-      <Col xs={24} sm={12} xxl={18}>
-        <ul className="social">
-          <li>
-            <a href="/">
-              <i className="fa fa-facebook" />
-            </a>
-          </li>
-          <li>
-            <a href="/">
-              <i className="fa fa-twitter" />
-            </a>
-          </li>
-          <li>
-            <a href="/">
-              <i className="fa fa-google-plus" />
-            </a>
-          </li>
-        </ul>
-      </Col>
-    </Row>
-  </Col>
-);
+    );
+  }
+}
 
 const StyledContent = styled(Content)`
   padding-left: 4rem;
@@ -132,31 +150,27 @@ const StyledContent = styled(Content)`
   }
 `;
 
-class Footer extends Component {
-  render() {
-    return (
-      <div className={this.props.className}>
-        <Row>
-          <StyledBg />
-          <StyledContent />
-        </Row>
-        <div className="logo">
-          <FixWidth>
-            <img src={logo} alt="logo" />
-          </FixWidth>
-        </div>
-        <div className="copyright">
-          <FixWidth>
-            <p>
-              <Icon type="copyright" /> Copyrights 2019 Shared Wifi. All rights
-              reserved.
-            </p>
-          </FixWidth>
-        </div>
-      </div>
-    );
-  }
-}
+const Footer = ({ className }) => (
+  <div className={className}>
+    <Row>
+      <StyledBg />
+      <StyledContent />
+    </Row>
+    <div className="logo">
+      <FixWidth>
+        <img src={logo} alt="logo" />
+      </FixWidth>
+    </div>
+    <div className="copyright">
+      <FixWidth>
+        <p>
+          <Icon type="copyright" /> Copyrights 2019 Shared Wifi. All rights
+          reserved.
+        </p>
+      </FixWidth>
+    </div>
+  </div>
+);
 
 const StyledFooter = styled(Footer)`
   background-color: #f3f3f3;
