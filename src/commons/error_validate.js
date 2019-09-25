@@ -1,6 +1,5 @@
 export const ERROR_REQUIRE = 'is required';
 export const ERROR_INVALID = 'is invalid';
-
 class Errors {
   static handleValidate(validate, isLength, type) {
     if (!validate) {

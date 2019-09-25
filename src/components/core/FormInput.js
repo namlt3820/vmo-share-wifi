@@ -11,7 +11,8 @@ export default class FormInput extends Component {
       value,
       error,
       label,
-      handleChange
+      handleChange,
+      keyPressed
     } = this.props;
     return (
       <div>
@@ -20,6 +21,7 @@ export default class FormInput extends Component {
           placeholder={placeholder}
           onChange={handleChange}
           onBlur={handleBlur}
+          onKeyDown={keyPressed}
           name={name}
           value={value}
           type={type}

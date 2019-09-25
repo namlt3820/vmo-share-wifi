@@ -88,7 +88,7 @@ export default class SignUp extends Component {
         });
         this.setState({ redirect: false, loading: false, errors: valied });
       } else if (res.status === httpStatus.StatusConflict) {
-        valied.email = 'This email or password invalid';
+        valied.email = 'Email is already exists';
         this.setState({ redirect: false, errors: valied, loading: false });
       } else {
         this.setState({ redirect: true, loading: false });
@@ -168,7 +168,8 @@ export default class SignUp extends Component {
           </WrapperAction>
         </WrapperForm>
         <OutSide>
-          Already have an account?&nbsp;<Link to="/login">Login</Link>
+          Already have an account?&nbsp;
+          <Link to="/login">Login</Link>
         </OutSide>
       </WrapperComponent>
     );

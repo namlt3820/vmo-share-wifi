@@ -27,18 +27,20 @@ class Navbar extends Component {
   }
 
   handleScroll = () => {
-    if (window.scrollY > 20) {
-      $('#navbar-landing').css({
-        boxShadow: '1px 1px 12px 0px rgba(50, 50, 50, 0.35)',
-        backgroundColor: 'white'
-      });
-      $('#navbar-landing a').css('color', 'black');
-    } else {
-      $('#navbar-landing').css({
-        boxShadow: 'none',
-        backgroundColor: 'transparent'
-      });
-      $('#navbar-landing a').css('color', 'white');
+    if ($(document).width() > 385) {
+      if (window.scrollY > 20) {
+        $('#navbar-landing').css({
+          boxShadow: '1px 1px 12px 0px rgba(50, 50, 50, 0.35)',
+          backgroundColor: 'white'
+        });
+        $('#navbar-landing a').css('color', 'black');
+      } else {
+        $('#navbar-landing').css({
+          boxShadow: 'none',
+          backgroundColor: 'transparent'
+        });
+        $('#navbar-landing a').css('color', 'white');
+      }
     }
   };
 
@@ -50,9 +52,9 @@ class Navbar extends Component {
           id="navbar-landing"
         >
           <div className="container">
-            <a className="navbar-brand" href="/landing">
+            <Link className="navbar-brand" to="/">
               <img src={logo} alt="logo" />
-            </a>
+            </Link>
             <button
               className="navbar-toggler"
               type="button"
@@ -117,9 +119,13 @@ const StyledNavbar = styled(Navbar)`
 
   nav {
     background-color: white;
+    -webkit-box-shadow: 1px 1px 12px 0px rgba(50, 50, 50, 0.35);
+    -moz-box-shadow: 1px 1px 12px 0px rgba(50, 50, 50, 0.35);
+    box-shadow: 1px 1px 12px 0px rgba(50, 50, 50, 0.35);
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
       background: transparent;
+      box-shadow: none;
     }
 
     > div {
@@ -135,23 +141,24 @@ const StyledNavbar = styled(Navbar)`
   }
 
   li > a.active {
-    border-radius: 0.25rem;
-    background-color: #49a1fc;
+    border-bottom: 3px solid #49a1fc;
   }
 
   li > a.always {
     border-radius: 0.25rem;
-    background-image: linear-gradient(150deg, #e44688 0%, #ba3cbd 100%);
+    border: 1px solid #49a1fc;
     color: white !important;
+    background-color: #49a1fc;
   }
 
   a.scrollspy.nav-link {
     color: black;
     font-size: 1.2rem;
-    padding: 0.3rem 0.6rem;
+    padding: 0.4rem 0.8rem 0.6rem 0.8rem;
+    cursor: pointer;
 
     &.active {
-      color: white !important;
+      color: #49a1fc !important;
     }
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
