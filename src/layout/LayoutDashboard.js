@@ -23,6 +23,18 @@ const Wrapper = styled.div`
   // align-items: center;
 `;
 
+const StyleMenuItem = styled(Menu.Item)`
+  display: flex;
+  align-items: center;
+`;
+
+const StyleSubMenu = styled(SubMenu)`
+  span {
+    display: flex;
+    align-items: center;
+  }
+`;
+
 const menu = (
   <Menu>
     <Menu.Item key="0">
@@ -107,21 +119,26 @@ class LayoutDashboard extends Component {
                 }}
               />
             </LogoDashBoard>
-            <Menu defaultSelectedKeys={['1']} mode="inline" theme="light">
+            <Menu
+              defaultSelectedKeys={['1']}
+              mode="inline"
+              theme="light"
+              // inlineCollapsed={collapsed}
+            >
               <Menu.Divider />
-              <Menu.Item key="1">
+              <StyleMenuItem key="1">
                 <Icon type="dashboard" />
                 <span>Dashboard</span>
                 <Link to="/dashboard" />
-              </Menu.Item>
+              </StyleMenuItem>
               <Menu.Divider />
-              <Menu.Item key="2">
+              <StyleMenuItem key="2">
                 <Icon type="user" />
                 <span>Accounts</span>
                 <Link to="/allUser" />
-              </Menu.Item>
+              </StyleMenuItem>
               <Menu.Divider />
-              <SubMenu
+              <StyleSubMenu
                 key="sub2"
                 title={
                   <span>
@@ -130,19 +147,19 @@ class LayoutDashboard extends Component {
                   </span>
                 }
               >
-                <Menu.Item key="5">
+                <StyleMenuItem key="5">
                   <Icon type="wifi" />
                   <span>All Router</span>
-                  <Link to="/routers" />
-                </Menu.Item>
-                <Menu.Item key="6">
+                  {/* <Link to="/routers" /> */}
+                </StyleMenuItem>
+                <StyleMenuItem key="6">
                   <Icon type="wifi" />
                   <span>Add Router</span>
                   <Link to="/addRouter" />
-                </Menu.Item>
-              </SubMenu>
+                </StyleMenuItem>
+              </StyleSubMenu>
               <Menu.Divider />
-              <SubMenu
+              <StyleSubMenu
                 key="sub3"
                 title={
                   <span>
@@ -151,22 +168,22 @@ class LayoutDashboard extends Component {
                   </span>
                 }
               >
-                <Menu.Item key="5">
+                <StyleMenuItem key="5">
                   <Icon type="user" />
                   <span>User Data</span>
                   <Link to="/userData" />
-                </Menu.Item>
-                <Menu.Item key="6">
+                </StyleMenuItem>
+                <StyleMenuItem key="6">
                   <Icon type="wifi" />
                   <span>Wifi Data</span>
                   <Link to="/wifiData" />
-                </Menu.Item>
-              </SubMenu>
+                </StyleMenuItem>
+              </StyleSubMenu>
               <Menu.Divider />
-              <Menu.Item key="8">
+              <StyleMenuItem key="8">
                 <Icon type="dollar" />
                 <span>Payment </span>
-              </Menu.Item>
+              </StyleMenuItem>
             </Menu>
           </Sider>
           <Layout>
@@ -201,8 +218,8 @@ class LayoutDashboard extends Component {
                 <HeaderProfile>
                   {user ? (
                     <HeaderProfileName>
-                      <h3>{user.name}</h3>
-                      <h5>{user.role === 0 ? 'Admin' : 'User'}</h5>
+                      <p>{user.name}</p>
+                      <p>{user.role === 0 ? 'Admin' : 'User'}</p>
                     </HeaderProfileName>
                   ) : (
                     ''

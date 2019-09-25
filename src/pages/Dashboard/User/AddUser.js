@@ -21,7 +21,7 @@ export default class AddDevice extends Component {
       email: '',
       role: '',
       file: '',
-      // loading: false,
+      loading: false,
       errors: {}
     };
   }
@@ -69,6 +69,7 @@ export default class AddDevice extends Component {
 
   addUser = () => {
     const { name, email, password, role, file } = this.state;
+    this.setState({ loading: true });
     const params = {
       name,
       email,
@@ -77,6 +78,12 @@ export default class AddDevice extends Component {
       file
     };
     this.props.addUser(params);
+    this.setState({
+      name: '',
+      email: '',
+      password: '',
+      loading: false
+    });
   };
 
   handleCancel = () => {
@@ -84,7 +91,7 @@ export default class AddDevice extends Component {
   };
 
   render() {
-    const { name, errors, email } = this.state;
+    const { name, errors, email, password, loading } = this.state;
     return (
       <>
         <DashBoardContent>
@@ -112,7 +119,6 @@ export default class AddDevice extends Component {
                 handleBlur={this.handleValidateEmail}
               />
               <FormInput
-                placeholder="Enter Password"
                 label="Password"
                 name="password"
                 type="password"
@@ -124,7 +130,7 @@ export default class AddDevice extends Component {
               <div>
                 <p>Role</p>
                 <Select
-                  defaultValue="Admin"
+                  defaultValue="User"
                   style={{ width: 120 }}
                   onChange={this.handleChange}
                 >
@@ -135,7 +141,13 @@ export default class AddDevice extends Component {
               {/* <FormInput label="Image" name="file" type="file" icon="*" /> */}
             </WrapperInput>
             <WrapperAction type="login">
-              <ButtonStyle onClick={this.addUser}>Save</ButtonStyle>
+              <ButtonStyle
+                onClick={this.addUser}
+                disabled={!email || !password || !name}
+                loading={loading}
+              >
+                Save
+              </ButtonStyle>
               <ButtonStyle onClick={this.handleCancel} background="none">
                 Cancel
               </ButtonStyle>

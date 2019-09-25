@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Breadcrumb, Input, Table, Icon, Dropdown, Menu } from 'antd';
+import { Breadcrumb, Input, Icon, Dropdown, Menu } from 'antd';
+import { connect } from 'react-redux';
 import {
   DashBoardTittle,
   DashBoardContent,
@@ -10,6 +11,7 @@ import {
   DashBoardButton,
   DashBoardButtonStyle,
   ModalStyle,
+  TableStyle,
   LinkStyle
 } from '../../../components/DashboardStyle';
 import UserManager from '../../../services/mngtUser.service';
@@ -18,22 +20,38 @@ import EditUser from './EditUser';
 import httpStatus from '../../../config/httpStatus';
 
 const { Search } = Input;
-const PER_PAGE = 20;
+const PER_PAGE = 500;
 const OFF_SET = 0;
 const PAGE_SIZE = 5;
 const userManager = new UserManager();
 let dataUser = [];
 
-export default class AllUser extends Component {
+class AllUser extends Component {
   constructor() {
     super();
     this.state = {
+      user: {},
       users: [],
       loading: false,
       visible: false,
       userInfo: {},
       searchText: ''
     };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    setTimeout(() => {
+      const { user } = props.userInfo;
+      console.log(user);
+      if (user !== state.user) {
+        return {
+          user
+        };
+      }
+      return null;
+    }, 3000);
+
+    return null;
   }
 
   componentDidMount() {
@@ -48,6 +66,7 @@ export default class AllUser extends Component {
     this.setState({
       loading: true
     });
+    console.log(this.props.userInfo);
     userManager
       .getListUser(params)
       .then(res => {
@@ -139,6 +158,12 @@ export default class AllUser extends Component {
 
   render() {
     const { users, loading, userInfo, searchText } = this.state;
+    console.log(users);
+    console.log(this.props.userInfo);
+    // const thunghiem = users.filter(dt => {
+    //   return dt._id !== this.props.userInfo.user._id;
+    // });
+    // console.log(thunghiem);
     const menu = (
       <Menu>
         <Menu.Item key="1">
@@ -166,16 +191,6 @@ export default class AllUser extends Component {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        filters: [
-          {
-            text: 'phuong',
-            value: 'phuong'
-          },
-          {
-            text: 'avew',
-            value: 'avew'
-          }
-        ],
         onFilter: (value, record) => record.name.indexOf(value) === 0,
         render: (text, record) => (
           <a key={record._id} href="#1">
@@ -227,11 +242,11 @@ export default class AllUser extends Component {
     return (
       <>
         <DashBoardTittle>
-          <h3>ALL USER</h3>
+          <h3>ALL USERS</h3>
           <Breadcrumb separator=">">
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item href="">Account</Breadcrumb.Item>
-            <Breadcrumb.Item href="">All User</Breadcrumb.Item>
+            <Breadcrumb.Item href="">All Users</Breadcrumb.Item>
           </Breadcrumb>
         </DashBoardTittle>
         <DashBoardContent>
@@ -270,7 +285,7 @@ export default class AllUser extends Component {
                 </DashBoardButtonStyle>
               </DashBoardButton>
             </DashBoardTableButton>
-            <Table
+            <TableStyle
               columns={columns}
               dataSource={users}
               loading={loading}
@@ -303,3 +318,12 @@ export default class AllUser extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  userInfo: state.users
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(AllUser);

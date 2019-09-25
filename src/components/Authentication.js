@@ -24,12 +24,7 @@ export const WrapperComponent = styled.div`
 
   @media only screen and ${sizeDevices.laptopL} {
     max-width: 1440px;
-    width: 700px;
   }
-
-  // @media only screen and ${sizeDevices.xl} {
-  //   padding: 4em 0 6em;
-  // }
 `;
 
 export const WrapperForm = styled.div`
@@ -42,9 +37,9 @@ export const WrapperForm = styled.div`
     border-radius: 10px;
   }
 
-  @media only screen and ${sizeDevices.laptopL} {
-    padding: 4em 4em;
-  }
+  // @media only screen and ${sizeDevices.laptopL} {
+  //   padding: 4em 4em;
+  // }
 
   // @media only screen and ${sizeDevices.lg} {
   //   width: 600px;
@@ -82,24 +77,27 @@ export const Logo = styled.div`
     width: 150px;
     margin-bottom: 0.5em;
   }
+  div {
+    font-weight: 400;
+  }
 
   @media only screen and ${sizeDevices.tablet} {
     img {
-      width: 200px
+      width: 185px
     }
     div {
       font-size: 20px;
     }
   }
 
-  @media only screen and ${sizeDevices.laptopL} {
-    img {
-      width: 300px
-    }
-    div {
-      font-size: 26px;
-    }
-  }
+  // @media only screen and ${sizeDevices.laptopL} {
+  //   img {
+  //     width: 300px
+  //   }
+  //   div {
+  //     font-size: 26px;
+  //   }
+  // }
 
   // @media only screen and ${sizeDevices.xl} {
   //   margin-bottom: 3em;
@@ -122,9 +120,9 @@ export const Label = styled.div`
   // .icon {
   //   color: red;
   // }
-  @media only screen and ${sizeDevices.laptopL} {
-    font-size: 27px;
-  }
+  // @media only screen and ${sizeDevices.laptopL} {
+  //   font-size: 27px;
+  // }
 `;
 
 export const InputStyle = styled.input`
@@ -143,9 +141,9 @@ export const InputStyle = styled.input`
     font-size: 20px;
   }
 
-  @media only screen and ${sizeDevices.laptopL} {
-    font-size: 27px;
-  }
+  // @media only screen and ${sizeDevices.laptopL} {
+  //   font-size: 27px;
+  // }
 
 //   @media only screen and ${sizeDevices.xl} {
 //     font-size: 20px;
@@ -163,6 +161,7 @@ export const CheckBoxAccess = styled.div`
   display: flex;
   align-items: center;
   justify-contentn: flex-start;
+  margin: 0.75em 0;
 `;
 
 export const CheckboxStyle = styled(Checkbox)`
@@ -206,12 +205,12 @@ export const ButtonStyle = styled(Button)`
   @media only screen and ${sizeDevices.tablet} {
     // height: 3.75em;
     // margin: 2em 0;
-    font-size: 20px;
+    font-size: 17px;
   }
 
-  @media only screen and ${sizeDevices.laptopL} {
-    font-size: 27px;
-  }
+  // @media only screen and ${sizeDevices.laptopL} {
+  //   font-size: 27px;
+  // }
 
   // @media only screen and ${sizeDevices.xl} {
   //   font-size: 20px;
@@ -229,7 +228,7 @@ export const Bottom = styled.div`
   @media only screen and ${sizeDevices.tablet} {
     // height: 3.75em;
     // margin: 2em 0;
-    font-size: 20px;
+    font-size: 17px;
   }
 `;
 
@@ -247,9 +246,9 @@ export const OutSide = styled.div`
     font-size: 20px;
   }
 
-  @media only screen and ${sizeDevices.laptopL} {
-    font-size: 27px;
-  }
+  // @media only screen and ${sizeDevices.laptopL} {
+  //   font-size: 27px;
+  // }
 
   // @media only screen and ${sizeDevices.xl} {
   //   font-size: 22px;
