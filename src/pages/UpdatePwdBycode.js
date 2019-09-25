@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import FormInput from '../components/core/FormInput';
 import {
   WrapperComponent,
@@ -11,7 +12,7 @@ import {
 } from '../components/Authentication';
 import UpdatePwd from '../services/updatePwdBycode.service';
 import httpStatus from '../config/httpStatus';
-import Validator, { EMAIL_REGEX } from '../utils/validator';
+import Validator from '../utils/validator';
 import Errors from '../commons/error_validate';
 
 const updatePwd = new UpdatePwd();
@@ -19,27 +20,17 @@ class UpdatePwdBycode extends Component {
   constructor() {
     super();
     this.state = {
-      email: '',
       password: '',
       code: '',
       errors: {},
-      loading: false
+      loading: false,
+      redirect: false
     };
   }
 
   handleChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
-    if (name === 'email' && EMAIL_REGEX.test(value)) {
-      this.handleValidateEmail();
-    }
-  };
-
-  handleValidateEmail = () => {
-    const { email, errors } = this.state;
-    const validateEmail = Validator.isValidEmailAddress(email);
-    errors.email = Errors.handleValidate(validateEmail, email, 'Email');
-    this.setState({ errors });
   };
 
   handleValidatePassword = () => {
@@ -53,8 +44,16 @@ class UpdatePwdBycode extends Component {
     this.setState({ errors });
   };
 
+  handleValidateCode = () => {
+    const { code, errors } = this.state;
+    const validateCode = Validator.isValidCode(code);
+    errors.code = Errors.handleValidate(validateCode, code, 'Code');
+    this.setState({ errors });
+  };
+
   updatePwd = () => {
-    const { email, password, code, errors } = this.state;
+    const { password, code, errors } = this.state;
+    const { email } = this.props.location;
     this.setState({ loading: true });
     const valied = { ...errors };
     const params = {
@@ -68,23 +67,29 @@ class UpdatePwdBycode extends Component {
         res.status === httpStatus.StatusNotFound
       ) {
         res.data.errors.map(error => {
-          if (error.location === 'email') {
-            valied.email = error.message;
-          } else if (error.location === 'password') {
+          if (error.location === 'password') {
             valied.password = error.message;
-          } else {
+          } else if (error.location === 'code') {
             valied.code = error.message;
           }
           return valied;
         });
-        this.setState({ errors: valied, loading: false });
+        this.setState({ errors: valied, loading: false, redirect: false });
+      } else if (res.status === httpStatus.StatusNoContent) {
+        this.setState({ loading: true, redirect: true });
       }
     });
   };
 
   render() {
-    const { email, password, errors, loading, code } = this.state;
-    return (
+    const { password, errors, loading, code, redirect } = this.state;
+    const result = redirect ? (
+      <Redirect
+        to={{
+          pathname: '/dashboard'
+        }}
+      />
+    ) : (
       <WrapperComponent>
         <WrapperForm form="login">
           <Logo>
@@ -93,16 +98,7 @@ class UpdatePwdBycode extends Component {
           </Logo>
           <WrapperInput>
             <FormInput
-              placeholder="Email"
-              name="email"
-              type="email"
-              error={errors.email}
-              value={email}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidateEmail}
-            />
-            <FormInput
-              placeholder="Password"
+              placeholder="New Password"
               name="password"
               type="password"
               error={errors.password}
@@ -117,6 +113,7 @@ class UpdatePwdBycode extends Component {
               error={errors.code}
               value={code}
               handleChange={this.handleChange}
+              handleBlur={this.handleValidateCode}
             />
           </WrapperInput>
           <WrapperAction type="change">
@@ -130,6 +127,7 @@ class UpdatePwdBycode extends Component {
         </OutSide>
       </WrapperComponent>
     );
+    return result;
   }
 }
 export default UpdatePwdBycode;

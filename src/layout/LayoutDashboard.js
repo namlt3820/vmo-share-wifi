@@ -190,7 +190,7 @@ class LayoutDashboard extends Component {
                 <StyleMenuItem key="5">
                   <Icon type="wifi" />
                   <span>All Router</span>
-                  {/* <Link to="/routers" /> */}
+                  <Link to="/routers" />
                 </StyleMenuItem>
                 <StyleMenuItem key="6">
                   <Icon type="wifi" />

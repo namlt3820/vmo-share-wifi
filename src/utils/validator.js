@@ -7,6 +7,8 @@ const USER_NAME_MIN_LENGTH = 1;
 const USER_NAME_MAX_LENGTH = 16;
 const NAME_MIN_LENGTH = 2;
 const NAME_MAX_LENGTH = 128;
+const CODE_MIN_LENGTH = 4;
+const CODE_MAX_LENGTH = 24;
 // eslint-disable-next-line
 export const EMAIL_REGEX = /^(([^<>()\[\]\.,:\s@\"]+(\.[^<>()\[\]\.,:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,:\s@\"]+\.)+[^<>()[\]\.,:\s@\"]{2,})$/i;
 // eslint-disable-next-line
@@ -18,6 +20,8 @@ export const NAME_REGEX = new RegExp(
   /^[a-zA-Z0-9ẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴẮẰẲẴẶĂẤẦẨẪẬÂÁÀẢÃẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒỎÕỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ ]+$/,
   'i'
 );
+// eslint-disable-next-line
+export const CODE_REGEX = /^[a-zA-Z0-9\_\-]+$/;
 
 class DataUtils {
   static isHasValue(value) {
@@ -66,6 +70,15 @@ class DataUtils {
       length >= NAME_MIN_LENGTH &&
       length <= NAME_MAX_LENGTH &&
       NAME_REGEX.test(name)
+    );
+  }
+
+  static isValidCode(code) {
+    const length = code ? code.length : 0;
+    return (
+      length >= CODE_MIN_LENGTH &&
+      length <= CODE_MAX_LENGTH &&
+      CODE_REGEX.test(code)
     );
   }
 }

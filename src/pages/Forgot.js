@@ -71,7 +71,8 @@ export default class Forgot extends Component {
     const result = redirect ? (
       <Redirect
         to={{
-          pathname: '/updatePwdBycode'
+          pathname: '/updatePwdBycode',
+          email
         }}
       />
     ) : (
