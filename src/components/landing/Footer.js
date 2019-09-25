@@ -186,6 +186,10 @@ const StyledFooter = styled(Footer)`
 
       @media only screen and (min-width: ${props =>
           props.theme.breakpoints.ul}) {
+        margin-left: 15rem;
+      }
+
+      @media only screen and (min-width: 2500px) {
         margin-left: 35rem;
       }
     }

@@ -30,7 +30,7 @@ class AllUser extends Component {
   constructor() {
     super();
     this.state = {
-      user: {},
+      // user: {},
       users: [],
       loading: false,
       visible: false,
@@ -39,20 +39,19 @@ class AllUser extends Component {
     };
   }
 
-  static getDerivedStateFromProps(props, state) {
-    setTimeout(() => {
-      const { user } = props.userInfo;
-      console.log(user);
-      if (user !== state.user) {
-        return {
-          user
-        };
-      }
-      return null;
-    }, 3000);
+  // static getDerivedStateFromProps(props, state) {
+  //   setTimeout(() => {
+  //     const { user } = props.userInfo;
+  //     if (user !== state.user) {
+  //       return {
+  //         user
+  //       };
+  //     }
+  //     return null;
+  //   }, 3000);
 
-    return null;
-  }
+  //   return null;
+  // }
 
   componentDidMount() {
     this.getListUser();
@@ -66,7 +65,6 @@ class AllUser extends Component {
     this.setState({
       loading: true
     });
-    console.log(this.props.userInfo);
     userManager
       .getListUser(params)
       .then(res => {
@@ -158,8 +156,8 @@ class AllUser extends Component {
 
   render() {
     const { users, loading, userInfo, searchText } = this.state;
-    console.log(users);
-    console.log(this.props.userInfo);
+    // console.log(users);
+    // console.log(this.props.userInfo);
     // const thunghiem = users.filter(dt => {
     //   return dt._id !== this.props.userInfo.user._id;
     // });
