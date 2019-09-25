@@ -190,10 +190,14 @@ export const DataCard = styled.div`
   display: flex;
   flex-direction: column;
   flex-basis: 20%;
-  border: 1px solid #333;
+  color: #ffffff;
+  box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.22);
   padding: 1em;
   border-radius: 5px;
-  background: linear-gradient(45deg, #c1c8ea, transparent);
+  background: linear-gradient(141deg, #49a1fc 0%, #49a1fc 51%, #49a1fc 75%);
+  h1 {
+    color: #ffffff;
+  }
 `;
 
 export const DataCardTop = styled.div`

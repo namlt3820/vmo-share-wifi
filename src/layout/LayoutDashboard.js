@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Layout, Menu, Icon, Button, Badge, Dropdown } from 'antd';
 import styled from 'styled-components';
+import { logout } from '../store/actions/logout';
 import {
   LogoDashBoard,
   HeaderIcon,
@@ -22,36 +23,6 @@ const Wrapper = styled.div`
   // justify-content: center;
   // align-items: center;
 `;
-
-const menu = (
-  <Menu>
-    <Menu.Item key="0">
-      <Icon type="profile" />
-      <span>
-        <LinkStyle
-          to={{
-            pathname: '/userInfomation',
-            state: {
-              type: 'myprofile'
-            }
-          }}
-        >
-          My Profile
-        </LinkStyle>
-      </span>
-    </Menu.Item>
-    <Menu.Divider />
-    <Menu.Item key="1">
-      <LinkStyle
-        to={{
-          pathname: '/changePwd'
-        }}
-      >
-        Change Password
-      </LinkStyle>
-    </Menu.Item>
-  </Menu>
-);
 
 class LayoutDashboard extends Component {
   constructor() {
@@ -79,7 +50,46 @@ class LayoutDashboard extends Component {
     });
   };
 
+  logout = () => {
+    logout();
+  };
+
   render() {
+    const menu = (
+      <Menu>
+        <Menu.Item key="0">
+          <Icon type="profile" />
+          <span>
+            <LinkStyle
+              to={{
+                pathname: '/userInfomation',
+                state: {
+                  type: 'myprofile'
+                }
+              }}
+            >
+              My Profile
+            </LinkStyle>
+          </span>
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="1">
+          <LinkStyle
+            to={{
+              pathname: '/changePwd'
+            }}
+          >
+            Change Password
+          </LinkStyle>
+        </Menu.Item>
+        <Menu.Item key="2">
+          <a href="#3" onClick={this.logout}>
+            Logout
+          </a>
+        </Menu.Item>
+      </Menu>
+    );
+
     const { collapsed, user } = this.state;
     const { children } = this.props;
     return (
