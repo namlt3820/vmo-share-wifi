@@ -10,6 +10,15 @@ import logo from './assets/images/logo.png';
 class Navbar extends Component {
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
+    $(document).click(function() {
+      $(document).mouseup(function(e) {
+        const container = $('#navbar-landing');
+
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+          $('.navbar-toggler-icon').click();
+        }
+      });
+    });
     $('.nav-link.scrollspy:not(".always"):not(".home")').click(function() {
       const divId = $(this).attr('href');
       $('html, body').animate(
@@ -18,6 +27,7 @@ class Navbar extends Component {
         },
         500
       );
+      $('.navbar-toggler-icon').click();
     });
   }
 
@@ -138,6 +148,13 @@ const StyledNavbar = styled(Navbar)`
 
   li {
     margin-right: 1rem;
+    margin-bottom: 0.25rem;
+    width: 49%;
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+      margin-bottom: 0;
+      width: auto;
+    }
   }
 
   li > a.active {
