@@ -57,6 +57,7 @@ const StyledContent = styled(Content)`
 
   p:nth-child(2) {
     line-height: 1.5rem;
+    padding-left: 1rem;
   }
 `;
 

@@ -87,7 +87,7 @@ export default class SignUp extends Component {
         });
         this.setState({ redirect: false, loading: false, errors: valied });
       } else if (res.status === httpStatus.StatusConflict) {
-        valied.email = 'This email or password invalid.';
+        valied.email = 'This email or password invalid';
         this.setState({ redirect: false, errors: valied, loading: false });
       } else {
         this.setState({ redirect: true, loading: false });
@@ -160,7 +160,7 @@ export default class SignUp extends Component {
             <ButtonStyle
               onClick={this.signUp}
               loading={loading}
-              disabled={!checked && !name && !email && !password}
+              disabled={!checked || !name || !email || !password}
             >
               SignUp
             </ButtonStyle>
