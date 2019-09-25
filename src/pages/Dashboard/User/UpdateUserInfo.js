@@ -47,8 +47,8 @@ export default class UpdateUserInfo extends Component {
       // type: '',
       // number: '',
       // expridate: '',
-      errors: {}
-      // loading: false
+      errors: {},
+      loading: false
     };
   }
 
@@ -94,10 +94,12 @@ export default class UpdateUserInfo extends Component {
 
   editUser = () => {
     const { id, name } = this.state;
+    this.setState({ loading: true });
     const params = {
       name
     };
     userManager.editUser(id, params).then(() => {
+      this.setState({ loading: false });
       this.props.history.push('/allUser');
     });
   };
@@ -109,7 +111,7 @@ export default class UpdateUserInfo extends Component {
         <div className="ant-upload-text">Upload</div>
       </div>
     );
-    const { imageUrl, name, email, errors } = this.state;
+    const { imageUrl, name, email, errors, loading } = this.state;
     return (
       <>
         <DashBoardTittle>
@@ -192,7 +194,13 @@ export default class UpdateUserInfo extends Component {
               </div>
             </div>
             <WrapperAction type="login">
-              <ButtonStyle onClick={this.editUser}>Save</ButtonStyle>
+              <ButtonStyle
+                onClick={this.editUser}
+                loading={loading}
+                disabled={errors.name || !name}
+              >
+                Save
+              </ButtonStyle>
               <ButtonStyle background="none">Cancel</ButtonStyle>
             </WrapperAction>
           </WrapperForm>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import {
   WrapperComponent,
   WrapperForm,
@@ -8,7 +8,8 @@ import {
   WrapperAction,
   CheckBoxAccess,
   ButtonStyle,
-  CheckboxStyle
+  CheckboxStyle,
+  OutSide
 } from '../components/Authentication';
 import FormInput from '../components/core/FormInput';
 import Validator, { EMAIL_REGEX } from '../utils/validator';
@@ -166,6 +167,9 @@ export default class SignUp extends Component {
             </ButtonStyle>
           </WrapperAction>
         </WrapperForm>
+        <OutSide>
+          Already have an account?&nbsp;<Link to="/login">Login</Link>
+        </OutSide>
       </WrapperComponent>
     );
     return result;

@@ -16,7 +16,8 @@ export default class AddDevice extends Component {
     this.state = {
       id: '',
       name: '',
-      errors: {}
+      errors: {},
+      loading: false
     };
   }
 
@@ -68,10 +69,12 @@ export default class AddDevice extends Component {
 
   editUser = () => {
     const { id, name } = this.state;
+    this.setState({ loading: true });
     const params = {
       name
     };
     this.props.editUser(id, params);
+    this.setState({ loading: false });
   };
 
   handleCancelEdit = () => {
@@ -79,7 +82,7 @@ export default class AddDevice extends Component {
   };
 
   render() {
-    const { name, errors } = this.state;
+    const { name, errors, loading } = this.state;
     return (
       <>
         <DashBoardContent>
@@ -97,7 +100,13 @@ export default class AddDevice extends Component {
               />
             </WrapperInput>
             <WrapperAction type="login">
-              <ButtonStyle onClick={this.editUser}>Edit</ButtonStyle>
+              <ButtonStyle
+                onClick={this.editUser}
+                disabled={!name}
+                loading={loading}
+              >
+                Edit
+              </ButtonStyle>
               <ButtonStyle onClick={this.handleCancelEdit} background="none">
                 Cancel
               </ButtonStyle>

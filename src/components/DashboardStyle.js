@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { Button, Table, Menu, Modal } from 'antd';
 import { Link } from 'react-router-dom';
 
+const { SubMenu } = Menu;
+
 export const DashBoardTittle = styled.div`
   h3 {
     font-weight: 700;
@@ -264,4 +266,16 @@ export const LinkStyle = styled(Link)`
 
 export const DataChart = styled.div`
   margin-top: 5em;
+`;
+
+export const StyleMenuItem = styled(Menu.Item)`
+  display: flex;
+  align-items: center;
+`;
+
+export const StyleSubMenu = styled(SubMenu)`
+  span {
+    display: flex;
+    align-items: center;
+  }
 `;
