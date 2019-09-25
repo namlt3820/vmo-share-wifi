@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 import $ from 'jquery';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import logo from './assets/images/logo.png';
@@ -9,7 +10,7 @@ import logo from './assets/images/logo.png';
 class Navbar extends Component {
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
-    $('.nav-link.scrollspy').click(function() {
+    $('.nav-link.scrollspy:not(".always"):not(".home")').click(function() {
       const divId = $(this).attr('href');
       $('html, body').animate(
         {
@@ -69,6 +70,11 @@ class Navbar extends Component {
             >
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
+                  <a className="nav-link scrollspy" href="#home">
+                    Home
+                  </a>
+                </li>
+                <li className="nav-item">
                   <a className="nav-link scrollspy" href="#features">
                     Features
                   </a>
@@ -89,9 +95,9 @@ class Navbar extends Component {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link scrollspy" href="/login">
-                    Login/Sign Up
-                  </a>
+                  <Link to="/login" className="nav-link scrollspy always">
+                    Login/Signup
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -135,9 +141,16 @@ const StyledNavbar = styled(Navbar)`
     background-color: #49a1fc;
   }
 
+  li > a.always {
+    border-radius: 0.25rem;
+    background-image: linear-gradient(150deg, #e44688 0%, #ba3cbd 100%);
+    color: white !important;
+  }
+
   a.scrollspy.nav-link {
     color: black;
     font-size: 1.2rem;
+    padding: 0.3rem 0.6rem;
 
     &.active {
       color: white !important;

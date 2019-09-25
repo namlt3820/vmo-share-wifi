@@ -65,12 +65,8 @@ class Login extends Component {
       email,
       password
     };
-    login(params, history).then(res => {
-      if (res.code === 'password_incorrect') {
-        valied.password = res.message;
-      } else {
-        valied.email = res.message;
-      }
+    login(params, history).then(() => {
+      valied.email = 'This email or password is invalid';
       this.setState({ errors: valied, loading: false });
     });
   };
@@ -113,7 +109,7 @@ class Login extends Component {
             <ButtonStyle
               loading={loading}
               onClick={this.login}
-              disabled={!email && !password}
+              disabled={!email || !password}
             >
               Login
             </ButtonStyle>

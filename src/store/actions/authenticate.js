@@ -17,6 +17,8 @@ export const login = (data, history) => dispatch =>
           history.push('/dashboard');
         } else if (res.status === httpStatus.StatusUnauthorized) {
           resolve(res.data);
+        } else {
+          resolve(res.data);
         }
       })
       .catch(error => {
