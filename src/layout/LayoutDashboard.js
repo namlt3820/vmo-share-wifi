@@ -9,31 +9,18 @@ import {
   HeaderIcon,
   HeaderProfile,
   HeaderProfileName,
-  LinkStyle
+  LinkStyle,
+  StyleMenuItem,
+  StyleSubMenu
 } from '../components/DashboardStyle';
 
 const { Header, Sider, Content } = Layout;
-
-const { SubMenu } = Menu;
-
 const Wrapper = styled.div`
   // height: 100vh;
   // display: flex;
   // flex-direction: column;
   // justify-content: center;
   // align-items: center;
-`;
-
-const StyleMenuItem = styled(Menu.Item)`
-  display: flex;
-  align-items: center;
-`;
-
-const StyleSubMenu = styled(SubMenu)`
-  span {
-    display: flex;
-    align-items: center;
-  }
 `;
 
 // const menu = (
@@ -85,6 +72,10 @@ class LayoutDashboard extends Component {
     return null;
   }
 
+  onCollapse = collapsed => {
+    this.setState({ collapsed });
+  };
+
   toggle = () => {
     const { collapsed } = this.state;
     this.setState({
@@ -99,7 +90,7 @@ class LayoutDashboard extends Component {
   render() {
     const menu = (
       <Menu>
-        <Menu.Item key="0">
+        <StyleMenuItem key="0">
           <Icon type="profile" />
           <span>
             <LinkStyle
@@ -113,9 +104,9 @@ class LayoutDashboard extends Component {
               My Profile
             </LinkStyle>
           </span>
-        </Menu.Item>
+        </StyleMenuItem>
         <Menu.Divider />
-        <Menu.Item key="1">
+        <StyleMenuItem key="1">
           <LinkStyle
             to={{
               pathname: '/changePwd'
@@ -123,12 +114,15 @@ class LayoutDashboard extends Component {
           >
             Change Password
           </LinkStyle>
-        </Menu.Item>
-        <Menu.Item key="2">
+        </StyleMenuItem>
+        <Menu.Divider />
+
+        <StyleMenuItem key="2">
+          <Icon type="logout" />
           <a href="#3" onClick={this.logout}>
             Logout
           </a>
-        </Menu.Item>
+        </StyleMenuItem>
       </Menu>
     );
 
@@ -138,6 +132,8 @@ class LayoutDashboard extends Component {
       <Wrapper>
         <Layout>
           <Sider
+            collapsible
+            onCollapse={this.onCollapse}
             trigger={null}
             theme="light"
             style={{ minWidth: '220px' }}
@@ -168,14 +164,16 @@ class LayoutDashboard extends Component {
               <Menu.Divider />
               <StyleMenuItem key="1">
                 <Icon type="dashboard" />
-                <span>Dashboard</span>
-                <Link to="/dashboard" />
+                <Link to="/dashboard">
+                  <span>Dashboard</span>
+                </Link>
               </StyleMenuItem>
               <Menu.Divider />
               <StyleMenuItem key="2">
                 <Icon type="user" />
-                <span>Accounts</span>
-                <Link to="/allUser" />
+                <Link to="/allUser">
+                  <span>Accounts</span>
+                </Link>
               </StyleMenuItem>
               <Menu.Divider />
               <StyleSubMenu
@@ -187,15 +185,17 @@ class LayoutDashboard extends Component {
                   </span>
                 }
               >
-                <StyleMenuItem key="5">
+                <StyleMenuItem key="3">
                   <Icon type="wifi" />
                   <span>All Router</span>
-                  {/* <Link to="/routers" /> */}
+                  <Link to="/routers" />
                 </StyleMenuItem>
-                <StyleMenuItem key="6">
+                <StyleMenuItem key="4">
                   <Icon type="wifi" />
-                  <span>Add Router</span>
-                  <Link to="/addRouter" />
+
+                  <Link to="/addRouter">
+                    <span>Add Router</span>
+                  </Link>
                 </StyleMenuItem>
               </StyleSubMenu>
               <Menu.Divider />
@@ -210,17 +210,19 @@ class LayoutDashboard extends Component {
               >
                 <StyleMenuItem key="5">
                   <Icon type="user" />
-                  <span>User Data</span>
-                  <Link to="/userData" />
+                  <Link to="/userData">
+                    <span>User Data</span>
+                  </Link>
                 </StyleMenuItem>
                 <StyleMenuItem key="6">
                   <Icon type="wifi" />
-                  <span>Wifi Data</span>
-                  <Link to="/wifiData" />
+                  <Link to="/wifiData">
+                    <span>Wifi Data</span>
+                  </Link>
                 </StyleMenuItem>
               </StyleSubMenu>
               <Menu.Divider />
-              <StyleMenuItem key="8">
+              <StyleMenuItem key="7">
                 <Icon type="dollar" />
                 <span>Payment </span>
               </StyleMenuItem>

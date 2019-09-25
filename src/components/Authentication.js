@@ -30,24 +30,26 @@ export const WrapperComponent = styled.div`
 
 export const WrapperForm = styled.div`
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   @media only screen and ${sizeDevices.tablet} {
     background: #fff;
-    padding: 3em 2em;
+    padding: 5em 2em;
     margin-bottom: 3em;
     border-radius: 10px;
   }
 
-  // @media only screen and ${sizeDevices.laptopL} {
-  //   padding: 4em 4em;
-  // }
+  @media only screen and ${sizeDevices.laptop} {
+    margin-top: 12em;
+    height: 52vh;
+  }
 
-  // @media only screen and ${sizeDevices.lg} {
-  //   width: 600px;
-  //   margin: 0 auto;
-  //   padding: 5em 3em;
-  //   font-size: 20px;
-  // }
+  @media only screen and ${sizeDevices.laptopL} {
+    margin-top: 13em;
+    height: 50vh;
+  }
 
   // @media only screen and ${sizeDevices.xl} {
   //   width: 700px;
@@ -236,7 +238,7 @@ export const OutSide = styled.div`
   justify-content: center;
   font-size: 15px;
   a {
-    color: #e80069;
+    color: ##007ed9;
   }
 
   @media only screen and ${sizeDevices.tablet} {

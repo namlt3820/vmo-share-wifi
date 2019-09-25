@@ -66,7 +66,7 @@ class Login extends Component {
       password
     };
     login(params, history).then(() => {
-      valied.email = 'This email or password is invalid';
+      valied.email = 'The email or password is incorrect';
       this.setState({ errors: valied, loading: false });
     });
   };

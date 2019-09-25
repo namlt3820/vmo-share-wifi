@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Breadcrumb, Input, Icon, Dropdown, Menu } from 'antd';
+import { Breadcrumb, Input, Icon, Dropdown, Menu, Popconfirm } from 'antd';
 import { connect } from 'react-redux';
 import {
   DashBoardTittle,
@@ -30,7 +30,7 @@ class AllUser extends Component {
   constructor() {
     super();
     this.state = {
-      // user: {},
+      user: {},
       users: [],
       loading: false,
       visible: false,
@@ -39,19 +39,16 @@ class AllUser extends Component {
     };
   }
 
-  // static getDerivedStateFromProps(props, state) {
-  //   setTimeout(() => {
-  //     const { user } = props.userInfo;
-  //     if (user !== state.user) {
-  //       return {
-  //         user
-  //       };
-  //     }
-  //     return null;
-  //   }, 3000);
+  static getDerivedStateFromProps(props, state) {
+    const { user } = props.userInfo;
+    if (user !== state.user) {
+      return {
+        user
+      };
+    }
 
-  //   return null;
-  // }
+    return null;
+  }
 
   componentDidMount() {
     this.getListUser();
@@ -154,14 +151,15 @@ class AllUser extends Component {
     });
   };
 
+  changeData = (user, users) => {
+    return users.filter(dt => {
+      return dt._id !== user._id;
+    });
+  };
+
   render() {
-    const { users, loading, userInfo, searchText } = this.state;
-    // console.log(users);
-    // console.log(this.props.userInfo);
-    // const thunghiem = users.filter(dt => {
-    //   return dt._id !== this.props.userInfo.user._id;
-    // });
-    // console.log(thunghiem);
+    const { users, loading, userInfo, searchText, user } = this.state;
+
     const menu = (
       <Menu>
         <Menu.Item key="1">
@@ -178,8 +176,13 @@ class AllUser extends Component {
           </LinkStyle>
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="2" onClick={this.deleteUser}>
-          <a href="#3">Delete</a>
+        <Menu.Item key="2">
+          <Popconfirm
+            title="Sure to delete?"
+            onConfirm={() => this.deleteUser()}
+          >
+            <a href="#3">Delete</a>
+          </Popconfirm>
         </Menu.Item>
       </Menu>
     );
@@ -189,12 +192,7 @@ class AllUser extends Component {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        onFilter: (value, record) => record.name.indexOf(value) === 0,
-        render: (text, record) => (
-          <a key={record._id} href="#1">
-            {text}
-          </a>
-        )
+        onFilter: (value, record) => record.name.indexOf(value) === 0
       },
       {
         title: 'Email',
@@ -283,13 +281,17 @@ class AllUser extends Component {
                 </DashBoardButtonStyle>
               </DashBoardButton>
             </DashBoardTableButton>
-            <TableStyle
-              columns={columns}
-              dataSource={users}
-              loading={loading}
-              rowKey={record => record._id}
-              pagination={{ pageSize: PAGE_SIZE }}
-            />
+            {user ? (
+              <TableStyle
+                columns={columns}
+                dataSource={this.changeData(user, users)}
+                loading={loading}
+                rowKey={record => record._id}
+                pagination={{ pageSize: PAGE_SIZE }}
+              />
+            ) : (
+              ''
+            )}
           </DashBoardContentLayout>
         </DashBoardContent>
         {/* ADD */}
