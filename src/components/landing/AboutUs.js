@@ -43,14 +43,15 @@ const StyledContent = styled(Content)`
     text-transform: uppercase;
     margin-top: 18rem;
     color: #6c747c;
+    text-align: center;
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+      text-align: left;
       margin-top: 10rem;
     }
 
-    @media only screen and (min-width: ${props =>
-        props.theme.breakpoints.xxl}) {
-      margin-top: 10rem;
+    @media only screen and (min-width: ${props => props.theme.breakpoints.ul}) {
+      margin-top: 0;
     }
   }
 
@@ -74,10 +75,12 @@ const StyledAboutUs = styled(AboutUs)`
   background-repeat: no-repeat;
   background-size: contain, cover;
   min-height: 500px;
+  margin-bottom: 1rem;
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
     background-image: url(${bg1}), url(${bg2});
     min-height: 800px;
+    margin-bottom: 0;
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.xl}) {
@@ -86,8 +89,7 @@ const StyledAboutUs = styled(AboutUs)`
   }
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.ul}) {
-    background-size: cover, cover;
-    min-height: 1000px;
+    min-height: 800px;
     margin-bottom: 5rem;
   }
 `;

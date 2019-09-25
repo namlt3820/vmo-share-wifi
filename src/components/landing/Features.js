@@ -105,16 +105,8 @@ const StyledCard = styled(Card)`
   img {
     position: absolute;
     left: 50%;
-    top: -25%;
+    top: -60px;
     transform: translateX(-50%);
-
-    @media only screen and (min-width: ${props => props.theme.breakpoints.ul}) {
-      top: -25%;
-    }
-
-    @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
-      top: -35%;
-    }
   }
 
   .title {
@@ -123,7 +115,11 @@ const StyledCard = styled(Card)`
   }
 
   .content {
-    padding: 0 2rem;
+    padding: 0 1rem;
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+      padding: 0 2rem;
+    }
   }
 `;
 

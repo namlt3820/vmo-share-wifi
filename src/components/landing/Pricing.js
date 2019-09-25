@@ -9,14 +9,13 @@ const Conainer = styled.div`
 
 const Pricingg = styled.p`
   text-align: center;
-  font-size: 30pt;
+  font-size: 2rem;
   font-family: 'utm_avo_bold';
   color: #6c747c;
   margin-bottom: 30px;
   text-transform: uppercase;
 
   @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
-    font-size: 2.5rem;
     margin-bottom: 50px;
   }
   @media only screen and (min-width: ${props => props.theme.breakpoints.lg}) {

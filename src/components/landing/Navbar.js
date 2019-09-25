@@ -27,20 +27,18 @@ class Navbar extends Component {
   }
 
   handleScroll = () => {
-    if (window.outerWidth > 375) {
-      if (window.scrollY > 20) {
-        $('#navbar-landing').css({
-          boxShadow: '1px 1px 12px 0px rgba(50, 50, 50, 0.35)',
-          backgroundColor: 'white'
-        });
-        $('#navbar-landing a').css('color', 'black');
-      } else {
-        $('#navbar-landing').css({
-          boxShadow: 'none',
-          backgroundColor: 'transparent'
-        });
-        $('#navbar-landing a').css('color', 'white');
-      }
+    if (window.scrollY > 20) {
+      $('#navbar-landing').css({
+        boxShadow: '1px 1px 12px 0px rgba(50, 50, 50, 0.35)',
+        backgroundColor: 'white'
+      });
+      $('#navbar-landing a').css('color', 'black');
+    } else {
+      $('#navbar-landing').css({
+        boxShadow: 'none',
+        backgroundColor: 'transparent'
+      });
+      $('#navbar-landing a').css('color', 'white');
     }
   };
 
