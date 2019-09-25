@@ -122,7 +122,7 @@ class Login extends Component {
           </Bottom>
         </WrapperForm>
         <OutSide>
-          Don&apos;t have an account? <Link to="/signup">Signup Now</Link>
+          Don&apos;t have an account?&nbsp;<Link to="/signup">Signup Now</Link>
         </OutSide>
       </WrapperComponent>
     );

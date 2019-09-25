@@ -34,7 +34,7 @@ export default class Forgot extends Component {
   handleValidateEmail = () => {
     const { email, errors } = this.state;
     const validateEmail = Validator.isValidEmailAddress(email);
-    errors.email = Errors.handleValidate(validateEmail, email, 'email');
+    errors.email = Errors.handleValidate(validateEmail, email, 'Email');
     this.setState({ errors });
   };
 

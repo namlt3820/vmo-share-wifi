@@ -58,6 +58,10 @@ const StyledContent = styled(Content)`
   p:nth-child(2) {
     line-height: 1.5rem;
     padding-left: 1rem;
+
+    @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
+      padding-left: 0;
+    }
   }
 `;
 
