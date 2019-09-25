@@ -160,7 +160,7 @@ export default class SignUp extends Component {
             <ButtonStyle
               onClick={this.signUp}
               loading={loading}
-              disabled={!checked && !name && !email && !password}
+              disabled={!checked || !name || !email || !password}
             >
               SignUp
             </ButtonStyle>

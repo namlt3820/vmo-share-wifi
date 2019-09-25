@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import LayoutMain from './layout/LayoutMain';
 import LayoutDashboard from './layout/LayoutDashboard';
 import LayoutLanding from './layout/LayoutLanding';
-
 // import './App.css';
 import { routersAuth, routesDashboard, routesLanding } from './routers/index';
 import { getCurrentUser } from './store/actions/user';

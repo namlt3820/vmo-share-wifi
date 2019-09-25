@@ -18,10 +18,12 @@ import { WrapperForm, WrapperInput } from '../../components/Authentication';
 import FormInput from '../../components/core/FormInput';
 import httpStatus from '../../config/httpStatus';
 
-const PER_PAGE = 10;
+const PER_PAGE = 20;
+const PAGE_SIZE = 5;
 const router = new Router();
 const InputGroup = Input.Group;
 const { Option } = Select;
+
 export default class ListRouter extends Component {
   constructor() {
     super();
@@ -218,6 +220,7 @@ export default class ListRouter extends Component {
                 dataSource={routers}
                 rowKey="_id"
                 loading={loading}
+                pagination={{ pageSize: PAGE_SIZE }}
               />
             </div>
           </DashBoardContentLayout>
