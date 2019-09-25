@@ -41,14 +41,14 @@ export const WrapperForm = styled.div`
     border-radius: 10px;
   }
 
-  @media only screen and ${sizeDevices.laptop} {
-    margin-top: 12em;
-    height: 52vh;
-  }
+  // @media only screen and ${sizeDevices.laptop} {
+  //   margin-top: 12em;
+    height: 70vh;
+  // }
 
   @media only screen and ${sizeDevices.laptopL} {
-    margin-top: 13em;
-    height: 50vh;
+    // margin-top: 13em;
+    height: 70vh;
   }
 
   // @media only screen and ${sizeDevices.xl} {
