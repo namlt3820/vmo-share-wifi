@@ -243,7 +243,7 @@ export class Pricing extends Component {
                 <CardText>
                   {/* <Personal>business</Personal> */}
                   <Free>
-                    Yearly <span>$100</span>
+                    Annually <span>$100</span>
                   </Free>
                   <StartGreat>Build a production-quanlity service!</StartGreat>
                   <Service>

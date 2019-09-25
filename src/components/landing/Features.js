@@ -13,16 +13,17 @@ const Introduction = ({ className }) => (
   <div className={className}>
     <FixWidth>
       <Row type="flex">
-        <Col xs={24} sm={8}>
+        <Col xs={24} sm={12}>
           <p>
-            Connect high speed internet. Earn money from your wifi device. All
-            on Shared Wifi network
+            Connect high speed internet <br />
+            Earn money from your wifi device <br />
+            All on Shared Wifi network
           </p>
           <Link to="/signup" className="explore">
             Explore
           </Link>
         </Col>
-        <Col xs={24} sm={16}>
+        <Col xs={24} sm={12}>
           <img src={bg2} alt="header-bg-2" />
         </Col>
       </Row>
@@ -38,27 +39,33 @@ const StyledIntroduction = styled(Introduction)`
   }
 
   .explore {
+    background-color: #49a1fc;
+    color: white;
     border-radius: 0.25rem;
-    background-image: linear-gradient(150deg, #e44688 0%, #ba3cbd 100%);
-    color: white !important;
+    padding: 0.4rem 3rem 0.6rem 3rem;
     font-size: 1.25rem;
-    padding: 0.5rem 0.8rem;
     margin-top: 2rem;
     text-decoration: none;
   }
 
   p {
     font-family: 'utm_avo_bold';
-    font-size: 1.5rem;
-    line-height: 2rem;
-    color: #4d5761;
+    font-size: 0.9rem;
+    line-height: 1.6rem;
+    color: #6c747c;
     text-transform: uppercase;
-    margin: 3rem 0;
+    margin: 3rem 0 2rem 0;
+
+    @media only screen and (min-width: 380px) {
+      font-size: 1.1rem;
+    }
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.xs}) {
       font-size: 1.75rem;
       line-height: 2.5rem;
+      margin: 3rem 0;
     }
+
     @media only screen and (min-width: ${props => props.theme.breakpoints.ul}) {
       margin-top: 15rem;
     }
@@ -73,9 +80,11 @@ const StyledIntroduction = styled(Introduction)`
   img {
     max-height: 600px;
     width: 100%;
+    margin-top: 2rem;
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
       margin-left: 4rem;
+      margin-top: 0;
     }
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.ul}) {
