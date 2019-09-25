@@ -141,6 +141,8 @@ const ButtonStyle = styled.button`
     color: #747576;
   }
   &:hover {
+    color: #ffff;
+    text-decoration: none;
     a {
       color: #ffff;
       text-decoration: none;
@@ -202,11 +204,11 @@ export class Pricing extends Component {
                       <span>Database&nbsp;</span> 25Gb
                     </p> */}
                   </Service>
-                  <ButtonStyle type="button" name="send">
-                    <Link to="/login" className="nav-link always">
+                  <Link to="/signup" className="nav-link always">
+                    <ButtonStyle type="button" name="send">
                       Sign Up
-                    </Link>
-                  </ButtonStyle>
+                    </ButtonStyle>
+                  </Link>
                 </CardText>
               </div>
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -234,9 +236,11 @@ export class Pricing extends Component {
                       {/* <span>Storage&nbsp;</span> 5Gb */}
                     </p>
                   </Service>
-                  <ButtonStyle type="button" name="send">
-                    <Link to="/login">Sign Up</Link>
-                  </ButtonStyle>
+                  <Link to="/signup" className="nav-link always">
+                    <ButtonStyle type="button" name="send">
+                      Sign Up
+                    </ButtonStyle>
+                  </Link>
                 </CardText>
               </div>
               <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -264,9 +268,11 @@ export class Pricing extends Component {
                       {/* <span>Storage&nbsp;</span> 5Gb */}
                     </p>
                   </Service>
-                  <ButtonStyle type="button" name="send">
-                    <Link to="/login">Sign Up</Link>
-                  </ButtonStyle>
+                  <Link to="/signup" className="nav-link always">
+                    <ButtonStyle type="button" name="send">
+                      Sign Up
+                    </ButtonStyle>
+                  </Link>
                 </CardText>
               </div>
             </div>
