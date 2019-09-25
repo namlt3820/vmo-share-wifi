@@ -75,8 +75,8 @@ export default class Forgot extends Component {
         }}
       />
     ) : (
-      <WrapperComponent>
-        <WrapperForm form="login">
+      <WrapperComponent type="forgot">
+        <WrapperForm form="forgot">
           <Logo>
             <img src="assets/logo.png" alt="Share Wifi" />
             <div>Forgot Password</div>

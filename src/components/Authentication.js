@@ -6,7 +6,8 @@ import { sizeDevices } from '../layout/sizeDevices';
 export const WrapperComponent = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: ${props =>
+    props.type === 'forgot' ? 'calc(100vh - 250px);' : '100vh'};
   padding: 2em 1.5em 4em;
   margin: 0 auto;
   @media only screen and ${sizeDevices.mobileL} {
@@ -130,9 +131,8 @@ export const Label = styled.div`
 export const InputStyle = styled.input`
   margin: 0.5em 0;
   border-color: #ccd3d9;
-  height: 32px;
+  // height: 32px;
   width: 100%;
-  height: 2.5em;
   padding: 4px 11px;
   font-size: 16px;
   line-height: 1.5;
@@ -171,15 +171,11 @@ export const CheckboxStyle = styled(Checkbox)`
 `;
 
 export const ButtonStyle = styled(Button)`
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // margin: 2em 0 4em;
-  // padding: 0 30px;
-  font-size: 14px;
+  padding: 5px 100px;
+  font-size: 20px;
   margin: 0.5em 0 1.5em;
   width: 100%;
-  height: 2.75em;
+  height: 2.5em;
   background: #007ed9;
   color: ${props => (props.background !== 'none' ? '#fff' : '#333')};
   font-weight: 700;
