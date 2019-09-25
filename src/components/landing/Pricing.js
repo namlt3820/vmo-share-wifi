@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import FixWidth from './core/FixWidth';
@@ -41,35 +42,33 @@ const CardText = styled.div`
   box-shadow: 0px 0px 73px -34px rgba(0, 0, 0, 0.75);
   @media only screen and (min-width: ${props => props.theme.breakpoints.lg}) {
     max-width: 540px;
-    width: 98%;
   }
   @media only screen and (min-width: ${props => props.theme.breakpoints.xl}) {
     max-width: 1140px;
-    width: 75%;
   }
 `;
-const Personal = styled.p`
-  font-family: 'roboto-bold';
-  text-transform: uppercase;
-  font-size: 15pt;
-  letter-spacing: 3px;
-  margin-bottom: 0px;
-  @media only screen and (min-width: ${props => props.theme.breakpoints.lg}) {
-    font-size: 14pt;
-    -webkit-letter-spacing: 3px;
-    -moz-letter-spacing: 3px;
-    -ms-letter-spacing: 3px;
-    letter-spacing: 3px;
-  }
-  @media only screen and (min-width: ${props => props.theme.breakpoints.xl}) {
-    max-width: 1140px;
-    font-size: 20pt;
-    -webkit-letter-spacing: 3px;
-    -moz-letter-spacing: 3px;
-    -ms-letter-spacing: 3px;
-    letter-spacing: 3px;
-  }
-`;
+// const Personal = styled.p`
+//   font-family: 'roboto-bold';
+//   text-transform: uppercase;
+//   font-size: 15pt;
+//   letter-spacing: 3px;
+//   margin-bottom: 0px;
+//   @media only screen and (min-width: ${props => props.theme.breakpoints.lg}) {
+//     font-size: 14pt;
+//     -webkit-letter-spacing: 3px;
+//     -moz-letter-spacing: 3px;
+//     -ms-letter-spacing: 3px;
+//     letter-spacing: 3px;
+//   }
+//   @media only screen and (min-width: ${props => props.theme.breakpoints.xl}) {
+//     max-width: 1140px;
+//     font-size: 20pt;
+//     -webkit-letter-spacing: 3px;
+//     -moz-letter-spacing: 3px;
+//     -ms-letter-spacing: 3px;
+//     letter-spacing: 3px;
+//   }
+// `;
 const Free = styled.p`
   font-family: 'roboto-bold';
   font-size: 25pt;
@@ -139,8 +138,14 @@ const ButtonStyle = styled.button`
   &:focus {
     outline: 0px auto -webkit-focus-ring-color;
   }
+  a {
+    color: #747576;
+  }
   &:hover {
-    color: #ffff;
+    a {
+      color: #ffff;
+      text-decoration: none;
+    }
     cursor: pointer;
     background-image: linear-gradient(
       to bottom right,
@@ -148,6 +153,7 @@ const ButtonStyle = styled.button`
       rgba(80, 94, 222)
     );
   }
+
   @media only screen and (min-width: ${props => props.theme.breakpoints.lg}) {
     width: 150px;
     height: 50px;
@@ -169,61 +175,98 @@ export class Pricing extends Component {
           <div className="container" id="pricing">
             <Pricingg>Pricing</Pricingg>
             <div className="row">
-              <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <CardText>
-                  <Personal>personal</Personal>
-                  <Free>Free</Free>
-                  <StartGreat>
-                    Start today and create something great!
-                  </StartGreat>
+                  {/* <Personal>personal</Personal> */}
+                  <Free>
+                    Trial <span>$0</span>
+                  </Free>
+                  <StartGreat>Experience with our services!</StartGreat>
                   <Service>
                     <p>
-                      <span>ML&nbsp;</span>250 hours
+                      1GB free after signup
+                      {/* <span>ML&nbsp;</span>250 hours */}
                     </p>
                     <p className="card-text">
-                      <span>Robotics&nbsp;</span> 25 SU-hours
+                      High speed
+                      {/* <span>Robotics&nbsp;</span> 25 SU-hours */}
                     </p>
                     <p className="card-text">
-                      <span>Compute&nbsp;</span> 750 hours
+                      Connect everywhere
+                      {/* <span>Compute&nbsp;</span> 750 hours */}
                     </p>
                     <p className="card-text">
-                      <span>Storage&nbsp;</span> 5Gb
+                      &nbsp;
+                      {/* <span>Storage&nbsp;</span> 5Gb */}
                     </p>
-                    <p className="card-text">
+                    {/* <p className="card-text">
                       <span>Database&nbsp;</span> 25Gb
-                    </p>
+                    </p> */}
                   </Service>
                   <ButtonStyle type="button" name="send">
-                    Sign Up
+                    <Link to="/login" className="nav-link always">
+                      Sign Up
+                    </Link>
                   </ButtonStyle>
                 </CardText>
               </div>
-              <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <CardText>
-                  <Personal>business</Personal>
+                  {/* <Personal>personal</Personal> */}
                   <Free>
-                    $10 <span>/ Month</span>
+                    Monthly <span>$10</span>
+                  </Free>
+                  <StartGreat>Be a member with more benefits!</StartGreat>
+                  <Service>
+                    <p>
+                      No limit data and bandwidth
+                      {/* <span>ML&nbsp;</span>250 hours */}
+                    </p>
+                    <p className="card-text">
+                      High speed
+                      {/* <span>Robotics&nbsp;</span> 25 SU-hours */}
+                    </p>
+                    <p className="card-text">
+                      Connect everywhere
+                      {/* <span>Compute&nbsp;</span> 750 hours */}
+                    </p>
+                    <p className="card-text">
+                      Earn money from your wifi devices
+                      {/* <span>Storage&nbsp;</span> 5Gb */}
+                    </p>
+                  </Service>
+                  <ButtonStyle type="button" name="send">
+                    <Link to="/login">Sign Up</Link>
+                  </ButtonStyle>
+                </CardText>
+              </div>
+              <div className="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <CardText>
+                  {/* <Personal>business</Personal> */}
+                  <Free>
+                    Yearly <span>$100</span>
                   </Free>
                   <StartGreat>Build a production-quanlity service!</StartGreat>
                   <Service>
                     <p>
-                      <span>ML&nbsp;</span>250 hours
+                      No limit data and bandwidth
+                      {/* <span>ML&nbsp;</span>250 hours */}
                     </p>
                     <p className="card-text">
-                      <span>Robotics&nbsp;</span> 25 SU-hours
+                      High speed
+                      {/* <span>Robotics&nbsp;</span> 25 SU-hours */}
                     </p>
                     <p className="card-text">
-                      <span>Compute&nbsp;</span> 750 hours
+                      Connect everywhere
+                      {/* <span>Compute&nbsp;</span> 750 hours */}
                     </p>
                     <p className="card-text">
-                      <span>Storage&nbsp;</span> 5Gb
-                    </p>
-                    <p className="card-text">
-                      <span>Database&nbsp;</span> 25Gb
+                      Earn money from your wifi devices
+                      {/* <span>Storage&nbsp;</span> 5Gb */}
                     </p>
                   </Service>
                   <ButtonStyle type="button" name="send">
-                    Sign Up
+                    <Link to="/login">Sign Up</Link>
                   </ButtonStyle>
                 </CardText>
               </div>
