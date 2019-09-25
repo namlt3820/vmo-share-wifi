@@ -22,6 +22,11 @@ export const WrapperComponent = styled.div`
     max-width: 960px;
   }
 
+  @media only screen and ${sizeDevices.laptopL} {
+    max-width: 1440px;
+    width: 700px;
+  }
+
   // @media only screen and ${sizeDevices.xl} {
   //   padding: 4em 0 6em;
   // }
@@ -35,6 +40,10 @@ export const WrapperForm = styled.div`
     padding: 3em 2em;
     margin-bottom: 3em;
     border-radius: 10px;
+  }
+
+  @media only screen and ${sizeDevices.laptopL} {
+    padding: 4em 4em;
   }
 
   // @media only screen and ${sizeDevices.lg} {
@@ -83,6 +92,15 @@ export const Logo = styled.div`
     }
   }
 
+  @media only screen and ${sizeDevices.laptopL} {
+    img {
+      width: 300px
+    }
+    div {
+      font-size: 26px;
+    }
+  }
+
   // @media only screen and ${sizeDevices.xl} {
   //   margin-bottom: 3em;
   //   img {
@@ -104,6 +122,9 @@ export const Label = styled.div`
   // .icon {
   //   color: red;
   // }
+  @media only screen and ${sizeDevices.laptopL} {
+    font-size: 27px;
+  }
 `;
 
 export const InputStyle = styled.input`
@@ -120,6 +141,10 @@ export const InputStyle = styled.input`
 
   @media only screen and ${sizeDevices.tablet} {
     font-size: 20px;
+  }
+
+  @media only screen and ${sizeDevices.laptopL} {
+    font-size: 27px;
   }
 
 //   @media only screen and ${sizeDevices.xl} {
@@ -184,6 +209,10 @@ export const ButtonStyle = styled(Button)`
     font-size: 20px;
   }
 
+  @media only screen and ${sizeDevices.laptopL} {
+    font-size: 27px;
+  }
+
   // @media only screen and ${sizeDevices.xl} {
   //   font-size: 20px;
   // }
@@ -216,6 +245,10 @@ export const OutSide = styled.div`
   @media only screen and ${sizeDevices.tablet} {
     // margin-top: 3em;
     font-size: 20px;
+  }
+
+  @media only screen and ${sizeDevices.laptopL} {
+    font-size: 27px;
   }
 
   // @media only screen and ${sizeDevices.xl} {
