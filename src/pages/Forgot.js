@@ -14,7 +14,7 @@ import Validator, { EMAIL_REGEX } from '../utils/validator';
 import ForgotPwd from '../services/forgotPwd.service';
 import httpStatus from '../config/httpStatus';
 import Errors from '../commons/error_validate';
-import getToken from '../utils/getToken';
+import { getToken } from '../utils/getToken';
 
 const forgot = new ForgotPwd();
 export default class Forgot extends Component {
@@ -28,7 +28,7 @@ export default class Forgot extends Component {
     };
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     getToken(this.props.history);
   }
 

@@ -16,7 +16,7 @@ import Validator, { EMAIL_REGEX } from '../utils/validator';
 import httpStatus from '../config/httpStatus';
 import User from '../services/user.service';
 import Errors from '../commons/error_validate';
-import getToken from '../utils/getToken';
+import { getToken } from '../utils/getToken';
 
 const user = new User();
 export default class SignUp extends Component {
@@ -33,7 +33,7 @@ export default class SignUp extends Component {
     };
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     getToken(this.props.history);
   }
 

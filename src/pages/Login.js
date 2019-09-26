@@ -17,7 +17,7 @@ import {
 import Validator, { EMAIL_REGEX } from '../utils/validator';
 import { login } from '../store/actions/authenticate';
 import Errors from '../commons/error_validate';
-import getToken from '../utils/getToken';
+import { getToken } from '../utils/getToken';
 
 class Login extends Component {
   constructor() {
@@ -31,7 +31,7 @@ class Login extends Component {
     };
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     getToken(this.props.history);
   }
 
