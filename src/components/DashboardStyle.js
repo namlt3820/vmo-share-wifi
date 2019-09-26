@@ -45,6 +45,12 @@ export const DashBoardTableButton = styled.div`
   align-items: center;
 `;
 
+export const DashBoardTableButtonSelect = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
 export const DashBoardTable = styled.div`
   // display: flex;
 `;
@@ -151,7 +157,7 @@ export const HeaderProfileName = styled.div`
     margin: 3px 0;
     font-size: 18px;
     :last-child {
-      font-size: 13px;
+      font-size: 12px;
     }
   }
 `;
@@ -262,6 +268,9 @@ export const DateRangePicker = styled.div`
 
 export const LinkStyle = styled(Link)`
   color: #333;
+  :hover {
+    text-decoration: none;
+  }
 `;
 
 export const DataChart = styled.div`

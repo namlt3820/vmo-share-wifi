@@ -115,7 +115,7 @@ class ChangePwd extends Component {
           </WrapperAction>
         </WrapperForm>
         <OutSide>
-          Don&apos;t have an account? <a href="#1">Signup Now</a>
+          Don&apos;t have an account?&nbsp;<a href="#1">Signup Now</a>
         </OutSide>
       </WrapperComponent>
     );

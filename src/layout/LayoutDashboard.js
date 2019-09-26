@@ -164,16 +164,16 @@ class LayoutDashboard extends Component {
               <Menu.Divider />
               <StyleMenuItem key="1">
                 <Icon type="dashboard" />
-                <Link to="/dashboard">
+                <LinkStyle to="/dashboard">
                   <span>Dashboard</span>
-                </Link>
+                </LinkStyle>
               </StyleMenuItem>
               <Menu.Divider />
               <StyleMenuItem key="2">
                 <Icon type="user" />
-                <Link to="/allUser">
+                <LinkStyle to="/allUser">
                   <span>Accounts</span>
-                </Link>
+                </LinkStyle>
               </StyleMenuItem>
               <Menu.Divider />
               <StyleSubMenu
@@ -193,9 +193,9 @@ class LayoutDashboard extends Component {
                 <StyleMenuItem key="4">
                   <Icon type="wifi" />
 
-                  <Link to="/addRouter">
+                  <LinkStyle to="/addRouter">
                     <span>Add Router</span>
-                  </Link>
+                  </LinkStyle>
                 </StyleMenuItem>
               </StyleSubMenu>
               <Menu.Divider />
@@ -210,15 +210,15 @@ class LayoutDashboard extends Component {
               >
                 <StyleMenuItem key="5">
                   <Icon type="user" />
-                  <Link to="/userData">
+                  <LinkStyle to="/userData">
                     <span>User Data</span>
-                  </Link>
+                  </LinkStyle>
                 </StyleMenuItem>
                 <StyleMenuItem key="6">
                   <Icon type="wifi" />
-                  <Link to="/wifiData">
+                  <LinkStyle to="/wifiData">
                     <span>Wifi Data</span>
-                  </Link>
+                  </LinkStyle>
                 </StyleMenuItem>
               </StyleSubMenu>
               <Menu.Divider />

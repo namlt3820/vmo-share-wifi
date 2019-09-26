@@ -19,6 +19,7 @@ export default class AddDevice extends Component {
     this.state = {
       name: '',
       email: '',
+      password: '',
       role: '',
       file: '',
       loading: false,
@@ -119,18 +120,20 @@ export default class AddDevice extends Component {
                 handleBlur={this.handleValidateEmail}
               />
               <FormInput
+                placeholder="Password"
                 label="Password"
                 name="password"
                 type="password"
                 icon="*"
                 error={errors.password}
+                value={password}
                 handleChange={this.handleChangeForm}
                 handleBlur={this.handleValidatePassword}
               />
               <div>
                 <p>Role</p>
                 <Select
-                  defaultValue="User"
+                  defaultValue="Select role"
                   style={{ width: 120 }}
                   onChange={this.handleChange}
                 >

@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-import { Breadcrumb, Input, Icon, Dropdown, Menu, Popconfirm } from 'antd';
+import {
+  Breadcrumb,
+  Input,
+  Icon,
+  Dropdown,
+  Menu,
+  Popconfirm,
+  Select
+} from 'antd';
 import { connect } from 'react-redux';
 import {
   DashBoardTittle,
   DashBoardContent,
-  // DashBoardTab,
-  // DashBoardTabItems,
   DashBoardContentLayout,
   DashBoardTableButton,
+  DashBoardTableButtonSelect,
   DashBoardButton,
   DashBoardButtonStyle,
   ModalStyle,
@@ -19,6 +26,7 @@ import AddUser from './AddUser';
 import EditUser from './EditUser';
 import httpStatus from '../../../config/httpStatus';
 
+const { Option } = Select;
 const { Search } = Input;
 const PER_PAGE = 500;
 const OFF_SET = 0;
@@ -35,7 +43,8 @@ class AllUser extends Component {
       loading: false,
       visible: false,
       userInfo: {},
-      searchText: ''
+      searchText: '',
+      type: ''
     };
   }
 
@@ -112,20 +121,36 @@ class AllUser extends Component {
   };
 
   onSearch = () => {
-    const { searchText } = this.state;
+    const { searchText, type } = this.state;
     const reg = new RegExp(searchText, 'gi');
-    this.setState({
-      searchText: '',
-      users: dataUser
-        .map(record => {
-          const match = record.name.match(reg);
-          if (!match) {
-            return null;
-          }
-          return record;
-        })
-        .filter(record => !!record)
-    });
+    if (type === 'name') {
+      this.setState({
+        searchText: '',
+        users: dataUser
+          .map(record => {
+            const match = record.name.match(reg);
+            if (!match) {
+              return null;
+            }
+            return record;
+          })
+          .filter(record => !!record)
+      });
+    } else {
+      this.setState({
+        searchText: '',
+        users: dataUser
+          .map(record => {
+            const match = record.email.match(reg);
+            if (!match) {
+              return null;
+            }
+            return record;
+          })
+          .filter(record => !!record)
+      });
+      console.log('email');
+    }
   };
 
   showModal = () => {
@@ -151,9 +176,15 @@ class AllUser extends Component {
     });
   };
 
-  changeData = (user, users) => {
+  hiddenUserInfoLogging = (user, users) => {
     return users.filter(dt => {
       return dt._id !== user._id;
+    });
+  };
+
+  handleChange = value => {
+    this.setState({
+      type: value
     });
   };
 
@@ -265,13 +296,24 @@ class AllUser extends Component {
           </DashBoardTab> */}
           <DashBoardContentLayout>
             <DashBoardTableButton name="user">
-              <Search
-                value={searchText}
-                onSearch={this.onSearch}
-                style={{ width: 200 }}
-                onChange={this.searchOnChange}
-                onPressEnter={this.onSearch}
-              />
+              <DashBoardTableButtonSelect>
+                <Select
+                  defaultValue="Type search"
+                  style={{ width: 150 }}
+                  onChange={this.handleChange}
+                >
+                  <Option value="name">Search By Name</Option>
+                  <Option value="email">Search By Email</Option>
+                </Select>
+                <Search
+                  value={searchText}
+                  onSearch={this.onSearch}
+                  style={{ width: 200 }}
+                  onChange={this.searchOnChange}
+                  onPressEnter={this.onSearch}
+                />
+              </DashBoardTableButtonSelect>
+
               <DashBoardButton>
                 <DashBoardButtonStyle
                   background="#1890ff"
@@ -284,7 +326,7 @@ class AllUser extends Component {
             {user ? (
               <TableStyle
                 columns={columns}
-                dataSource={this.changeData(user, users)}
+                dataSource={this.hiddenUserInfoLogging(user, users)}
                 loading={loading}
                 rowKey={record => record._id}
                 pagination={{ pageSize: PAGE_SIZE }}

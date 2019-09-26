@@ -8,7 +8,7 @@ export const WrapperComponent = styled.div`
   flex-direction: column;
   height: ${props =>
     props.type === 'forgot' ? 'calc(100vh - 250px);' : '100vh'};
-  padding: 2em 1.5em 2em;
+  padding: 3em 1.5em 4em;
   margin: 0 auto;
   @media only screen and ${sizeDevices.mobileL} {
     max-width: 540px;
@@ -22,6 +22,7 @@ export const WrapperComponent = styled.div`
   @media only screen and ${sizeDevices.laptop} {
     max-width: 960px;
     padding-bottom: 10em;
+    padding-top: 3em;
   }
 
   @media only screen and ${sizeDevices.laptopL} {
@@ -48,8 +49,8 @@ export const WrapperForm = styled.div`
   // }
 
   @media only screen and ${sizeDevices.laptopL} {
-    margin-top: 12em;
-    height: 50vh;
+    margin-top: 9em;
+    height: 57vh;
   }
 
   // @media only screen and ${sizeDevices.xl} {
@@ -174,8 +175,7 @@ export const CheckboxStyle = styled(Checkbox)`
 `;
 
 export const ButtonStyle = styled(Button)`
-  padding: 5px 100px;
-  font-size: 20px;
+  font-size: 16px;
   margin: 0.5em 0 1.5em;
   width: 100%;
   height: 2.5em;

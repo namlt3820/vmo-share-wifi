@@ -83,7 +83,7 @@ class Login extends Component {
         <WrapperForm form="login">
           <Logo>
             <img src="assets/logo.png" alt="Share Wifi" />
-            <h5>Welcome Back</h5>
+            <div>Welcome Back</div>
             <p>Sign in to continue to Shared Wifi</p>
           </Logo>
           <WrapperInput>
