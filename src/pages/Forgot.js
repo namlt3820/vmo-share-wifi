@@ -28,7 +28,7 @@ export default class Forgot extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     getToken(this.props.history);
   }
 

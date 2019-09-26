@@ -33,7 +33,7 @@ export default class SignUp extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     getToken(this.props.history);
   }
 
