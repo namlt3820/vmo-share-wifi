@@ -171,7 +171,7 @@ export default class UserDataDashboard extends Component {
               />
             </DateRangePicker>
             <DataChart>
-              <Chart options={options} series={series} type="bar" width="500" />
+              <Chart options={options} series={series} type="bar" width="600" />
             </DataChart>
           </DashBoardContentLayout>
         </DashBoardContent>

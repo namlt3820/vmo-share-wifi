@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import FormInput from '../components/core/FormInput';
 import {
   WrapperComponent,
@@ -13,6 +14,7 @@ import Validator from '../utils/validator';
 import ChangePassword from '../services/changePwd.service';
 import httpStatus from '../config/httpStatus';
 import Errors from '../commons/error_validate';
+import { logout } from '../store/actions/logout';
 
 const changePw = new ChangePassword();
 class ChangePwd extends Component {
@@ -64,17 +66,22 @@ class ChangePwd extends Component {
     changePw.changePwd(params).then(res => {
       if (
         res.status === httpStatus.StatusBadRequest ||
-        httpStatus.StatusNotFound
+        res.status === httpStatus.StatusNotFound
       ) {
-        res.data.errors.map(error => {
-          if (error.location === 'currentPassword') {
-            valied.currentPassword = error.message;
-          } else {
-            valied.newPassword = error.message;
-          }
-          return valied;
-        });
+        if (res.data) {
+          res.data.errors.map(error => {
+            if (error.location === 'currentPassword') {
+              valied.currentPassword = error.message;
+            } else {
+              valied.newPassword = error.message;
+            }
+            return valied;
+          });
+        }
         this.setState({ errors: valied, loading: false });
+      } else if (res.status === httpStatus.StatusNoContent) {
+        this.setState({ loading: false });
+        this.props.history.push('/dashboard');
       }
     });
   };
@@ -121,4 +128,7 @@ class ChangePwd extends Component {
     );
   }
 }
-export default ChangePwd;
+export default connect(
+  null,
+  { logout }
+)(ChangePwd);
