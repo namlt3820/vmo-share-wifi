@@ -3,50 +3,29 @@ export const sidebarData = [
   {
     key: 'Dashboard',
     title: {
-      icon: 'bank',
-      text: 'Quản lý cơ sở'
+      icon: 'dashboard',
+      text: 'Dashboard',
+      path: '/dashboard'
     },
-    children: [
-      {
-        key: '/danh-sach-co-so',
-        text: 'Danh sách cơ sở',
-        path: '/danh-sach-co-so'
-      },
-      {
-        key: '/thong-tin-co-so',
-        text: 'Thông tin cơ sở',
-        path: '/thong-tin-co-so'
-      }
-    ]
+    children: []
   },
   {
-    key: 'Quản lý khách hàng',
+    key: 'Accounts',
     title: {
-      icon: 'solution',
-      text: 'Quản lý khách hàng'
+      icon: 'users',
+      text: 'Accounts'
     },
-    children: [
-      {
-        key: 'Thông tin khách hàng',
-        text: 'Thông tin khách hàng',
-        path: '/thong-tin-khach-hang'
-      },
-      {
-        key: 'Thêm khách hàng',
-        text: 'Thêm khách hàng',
-        path: '/them-khach-hang'
-      }
-    ]
+    children: []
   },
   {
-    key: 'Quản lý nhân viên',
+    key: 'Wifi',
     title: {
-      icon: 'team',
-      text: 'Quản lý nhân viên'
+      icon: 'wifi',
+      text: 'Wifi'
     },
     children: [
       {
-        key: '/danh-sach-nhan-vien',
+        key: '/list',
         text: 'Danh sách nhân viên',
         path: '/danh-sach-nhan-vien'
       },
@@ -99,22 +78,6 @@ export const sidebarData = [
         path: '/tong-hop-luong'
       }
     ]
-  },
-  {
-    key: 'Quản lý nâng hạng thẻ',
-    title: {
-      icon: 'idcard',
-      text: 'Quản lý nâng hạng thẻ'
-    },
-    children: []
-  },
-  {
-    key: 'Quản lý chấm công',
-    title: {
-      text: 'Quản lý chấm công',
-      icon: 'clock-circle'
-    },
-    children: []
   }
 ];
 
