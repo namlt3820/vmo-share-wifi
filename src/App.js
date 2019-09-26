@@ -7,6 +7,7 @@ import LayoutLanding from './layout/LayoutLanding';
 // import './App.css';
 import { routersAuth, routesDashboard, routesLanding } from './routers/index';
 import { getCurrentUser } from './store/actions/user';
+import Loading from './components/core/Loading';
 
 const AppRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route
@@ -23,7 +24,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // user: null
+      loading: false
     };
   }
 
@@ -33,9 +34,18 @@ class App extends Component {
     if (token) {
       dispatch(getCurrentUser());
     }
+    this.getUser();
   }
 
+  getUser = () => {
+    this.setState({ loading: true });
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 1000);
+  };
+
   render() {
+    const { loading } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
@@ -51,15 +61,19 @@ class App extends Component {
             ))}
           </Switch>
           <Switch>
-            {routersAuth.map(router => (
-              <AppRoute
-                exact
-                path={router.path}
-                layout={LayoutMain}
-                component={router.component}
-                key={router.id}
-              />
-            ))}
+            {loading ? (
+              <Loading />
+            ) : (
+              routersAuth.map(router => (
+                <AppRoute
+                  exact
+                  path={router.path}
+                  layout={LayoutMain}
+                  component={router.component}
+                  key={router.id}
+                />
+              ))
+            )}
           </Switch>
           <Switch>
             {routesLanding.map(router => (
@@ -79,7 +93,7 @@ class App extends Component {
 }
 
 const mapStateToProp = state => ({
-  user: state.data
+  user: state.users
 });
 
 export default connect(mapStateToProp)(App);

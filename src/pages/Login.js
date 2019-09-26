@@ -17,6 +17,7 @@ import {
 import Validator, { EMAIL_REGEX } from '../utils/validator';
 import { login } from '../store/actions/authenticate';
 import Errors from '../commons/error_validate';
+import getToken from '../utils/getToken';
 
 class Login extends Component {
   constructor() {
@@ -28,6 +29,10 @@ class Login extends Component {
       checked: false,
       loading: false
     };
+  }
+
+  componentDidMount() {
+    getToken(this.props.history);
   }
 
   handleChange = event => {
@@ -129,6 +134,7 @@ class Login extends Component {
     );
   }
 }
+
 export default connect(
   null,
   { login }
