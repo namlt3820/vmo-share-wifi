@@ -4,6 +4,7 @@ import FormInput from '../components/core/FormInput';
 import {
   WrapperComponent,
   WrapperForm,
+  WrapperFormContent,
   Logo,
   WrapperInput,
   WrapperAction,
@@ -92,38 +93,40 @@ class UpdatePwdBycode extends Component {
     ) : (
       <WrapperComponent>
         <WrapperForm form="login">
-          <Logo>
-            <img src="assets/logo.png" alt="Share Wifi" />
-            <div>Change Password</div>
-          </Logo>
-          <WrapperInput>
-            <FormInput
-              placeholder="New Password"
-              name="password"
-              type="password"
-              error={errors.password}
-              value={password}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidatePassword}
-            />
-            <FormInput
-              placeholder="Active Code"
-              name="code"
-              type="text"
-              error={errors.code}
-              value={code}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidateCode}
-            />
-          </WrapperInput>
-          <WrapperAction type="change">
-            <ButtonStyle loading={loading} onClick={this.updatePwd}>
-              Change Password
-            </ButtonStyle>
-          </WrapperAction>
+          <WrapperFormContent>
+            <Logo>
+              <img src="assets/logo.png" alt="Share Wifi" />
+              <div>Change Password</div>
+            </Logo>
+            <WrapperInput>
+              <FormInput
+                placeholder="New Password"
+                name="password"
+                type="password"
+                error={errors.password}
+                value={password}
+                handleChange={this.handleChange}
+                handleBlur={this.handleValidatePassword}
+              />
+              <FormInput
+                placeholder="Active Code"
+                name="code"
+                type="text"
+                error={errors.code}
+                value={code}
+                handleChange={this.handleChange}
+                handleBlur={this.handleValidateCode}
+              />
+            </WrapperInput>
+            <WrapperAction type="change">
+              <ButtonStyle loading={loading} onClick={this.updatePwd}>
+                Change Password
+              </ButtonStyle>
+            </WrapperAction>
+          </WrapperFormContent>
         </WrapperForm>
         <OutSide>
-          Don&apos;t have an account? <a href="#1">Signup Now</a>
+          Don&apos;t have an account?&nbsp;<a href="#1">Signup Now</a>
         </OutSide>
       </WrapperComponent>
     );

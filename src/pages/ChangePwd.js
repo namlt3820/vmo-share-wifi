@@ -3,6 +3,7 @@ import FormInput from '../components/core/FormInput';
 import {
   WrapperComponent,
   WrapperForm,
+  WrapperFormContent,
   Logo,
   WrapperInput,
   WrapperAction,
@@ -84,35 +85,37 @@ class ChangePwd extends Component {
     return (
       <WrapperComponent>
         <WrapperForm form="login">
-          <Logo>
-            <img src="assets/logo.png" alt="Share Wifi" />
-            <div>Change Password</div>
-          </Logo>
-          <WrapperInput>
-            <FormInput
-              placeholder="Current Password"
-              name="currentPassword"
-              type="password"
-              error={errors.currentPassword}
-              value={currentPassword}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidateCurrentPassword}
-            />
-            <FormInput
-              placeholder="New Password"
-              name="newPassword"
-              type="password"
-              error={errors.newPassword}
-              value={newPassword}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidateNewPassword}
-            />
-          </WrapperInput>
-          <WrapperAction type="change">
-            <ButtonStyle loading={loading} onClick={this.changePwd}>
-              Change Password
-            </ButtonStyle>
-          </WrapperAction>
+          <WrapperFormContent>
+            <Logo>
+              <img src="assets/logo.png" alt="Share Wifi" />
+              <div>Change Password</div>
+            </Logo>
+            <WrapperInput>
+              <FormInput
+                placeholder="Current Password"
+                name="currentPassword"
+                type="password"
+                error={errors.currentPassword}
+                value={currentPassword}
+                handleChange={this.handleChange}
+                handleBlur={this.handleValidateCurrentPassword}
+              />
+              <FormInput
+                placeholder="New Password"
+                name="newPassword"
+                type="password"
+                error={errors.newPassword}
+                value={newPassword}
+                handleChange={this.handleChange}
+                handleBlur={this.handleValidateNewPassword}
+              />
+            </WrapperInput>
+            <WrapperAction type="change">
+              <ButtonStyle loading={loading} onClick={this.changePwd}>
+                Change Password
+              </ButtonStyle>
+            </WrapperAction>
+          </WrapperFormContent>
         </WrapperForm>
         <OutSide>
           Don&apos;t have an account?&nbsp;<a href="#1">Signup Now</a>

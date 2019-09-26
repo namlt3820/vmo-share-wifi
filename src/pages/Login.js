@@ -6,6 +6,7 @@ import FormInput from '../components/core/FormInput';
 import {
   WrapperComponent,
   WrapperForm,
+  WrapperFormContent,
   Logo,
   WrapperInput,
   WrapperAction,
@@ -81,46 +82,48 @@ class Login extends Component {
     return (
       <WrapperComponent>
         <WrapperForm form="login">
-          <Logo>
-            <img src="assets/logo.png" alt="Share Wifi" />
-            <div>Welcome Back</div>
-            <p>Sign in to continue to Shared Wifi</p>
-          </Logo>
-          <WrapperInput>
-            <FormInput
-              placeholder="Email"
-              name="email"
-              type="email"
-              error={errors.email}
-              value={email}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidateEmail}
-            />
-            <FormInput
-              placeholder="Password"
-              name="password"
-              type="password"
-              error={errors.password}
-              value={password}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidatePassword}
-            />
-          </WrapperInput>
-          <WrapperAction type="login">
-            <ButtonStyle
-              loading={loading}
-              onClick={this.login}
-              disabled={!email || !password}
-            >
-              Login
-            </ButtonStyle>
-          </WrapperAction>
-          <Bottom>
-            <Forgot>
-              <Icon type="lock" />
-              &nbsp;&nbsp; <Link to="/forgotPwd">Forgot your password</Link>
-            </Forgot>
-          </Bottom>
+          <WrapperFormContent>
+            <Logo>
+              <img src="assets/logo.png" alt="Share Wifi" />
+              <div>Welcome Back</div>
+              <p>Sign in to continue to Shared Wifi</p>
+            </Logo>
+            <WrapperInput>
+              <FormInput
+                placeholder="Email"
+                name="email"
+                type="email"
+                error={errors.email}
+                value={email}
+                handleChange={this.handleChange}
+                handleBlur={this.handleValidateEmail}
+              />
+              <FormInput
+                placeholder="Password"
+                name="password"
+                type="password"
+                error={errors.password}
+                value={password}
+                handleChange={this.handleChange}
+                handleBlur={this.handleValidatePassword}
+              />
+            </WrapperInput>
+            <WrapperAction type="login">
+              <ButtonStyle
+                loading={loading}
+                onClick={this.login}
+                disabled={!email || !password}
+              >
+                Login
+              </ButtonStyle>
+            </WrapperAction>
+            <Bottom>
+              <Forgot>
+                <Icon type="lock" />
+                &nbsp;&nbsp; <Link to="/forgotPwd">Forgot your password</Link>
+              </Forgot>
+            </Bottom>
+          </WrapperFormContent>
         </WrapperForm>
         <OutSide>
           Don&apos;t have an account?&nbsp;<Link to="/signup">Signup Now</Link>

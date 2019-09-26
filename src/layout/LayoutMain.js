@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import { sizeDevices } from './sizeDevices';
 
 const Wrapper = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   // display: flex;
   // flex-direction: column;
+  // background: #fff;
+  // max-width: 100%;
   // justify-content: center;
   // align-items: center;
   // @media only screen and ${sizeDevices.xs} {

@@ -177,15 +177,20 @@ export const DashboardTop = styled.div`
 `;
 
 export const DashboardTopText = styled.div`
-  h5 {
-    margin-bottom: 3em;
+  h6 {
+    margin-bottom: 2em;
+  }
+  a {
+    :hover {
+      text-decoration: none;
+    }
   }
 `;
 
 export const DashboardBottomText = styled.div`
   display: flex;
   margin: 2em 0 0 0;
-  h4 {
+  h6 {
     margin-right: 1em;
     margin-bottom: 0;
     position: relative;
@@ -211,6 +216,10 @@ export const ModalStyle = styled(Modal)`
   }
   .ant-modal-footer button {
     display: none;
+  }
+
+  .ant-modal-title {
+    font-size: 20px;
   }
 `;
 

@@ -44,7 +44,8 @@ class AllUser extends Component {
       visible: false,
       userInfo: {},
       searchText: '',
-      type: ''
+      type: '',
+      sortedInfo: null
     };
   }
 
@@ -187,7 +188,16 @@ class AllUser extends Component {
     });
   };
 
+  onChange = (pagination, filters, sorter) => {
+    this.setState({
+      sortedInfo: sorter
+    });
+  };
+
   render() {
+    let { sortedInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+
     const { users, loading, userInfo, searchText, user } = this.state;
 
     const menu = (
@@ -222,12 +232,15 @@ class AllUser extends Component {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        onFilter: (value, record) => record.name.indexOf(value) === 0
+        sorter: (a, b) => a.name.localeCompare(b.name),
+        sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order
       },
       {
         title: 'Email',
         dataIndex: 'email',
-        key: 'email'
+        key: 'email',
+        sorter: (a, b) => a.email.localeCompare(b.email),
+        sortOrder: sortedInfo.columnKey === 'email' && sortedInfo.order
       },
       {
         title: 'Role',
@@ -329,6 +342,7 @@ class AllUser extends Component {
                 loading={loading}
                 rowKey={record => record._id}
                 pagination={{ pageSize: PAGE_SIZE }}
+                onChange={this.onChange}
               />
             ) : (
               ''
