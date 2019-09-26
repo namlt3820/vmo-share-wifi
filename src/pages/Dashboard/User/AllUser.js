@@ -149,7 +149,6 @@ class AllUser extends Component {
           })
           .filter(record => !!record)
       });
-      console.log('email');
     }
   };
 
