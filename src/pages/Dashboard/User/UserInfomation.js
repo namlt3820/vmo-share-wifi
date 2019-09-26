@@ -103,7 +103,7 @@ class UserInfomation extends Component {
         <DashBoardContentLayout>
           <DashboardTop>
             <Skeleton loading={loading} active>
-              <img alt="" src="assets/logo.png" />
+              <img alt="" src="assets/user.png" />
               <DashboardTopText>
                 <h4>{name}</h4>
                 <h6>{role === 0 ? 'Admin' : 'User'}</h6>

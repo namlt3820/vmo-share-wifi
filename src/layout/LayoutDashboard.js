@@ -1,27 +1,18 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Layout, Menu, Icon, Button, Badge, Dropdown } from 'antd';
-import styled from 'styled-components';
+import { Layout, Menu, Icon, Badge, Dropdown } from 'antd';
 import { logout } from '../store/actions/logout';
 import {
-  LogoDashBoard,
+  Wrapper,
   HeaderIcon,
   HeaderProfile,
   HeaderProfileName,
   LinkStyle,
-  StyleMenuItem,
-  StyleSubMenu
+  StyleMenuItem
 } from '../components/DashboardStyle';
+import Sidebar from './Sidebar';
 
-const { Header, Sider, Content } = Layout;
-const Wrapper = styled.div`
-  // height: 100vh;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
-`;
+const { Header, Content } = Layout;
 
 // const menu = (
 //   <Menu>
@@ -128,18 +119,19 @@ class LayoutDashboard extends Component {
 
     const { collapsed, user } = this.state;
     const { children } = this.props;
+
     return (
       <Wrapper>
         <Layout>
-          <Sider
+          {/* <Sider
             collapsible
             onCollapse={this.onCollapse}
-            trigger={null}
+            trigger={collapsed}
             theme="light"
             style={{ minWidth: '220px' }}
             collapsed={collapsed}
-          >
-            <LogoDashBoard>
+          > */}
+          {/* <LogoDashBoard>
               <Button
                 onClick={this.toggle}
                 style={{ margin: 17, border: 'none' }}
@@ -154,80 +146,9 @@ class LayoutDashboard extends Component {
                   transition: 'display 2s 2s 2s'
                 }}
               />
-            </LogoDashBoard>
-            <Menu
-              defaultSelectedKeys={['1']}
-              mode="inline"
-              theme="light"
-              // inlineCollapsed={collapsed}
-            >
-              <Menu.Divider />
-              <StyleMenuItem key="1">
-                <Icon type="dashboard" />
-                <LinkStyle to="/dashboard">
-                  <span>Dashboard</span>
-                </LinkStyle>
-              </StyleMenuItem>
-              <Menu.Divider />
-              <StyleMenuItem key="2">
-                <Icon type="user" />
-                <LinkStyle to="/allUser">
-                  <span>Accounts</span>
-                </LinkStyle>
-              </StyleMenuItem>
-              <Menu.Divider />
-              <StyleSubMenu
-                key="sub2"
-                title={
-                  <span>
-                    <Icon type="wifi" />
-                    <span>Wifi</span>
-                  </span>
-                }
-              >
-                <StyleMenuItem key="3">
-                  <Icon type="wifi" />
-                  <span>All Router</span>
-                  <Link to="/routers" />
-                </StyleMenuItem>
-                <StyleMenuItem key="4">
-                  <Icon type="wifi" />
-
-                  <LinkStyle to="/addRouter">
-                    <span>Add Router</span>
-                  </LinkStyle>
-                </StyleMenuItem>
-              </StyleSubMenu>
-              <Menu.Divider />
-              <StyleSubMenu
-                key="sub3"
-                title={
-                  <span>
-                    <Icon type="database" />
-                    <span>Data</span>
-                  </span>
-                }
-              >
-                <StyleMenuItem key="5">
-                  <Icon type="user" />
-                  <LinkStyle to="/userData">
-                    <span>User Data</span>
-                  </LinkStyle>
-                </StyleMenuItem>
-                <StyleMenuItem key="6">
-                  <Icon type="wifi" />
-                  <LinkStyle to="/wifiData">
-                    <span>Wifi Data</span>
-                  </LinkStyle>
-                </StyleMenuItem>
-              </StyleSubMenu>
-              <Menu.Divider />
-              <StyleMenuItem key="7">
-                <Icon type="dollar" />
-                <span>Payment </span>
-              </StyleMenuItem>
-            </Menu>
-          </Sider>
+            </LogoDashBoard> */}
+          <Sidebar collapsed={collapsed} onCollapse={this.onCollapse} />
+          {/* </Sider> */}
           <Layout>
             <Header
               style={{

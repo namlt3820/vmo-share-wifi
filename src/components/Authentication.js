@@ -117,7 +117,7 @@ export const InputStyle = styled.input`
   // height: 32px;
   width: 100%;
   padding: 4px 11px;
-  font-size: 20px;
+  font-size: ${props => (props.popup === 'popup' ? '17px' : '20px')};
   line-height: 1.5;
   border: 1px solid #d9d9d9;
   border-radius: 4px;

@@ -62,7 +62,7 @@ export default class AddDevice extends Component {
 
   handleValidateName = () => {
     const { name, errors } = this.state;
-    const validateName = Validator.isValidName(name);
+    const validateName = Validator.isValidUsername(name);
     errors.name = Errors.handleValidate(validateName, name, 'name');
     this.setState({ errors });
   };

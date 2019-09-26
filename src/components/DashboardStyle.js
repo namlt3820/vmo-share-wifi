@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import { Button, Table, Menu, Modal } from 'antd';
 import { Link } from 'react-router-dom';
+import Chart from 'react-apexcharts';
 
 const { SubMenu } = Menu;
+
+export const Wrapper = styled.div``;
 
 export const DashBoardTittle = styled.div`
   h3 {
@@ -289,11 +292,22 @@ export const DataChart = styled.div`
 export const StyleMenuItem = styled(Menu.Item)`
   display: flex;
   align-items: center;
+  a {
+    :hover {
+      text-decoration: none;
+    }
+  }
 `;
 
 export const StyleSubMenu = styled(SubMenu)`
   span {
     display: flex;
     align-items: center;
+  }
+`;
+
+export const ChartStyle = styled(Chart)`
+  .apexcharts-menu-icon {
+    display: none;
   }
 `;

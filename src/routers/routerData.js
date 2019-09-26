@@ -1,23 +1,6 @@
 // The key property is used for Antd Menu Component
 export const sidebarData = [
   {
-    key: 'Dashboard',
-    title: {
-      icon: 'dashboard',
-      text: 'Dashboard',
-      path: '/dashboard'
-    },
-    children: []
-  },
-  {
-    key: 'Accounts',
-    title: {
-      icon: 'users',
-      text: 'Accounts'
-    },
-    children: []
-  },
-  {
     key: 'Wifi',
     title: {
       icon: 'wifi',
@@ -26,58 +9,65 @@ export const sidebarData = [
     children: [
       {
         key: '/list',
-        text: 'Danh sách nhân viên',
-        path: '/danh-sach-nhan-vien'
+        text: 'All Routers',
+        icon: 'wifi',
+        path: '/routers'
       },
       {
-        key: '/danh-sach-hop-dong',
-        text: 'Danh sách hợp đồng',
-        path: '/danh-sach-hop-dong'
-      },
-      {
-        key: '/danh-sach-nhan-vien/thong-tin-nhan-vien',
-        text: 'Thông tin nhân viên',
-        path: '/danh-sach-nhan-vien/thong-tin-nhan-vien'
+        key: '/addRouter',
+        text: 'Add Router',
+        icon: 'wifi',
+        path: '/addRouter'
       }
     ]
   },
   {
-    key: 'Quản lý dịch vụ',
+    key: 'Data',
     title: {
-      text: 'Quản lý dịch vụ',
-      icon: 'tool'
+      text: 'Data',
+      icon: 'database'
     },
     children: [
       {
-        key: '/danh-sach-dich-vu',
-        text: 'Danh sách dịch vụ',
-        path: '/danh-sach-dich-vu'
+        key: '/userData',
+        text: 'User Data',
+        icon: 'database',
+        path: '/userData'
       },
       {
-        key: '/tao-moi-dich-vu',
-        text: 'Tạo mới dịch vụ',
-        path: '/tao-moi-dich-vu'
+        key: '/wifiData',
+        text: 'Wifi Data',
+        icon: 'wifi',
+        path: '/wifiData'
       }
     ]
   },
   {
-    key: 'Quản lý lương',
+    key: 'Payment',
     title: {
-      text: 'Quản lý lương',
+      text: 'Payment',
       icon: 'dollar'
     },
-    children: [
-      {
-        key: '/lich-su-thu-nhap',
-        text: 'Lịch sử thu thập',
-        path: '/lich-su-thu-nhap'
-      },
-      {
-        key: '/tong-hop-luong',
-        text: 'Tổng hợp lương',
-        path: '/tong-hop-luong'
-      }
-    ]
+    children: []
+  }
+];
+
+export const sidebarDataOne = [
+  {
+    key: 'Dashboard',
+    title: {
+      icon: 'dashboard',
+      text: 'Dashboard',
+      path: '/dashboard'
+    }
+  },
+  {
+    key: 'Accounts',
+    title: {
+      icon: 'user',
+      text: 'Accounts',
+      path: '/allUser'
+    }
   }
 ];
 

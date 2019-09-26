@@ -6,7 +6,8 @@ import {
   Dropdown,
   Menu,
   Popconfirm,
-  Select
+  Select,
+  Tooltip
 } from 'antd';
 import { connect } from 'react-redux';
 import {
@@ -45,7 +46,8 @@ class AllUser extends Component {
       userInfo: {},
       searchText: '',
       type: '',
-      sortedInfo: null
+      sortedInfo: null,
+      visibleTooltip: false
     };
   }
 
@@ -124,9 +126,14 @@ class AllUser extends Component {
   onSearch = () => {
     const { searchText, type } = this.state;
     const reg = new RegExp(searchText, 'gi');
+    if (!type) {
+      this.setState({
+        visibleTooltip: true
+      });
+    }
     if (type === 'name') {
       this.setState({
-        searchText: '',
+        visibleTooltip: true,
         users: dataUser
           .map(record => {
             const match = record.name.match(reg);
@@ -137,9 +144,9 @@ class AllUser extends Component {
           })
           .filter(record => !!record)
       });
-    } else {
+    } else if (type === 'email') {
       this.setState({
-        searchText: '',
+        visibleTooltip: true,
         users: dataUser
           .map(record => {
             const match = record.email.match(reg);
@@ -198,8 +205,17 @@ class AllUser extends Component {
     let { sortedInfo } = this.state;
     sortedInfo = sortedInfo || {};
 
-    const { users, loading, userInfo, searchText, user } = this.state;
-
+    const {
+      users,
+      loading,
+      userInfo,
+      searchText,
+      user,
+      visibleTooltip,
+      type
+    } = this.state;
+    const visibleOn = true;
+    const visibleOff = false;
     const menu = (
       <Menu>
         <Menu.Item key="1">
@@ -309,14 +325,19 @@ class AllUser extends Component {
           <DashBoardContentLayout>
             <DashBoardTableButton name="user">
               <DashBoardTableButtonSelect>
-                <Select
-                  defaultValue="Type search"
-                  style={{ width: 150 }}
-                  onChange={this.handleChange}
+                <Tooltip
+                  title="Please choose type search"
+                  visible={visibleTooltip && (type ? visibleOff : visibleOn)}
                 >
-                  <Option value="name">Search By Name</Option>
-                  <Option value="email">Search By Email</Option>
-                </Select>
+                  <Select
+                    defaultValue="Type search"
+                    style={{ width: 150 }}
+                    onChange={this.handleChange}
+                  >
+                    <Option value="name">Search By Name</Option>
+                    <Option value="email">Search By Email</Option>
+                  </Select>
+                </Tooltip>
                 <Search
                   value={searchText}
                   onSearch={this.onSearch}

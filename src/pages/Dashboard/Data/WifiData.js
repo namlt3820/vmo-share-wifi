@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Breadcrumb, Icon, DatePicker } from 'antd';
-import Chart from 'react-apexcharts';
 import moment from 'moment';
 import {
   DashBoardTittle,
@@ -11,7 +10,8 @@ import {
   DataCardTop,
   DataCardBottom,
   DateRangePicker,
-  DataChart
+  DataChart,
+  ChartStyle
 } from '../../../components/DashboardStyle';
 import WifiData from '../../../services/wifidata.service';
 import httpStatus from '../../../config/httpStatus';
@@ -167,7 +167,7 @@ export default class AddDevice extends Component {
               />
             </DateRangePicker>
             <DataChart>
-              <Chart
+              <ChartStyle
                 options={this.state.options}
                 series={this.state.series}
                 type="bar"
