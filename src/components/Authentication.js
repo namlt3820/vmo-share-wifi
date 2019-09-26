@@ -8,7 +8,7 @@ export const WrapperComponent = styled.div`
   flex-direction: column;
   height: ${props =>
     props.type === 'forgot' ? 'calc(100vh - 250px);' : '100vh'};
-  padding: 2em 1.5em 4em;
+  padding: 2em 1.5em 2em;
   margin: 0 auto;
   @media only screen and ${sizeDevices.mobileL} {
     max-width: 540px;
@@ -16,11 +16,12 @@ export const WrapperComponent = styled.div`
 
   @media only screen and ${sizeDevices.tablet} {
     max-width: 720px;
-    width: 500px;
+    width: 450px;
   }
 
   @media only screen and ${sizeDevices.laptop} {
     max-width: 960px;
+    padding-bottom: 10em;
   }
 
   @media only screen and ${sizeDevices.laptopL} {
@@ -30,26 +31,21 @@ export const WrapperComponent = styled.div`
 
 export const WrapperForm = styled.div`
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
 
   @media only screen and ${sizeDevices.tablet} {
     background: #fff;
-    padding: 5em 2em;
-    margin-bottom: 3em;
+    padding: 2em 2em;
+    margin-bottom: 2em;
     border-radius: 10px;
   }
 
   // @media only screen and ${sizeDevices.laptop} {
-  //   margin-top: 12em;
+//   margin-top: 12em;
     height: 70vh;
   // }
-
-  @media only screen and ${sizeDevices.laptopL} {
-    // margin-top: 13em;
-    height: 70vh;
-  }
 
   // @media only screen and ${sizeDevices.xl} {
   //   width: 700px;
@@ -75,7 +71,7 @@ export const Logo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2.75em;
+  margin-bottom: 1.5em;
   img {
     width: 150px;
     margin-bottom: 0.5em;
@@ -243,7 +239,7 @@ export const OutSide = styled.div`
 
   @media only screen and ${sizeDevices.tablet} {
     // margin-top: 3em;
-    font-size: 20px;
+    font-size: 17px;
   }
 
   // @media only screen and ${sizeDevices.laptopL} {
