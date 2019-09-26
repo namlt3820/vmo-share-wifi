@@ -15,7 +15,7 @@ import DashboardManagerment from '../../services/dashboard.service';
 
 const dashboardManagerment = new DashboardManagerment();
 
-export default class AddDevice extends Component {
+export default class DashBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,18 +23,64 @@ export default class AddDevice extends Component {
       devices: '',
       users: '',
       usedData: '',
-      options: {
+      dataDevices: [],
+      dataRouters: [],
+      dataTraffics: [],
+      dataUsers: [],
+      optionsDevices: {
         chart: {
-          id: 'basic-bar'
+          id: 'basic-bar-1'
         },
         xaxis: {
-          categories: ['10/11/2019', 1992, 1993, 1994, 1995, 1996, 1997, 1998]
+          categories: []
         }
       },
-      series: [
+      seriesDevices: [
         {
-          name: 'series-1',
-          data: [30, 40, 45, 50, 49, 60, 70, 200]
+          name: 'device',
+          data: []
+        }
+      ],
+      optionsUsers: {
+        chart: {
+          id: 'basic-bar-2'
+        },
+        xaxis: {
+          categories: []
+        }
+      },
+      seriesUsers: [
+        {
+          name: 'user',
+          data: []
+        }
+      ],
+      optionsRouters: {
+        chart: {
+          id: 'basic-bar-3'
+        },
+        xaxis: {
+          categories: []
+        }
+      },
+      seriesRouters: [
+        {
+          name: 'router',
+          data: []
+        }
+      ],
+      optionsTraffics: {
+        chart: {
+          id: 'basic-bar-3'
+        },
+        xaxis: {
+          categories: []
+        }
+      },
+      seriesTraffics: [
+        {
+          name: 'router',
+          data: []
         }
       ]
     };
@@ -42,15 +88,154 @@ export default class AddDevice extends Component {
 
   componentDidMount() {
     dashboardManagerment.getAllData().then(res => {
-      const { users, routers, devices, dataUsed } = res.data.data;
-      this.setState({
+      const {
         users,
         routers,
         devices,
-        usedData: dataUsed
-      });
+        dataUsed,
+        dataDevices,
+        dataRouters,
+        dataUsers
+      } = res.data.data;
+      this.setState(
+        {
+          users,
+          routers,
+          devices,
+          usedData: dataUsed,
+          dataDevices,
+          dataRouters,
+          dataUsers
+        },
+        () => {
+          this.getDataCharts();
+        }
+      );
     });
   }
+
+  getDataCharts = async () => {
+    const { dataDevices, dataRouters, dataUsers, dataTraffics } = this.state;
+    await this.getDataChartDevice(dataDevices);
+    await this.getDataChartUser(dataUsers);
+    await this.getDataChartRouter(dataRouters);
+    await this.getDataChartTraffics(dataTraffics);
+  };
+
+  getDataChartDevice = async data => {
+    const cate = [];
+    const dataChart = [];
+    data.forEach(device => {
+      dataChart.push(device.count);
+      cate.push(device.createdAt);
+    });
+    const time = cate.map(t => {
+      return this.convertTime(t);
+    });
+    await this.setState(prevState => ({
+      optionsDevices: {
+        ...prevState.optionsDevices,
+        xaxis: {
+          ...prevState.optionsDevices.xaxis,
+          categories: time
+        }
+      },
+      seriesDevices: [
+        {
+          ...prevState.seriesDevices,
+          data: dataChart
+        }
+      ]
+    }));
+  };
+
+  getDataChartUser = async data => {
+    const cate = [];
+    const dataChart = [];
+    data.forEach(device => {
+      dataChart.push(device.count);
+      cate.push(device.createdAt);
+    });
+    const time = cate.map(t => {
+      return this.convertTime(t);
+    });
+    await this.setState(prevState => ({
+      optionsUsers: {
+        ...prevState.optionsUsers,
+        xaxis: {
+          ...prevState.optionsUsers.xaxis,
+          categories: time
+        }
+      },
+      seriesUsers: [
+        {
+          ...prevState.seriesUsers,
+          data: dataChart
+        }
+      ]
+    }));
+  };
+
+  getDataChartRouter = async data => {
+    const cate = [];
+    const dataChart = [];
+    data.forEach(device => {
+      dataChart.push(device.count);
+      cate.push(device.createdAt);
+    });
+    const time = cate.map(t => {
+      return this.convertTime(t);
+    });
+    await this.setState(prevState => ({
+      optionsRouters: {
+        ...prevState.optionsRouters,
+        xaxis: {
+          ...prevState.optionsRouters.xaxis,
+          categories: time
+        }
+      },
+      seriesRouters: [
+        {
+          ...prevState.seriesRouters,
+          data: dataChart
+        }
+      ]
+    }));
+  };
+
+  getDataChartTraffics = async data => {
+    const cate = [];
+    const dataChart = [];
+    data.forEach(device => {
+      dataChart.push(device.count);
+      cate.push(device.createdAt);
+    });
+    const time = cate.map(t => {
+      return this.convertTime(t);
+    });
+    await this.setState(prevState => ({
+      optionsTraffics: {
+        ...prevState.optionsTraffics,
+        xaxis: {
+          ...prevState.optionsTraffics.xaxis,
+          categories: time
+        }
+      },
+      seriesTraffics: [
+        {
+          ...prevState.seriesTraffics,
+          data: dataChart
+        }
+      ]
+    }));
+  };
+
+  convertTime = date => {
+    const day = new Date(date).getDate();
+    const month = new Date(date).getMonth();
+    const params = [month, day];
+    return params.join('-');
+  };
 
   render() {
     const { routers, users, devices, usedData } = this.state;
@@ -98,12 +283,34 @@ export default class AddDevice extends Component {
 
             <DataChart>
               <Chart
-                options={this.state.options}
-                series={this.state.series}
+                options={this.state.optionsDevices}
+                series={this.state.seriesDevices}
                 type="bar"
                 width="500"
               />
             </DataChart>
+            <DataChart>
+              <Chart
+                options={this.state.optionsUsers}
+                series={this.state.seriesUsers}
+                type="bar"
+                width="500"
+              />
+            </DataChart>
+            <DataChart>
+              <Chart
+                options={this.state.optionsRouters}
+                series={this.state.seriesRouters}
+                type="bar"
+                width="500"
+              />
+            </DataChart>
+            <Chart
+              options={this.state.optionsTraffics}
+              series={this.state.seriesTraffics}
+              type="bar"
+              width="500"
+            />
           </DashBoardContentLayout>
         </DashBoardContent>
       </>

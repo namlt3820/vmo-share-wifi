@@ -4,9 +4,7 @@ const EMAIL_MAX_LENGTH = 128;
 const PASS_WORD_MIN_LENGTH = 6;
 const PASS_WORD_MAX_LENGTH = 24;
 const USER_NAME_MIN_LENGTH = 1;
-const USER_NAME_MAX_LENGTH = 16;
-const NAME_MIN_LENGTH = 2;
-const NAME_MAX_LENGTH = 128;
+const USER_NAME_MAX_LENGTH = 25;
 const CODE_MIN_LENGTH = 4;
 const CODE_MAX_LENGTH = 24;
 // eslint-disable-next-line
@@ -61,15 +59,6 @@ class DataUtils {
       length >= USER_NAME_MIN_LENGTH &&
       length <= USER_NAME_MAX_LENGTH &&
       USERNAME_REGEX.test(username)
-    );
-  }
-
-  static isValidName(name) {
-    const length = name ? name.length : 0;
-    return (
-      length >= NAME_MIN_LENGTH &&
-      length <= NAME_MAX_LENGTH &&
-      NAME_REGEX.test(name)
     );
   }
 

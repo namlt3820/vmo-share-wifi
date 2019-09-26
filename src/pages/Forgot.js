@@ -15,6 +15,7 @@ import Validator, { EMAIL_REGEX } from '../utils/validator';
 import ForgotPwd from '../services/forgotPwd.service';
 import httpStatus from '../config/httpStatus';
 import Errors from '../commons/error_validate';
+import { getToken } from '../utils/getToken';
 
 const forgot = new ForgotPwd();
 export default class Forgot extends Component {
@@ -26,6 +27,10 @@ export default class Forgot extends Component {
       loading: false,
       redirect: false
     };
+  }
+
+  componentDidMount() {
+    getToken(this.props.history);
   }
 
   handleChange = event => {
