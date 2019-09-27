@@ -237,7 +237,7 @@ export const DataTop = styled.div`
 export const DataCard = styled.div`
   display: flex;
   flex-direction: column;
-  flex-basis: 20%;
+  flex-basis: ${props => (props.type === 'data' ? '27%' : '24%')};
   color: #ffffff;
   box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.22);
   padding: 1em;

@@ -33,25 +33,6 @@ export default class AddDevice extends Component {
     return null;
   }
 
-  // componentDidUpdate(prevProps, prevState) {}
-  // componentWillReceiveProps(props) {
-  //   const { _id, name } = props.userInfo;
-  //   console.log(name);
-  //   this.setState({
-  //     id: _id,
-  //     name
-  //   });
-  // }
-
-  // componentDidMount() {
-  //   const { _id, name } = this.props.userInfo;
-  //   console.log(name);
-  //   this.setState({
-  //     id: _id,
-  //     name
-  //   });
-  // }
-
   handleChangeForm = evt => {
     const { name, value } = evt.target;
     this.setState({ [name]: value });

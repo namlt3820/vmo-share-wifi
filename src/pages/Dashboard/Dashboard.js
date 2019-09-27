@@ -282,34 +282,41 @@ export default class DashBoard extends Component {
             </DataTop>
 
             <DataChart>
+              <h4>Active Devices</h4>
               <ChartStyle
                 options={this.state.optionsDevices}
                 series={this.state.seriesDevices}
                 type="bar"
-                width="500"
+                width="90%"
               />
             </DataChart>
             <DataChart>
+              <h4>User Registration</h4>
+
               <ChartStyle
                 options={this.state.optionsUsers}
                 series={this.state.seriesUsers}
                 type="bar"
-                width="500"
+                width="90%"
               />
             </DataChart>
             <DataChart>
+              <h4>Wifi Registration</h4>
+
               <ChartStyle
                 options={this.state.optionsRouters}
                 series={this.state.seriesRouters}
                 type="bar"
-                width="500"
+                width="90%"
               />
             </DataChart>
+            <h4>Data Traffic</h4>
+
             <ChartStyle
               options={this.state.optionsTraffics}
               series={this.state.seriesTraffics}
               type="bar"
-              width="500"
+              width="90%"
             />
           </DashBoardContentLayout>
         </DashBoardContent>

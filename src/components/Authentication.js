@@ -28,10 +28,6 @@ export const WrapperComponent = styled.div`
       height: 24px;
     }
   }
-
-  @media only screen and ${sizeDevices.laptopL} {
-    max-width: 1440px;
-  }
 `;
 
 export const WrapperForm = styled.div`
@@ -138,7 +134,7 @@ export const CheckBoxAccess = styled.div`
 `;
 
 export const CheckboxStyle = styled(Checkbox)`
-  padding: 0 5px;
+  padding-right: 5px;
 `;
 
 export const ButtonStyle = styled(Button)`

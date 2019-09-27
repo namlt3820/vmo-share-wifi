@@ -136,21 +136,21 @@ export default class UserDataDashboard extends Component {
         <DashBoardContent>
           <DashBoardContentLayout>
             <DataTop>
-              <DataCard>
+              <DataCard type="data">
                 <DataCardTop>
                   <Icon type="database" />
                   <h1>{totalDataToday} MB</h1>
                 </DataCardTop>
                 <DataCardBottom>Today</DataCardBottom>
               </DataCard>
-              <DataCard>
+              <DataCard type="data">
                 <DataCardTop>
                   <Icon type="database" />
                   <h1>{totalDataThisWeek} GB</h1>
                 </DataCardTop>
                 <DataCardBottom>This week</DataCardBottom>
               </DataCard>
-              <DataCard>
+              <DataCard type="data">
                 <DataCardTop>
                   <Icon type="database" />
                   <h1>{totalDataThisMonth} GB</h1>
@@ -171,11 +171,12 @@ export default class UserDataDashboard extends Component {
               />
             </DateRangePicker>
             <DataChart>
+              <h4>Used Data Per Day</h4>
               <ChartStyle
                 options={options}
                 series={series}
                 type="bar"
-                width="600"
+                width="90%"
               />
             </DataChart>
           </DashBoardContentLayout>

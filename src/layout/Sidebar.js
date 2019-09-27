@@ -70,9 +70,17 @@ class Sidebar extends Component {
     }
   };
 
+  toggle = () => {
+    this.setState({
+      openKeys: [''],
+      selectedKeys: ['']
+    });
+    this.props.toggle();
+  };
+
   render() {
     const { openKeys, selectedKeys } = this.state;
-    const { collapsed, onCollapse, toggle } = this.props;
+    const { collapsed, onCollapse } = this.props;
     const SideTreeOne = sidebarDataOne.map(item => (
       <StyleMenuItem
         key={item.key}
@@ -130,20 +138,19 @@ class Sidebar extends Component {
         theme="light"
       >
         <LogoDashBoard>
-          <Button
-            onClick={() => toggle()}
-            style={{ margin: 17, border: 'none' }}
-          >
+          <Button onClick={this.toggle} style={{ margin: 17, border: 'none' }}>
             <Icon type={collapsed ? 'menu' : 'close'} />
           </Button>
-          <img
-            src="assets/logo.png"
-            alt="Share Wifi"
-            style={{
-              display: `${!collapsed ? 'block' : 'none'}`,
-              transition: 'display 2s 2s 2s'
-            }}
-          />
+          <Link to="/dashboard">
+            <img
+              src="assets/logo.png"
+              alt="Share Wifi"
+              style={{
+                display: `${!collapsed ? 'block' : 'none'}`,
+                transition: 'display 2s 2s 2s'
+              }}
+            />
+          </Link>
         </LogoDashBoard>
         <Menu
           subMenuOpenDelay={0.3}
