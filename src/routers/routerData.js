@@ -1,27 +1,6 @@
 // The key property is used for Antd Menu Component
 export const sidebarData = [
   {
-    key: 'Wifi',
-    title: {
-      icon: 'wifi',
-      text: 'Wifi'
-    },
-    children: [
-      {
-        key: '/list',
-        text: 'All Routers',
-        icon: 'wifi',
-        path: '/routers'
-      },
-      {
-        key: '/addRouter',
-        text: 'Add Router',
-        icon: 'wifi',
-        path: '/addRouter'
-      }
-    ]
-  },
-  {
     key: 'Data',
     title: {
       text: 'Data',
@@ -67,6 +46,14 @@ export const sidebarDataOne = [
       icon: 'user',
       text: 'Accounts',
       path: '/allUser'
+    }
+  },
+  {
+    key: 'Wifi',
+    title: {
+      icon: 'wifi',
+      text: 'Routers',
+      path: '/routers'
     }
   }
 ];

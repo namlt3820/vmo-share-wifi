@@ -13,7 +13,7 @@ import {
 } from '../../components/DashboardStyle';
 import Router from '../../services/router.service';
 
-import { WrapperForm, WrapperInput } from '../../components/Authentication';
+import { WrapperInput } from '../../components/Authentication';
 import FormInput from '../../components/core/FormInput';
 import httpStatus from '../../config/httpStatus';
 
@@ -280,47 +280,45 @@ export default class ListRouter extends Component {
               onOk={this.handleOk}
               onCancel={this.handleCancel}
             >
-              <WrapperForm>
-                <WrapperInput>
-                  <FormInput
-                    placeholder="Enter Router Name"
-                    label="Name"
-                    name="name"
-                    value={name}
-                    handleChange={this.handleChange}
-                    type="text"
-                  />
-                  <FormInput
-                    placeholder="Enter Mac-Address"
-                    label="Mac-Address"
-                    name="macAddress"
-                    type="text"
-                    disabled={typeAction !== 'add'}
-                    // error={errors.macAddress}
-                    handleChange={this.handleChange}
-                    value={macAddress}
-                    icon="*"
-                  />
+              <WrapperInput>
+                <FormInput
+                  placeholder="Enter Router Name"
+                  label="Name"
+                  name="name"
+                  value={name}
+                  handleChange={this.handleChange}
+                  type="text"
+                />
+                <FormInput
+                  placeholder="Enter Mac-Address"
+                  label="Mac-Address"
+                  name="macAddress"
+                  type="text"
+                  disabled={typeAction !== 'add'}
+                  // error={errors.macAddress}
+                  handleChange={this.handleChange}
+                  value={macAddress}
+                  icon="*"
+                />
 
-                  <FormInput
-                    placeholder="Location"
-                    label="Location"
-                    name="location"
-                    type="text"
-                    handleChange={this.handleChange}
-                    value={location}
-                    icon="*"
-                  />
-                  <FormInput
-                    placeholder="Description"
-                    label="Description"
-                    name="description"
-                    value={description}
-                    handleChange={this.handleChange}
-                    type="text"
-                  />
-                </WrapperInput>
-              </WrapperForm>
+                <FormInput
+                  placeholder="Location"
+                  label="Location"
+                  name="location"
+                  type="text"
+                  handleChange={this.handleChange}
+                  value={location}
+                  icon="*"
+                />
+                <FormInput
+                  placeholder="Description"
+                  label="Description"
+                  name="description"
+                  value={description}
+                  handleChange={this.handleChange}
+                  type="text"
+                />
+              </WrapperInput>
             </Modal>
           ) : (
             ''
