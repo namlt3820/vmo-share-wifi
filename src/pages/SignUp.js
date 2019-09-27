@@ -106,6 +106,15 @@ export default class SignUp extends Component {
     this.setState({ checked: !checked });
   };
 
+  keyPressed = e => {
+    const { name, email, password } = this.state;
+    if (e.keyCode === 13) {
+      if (name && email && password) {
+        this.signUp();
+      }
+    }
+  };
+
   render() {
     const {
       name,
@@ -138,6 +147,7 @@ export default class SignUp extends Component {
               value={name}
               handleChange={this.handleChange}
               handleBlur={this.handleValidateUsername}
+              keyPressed={this.keyPressed}
             />
             <FormInput
               placeholder="Email"
@@ -147,6 +157,7 @@ export default class SignUp extends Component {
               value={email}
               handleChange={this.handleChange}
               handleBlur={this.handleValidateEmail}
+              keyPressed={this.keyPressed}
             />
             <FormInput
               placeholder="Password"
@@ -156,6 +167,7 @@ export default class SignUp extends Component {
               value={password}
               handleChange={this.handleChange}
               handleBlur={this.handleValidatePassword}
+              keyPressed={this.keyPressed}
             />
           </WrapperInput>
           <WrapperAction type="signup">

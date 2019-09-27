@@ -81,6 +81,15 @@ class Login extends Component {
     this.setState({ checked: !checked });
   };
 
+  keyPressed = e => {
+    const { email, password } = this.state;
+    if (e.keyCode === 13) {
+      if (email && password) {
+        this.login();
+      }
+    }
+  };
+
   render() {
     const { email, password, errors, loading } = this.state;
     return (
@@ -100,6 +109,7 @@ class Login extends Component {
               value={email}
               handleChange={this.handleChange}
               handleBlur={this.handleValidateEmail}
+              keyPressed={this.keyPressed}
             />
             <FormInput
               placeholder="Password"
@@ -109,6 +119,7 @@ class Login extends Component {
               value={password}
               handleChange={this.handleChange}
               handleBlur={this.handleValidatePassword}
+              keyPressed={this.keyPressed}
             />
           </WrapperInput>
           <WrapperAction type="login">

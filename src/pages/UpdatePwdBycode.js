@@ -81,6 +81,15 @@ class UpdatePwdBycode extends Component {
     });
   };
 
+  keyPressed = e => {
+    const { password, code } = this.state;
+    if (e.keyCode === 13) {
+      if (code && password) {
+        this.updatePwd();
+      }
+    }
+  };
+
   render() {
     const { password, errors, loading, code, redirect } = this.state;
     const result = redirect ? (
@@ -105,6 +114,7 @@ class UpdatePwdBycode extends Component {
               value={password}
               handleChange={this.handleChange}
               handleBlur={this.handleValidatePassword}
+              keyPressed={this.keyPressed}
             />
             <FormInput
               placeholder="Active Code"
@@ -114,6 +124,7 @@ class UpdatePwdBycode extends Component {
               value={code}
               handleChange={this.handleChange}
               handleBlur={this.handleValidateCode}
+              keyPressed={this.keyPressed}
             />
           </WrapperInput>
           <WrapperAction type="change">

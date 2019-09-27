@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Layout, Menu, Icon, Button, Badge, Dropdown } from 'antd';
 import styled from 'styled-components';
@@ -15,43 +14,7 @@ import {
 } from '../components/DashboardStyle';
 
 const { Header, Sider, Content } = Layout;
-const Wrapper = styled.div`
-  // height: 100vh;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
-`;
-
-// const menu = (
-//   <Menu>
-//     <Menu.Item key="0">
-//       <Icon type="profile" />
-//       <span>
-//         <LinkStyle
-//           to={{
-//             pathname: '/userInfomation',
-//             state: {
-//               type: 'myprofile'
-//             }
-//           }}
-//         >
-//           My Profile
-//         </LinkStyle>
-//       </span>
-//     </Menu.Item>
-//     <Menu.Divider />
-//     <Menu.Item key="1">
-//       <LinkStyle
-//         to={{
-//           pathname: '/changePwd'
-//         }}
-//       >
-//         Change Password
-//       </LinkStyle>
-//     </Menu.Item>
-//   </Menu>
-// );
+const Wrapper = styled.div``;
 
 class LayoutDashboard extends Component {
   constructor() {
@@ -176,28 +139,12 @@ class LayoutDashboard extends Component {
                 </LinkStyle>
               </StyleMenuItem>
               <Menu.Divider />
-              <StyleSubMenu
-                key="sub2"
-                title={
-                  <span>
-                    <Icon type="wifi" />
-                    <span>Wifi</span>
-                  </span>
-                }
-              >
-                <StyleMenuItem key="3">
-                  <Icon type="wifi" />
-                  <span>All Router</span>
-                  <Link to="/routers" />
-                </StyleMenuItem>
-                <StyleMenuItem key="4">
-                  <Icon type="wifi" />
-
-                  <LinkStyle to="/addRouter">
-                    <span>Add Router</span>
-                  </LinkStyle>
-                </StyleMenuItem>
-              </StyleSubMenu>
+              <StyleMenuItem key="3">
+                <Icon type="wifi" />
+                <LinkStyle to="/routers">
+                  <span>Routers</span>
+                </LinkStyle>
+              </StyleMenuItem>
               <Menu.Divider />
               <StyleSubMenu
                 key="sub3"

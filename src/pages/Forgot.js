@@ -65,9 +65,12 @@ export default class Forgot extends Component {
     });
   };
 
-  keyPressed = event => {
-    if (event.key === 'Enter') {
-      this.forgotPwd();
+  keyPressed = e => {
+    const { email } = this.state;
+    if (e.keyCode === 13) {
+      if (email) {
+        this.forgotPwd();
+      }
     }
   };
 

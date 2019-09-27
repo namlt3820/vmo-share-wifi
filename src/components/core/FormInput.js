@@ -12,7 +12,8 @@ export default class FormInput extends Component {
       error,
       label,
       handleChange,
-      keyPressed
+      keyPressed,
+      disabled
     } = this.props;
     return (
       <div>
@@ -24,6 +25,7 @@ export default class FormInput extends Component {
           onKeyDown={keyPressed}
           name={name}
           value={value}
+          disabled={disabled}
           type={type}
         />
         <Label type="error">{error}</Label>

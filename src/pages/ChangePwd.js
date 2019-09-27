@@ -86,6 +86,15 @@ class ChangePwd extends Component {
     });
   };
 
+  keyPressed = e => {
+    const { currentPassword, newPassword } = this.state;
+    if (e.keyCode === 13) {
+      if (currentPassword && newPassword) {
+        this.changePwd();
+      }
+    }
+  };
+
   render() {
     const { currentPassword, newPassword, errors, loading } = this.state;
     return (
@@ -104,6 +113,7 @@ class ChangePwd extends Component {
               value={currentPassword}
               handleChange={this.handleChange}
               handleBlur={this.handleValidateCurrentPassword}
+              keyPressed={this.keyPressed}
             />
             <FormInput
               placeholder="New Password"
@@ -113,6 +123,7 @@ class ChangePwd extends Component {
               value={newPassword}
               handleChange={this.handleChange}
               handleBlur={this.handleValidateNewPassword}
+              keyPressed={this.keyPressed}
             />
           </WrapperInput>
           <WrapperAction type="change">
