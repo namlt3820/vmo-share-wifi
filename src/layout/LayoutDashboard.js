@@ -14,36 +14,6 @@ import Sidebar from './Sidebar';
 
 const { Header, Content } = Layout;
 
-// const menu = (
-//   <Menu>
-//     <Menu.Item key="0">
-//       <Icon type="profile" />
-//       <span>
-//         <LinkStyle
-//           to={{
-//             pathname: '/userInfomation',
-//             state: {
-//               type: 'myprofile'
-//             }
-//           }}
-//         >
-//           My Profile
-//         </LinkStyle>
-//       </span>
-//     </Menu.Item>
-//     <Menu.Divider />
-//     <Menu.Item key="1">
-//       <LinkStyle
-//         to={{
-//           pathname: '/changePwd'
-//         }}
-//       >
-//         Change Password
-//       </LinkStyle>
-//     </Menu.Item>
-//   </Menu>
-// );
-
 class LayoutDashboard extends Component {
   constructor() {
     super();
@@ -123,32 +93,11 @@ class LayoutDashboard extends Component {
     return (
       <Wrapper>
         <Layout>
-          {/* <Sider
-            collapsible
-            onCollapse={this.onCollapse}
-            trigger={collapsed}
-            theme="light"
-            style={{ minWidth: '220px' }}
+          <Sidebar
             collapsed={collapsed}
-          > */}
-          {/* <LogoDashBoard>
-              <Button
-                onClick={this.toggle}
-                style={{ margin: 17, border: 'none' }}
-              >
-                <Icon type={collapsed ? 'menu' : 'close'} />
-              </Button>
-              <img
-                src="assets/logo.png"
-                alt="Share Wifi"
-                style={{
-                  display: `${!collapsed ? 'block' : 'none'}`,
-                  transition: 'display 2s 2s 2s'
-                }}
-              />
-            </LogoDashBoard> */}
-          <Sidebar collapsed={collapsed} onCollapse={this.onCollapse} />
-          {/* </Sider> */}
+            onCollapse={this.onCollapse}
+            toggle={this.toggle}
+          />
           <Layout>
             <Header
               style={{
