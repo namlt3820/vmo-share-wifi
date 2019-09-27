@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Layout, Menu, Icon } from 'antd';
+import { Layout, Menu, Icon, Button } from 'antd';
 import { sidebarData, sidebarDataOne, groupKey } from '../routers/routerData';
-import { StyleMenuItem } from '../components/DashboardStyle';
+import { StyleMenuItem, LogoDashBoard } from '../components/DashboardStyle';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -72,7 +72,7 @@ class Sidebar extends Component {
 
   render() {
     const { openKeys, selectedKeys } = this.state;
-    const { collapsed, onCollapse } = this.props;
+    const { collapsed, onCollapse, toggle } = this.props;
     const SideTreeOne = sidebarDataOne.map(item => (
       <StyleMenuItem
         key={item.key}
@@ -83,7 +83,10 @@ class Sidebar extends Component {
         }}
       >
         <Icon type={item.title.icon} />
-        <Link to={item.title.path} style={{ display: 'contents' }}>
+        <Link
+          to={item.title.path}
+          style={{ display: !collapsed ? 'contents' : 'none' }}
+        >
           <span>{item.title.text}</span>
         </Link>
       </StyleMenuItem>
@@ -126,6 +129,22 @@ class Sidebar extends Component {
         width={250}
         theme="light"
       >
+        <LogoDashBoard>
+          <Button
+            onClick={() => toggle()}
+            style={{ margin: 17, border: 'none' }}
+          >
+            <Icon type={collapsed ? 'menu' : 'close'} />
+          </Button>
+          <img
+            src="assets/logo.png"
+            alt="Share Wifi"
+            style={{
+              display: `${!collapsed ? 'block' : 'none'}`,
+              transition: 'display 2s 2s 2s'
+            }}
+          />
+        </LogoDashBoard>
         <Menu
           subMenuOpenDelay={0.3}
           openKeys={openKeys}

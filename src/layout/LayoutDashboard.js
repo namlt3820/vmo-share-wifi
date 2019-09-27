@@ -93,7 +93,11 @@ class LayoutDashboard extends Component {
     return (
       <Wrapper>
         <Layout>
-          <Sidebar collapsed={collapsed} onCollapse={this.onCollapse} />
+          <Sidebar
+            collapsed={collapsed}
+            onCollapse={this.onCollapse}
+            toggle={this.toggle}
+          />
           <Layout>
             <Header
               style={{
