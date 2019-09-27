@@ -200,19 +200,6 @@ export const DashboardBottomText = styled.div`
   }
 `;
 
-// export const UnderLine = styled.h4`
-//   position: relative;
-//   ::after {
-//     content: '';
-//     height: 1px;
-//     background: #333;
-//     position: absolute;
-//     width: 18%;
-//     top: 1.75em;
-//     left: 0;
-//   }
-// `;
-
 export const ModalStyle = styled(Modal)`
   .ant-modal-footer {
     padding: 0;
@@ -310,4 +297,30 @@ export const ChartStyle = styled(Chart)`
   .apexcharts-menu-icon {
     display: none;
   }
+`;
+
+export const ContentUpdateInfo = styled.div`
+  width: 450px;
+  margin: 0 auto;
+`;
+
+export const UpdateInfoTop = styled.div`
+  p:first-child {
+    marign: 0;
+  }
+`;
+
+export const UpdateInfoTopTitle = styled.div`
+  p {
+    margin-bottom: 5px;
+    :last-child {
+      margin-bottom: 20px;
+    }
+  }
+`;
+
+export const UpdateInfoBottom = styled.div``;
+
+export const UpdateInfoBottomType = styled.div`
+  margin-bottom: 10px;
 `;

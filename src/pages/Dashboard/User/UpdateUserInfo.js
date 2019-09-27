@@ -3,9 +3,14 @@ import { Breadcrumb, Icon, Upload, Select } from 'antd';
 import {
   DashBoardTittle,
   DashBoardContent,
-  DashBoardContentLayout
+  DashBoardContentLayout,
+  ContentUpdateInfo,
+  UpdateInfoTop,
+  UpdateInfoTopTitle,
+  UpdateInfoBottom,
+  UpdateInfoBottomType
 } from '../../../components/DashboardStyle';
-import { ButtonStyle, WrapperAction } from '../../../components/Authentication';
+import { ButtonStyle, WrapperButton } from '../../../components/Authentication';
 import FormInput from '../../../components/core/FormInput';
 import Validator, { EMAIL_REGEX } from '../../../utils/validator';
 import UserManager from '../../../services/mngtUser.service';
@@ -84,7 +89,7 @@ export default class UpdateUserInfo extends Component {
 
   handleValidateName = () => {
     const { name, errors } = this.state;
-    const validateName = Validator.isValidName(name);
+    const validateName = Validator.isValidUsername(name);
     errors.name = Errors.handleValidate(validateName, name, 'name');
     this.setState({ errors });
   };
@@ -121,85 +126,93 @@ export default class UpdateUserInfo extends Component {
         </DashBoardTittle>
         <DashBoardContent>
           <DashBoardContentLayout>
-            <div>
-              <div>
-                <Upload
-                  name="avatar"
-                  listType="picture-card"
-                  className="avatar-uploader"
-                  showUploadList={false}
-                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  beforeUpload={beforeUpload}
-                  onChange={this.handleChangeImage}
+            <ContentUpdateInfo>
+              <UpdateInfoTop>
+                <div>
+                  <Upload
+                    name="avatar"
+                    listType="picture-card"
+                    className="avatar-uploader"
+                    showUploadList={false}
+                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    beforeUpload={beforeUpload}
+                    onChange={this.handleChangeImage}
+                  >
+                    {imageUrl ? (
+                      <img
+                        src={imageUrl}
+                        alt="avatar"
+                        style={{ width: '100%' }}
+                      />
+                    ) : (
+                      uploadButton
+                    )}
+                  </Upload>
+                </div>
+                <UpdateInfoTopTitle>
+                  <FormInput
+                    popup="popup"
+                    placeholder="Enter Name"
+                    label="Name"
+                    name="name"
+                    type="text"
+                    error={errors.name}
+                    value={name}
+                    handleChange={this.handleChange}
+                    handleBlur={this.handleValidateName}
+                  />
+                  <p>Email</p>
+                  <p>{email}</p>
+                </UpdateInfoTopTitle>
+              </UpdateInfoTop>
+              <UpdateInfoBottom>
+                <h5>Payment</h5>
+                <div>
+                  <UpdateInfoBottomType>Type</UpdateInfoBottomType>
+                  <Select
+                    defaultValue="Credit Card"
+                    style={{ width: 120 }}
+                    onChange={this.handleChange}
+                  >
+                    <Option value={0}>VISA</Option>
+                    <Option value={1}>MasterCard</Option>
+                  </Select>
+                  <FormInput
+                    popup="popup"
+                    placeholder="Enter Number"
+                    label="Number"
+                    name="number"
+                    type="text"
+                    // error={errors.password}
+                    handleChange={this.handleChangeForm}
+                    handleBlur={this.handleValidateNumber}
+                  />
+                  <FormInput
+                    popup="popup"
+                    placeholder="Enter Expiry Date"
+                    label="Expiry Date"
+                    name="expirydate"
+                    type="text"
+                    // error={errors.password}
+                    handleChange={this.handleChangeForm}
+                    handleBlur={this.handleValidateExpiryDate}
+                  />
+                </div>
+              </UpdateInfoBottom>
+              <WrapperButton type="login">
+                <ButtonStyle
+                  onClick={this.editUser}
+                  loading={loading}
+                  disabled={errors.name || !name}
+                  adduser="adduser"
                 >
-                  {imageUrl ? (
-                    <img
-                      src={imageUrl}
-                      alt="avatar"
-                      style={{ width: '100%' }}
-                    />
-                  ) : (
-                    uploadButton
-                  )}
-                </Upload>
-              </div>
-              <div>
-                <FormInput
-                  placeholder="Enter Name"
-                  label="Name"
-                  name="name"
-                  type="text"
-                  error={errors.name}
-                  value={name}
-                  handleChange={this.handleChange}
-                  handleBlur={this.handleValidateName}
-                />
-                <p>Email: </p>
-                <p>{email}</p>
-              </div>
-            </div>
-            <div>
-              <h4>Payment</h4>
-              <div>
-                <p>Type</p>
-                <Select
-                  defaultValue="Credit Card"
-                  style={{ width: 120 }}
-                  onChange={this.handleChange}
-                >
-                  <Option value={0}>VISA</Option>
-                  <Option value={1}>MasterCard</Option>
-                </Select>
-                <FormInput
-                  placeholder="Enter Number"
-                  label="Number"
-                  name="number"
-                  type="text"
-                  // error={errors.password}
-                  handleChange={this.handleChangeForm}
-                  handleBlur={this.handleValidateNumber}
-                />
-                <FormInput
-                  placeholder="Enter Expiry Date"
-                  label="Expiry Date"
-                  name="expirydate"
-                  type="text"
-                  // error={errors.password}
-                  handleChange={this.handleChangeForm}
-                  handleBlur={this.handleValidateExpiryDate}
-                />
-              </div>
-            </div>
-            <WrapperAction type="login">
-              <ButtonStyle
-                onClick={this.editUser}
-                loading={loading}
-                disabled={errors.name || !name}
-              >
-                Save
-              </ButtonStyle>
-              <ButtonStyle background="none">Cancel</ButtonStyle>
-            </WrapperAction>
+                  Save
+                </ButtonStyle>
+                <ButtonStyle background="none" adduser="adduser">
+                  Cancel
+                </ButtonStyle>
+              </WrapperButton>
+            </ContentUpdateInfo>
           </DashBoardContentLayout>
         </DashBoardContent>
       </>
