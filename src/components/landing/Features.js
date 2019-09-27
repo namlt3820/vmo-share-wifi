@@ -8,6 +8,7 @@ import bg2 from './assets/images/header-bg-2.png';
 import icon1 from './assets/images/icon-1.png';
 import icon2 from './assets/images/icon-2.png';
 import icon3 from './assets/images/icon-3.png';
+import icon4 from './assets/images/icon-4.png';
 
 const Introduction = ({ className }) => (
   <div className={className}>
@@ -151,7 +152,7 @@ const Cards = ({ className }) => {
       content: 'We are providing our service to many countries in the world.'
     },
     {
-      icon: icon3,
+      icon: icon4,
       title: 'Get money from wifi device',
       content:
         'You can earn money by connection your wifi devices to shared wifi network.'
