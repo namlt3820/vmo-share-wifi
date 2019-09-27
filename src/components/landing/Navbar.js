@@ -7,27 +7,53 @@ import $ from 'jquery';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import logo from './assets/images/logo.png';
 
+const highlightScrollspy = () => {
+  const SECTIONS = ['home', 'features', 'aboutus', 'pricing', 'contact'];
+  const highlight = SECTIONS.find(
+    section => document.getElementById(section).getBoundingClientRect().top >= 0
+  );
+
+  $('#navbar-landing li a').css({
+    borderBottom: 'none'
+  });
+
+  $(`#navbar-landing li a[href="#${highlight}"]`).css({
+    borderBottom: '3px solid #49a1fc'
+  });
+};
+
 class Navbar extends Component {
   componentDidMount() {
+    $(window).one('load', highlightScrollspy);
+
     window.addEventListener('scroll', this.handleScroll);
+
     $(document).click(function() {
       $(document).mouseup(function(e) {
         const container = $('#navbar-landing');
 
-        if (!container.is(e.target) && container.has(e.target).length === 0) {
-          $('.navbar-toggler-icon').click();
+        if (
+          !container.is(e.target) &&
+          container.has(e.target).length === 0 &&
+          $(document).width() < 385
+        ) {
+          $('.navbar-collapse').attr('class', 'navbar-collapse collapse');
         }
       });
     });
-    $('.nav-link.scrollspy:not(".always"):not(".home")').click(function() {
+
+    $('.nav-link.scrollspy:not(".always")').click(function() {
       const divId = $(this).attr('href');
       $('html, body').animate(
         {
           scrollTop: $(divId).offset().top - 78
         },
-        500
+        200,
+        highlightScrollspy
       );
-      $('.navbar-toggler-icon').click();
+      if ($(document).width() < 385) {
+        $('.navbar-toggler-icon').click();
+      }
     });
   }
 
@@ -37,6 +63,10 @@ class Navbar extends Component {
   }
 
   handleScroll = () => {
+    $('#navbar-landing li a').css({
+      borderBottom: 'none'
+    });
+
     if ($(document).width() > 385) {
       if (window.scrollY > 20) {
         $('#navbar-landing').css({
@@ -157,10 +187,6 @@ const StyledNavbar = styled(Navbar)`
     }
   }
 
-  li > a.active {
-    border-bottom: 3px solid #49a1fc;
-  }
-
   li > a.always {
     border-radius: 0.25rem;
     border: 1px solid #49a1fc;
@@ -176,6 +202,7 @@ const StyledNavbar = styled(Navbar)`
 
     &.active {
       color: #49a1fc !important;
+      border-bottom: 3px solid #49a1fc !important;
     }
 
     @media only screen and (min-width: ${props => props.theme.breakpoints.sm}) {
