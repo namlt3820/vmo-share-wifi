@@ -5,6 +5,7 @@ import FormInput from '../components/core/FormInput';
 import {
   WrapperComponent,
   WrapperForm,
+  WrapperFormContent,
   Logo,
   WrapperInput,
   WrapperAction,
@@ -86,27 +87,29 @@ export default class Forgot extends Component {
     ) : (
       <WrapperComponent type="forgot">
         <WrapperForm form="forgot">
-          <Logo>
-            <img src="assets/logo.png" alt="Share Wifi" />
-            <div>Forgot Password</div>
-          </Logo>
-          <WrapperInput>
-            <FormInput
-              placeholder="Email"
-              name="email"
-              type="email"
-              error={errors.email}
-              value={email}
-              keyPressed={this.keyPressed}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidateEmail}
-            />
-          </WrapperInput>
-          <WrapperAction type="forgot">
-            <ButtonStyle onClick={this.forgotPwd} loading={loading}>
-              Send recovery email
-            </ButtonStyle>
-          </WrapperAction>
+          <WrapperFormContent>
+            <Logo>
+              <img src="assets/logo.png" alt="Share Wifi" />
+              <div>Forgot Password</div>
+            </Logo>
+            <WrapperInput>
+              <FormInput
+                placeholder="Email"
+                name="email"
+                type="email"
+                error={errors.email}
+                value={email}
+                keyPressed={this.keyPressed}
+                handleChange={this.handleChange}
+                handleBlur={this.handleValidateEmail}
+              />
+            </WrapperInput>
+            <WrapperAction type="forgot">
+              <ButtonStyle onClick={this.forgotPwd} loading={loading}>
+                Send recovery email
+              </ButtonStyle>
+            </WrapperAction>
+          </WrapperFormContent>
         </WrapperForm>
       </WrapperComponent>
     );

@@ -6,23 +6,27 @@ import { sizeDevices } from '../layout/sizeDevices';
 export const WrapperComponent = styled.div`
   display: flex;
   flex-direction: column;
-  height: ${props =>
-    props.type === 'forgot' ? 'calc(100vh - 250px);' : '100vh'};
-  padding: 3em 1.5em 4em;
-  margin: 0 auto;
-  @media only screen and ${sizeDevices.mobileL} {
-    max-width: 540px;
-  }
+  max-width: 100%;
 
   @media only screen and ${sizeDevices.tablet} {
-    max-width: 720px;
-    width: 450px;
-  }
+    display: flex;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    ::before {
+      flex-grow: 1;
+      content: '';
+      display: block;
+      height: 24px;
+    }
 
-  @media only screen and ${sizeDevices.laptop} {
-    max-width: 960px;
-    padding-bottom: 10em;
-    padding-top: 3em;
+    ::after {
+      flex-grow: 1;
+      content: '';
+      display: block;
+      height: 24px;
+    }
   }
 
   @media only screen and ${sizeDevices.laptopL} {
@@ -31,41 +35,44 @@ export const WrapperComponent = styled.div`
 `;
 
 export const WrapperForm = styled.div`
-  // height: 100vh;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  max-width: 100%;
+  position: relative;
+  z-index: 2;
 
   @media only screen and ${sizeDevices.tablet} {
-    background: #fff;
-    padding: 2em 2em;
-    margin-bottom: 2em;
-    border-radius: 10px;
+    // background: #fff;
+    // padding: 2em 2em;
+    // margin-bottom: 2em;
+    // border-radius: 10px;
+    width: 450px;
+    min-height: 0;
+    flex-shrink: 0;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+    transition: 0.2s;
+  }
+`;
+
+export const WrapperFormContent = styled.div`
+  flex-grow: 1;
+  overflow: hidden;
+  padding: 24px 24px 36px;
+
+  @media only screen and ${sizeDevices.mobileL} {
+    padding: 48px 40px 36px;
   }
 
-  @media only screen and ${sizeDevices.laptopL} {
-    margin-top: 9em;
-    height: 57vh;
+  @media only screen and ${sizeDevices.tablet} {
+    height: auto;
+    min-height: 500px;
+    overflow-y: auto;
   }
-
-  // @media only screen and ${sizeDevices.xl} {
-  //   width: 700px;
-  //   margin: 0 auto;
-  //   padding: 2.5em 3em 1em;
-  //   font-size: 22px;
-  // }
-
-  // display: flex;
-  // position: relative;
-  // flex-direction: column;
-  // align-items: center;
-  // width: 450px;
-  // background: #ffffff;
-  // padding: 2.5em;
-  // margin-bottom: 3em;
-  // line-height: 2em;
-  // width: 34%;
-  // height: 80%;
 `;
 
 export const Logo = styled.div`
@@ -79,35 +86,12 @@ export const Logo = styled.div`
   }
   p {
     color: gray;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
   }
-
-  @media only screen and ${sizeDevices.tablet} {
-    img {
-      width: 185px
-    }
-    div {
-      font-size: 20px;
-    }
+  div {
+    font-size: 24px;
   }
-
-  // @media only screen and ${sizeDevices.laptopL} {
-  //   img {
-  //     width: 300px
-  //   }
-  //   div {
-  //     font-size: 26px;
-  //   }
-  // }
-
-  // @media only screen and ${sizeDevices.xl} {
-  //   margin-bottom: 3em;
-  //   img {
-  //       height: 2.5em
-  //       margin-bottom: 0.5em;
-  //     }
-  // }
 `;
 
 export const WrapperInput = styled.div`
@@ -133,23 +117,11 @@ export const InputStyle = styled.input`
   // height: 32px;
   width: 100%;
   padding: 4px 11px;
-  font-size: 16px;
+  font-size: ${props => (props.popup === 'popup' ? '17px' : '20px')};
   line-height: 1.5;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
-
-  @media only screen and ${sizeDevices.tablet} {
-    font-size: 20px;
-  }
-
-  // @media only screen and ${sizeDevices.laptopL} {
-  //   font-size: 27px;
-  // }
-
-//   @media only screen and ${sizeDevices.xl} {
-//     font-size: 20px;
-//   }
-// `;
+`;
 
 export const WrapperAction = styled.div`
   // width: 100%;
@@ -172,10 +144,10 @@ export const CheckboxStyle = styled(Checkbox)`
 export const ButtonStyle = styled(Button)`
   font-size: 16px;
   margin: 0.5em 0 1.5em;
-  width: 100%;
+  width: ${props => (props.adduser !== 'adduser' ? '100%' : '40%')};
   height: 2.5em;
   background: #007ed9;
-  color: ${props => (props.background !== 'none' ? '#fff' : '#333')};
+  color: #fff;
   font-weight: 700;
   :hover {
     background: #007ed9;
@@ -197,20 +169,6 @@ export const ButtonStyle = styled(Button)`
       color: #fff;
     }
   }
-
-  @media only screen and ${sizeDevices.tablet} {
-    // height: 3.75em;
-    // margin: 2em 0;
-    font-size: 17px;
-  }
-
-  // @media only screen and ${sizeDevices.laptopL} {
-  //   font-size: 27px;
-  // }
-
-  // @media only screen and ${sizeDevices.xl} {
-  //   font-size: 20px;
-  // }
 `;
 
 export const Bottom = styled.div`
@@ -219,42 +177,31 @@ export const Bottom = styled.div`
   span {
     align-items: center;
     display: flex;
-  }
-
-  @media only screen and ${sizeDevices.tablet} {
-    // height: 3.75em;
-    // margin: 2em 0;
-    font-size: 17px;
+    font-size: 16px;
   }
 `;
 
 export const OutSide = styled.div`
   display: flex;
   align-items: center;
+  margin-top: 20px;
   justify-content: center;
-  font-size: 15px;
+  font-size: 16px;
   a {
     color: ##007ed9;
   }
-
-  @media only screen and ${sizeDevices.tablet} {
-    // margin-top: 3em;
-    font-size: 17px;
-  }
-
-  // @media only screen and ${sizeDevices.laptopL} {
-  //   font-size: 27px;
-  // }
-
-  // @media only screen and ${sizeDevices.xl} {
-  //   font-size: 22px;
-  // }
 `;
 
 export const Forgot = styled.span`
   // a {
   //   color: #333;
   // }
+`;
+
+export const WrapperButton = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export default class Authentication extends Component {

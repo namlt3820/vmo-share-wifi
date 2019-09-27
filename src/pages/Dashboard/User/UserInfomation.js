@@ -103,10 +103,10 @@ class UserInfomation extends Component {
         <DashBoardContentLayout>
           <DashboardTop>
             <Skeleton loading={loading} active>
-              <img alt="" src="assets/logo.png" />
+              <img alt="" src="assets/user.png" />
               <DashboardTopText>
-                <h3>{name}</h3>
-                <h5>{role === 0 ? 'Admin' : 'User'}</h5>
+                <h4>{name}</h4>
+                <h6>{role === 0 ? 'Admin' : 'User'}</h6>
                 <Button>
                   <Link
                     to={{
@@ -127,24 +127,24 @@ class UserInfomation extends Component {
               <Tabs defaultActiveKey="1">
                 <TabPane tab="About" key="1" style={{ padding: '0 4em' }}>
                   <DashboardBottomText>
-                    <h4>Email:</h4>
+                    <h6>Email:</h6>
                     <p>{email}</p>
                   </DashboardBottomText>
                   <Divider />
 
                   <div>
-                    <h4>Payment</h4>
+                    <h5>Payment</h5>
                     <div>
                       <DashboardBottomText>
-                        <h4>Type:</h4>
+                        <h6>Type:</h6>
                         <p>Credit Card</p>
                       </DashboardBottomText>
                       <DashboardBottomText>
-                        <h4>Number:</h4>
+                        <h6>Number:</h6>
                         <p>09238982983</p>
                       </DashboardBottomText>
                       <DashboardBottomText>
-                        <h4>Expiry Date:</h4>
+                        <h6>Expiry Date:</h6>
                         <p>2019/08/10</p>
                       </DashboardBottomText>
                     </div>
@@ -153,17 +153,17 @@ class UserInfomation extends Component {
                 <TabPane tab="Devices" key="2" style={{ padding: '0 4em' }}>
                   <div>
                     <DashboardBottomText>
-                      <h4>SW Devices</h4>
+                      <h5>SW Devices</h5>
                     </DashboardBottomText>
                     {Devices.map(dv => {
                       return (
                         <div key={dv.id}>
                           <DashboardBottomText>
-                            <h4>Name</h4>
+                            <h6>Name</h6>
                             <p>{dv.name}</p>
                           </DashboardBottomText>
                           <DashboardBottomText>
-                            <h4>Mac-Address:</h4>
+                            <h6>Mac-Address:</h6>
                             <p>{dv.mac_address}</p>
                           </DashboardBottomText>
                         </div>
@@ -171,17 +171,17 @@ class UserInfomation extends Component {
                     })}
                     <Divider />
                     <DashboardBottomText>
-                      <h4>SW Routers</h4>
+                      <h5>SW Routers</h5>
                     </DashboardBottomText>
                     {Routers.map(rt => {
                       return (
                         <div key={rt.id}>
                           <DashboardBottomText>
-                            <h4>Name</h4>
+                            <h6>Name</h6>
                             <p>{rt.name}</p>
                           </DashboardBottomText>
                           <DashboardBottomText>
-                            <h4>Mac-Address:</h4>
+                            <h6>Mac-Address:</h6>
                             <p>{rt.mac_address}</p>
                           </DashboardBottomText>
                         </div>

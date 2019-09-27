@@ -2,13 +2,10 @@ import React, { Component } from 'react';
 import { Breadcrumb, Icon, Upload, Select } from 'antd';
 import {
   DashBoardTittle,
-  DashBoardContent
+  DashBoardContent,
+  DashBoardContentLayout
 } from '../../../components/DashboardStyle';
-import {
-  ButtonStyle,
-  WrapperForm,
-  WrapperAction
-} from '../../../components/Authentication';
+import { ButtonStyle, WrapperAction } from '../../../components/Authentication';
 import FormInput from '../../../components/core/FormInput';
 import Validator, { EMAIL_REGEX } from '../../../utils/validator';
 import UserManager from '../../../services/mngtUser.service';
@@ -123,7 +120,7 @@ export default class UpdateUserInfo extends Component {
           </Breadcrumb>
         </DashBoardTittle>
         <DashBoardContent>
-          <WrapperForm>
+          <DashBoardContentLayout>
             <div>
               <div>
                 <Upload
@@ -170,8 +167,8 @@ export default class UpdateUserInfo extends Component {
                   style={{ width: 120 }}
                   onChange={this.handleChange}
                 >
-                  <Option value={0}>Creadit Card</Option>
-                  <Option value={1}>User</Option>
+                  <Option value={0}>VISA</Option>
+                  <Option value={1}>MasterCard</Option>
                 </Select>
                 <FormInput
                   placeholder="Enter Number"
@@ -203,7 +200,7 @@ export default class UpdateUserInfo extends Component {
               </ButtonStyle>
               <ButtonStyle background="none">Cancel</ButtonStyle>
             </WrapperAction>
-          </WrapperForm>
+          </DashBoardContentLayout>
         </DashBoardContent>
       </>
     );

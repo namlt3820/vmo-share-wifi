@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Breadcrumb, Icon } from 'antd';
-import Chart from 'react-apexcharts';
 import {
   DashBoardTittle,
   DashBoardContent,
@@ -9,7 +8,8 @@ import {
   DataCard,
   DataCardTop,
   DataCardBottom,
-  DataChart
+  DataChart,
+  ChartStyle
 } from '../../components/DashboardStyle';
 import DashboardManagerment from '../../services/dashboard.service';
 
@@ -282,7 +282,7 @@ export default class DashBoard extends Component {
             </DataTop>
 
             <DataChart>
-              <Chart
+              <ChartStyle
                 options={this.state.optionsDevices}
                 series={this.state.seriesDevices}
                 type="bar"
@@ -290,7 +290,7 @@ export default class DashBoard extends Component {
               />
             </DataChart>
             <DataChart>
-              <Chart
+              <ChartStyle
                 options={this.state.optionsUsers}
                 series={this.state.seriesUsers}
                 type="bar"
@@ -298,14 +298,14 @@ export default class DashBoard extends Component {
               />
             </DataChart>
             <DataChart>
-              <Chart
+              <ChartStyle
                 options={this.state.optionsRouters}
                 series={this.state.seriesRouters}
                 type="bar"
                 width="500"
               />
             </DataChart>
-            <Chart
+            <ChartStyle
               options={this.state.optionsTraffics}
               series={this.state.seriesTraffics}
               type="bar"

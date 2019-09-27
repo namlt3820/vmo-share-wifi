@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Breadcrumb, Icon, DatePicker } from 'antd';
-import Chart from 'react-apexcharts';
 import moment from 'moment';
 import {
   DashBoardTittle,
@@ -11,7 +10,8 @@ import {
   DataCardTop,
   DataCardBottom,
   DateRangePicker,
-  DataChart
+  DataChart,
+  ChartStyle
 } from '../../../components/DashboardStyle';
 import UserData from '../../../services/userdata.service';
 import httpStatus from '../../../config/httpStatus';
@@ -171,7 +171,12 @@ export default class UserDataDashboard extends Component {
               />
             </DateRangePicker>
             <DataChart>
-              <Chart options={options} series={series} type="bar" width="600" />
+              <ChartStyle
+                options={options}
+                series={series}
+                type="bar"
+                width="600"
+              />
             </DataChart>
           </DashBoardContentLayout>
         </DashBoardContent>

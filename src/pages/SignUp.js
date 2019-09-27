@@ -3,6 +3,7 @@ import { Redirect, Link } from 'react-router-dom';
 import {
   WrapperComponent,
   WrapperForm,
+  WrapperFormContent,
   Logo,
   WrapperInput,
   WrapperAction,
@@ -134,55 +135,60 @@ export default class SignUp extends Component {
     ) : (
       <WrapperComponent>
         <WrapperForm form="login">
-          <Logo>
-            <img src="assets/logo.png" alt="Share Wifi" />
-            <div>Create your account</div>
-          </Logo>
-          <WrapperInput>
-            <FormInput
-              placeholder="Name"
-              name="name"
-              type="text"
-              error={errors.name}
-              value={name}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidateUsername}
-              keyPressed={this.keyPressed}
-            />
-            <FormInput
-              placeholder="Email"
-              name="email"
-              type="email"
-              error={errors.email}
-              value={email}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidateEmail}
-              keyPressed={this.keyPressed}
-            />
-            <FormInput
-              placeholder="Password"
-              name="password"
-              type="password"
-              error={errors.password}
-              value={password}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidatePassword}
-              keyPressed={this.keyPressed}
-            />
-          </WrapperInput>
-          <WrapperAction type="signup">
-            <CheckBoxAccess type="signup">
-              <CheckboxStyle checked={checked} onChange={this.handleCheckbox} />
-              <div>I accept the Terms and Conditions</div>
-            </CheckBoxAccess>
-            <ButtonStyle
-              onClick={this.signUp}
-              loading={loading}
-              disabled={!checked || !name || !email || !password}
-            >
-              SignUp
-            </ButtonStyle>
-          </WrapperAction>
+          <WrapperFormContent>
+            <Logo>
+              <img src="assets/logo.png" alt="Share Wifi" />
+              <div>Create your account</div>
+            </Logo>
+            <WrapperInput>
+              <FormInput
+                placeholder="Name"
+                name="name"
+                type="text"
+                error={errors.name}
+                value={name}
+                handleChange={this.handleChange}
+                handleBlur={this.handleValidateUsername}
+                keyPressed={this.keyPressed}
+              />
+              <FormInput
+                placeholder="Email"
+                name="email"
+                type="email"
+                error={errors.email}
+                value={email}
+                handleChange={this.handleChange}
+                handleBlur={this.handleValidateEmail}
+                keyPressed={this.keyPressed}
+              />
+              <FormInput
+                placeholder="Password"
+                name="password"
+                type="password"
+                error={errors.password}
+                value={password}
+                handleChange={this.handleChange}
+                handleBlur={this.handleValidatePassword}
+                keyPressed={this.keyPressed}
+              />
+            </WrapperInput>
+            <WrapperAction type="signup">
+              <CheckBoxAccess type="signup">
+                <CheckboxStyle
+                  checked={checked}
+                  onChange={this.handleCheckbox}
+                />
+                <div>I accept the Terms and Conditions</div>
+              </CheckBoxAccess>
+              <ButtonStyle
+                onClick={this.signUp}
+                loading={loading}
+                disabled={!checked || !name || !email || !password}
+              >
+                SignUp
+              </ButtonStyle>
+            </WrapperAction>
+          </WrapperFormContent>
         </WrapperForm>
         <OutSide>
           Already have an account?&nbsp;
