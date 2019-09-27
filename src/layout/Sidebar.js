@@ -133,22 +133,6 @@ class Sidebar extends Component {
           mode="inline"
           onOpenChange={this.OpenChange}
         >
-          {/* <LogoDashBoard>
-            <Button
-              onClick={this.toggle}
-              style={{ margin: 17, border: 'none' }}
-            >
-              <Icon type={collapsed ? 'menu' : 'close'} />
-            </Button>
-            <img
-              src="assets/logo.png"
-              alt="Share Wifi"
-              style={{
-                display: `${!collapsed ? 'block' : 'none'}`,
-                transition: 'display 2s 2s 2s'
-              }}
-            />
-          </LogoDashBoard> */}
           {SideTreeOne}
           {SideTree}
         </Menu>
