@@ -1,120 +1,60 @@
 // The key property is used for Antd Menu Component
 export const sidebarData = [
   {
-    key: 'Dashboard',
+    key: 'Data',
     title: {
-      icon: 'bank',
-      text: 'Quản lý cơ sở'
+      text: 'Data',
+      icon: 'database'
     },
     children: [
       {
-        key: '/danh-sach-co-so',
-        text: 'Danh sách cơ sở',
-        path: '/danh-sach-co-so'
+        key: '/userData',
+        text: 'User Data',
+        icon: 'database',
+        path: '/userData'
       },
       {
-        key: '/thong-tin-co-so',
-        text: 'Thông tin cơ sở',
-        path: '/thong-tin-co-so'
+        key: '/wifiData',
+        text: 'Wifi Data',
+        icon: 'wifi',
+        path: '/wifiData'
       }
     ]
   },
   {
-    key: 'Quản lý khách hàng',
+    key: 'Payment',
     title: {
-      icon: 'solution',
-      text: 'Quản lý khách hàng'
-    },
-    children: [
-      {
-        key: 'Thông tin khách hàng',
-        text: 'Thông tin khách hàng',
-        path: '/thong-tin-khach-hang'
-      },
-      {
-        key: 'Thêm khách hàng',
-        text: 'Thêm khách hàng',
-        path: '/them-khach-hang'
-      }
-    ]
-  },
-  {
-    key: 'Quản lý nhân viên',
-    title: {
-      icon: 'team',
-      text: 'Quản lý nhân viên'
-    },
-    children: [
-      {
-        key: '/danh-sach-nhan-vien',
-        text: 'Danh sách nhân viên',
-        path: '/danh-sach-nhan-vien'
-      },
-      {
-        key: '/danh-sach-hop-dong',
-        text: 'Danh sách hợp đồng',
-        path: '/danh-sach-hop-dong'
-      },
-      {
-        key: '/danh-sach-nhan-vien/thong-tin-nhan-vien',
-        text: 'Thông tin nhân viên',
-        path: '/danh-sach-nhan-vien/thong-tin-nhan-vien'
-      }
-    ]
-  },
-  {
-    key: 'Quản lý dịch vụ',
-    title: {
-      text: 'Quản lý dịch vụ',
-      icon: 'tool'
-    },
-    children: [
-      {
-        key: '/danh-sach-dich-vu',
-        text: 'Danh sách dịch vụ',
-        path: '/danh-sach-dich-vu'
-      },
-      {
-        key: '/tao-moi-dich-vu',
-        text: 'Tạo mới dịch vụ',
-        path: '/tao-moi-dich-vu'
-      }
-    ]
-  },
-  {
-    key: 'Quản lý lương',
-    title: {
-      text: 'Quản lý lương',
+      text: 'Payment',
       icon: 'dollar'
     },
-    children: [
-      {
-        key: '/lich-su-thu-nhap',
-        text: 'Lịch sử thu thập',
-        path: '/lich-su-thu-nhap'
-      },
-      {
-        key: '/tong-hop-luong',
-        text: 'Tổng hợp lương',
-        path: '/tong-hop-luong'
-      }
-    ]
+    children: []
+  }
+];
+
+export const sidebarDataOne = [
+  {
+    key: 'Dashboard',
+    title: {
+      icon: 'dashboard',
+      text: 'Dashboard',
+      path: '/dashboard'
+    }
   },
   {
-    key: 'Quản lý nâng hạng thẻ',
+    key: 'Accounts',
     title: {
-      icon: 'idcard',
-      text: 'Quản lý nâng hạng thẻ'
-    },
-    children: []
+      icon: 'user',
+      text: 'Accounts',
+      path: '/allUser'
+    }
   },
   {
-    key: 'Quản lý chấm công',
+    key: 'Wifi',
     title: {
-      text: 'Quản lý chấm công',
-      icon: 'clock-circle'
-    },
-    children: []
+      icon: 'wifi',
+      text: 'Routers',
+      path: '/routers'
+    }
   }
 ];
 

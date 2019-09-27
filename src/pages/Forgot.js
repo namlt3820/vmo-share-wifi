@@ -5,6 +5,7 @@ import FormInput from '../components/core/FormInput';
 import {
   WrapperComponent,
   WrapperForm,
+  WrapperFormContent,
   Logo,
   WrapperInput,
   WrapperAction,
@@ -14,6 +15,7 @@ import Validator, { EMAIL_REGEX } from '../utils/validator';
 import ForgotPwd from '../services/forgotPwd.service';
 import httpStatus from '../config/httpStatus';
 import Errors from '../commons/error_validate';
+import { getToken } from '../utils/getToken';
 
 const forgot = new ForgotPwd();
 export default class Forgot extends Component {
@@ -25,6 +27,10 @@ export default class Forgot extends Component {
       loading: false,
       redirect: false
     };
+  }
+
+  componentDidMount() {
+    getToken(this.props.history);
   }
 
   handleChange = event => {
@@ -60,9 +66,12 @@ export default class Forgot extends Component {
     });
   };
 
-  keyPressed = event => {
-    if (event.key === 'Enter') {
-      this.forgotPwd();
+  keyPressed = e => {
+    const { email } = this.state;
+    if (e.keyCode === 13) {
+      if (email) {
+        this.forgotPwd();
+      }
     }
   };
 
@@ -78,27 +87,29 @@ export default class Forgot extends Component {
     ) : (
       <WrapperComponent type="forgot">
         <WrapperForm form="forgot">
-          <Logo>
-            <img src="assets/logo.png" alt="Share Wifi" />
-            <div>Forgot Password</div>
-          </Logo>
-          <WrapperInput>
-            <FormInput
-              placeholder="Email"
-              name="email"
-              type="email"
-              error={errors.email}
-              value={email}
-              keyPressed={this.keyPressed}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidateEmail}
-            />
-          </WrapperInput>
-          <WrapperAction type="forgot">
-            <ButtonStyle onClick={this.forgotPwd} loading={loading}>
-              Send recovery email
-            </ButtonStyle>
-          </WrapperAction>
+          <WrapperFormContent>
+            <Logo>
+              <img src="assets/logo.png" alt="Share Wifi" />
+              <div>Forgot Password</div>
+            </Logo>
+            <WrapperInput>
+              <FormInput
+                placeholder="Email"
+                name="email"
+                type="email"
+                error={errors.email}
+                value={email}
+                keyPressed={this.keyPressed}
+                handleChange={this.handleChange}
+                handleBlur={this.handleValidateEmail}
+              />
+            </WrapperInput>
+            <WrapperAction type="forgot">
+              <ButtonStyle onClick={this.forgotPwd} loading={loading}>
+                Send recovery email
+              </ButtonStyle>
+            </WrapperAction>
+          </WrapperFormContent>
         </WrapperForm>
       </WrapperComponent>
     );

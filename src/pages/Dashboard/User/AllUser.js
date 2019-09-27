@@ -1,13 +1,21 @@
 import React, { Component } from 'react';
-import { Breadcrumb, Input, Icon, Dropdown, Menu, Popconfirm } from 'antd';
+import {
+  Breadcrumb,
+  Input,
+  Icon,
+  Dropdown,
+  Menu,
+  Popconfirm,
+  Select,
+  Tooltip
+} from 'antd';
 import { connect } from 'react-redux';
 import {
   DashBoardTittle,
   DashBoardContent,
-  // DashBoardTab,
-  // DashBoardTabItems,
   DashBoardContentLayout,
   DashBoardTableButton,
+  DashBoardTableButtonSelect,
   DashBoardButton,
   DashBoardButtonStyle,
   ModalStyle,
@@ -19,6 +27,7 @@ import AddUser from './AddUser';
 import EditUser from './EditUser';
 import httpStatus from '../../../config/httpStatus';
 
+const { Option } = Select;
 const { Search } = Input;
 const PER_PAGE = 500;
 const OFF_SET = 0;
@@ -35,7 +44,10 @@ class AllUser extends Component {
       loading: false,
       visible: false,
       userInfo: {},
-      searchText: ''
+      searchText: '',
+      type: '',
+      sortedInfo: null,
+      visibleTooltip: false
     };
   }
 
@@ -112,20 +124,40 @@ class AllUser extends Component {
   };
 
   onSearch = () => {
-    const { searchText } = this.state;
+    const { searchText, type } = this.state;
     const reg = new RegExp(searchText, 'gi');
-    this.setState({
-      searchText: '',
-      users: dataUser
-        .map(record => {
-          const match = record.name.match(reg);
-          if (!match) {
-            return null;
-          }
-          return record;
-        })
-        .filter(record => !!record)
-    });
+    if (!type) {
+      this.setState({
+        visibleTooltip: true
+      });
+    }
+    if (type === 'name') {
+      this.setState({
+        visibleTooltip: true,
+        users: dataUser
+          .map(record => {
+            const match = record.name.match(reg);
+            if (!match) {
+              return null;
+            }
+            return record;
+          })
+          .filter(record => !!record)
+      });
+    } else if (type === 'email') {
+      this.setState({
+        visibleTooltip: true,
+        users: dataUser
+          .map(record => {
+            const match = record.email.match(reg);
+            if (!match) {
+              return null;
+            }
+            return record;
+          })
+          .filter(record => !!record)
+      });
+    }
   };
 
   showModal = () => {
@@ -151,15 +183,39 @@ class AllUser extends Component {
     });
   };
 
-  changeData = (user, users) => {
+  hiddenUserInfoLogging = (user, users) => {
     return users.filter(dt => {
       return dt._id !== user._id;
     });
   };
 
-  render() {
-    const { users, loading, userInfo, searchText, user } = this.state;
+  handleChange = value => {
+    this.setState({
+      type: value
+    });
+  };
 
+  onChange = (pagination, filters, sorter) => {
+    this.setState({
+      sortedInfo: sorter
+    });
+  };
+
+  render() {
+    let { sortedInfo } = this.state;
+    sortedInfo = sortedInfo || {};
+
+    const {
+      users,
+      loading,
+      userInfo,
+      searchText,
+      user,
+      visibleTooltip,
+      type
+    } = this.state;
+    const visibleOn = true;
+    const visibleOff = false;
     const menu = (
       <Menu>
         <Menu.Item key="1">
@@ -192,12 +248,15 @@ class AllUser extends Component {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        onFilter: (value, record) => record.name.indexOf(value) === 0
+        sorter: (a, b) => a.name.localeCompare(b.name),
+        sortOrder: sortedInfo.columnKey === 'name' && sortedInfo.order
       },
       {
         title: 'Email',
         dataIndex: 'email',
-        key: 'email'
+        key: 'email',
+        sorter: (a, b) => a.email.localeCompare(b.email),
+        sortOrder: sortedInfo.columnKey === 'email' && sortedInfo.order
       },
       {
         title: 'Role',
@@ -265,13 +324,29 @@ class AllUser extends Component {
           </DashBoardTab> */}
           <DashBoardContentLayout>
             <DashBoardTableButton name="user">
-              <Search
-                value={searchText}
-                onSearch={this.onSearch}
-                style={{ width: 200 }}
-                onChange={this.searchOnChange}
-                onPressEnter={this.onSearch}
-              />
+              <DashBoardTableButtonSelect>
+                <Tooltip
+                  title="Please choose type search"
+                  visible={visibleTooltip && (type ? visibleOff : visibleOn)}
+                >
+                  <Select
+                    defaultValue="Type search"
+                    style={{ width: 150 }}
+                    onChange={this.handleChange}
+                  >
+                    <Option value="name">Search By Name</Option>
+                    <Option value="email">Search By Email</Option>
+                  </Select>
+                </Tooltip>
+                <Search
+                  value={searchText}
+                  onSearch={this.onSearch}
+                  style={{ width: 200 }}
+                  onChange={this.searchOnChange}
+                  onPressEnter={this.onSearch}
+                />
+              </DashBoardTableButtonSelect>
+
               <DashBoardButton>
                 <DashBoardButtonStyle
                   background="#1890ff"
@@ -284,10 +359,11 @@ class AllUser extends Component {
             {user ? (
               <TableStyle
                 columns={columns}
-                dataSource={this.changeData(user, users)}
+                dataSource={this.hiddenUserInfoLogging(user, users)}
                 loading={loading}
                 rowKey={record => record._id}
                 pagination={{ pageSize: PAGE_SIZE }}
+                onChange={this.onChange}
               />
             ) : (
               ''

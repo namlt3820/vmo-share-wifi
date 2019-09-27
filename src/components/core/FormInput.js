@@ -12,18 +12,22 @@ export default class FormInput extends Component {
       error,
       label,
       handleChange,
-      keyPressed
+      keyPressed,
+      disabled,
+      popup
     } = this.props;
     return (
       <div>
         <Label>{label}</Label>
         <InputStyle
+          popup={popup}
           placeholder={placeholder}
           onChange={handleChange}
           onBlur={handleBlur}
           onKeyDown={keyPressed}
           name={name}
           value={value}
+          disabled={disabled}
           type={type}
         />
         <Label type="error">{error}</Label>

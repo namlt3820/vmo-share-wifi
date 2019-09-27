@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { Select } from 'antd';
 import { DashBoardContent } from '../../../components/DashboardStyle';
 import {
-  WrapperForm,
   WrapperInput,
-  WrapperAction,
-  ButtonStyle
+  ButtonStyle,
+  WrapperButton
 } from '../../../components/Authentication';
 import FormInput from '../../../components/core/FormInput';
 import Validator, { EMAIL_REGEX } from '../../../utils/validator';
@@ -19,6 +18,7 @@ export default class AddDevice extends Component {
     this.state = {
       name: '',
       email: '',
+      password: '',
       role: '',
       file: '',
       loading: false,
@@ -44,7 +44,7 @@ export default class AddDevice extends Component {
 
   handleValidateName = () => {
     const { name, errors } = this.state;
-    const validateName = Validator.isValidName(name);
+    const validateName = Validator.isValidUsername(name);
     errors.name = Errors.handleValidate(validateName, name, 'name');
     this.setState({ errors });
   };
@@ -95,64 +95,64 @@ export default class AddDevice extends Component {
     return (
       <>
         <DashBoardContent>
-          <WrapperForm>
-            <WrapperInput>
-              <FormInput
-                placeholder="Enter name"
-                label="Name"
-                name="name"
-                type="text"
-                error={errors.name}
-                value={name}
-                handleChange={this.handleChangeForm}
-                handleBlur={this.handleValidateName}
-              />
-              <FormInput
-                placeholder="Enter Email"
-                label="Email"
-                name="email"
-                type="text"
-                icon="*"
-                error={errors.email}
-                value={email}
-                handleChange={this.handleChangeForm}
-                handleBlur={this.handleValidateEmail}
-              />
-              <FormInput
-                label="Password"
-                name="password"
-                type="password"
-                icon="*"
-                error={errors.password}
-                handleChange={this.handleChangeForm}
-                handleBlur={this.handleValidatePassword}
-              />
-              <div>
-                <p>Role</p>
-                <Select
-                  defaultValue="User"
-                  style={{ width: 120 }}
-                  onChange={this.handleChange}
-                >
-                  <Option value={0}>Admin</Option>
-                  <Option value={1}>User</Option>
-                </Select>
-              </div>
-              {/* <FormInput label="Image" name="file" type="file" icon="*" /> */}
-            </WrapperInput>
-            <WrapperAction type="login">
-              <ButtonStyle
-                onClick={this.addUser}
-                disabled={!email || !password || !name}
-                loading={loading}
+          <WrapperInput>
+            <FormInput
+              popup="popup"
+              placeholder="Enter name"
+              name="name"
+              type="text"
+              error={errors.name}
+              value={name}
+              handleChange={this.handleChangeForm}
+              handleBlur={this.handleValidateName}
+            />
+            <FormInput
+              popup="popup"
+              placeholder="Enter Email"
+              name="email"
+              type="text"
+              icon="*"
+              error={errors.email}
+              value={email}
+              handleChange={this.handleChangeForm}
+              handleBlur={this.handleValidateEmail}
+            />
+            <FormInput
+              popup="popup"
+              placeholder="Password"
+              name="password"
+              type="password"
+              icon="*"
+              error={errors.password}
+              value={password}
+              handleChange={this.handleChangeForm}
+              handleBlur={this.handleValidatePassword}
+            />
+            <div>
+              <Select
+                defaultValue="Select role"
+                style={{ width: 120, margin: '0.5em 0' }}
+                onChange={this.handleChange}
               >
-                Save
-              </ButtonStyle>
-              <ButtonStyle onClick={this.handleCancel} background="none">
-                Cancel
-              </ButtonStyle>
-            </WrapperAction>
-          </WrapperForm>
+                <Option value={0}>Admin</Option>
+                <Option value={1}>User</Option>
+              </Select>
+            </div>
+            {/* <FormInput label="Image" name="file" type="file" icon="*" /> */}
+          </WrapperInput>
+          <WrapperButton type="login">
+            <ButtonStyle
+              adduser="adduser"
+              onClick={this.addUser}
+              disabled={!email || !password || !name}
+              loading={loading}
+            >
+              Save
+            </ButtonStyle>
+            <ButtonStyle onClick={this.handleCancel} adduser="adduser">
+              Cancel
+            </ButtonStyle>
+          </WrapperButton>
         </DashBoardContent>
       </>
     );

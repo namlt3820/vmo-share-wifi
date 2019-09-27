@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Breadcrumb, Input, Icon, Menu, Select, Dropdown, Modal } from 'antd';
-import { Link } from 'react-router-dom';
 import {
   DashBoardTittle,
   DashBoardContent,
@@ -14,7 +13,7 @@ import {
 } from '../../components/DashboardStyle';
 import Router from '../../services/router.service';
 
-import { WrapperForm, WrapperInput } from '../../components/Authentication';
+import { WrapperInput } from '../../components/Authentication';
 import FormInput from '../../components/core/FormInput';
 import httpStatus from '../../config/httpStatus';
 
@@ -29,8 +28,10 @@ export default class ListRouter extends Component {
     super();
     this.state = {
       name: '',
+      macAddress: '',
       location: '',
       description: '',
+      typeAction: '',
       routers: [],
       router: {},
       loading: false,
@@ -64,13 +65,26 @@ export default class ListRouter extends Component {
     });
   };
 
-  openEdit = () => {
-    const { router } = this.state;
-    this.setState({ isVisibleEditRouter: true });
-    this.setState({
-      name: router.name,
-      location: router.location,
-      description: router.description
+  openEdit = type => {
+    this.setState({ typeAction: type }, () => {
+      if (this.state.typeAction === 'add') {
+        this.setState({
+          isVisibleEditRouter: true,
+          name: '',
+          macAddress: '',
+          location: '',
+          description: ''
+        });
+      } else {
+        this.setState({ isVisibleEditRouter: true });
+        const { router } = this.state;
+        this.setState({
+          name: router.name,
+          macAddress: router.macAddress,
+          location: router.location,
+          description: router.description
+        });
+      }
     });
   };
 
@@ -93,24 +107,51 @@ export default class ListRouter extends Component {
   };
 
   handleOk = () => {
-    const { name, location, description } = this.state;
+    const { name, location, description, macAddress, typeAction } = this.state;
     const { _id } = this.state.router;
-    this.setState({ isVisibleEditRouter: false });
+    const valied = {};
     const params = {
       name,
       location,
+      macAddress,
       description
     };
-    router.updateRouter(_id, params).then(() => {
-      this.getRoutes();
-    });
+    if (typeAction === 'add') {
+      router.addRouter(params).then(res => {
+        if (res.status === httpStatus.StatusBadRequest) {
+          res.data.errors.forEach(error => {
+            if (error.location === 'macAddress') {
+              valied.macAddress = error.message;
+            } else {
+              valied.location = error.message;
+            }
+          });
+          // this.setState({ errors: valied });
+        } else if (res.status === httpStatus.StatusConflict) {
+          valied.macAddress = res.data.errors[0].message;
+          // this.setState({ errors: valied });
+        } else {
+          this.getRoutes();
+        }
+      });
+    } else {
+      router.updateRouter(_id, params).then(() => {
+        this.getRoutes();
+      });
+    }
+    this.setState({ isVisibleEditRouter: false });
   };
 
   render() {
     const menu = (
       <MenuStyle>
         <Menu.Item key="0">
-          <a href="#3" onClick={this.openEdit}>
+          <a
+            href="#3"
+            onClick={() => {
+              this.openEdit('edit');
+            }}
+          >
             Edit
           </a>
         </Menu.Item>
@@ -181,10 +222,12 @@ export default class ListRouter extends Component {
     const {
       routers,
       loading,
+      macAddress,
       isVisibleEditRouter,
       description,
       location,
-      name
+      name,
+      typeAction
     } = this.state;
 
     return (
@@ -209,8 +252,14 @@ export default class ListRouter extends Component {
               </InputGroup>
 
               <DashBoardButton>
-                <DashBoardButtonStyle background="#747474">
-                  <Link to="/addRouter">Add</Link>
+                <DashBoardButtonStyle
+                  background="#747474"
+                  onClick={() => {
+                    this.openEdit('add');
+                  }}
+                >
+                  {/* <Link to="/addRouter">Add</Link> */}
+                  Add
                 </DashBoardButtonStyle>
               </DashBoardButton>
             </DashBoardTableButton>
@@ -226,40 +275,50 @@ export default class ListRouter extends Component {
           </DashBoardContentLayout>
           {isVisibleEditRouter ? (
             <Modal
-              title="Edit Routers"
+              title={typeAction === 'add' ? 'Add Router' : 'Edit Router'}
               visible={isVisibleEditRouter}
               onOk={this.handleOk}
               onCancel={this.handleCancel}
             >
-              <WrapperForm>
-                <WrapperInput>
-                  <FormInput
-                    placeholder="Enter Router Name"
-                    label="Name"
-                    name="name"
-                    value={name}
-                    handleChange={this.handleChange}
-                    type="text"
-                  />
-                  <FormInput
-                    placeholder="Location"
-                    label="Location"
-                    name="location"
-                    type="text"
-                    handleChange={this.handleChange}
-                    value={location}
-                    icon="*"
-                  />
-                  <FormInput
-                    placeholder="Description"
-                    label="Description"
-                    name="description"
-                    value={description}
-                    handleChange={this.handleChange}
-                    type="text"
-                  />
-                </WrapperInput>
-              </WrapperForm>
+              <WrapperInput>
+                <FormInput
+                  placeholder="Enter Router Name"
+                  label="Name"
+                  name="name"
+                  value={name}
+                  handleChange={this.handleChange}
+                  type="text"
+                />
+                <FormInput
+                  placeholder="Enter Mac-Address"
+                  label="Mac-Address"
+                  name="macAddress"
+                  type="text"
+                  disabled={typeAction !== 'add'}
+                  // error={errors.macAddress}
+                  handleChange={this.handleChange}
+                  value={macAddress}
+                  icon="*"
+                />
+
+                <FormInput
+                  placeholder="Location"
+                  label="Location"
+                  name="location"
+                  type="text"
+                  handleChange={this.handleChange}
+                  value={location}
+                  icon="*"
+                />
+                <FormInput
+                  placeholder="Description"
+                  label="Description"
+                  name="description"
+                  value={description}
+                  handleChange={this.handleChange}
+                  type="text"
+                />
+              </WrapperInput>
             </Modal>
           ) : (
             ''

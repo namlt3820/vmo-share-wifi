@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import { Button, Table, Menu, Modal } from 'antd';
 import { Link } from 'react-router-dom';
+import Chart from 'react-apexcharts';
 
 const { SubMenu } = Menu;
+
+export const Wrapper = styled.div``;
 
 export const DashBoardTittle = styled.div`
   h3 {
@@ -42,6 +45,12 @@ export const DashBoardTableButton = styled.div`
   justify-content: ${props =>
     props.name === 'user' ? 'space-between;' : 'flex-start'};
   margin-bottom: 1.5em;
+  align-items: center;
+`;
+
+export const DashBoardTableButtonSelect = styled.div`
+  display: flex;
+  justify-content: flex-end;
   align-items: center;
 `;
 
@@ -151,7 +160,7 @@ export const HeaderProfileName = styled.div`
     margin: 3px 0;
     font-size: 18px;
     :last-child {
-      font-size: 13px;
+      font-size: 12px;
     }
   }
 `;
@@ -171,33 +180,25 @@ export const DashboardTop = styled.div`
 `;
 
 export const DashboardTopText = styled.div`
-  h5 {
-    margin-bottom: 3em;
+  h6 {
+    margin-bottom: 2em;
+  }
+  a {
+    :hover {
+      text-decoration: none;
+    }
   }
 `;
 
 export const DashboardBottomText = styled.div`
   display: flex;
   margin: 2em 0 0 0;
-  h4 {
+  h6 {
     margin-right: 1em;
     margin-bottom: 0;
     position: relative;
   }
 `;
-
-// export const UnderLine = styled.h4`
-//   position: relative;
-//   ::after {
-//     content: '';
-//     height: 1px;
-//     background: #333;
-//     position: absolute;
-//     width: 18%;
-//     top: 1.75em;
-//     left: 0;
-//   }
-// `;
 
 export const ModalStyle = styled(Modal)`
   .ant-modal-footer {
@@ -205,6 +206,10 @@ export const ModalStyle = styled(Modal)`
   }
   .ant-modal-footer button {
     display: none;
+  }
+
+  .ant-modal-title {
+    font-size: 20px;
   }
 `;
 
@@ -219,7 +224,7 @@ export const DataTop = styled.div`
 export const DataCard = styled.div`
   display: flex;
   flex-direction: column;
-  flex-basis: 20%;
+  flex-basis: ${props => (props.type === 'data' ? '27%' : '24%')};
   color: #ffffff;
   box-shadow: 1px 1px 10px 0px rgba(50, 50, 50, 0.22);
   padding: 1em;
@@ -262,6 +267,9 @@ export const DateRangePicker = styled.div`
 
 export const LinkStyle = styled(Link)`
   color: #333;
+  :hover {
+    text-decoration: none;
+  }
 `;
 
 export const DataChart = styled.div`
@@ -271,6 +279,11 @@ export const DataChart = styled.div`
 export const StyleMenuItem = styled(Menu.Item)`
   display: flex;
   align-items: center;
+  a {
+    :hover {
+      text-decoration: none;
+    }
+  }
 `;
 
 export const StyleSubMenu = styled(SubMenu)`
@@ -278,4 +291,36 @@ export const StyleSubMenu = styled(SubMenu)`
     display: flex;
     align-items: center;
   }
+`;
+
+export const ChartStyle = styled(Chart)`
+  .apexcharts-menu-icon {
+    display: none;
+  }
+`;
+
+export const ContentUpdateInfo = styled.div`
+  width: 450px;
+  margin: 0 auto;
+`;
+
+export const UpdateInfoTop = styled.div`
+  p:first-child {
+    marign: 0;
+  }
+`;
+
+export const UpdateInfoTopTitle = styled.div`
+  p {
+    margin-bottom: 5px;
+    :last-child {
+      margin-bottom: 20px;
+    }
+  }
+`;
+
+export const UpdateInfoBottom = styled.div``;
+
+export const UpdateInfoBottomType = styled.div`
+  margin-bottom: 10px;
 `;

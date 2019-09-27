@@ -6,6 +6,7 @@ import FormInput from '../components/core/FormInput';
 import {
   WrapperComponent,
   WrapperForm,
+  WrapperFormContent,
   Logo,
   WrapperInput,
   WrapperAction,
@@ -17,6 +18,7 @@ import {
 import Validator, { EMAIL_REGEX } from '../utils/validator';
 import { login } from '../store/actions/authenticate';
 import Errors from '../commons/error_validate';
+import { getToken } from '../utils/getToken';
 
 class Login extends Component {
   constructor() {
@@ -28,6 +30,10 @@ class Login extends Component {
       checked: false,
       loading: false
     };
+  }
+
+  componentDidMount() {
+    getToken(this.props.history);
   }
 
   handleChange = event => {
@@ -76,51 +82,64 @@ class Login extends Component {
     this.setState({ checked: !checked });
   };
 
+  keyPressed = e => {
+    const { email, password } = this.state;
+    if (e.keyCode === 13) {
+      if (email && password) {
+        this.login();
+      }
+    }
+  };
+
   render() {
     const { email, password, errors, loading } = this.state;
     return (
       <WrapperComponent>
         <WrapperForm form="login">
-          <Logo>
-            <img src="assets/logo.png" alt="Share Wifi" />
-            <h5>Welcome Back</h5>
-            <p>Sign in to continue to Shared Wifi</p>
-          </Logo>
-          <WrapperInput>
-            <FormInput
-              placeholder="Email"
-              name="email"
-              type="email"
-              error={errors.email}
-              value={email}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidateEmail}
-            />
-            <FormInput
-              placeholder="Password"
-              name="password"
-              type="password"
-              error={errors.password}
-              value={password}
-              handleChange={this.handleChange}
-              handleBlur={this.handleValidatePassword}
-            />
-          </WrapperInput>
-          <WrapperAction type="login">
-            <ButtonStyle
-              loading={loading}
-              onClick={this.login}
-              disabled={!email || !password}
-            >
-              Login
-            </ButtonStyle>
-          </WrapperAction>
-          <Bottom>
-            <Forgot>
-              <Icon type="lock" />
-              &nbsp;&nbsp; <Link to="/forgotPwd">Forgot your password</Link>
-            </Forgot>
-          </Bottom>
+          <WrapperFormContent>
+            <Logo>
+              <img src="assets/logo.png" alt="Share Wifi" />
+              <div>Welcome Back</div>
+              <p>Sign in to continue to Shared Wifi</p>
+            </Logo>
+            <WrapperInput>
+              <FormInput
+                placeholder="Email"
+                name="email"
+                type="email"
+                error={errors.email}
+                value={email}
+                handleChange={this.handleChange}
+                handleBlur={this.handleValidateEmail}
+                keyPressed={this.keyPressed}
+              />
+              <FormInput
+                placeholder="Password"
+                name="password"
+                type="password"
+                error={errors.password}
+                value={password}
+                handleChange={this.handleChange}
+                handleBlur={this.handleValidatePassword}
+                keyPressed={this.keyPressed}
+              />
+            </WrapperInput>
+            <WrapperAction type="login">
+              <ButtonStyle
+                loading={loading}
+                onClick={this.login}
+                disabled={!email || !password}
+              >
+                Login
+              </ButtonStyle>
+            </WrapperAction>
+            <Bottom>
+              <Forgot>
+                <Icon type="lock" />
+                &nbsp;&nbsp; <Link to="/forgotPwd">Forgot your password</Link>
+              </Forgot>
+            </Bottom>
+          </WrapperFormContent>
         </WrapperForm>
         <OutSide>
           Don&apos;t have an account?&nbsp;<Link to="/signup">Signup Now</Link>
@@ -129,6 +148,7 @@ class Login extends Component {
     );
   }
 }
+
 export default connect(
   null,
   { login }
